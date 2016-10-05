@@ -9,7 +9,7 @@
 (Eclipse should automatically connect the project to git as well as install the project dependencies through Maven)
 
 ## Run the Server Locally
-1. **In Eclipse:** (>) (the green arrow)
+1. **In Eclipse:** Select the project in Package Explorer 
 2. *Run as... Maven install*
 3. **In command line:** `heroku local:start`
 
