@@ -1,16 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <#include "header.ftl">
+  <#include "head.ftl">
 </head>
 
 <body>
 
-  <#include "nav.ftl">
-
-<div class="container">
-  ${message}
-</div>
+<span>DB Error:</span>
+<h1 style="color: red">${message}</h1>
 
 </body>
 </html>
