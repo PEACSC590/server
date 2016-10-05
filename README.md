@@ -11,7 +11,7 @@
 ## Run the Server Locally
 1. **In Eclipse:** Select the project in Package Explorer 
 2. *Run as... Maven install*
-3. **In command line:** `heroku local:start`
+3. **In command line:** In the project directory: `heroku local:start`
 
 ## Deploy to Heroku
 Push to branch **production**; Heroku deploys this branch automatically
