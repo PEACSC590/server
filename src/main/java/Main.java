@@ -6,7 +6,6 @@ import java.net.UnknownHostException;
 import static spark.Spark.*;
 import spark.template.freemarker.FreeMarkerEngine;
 import spark.ModelAndView;
-import static spark.Spark.get;
 
 import com.mongodb.*;
 
@@ -18,36 +17,39 @@ public class Main {
 		port(Integer.valueOf(System.getenv("PORT")));
 		staticFileLocation("/public");
 
+		// TODO: add the mongo db URI into .env
+		// Database database = new Database(new
+		// MongoURI(System.getenv("MLAB_URI")));
+		// DB db = database.db;
+
+		// API api = new API(db); // note: the way the methods are organized and
+		// accessed is subject to change
+		API api = new API(null);
+
 		//
 		// demo page using a view
 		get("/", (request, response) -> {
 			Map<String, Object> attributes = new HashMap<>();
 			attributes.put("message", "Hello World!");
-
 			return new ModelAndView(attributes, "index.ftl");
 		}, new FreeMarkerEngine());
 		//
 
-		//
+		// Using API.java (as all endpoints should)
+		post("/post-demo", (request, response) -> {
+			Map<String, String> data = api.getBody(request);
 
-		//
+			Map<String, Object> attributes = new HashMap<>();
+			attributes.put("data", data);
+			return new ModelAndView(attributes, "display-data.ftl");
+		}, new FreeMarkerEngine());
 
-		// TODO: add the mongo db URI into .env
-		if (System.getenv("MLAB_URI") == "")
-			return;
-
-		Database database = new Database(new MongoURI(System.getenv("MLAB_URI")));
-		DB db = database.db;
-
-		API api = new API(db); // note: the way the methods are organized and
-								// accessed is subject to change
-
+		// example using the db
 		get("/list-items", (req, res) -> {
 			Set<String> items = api.getItems();
 
 			Map<String, Object> attributes = new HashMap<>();
 			attributes.put("results", items);
-
 			return new ModelAndView(attributes, "db.ftl");
 		}, new FreeMarkerEngine());
 
