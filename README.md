@@ -15,3 +15,7 @@
 
 ## Deploy to Heroku
 Push to branch **production**; Heroku deploys this branch automatically
+
+1. **In command line:** In the project directory: `git checkout production` - Switch to the **production** branch
+2. `git merge master` - Merge **master** into the current branch (**production**)
+3. `git checkout master` - Switch back to **master**
