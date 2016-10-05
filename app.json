@@ -1,6 +1,6 @@
 {
-  "name": "Start on Heroku: Java",
-  "description": "A barebones Java app, which can easily be deployed to Heroku.",
+  "name": "PEAbay",
+  "description": "",
   "image": "heroku/java",
-  "addons": [ "heroku-postgresql" ]
+  "addons": []
 }
