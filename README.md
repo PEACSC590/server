@@ -1,5 +1,7 @@
 # PEAbay
 
+Install Maven and the [Heroku Toolbelt](https://toolbelt.heroku.com).
+
 ## Import the Repo into Eclipse
 1. **In command line:** `git clone https://github.com/PEACSC590/server.git`
 2. **In Eclipse:** *File > Import...*
@@ -9,7 +11,6 @@
 (Eclipse should automatically connect the project to git as well as install the project dependencies through Maven)
 
 ## Run the Server Locally
-Install the [Heroku Toolbelt](https://toolbelt.heroku.com).
 
 1. **In Eclipse:** Select the project in Package Explorer 
 2. *Run as... Maven install*
