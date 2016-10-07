@@ -16,15 +16,12 @@ public class Main {
 		// set server port and configure /public to be served statically
 		port(Integer.valueOf(System.getenv("PORT")));
 		staticFileLocation("/public");
+		
+		Database database = new Database(new MongoURI(System.getenv("MONGODB_URI")));
+		DB db = database.db;
 
-		// TODO: add the mongo db URI into .env
-		// Database database = new Database(new
-		// MongoURI(System.getenv("MLAB_URI")));
-		// DB db = database.db;
-
-		// API api = new API(db); // note: the way the methods are organized and
-		// accessed is subject to change
-		API api = new API(null);
+		API api = new API(db); // note: the way the methods are organized and
+								// accessed is subject to change
 
 		//
 		// demo page using a view
