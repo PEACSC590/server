@@ -4,12 +4,16 @@
 `/login`
 
 Input: Body
+```json
 {
   "login": "...",
   "password": "..."
 }
+```
 
 Output: JSON
+```json
 {
   "valid": [boolean]
 }
+```
