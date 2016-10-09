@@ -47,7 +47,7 @@
           <descriptorRefs>
             <descriptorRef>jar-with-dependencies</descriptorRef>
           </descriptorRefs>
-          <finalName>helloworld</finalName>
+          <finalName>PEAbay</finalName>
           <appendAssemblyId>false</appendAssemblyId>
           <archive>
             <manifest>
