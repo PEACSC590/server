@@ -1,4 +1,5 @@
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.net.UnknownHostException;
@@ -43,7 +44,7 @@ public class Main {
 
 		// example using the db
 		get("/list-items", (req, res) -> {
-			Set<String> items = api.getItems();
+			List<String> items = api.getItems();
 
 			Map<String, Object> attributes = new HashMap<>();
 			attributes.put("results", items);

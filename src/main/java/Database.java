@@ -9,7 +9,8 @@ public class Database {
 
 	public Database(MongoURI mongoURI) throws MongoException, UnknownHostException {
 		db = mongoURI.connectDB();
-		db.authenticate(mongoURI.getUsername(), mongoURI.getPassword());
+		boolean authenticated = db.authenticate(mongoURI.getUsername(), mongoURI.getPassword());
+		System.out.printf("Authenticated: %b", authenticated);
 	}
 
 }
