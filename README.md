@@ -1,6 +1,6 @@
 # PEAbay
 
-Install Maven and the [Heroku Toolbelt](https://toolbelt.heroku.com).
+Install [JDK 1.8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html), [Maven](https://maven.apache.org/download.cgi), and the [Heroku Toolbelt](https://toolbelt.heroku.com).
 
 ## Import the Repo into Eclipse
 1. **In command line:** `git clone https://github.com/PEACSC590/server.git`
