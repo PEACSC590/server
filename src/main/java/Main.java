@@ -45,6 +45,15 @@ public class Main {
 			attributes.put("data", data);
 			return new ModelAndView(attributes, "display-data.ftl");
 		}, new FreeMarkerEngine());
+		
+		// login
+		post("/post-demo", (request, response) -> {
+			Map<String, String> data = api.getBody(request);
+
+			Map<String, Object> attributes = new HashMap<>();
+			attributes.put("data", data);
+			return new ModelAndView(attributes, "login.ftl");
+		}, new FreeMarkerEngine());
 
 		// example using the db
 		get("/list-items", (req, res) -> {
