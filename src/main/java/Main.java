@@ -18,7 +18,11 @@ public class Main {
 		port(Integer.valueOf(System.getenv("PORT")));
 		staticFileLocation("/public");
 
-		Database database = new Database(new MongoClientURI(System.getenv("MONGODB_URI")));
+		// only use the official mongo db uri for production--when it is on the
+		// machine (only MONGO_DEV_URI should be in .env for development)
+		String mongoURI = System.getenv("MONGODB_URI") != null ? System.getenv("MONGODB_URI")
+				: System.getenv("MONGODB_DEV_URI");
+		Database database = new Database(new MongoClientURI(mongoURI));
 		MongoDatabase db = database.db;
 
 		API api = new API(db); // note: the way the methods are organized and
