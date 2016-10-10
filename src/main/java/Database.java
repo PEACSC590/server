@@ -1,16 +1,26 @@
 import java.net.UnknownHostException;
-import com.mongodb.DB;
+
+import com.mongodb.MongoClient;
+import com.mongodb.MongoClientURI;
 import com.mongodb.MongoException;
-import com.mongodb.MongoURI;
+import com.mongodb.client.MongoDatabase;
 
 public class Database {
 
-	public DB db;
+	public MongoDatabase db;
 
-	public Database(MongoURI mongoURI) throws MongoException, UnknownHostException {
-		db = mongoURI.connectDB();
-		boolean authenticated = db.authenticate(mongoURI.getUsername(), mongoURI.getPassword());
-		System.out.printf("Authenticated: %b", authenticated);
+	public Database(MongoClientURI mongoURI) throws MongoException, UnknownHostException {
+		MongoClient mongoClient = new MongoClient(mongoURI);
+		db = mongoClient.getDatabase("heroku_cf7lkl0c");
+
+		// close the connection when the app receives a SIGTERM
+		Runtime.getRuntime().addShutdownHook(new Thread() {
+			@Override
+			public void run() {
+				mongoClient.close();
+			}
+		});
+
 	}
 
 }
