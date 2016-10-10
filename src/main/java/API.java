@@ -3,19 +3,25 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.bson.BSONObject;
+import org.bson.Document;
+
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DBObject;
+import com.mongodb.client.FindIterable;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
 
 import spark.Request;
 
 public class API {
 
-	private DB db;
-	private DBCollection usersCollection;
-	private DBCollection itemsCollection;
+	private MongoDatabase db;
+	private MongoCollection<Document> usersCollection;
+	private MongoCollection<Document> itemsCollection;
 
-	public API(DB db) {
+	public API(MongoDatabase db) {
 		this.db = db;
 
 		this.usersCollection = this.db.getCollection("users");
@@ -25,9 +31,9 @@ public class API {
 	public List<String> getItems() {
 		List<String> itemStrings = new LinkedList<String>();
 
-		List<DBObject> items = itemsCollection.find().toArray();
-		for (DBObject item : items)
-			itemStrings.add(item.toMap().toString());
+		FindIterable<Document> items = itemsCollection.find();
+		for (Document item : items)
+			itemStrings.add(item.toJson());
 
 		return itemStrings;
 	}
