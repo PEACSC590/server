@@ -47,7 +47,9 @@ Output: JSON
 Input: query
 
 ```
-itemID // database's id for desired item
+{
+  “itemID” : [int],
+}
 ```
 
 Output: JSON
@@ -61,22 +63,56 @@ Output: JSON
 }
 ```
 
-**POST** List Items
+**GET** List Items
 `/list-items`
+Use for Search. Assumes “status” = null.
 
 Input: Body
 ```json
 {
   "sellerID" : "...",
-  "description" : "...",
   "price" : [double],
   "tags" : [array[string]],
-  "image" : [jpg, bmp, png]
 }
+```
 
 Output: JSON
 ```json
 {
   "items" : [array[item]]
+}
+```
+
+**POST** Buy
+`/buy`
+
+Input: JSON
+```json
+{
+  “itemID" : [int],
+}
+```
+
+Output: JSON
+```json
+{
+  “status” : [string] “pending”,
+}
+```
+
+**POST** Sell
+`/sell`
+
+Input: JSON
+```json
+{
+  “itemID" : [int],
+}
+```
+
+Output: JSON
+```json
+{
+  “status” : [string] “sold”,
 }
 ```
