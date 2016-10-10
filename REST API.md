@@ -14,7 +14,7 @@ Input: Body
 Output: JSON
 ```json
 {
-  "valid": [boolean]
+  "valid": [boolean],
   "username": "..."
 }
 ```
