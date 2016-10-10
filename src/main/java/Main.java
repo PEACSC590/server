@@ -6,6 +6,7 @@ import java.net.UnknownHostException;
 import static spark.Spark.*;
 import spark.template.freemarker.FreeMarkerEngine;
 import spark.ModelAndView;
+import spark.Response;
 
 import com.mongodb.*;
 import com.mongodb.client.MongoDatabase;
@@ -53,6 +54,28 @@ public class Main {
 			Map<String, Object> attributes = new HashMap<>();
 			attributes.put("results", items);
 			return new ModelAndView(attributes, "db.ftl");
+		}, new FreeMarkerEngine());
+		
+		post("/upload", (request, response) -> {
+			Map<String, String> data = api.getBody(request);
+			boolean success = false;
+			Map<String, Object> attributes = new HashMap<>();
+			if(data.size()<5){
+				success = false;
+			}
+			if(data.size()==5){
+				success = true;
+			}
+			if(success == true){
+				response.redirect("/myproducts");
+			}
+			if(success == false){
+				response.redirect("/uploads");
+				return new ModelAndView(attributes, "display-data.ftl");
+			}
+			
+			attributes.put("data", data);
+			return new ModelAndView(attributes, "display-data.ftl");
 		}, new FreeMarkerEngine());
 
 	}

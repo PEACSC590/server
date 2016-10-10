@@ -8,7 +8,7 @@
 
 <!-- for demo purposes only -->
 <#list data?keys as key>
-  <li> <b>${key}</b> ${data[key]} </li>
+  <p> <b>${key}</b> ${data[key]} </p>
 </#list>
 
 </body>
