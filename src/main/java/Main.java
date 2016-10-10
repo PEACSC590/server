@@ -59,9 +59,11 @@ public class Main {
 			Map<String, String> data = api.getBody(req);
 
 			if (data.size() == 5) {
+				// actually do the upload
 				res.redirect("/myproducts");
 			} else {
-				res.redirect("/uploads");
+				// give an error msg
+				res.redirect("/upload");
 			}
 
 			Map<String, Object> attributes = new HashMap<>();
