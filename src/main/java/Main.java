@@ -1,7 +1,6 @@
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.net.UnknownHostException;
 
 import static spark.Spark.*;
@@ -9,6 +8,7 @@ import spark.template.freemarker.FreeMarkerEngine;
 import spark.ModelAndView;
 
 import com.mongodb.*;
+import com.mongodb.client.MongoDatabase;
 
 public class Main {
 
@@ -17,9 +17,13 @@ public class Main {
 		// set server port and configure /public to be served statically
 		port(Integer.valueOf(System.getenv("PORT")));
 		staticFileLocation("/public");
-		
-		Database database = new Database(new MongoURI(System.getenv("MONGODB_URI")));
-		DB db = database.db;
+
+		// only use the official mongo db uri for production--when it is on the
+		// machine (only MONGO_DEV_URI should be in .env for development)
+		String mongoURI = System.getenv("MONGODB_URI") != null ? System.getenv("MONGODB_URI")
+				: System.getenv("MONGODB_DEV_URI");
+		Database database = new Database(new MongoClientURI(mongoURI));
+		MongoDatabase db = database.db;
 
 		API api = new API(db); // note: the way the methods are organized and
 								// accessed is subject to change
