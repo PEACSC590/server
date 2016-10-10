@@ -15,6 +15,7 @@ Output: JSON
 ```json
 {
   "valid": [boolean]
+  "username": "..."
 }
 ```
 
