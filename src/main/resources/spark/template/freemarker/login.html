@@ -53,47 +53,46 @@
 
     <div class = "container">
     	<div class="wrapper">
-    		<form id="login" action="" method="post" name="Login_Form" class="form-signin">
-    		    <h3 class="form-signin-heading">PEABay</h3>
+    		<form id="login" name="Login_Form" class="form-signin">
+    		    <h3 class="form-signin-heading">PEAbay</h3>
     			  <hr class="colorgraph"><br>
 
     			  <input type="text" class="form-control" id="username" name="Username" placeholder="Exeter Username" required="" autofocus="" />
     			  <input type="password" class="form-control" id="password" name="Password" placeholder="Exeter Password" required=""/>
 
-    			  <button class="btn btn-lg btn-primary btn-block"  name="Submit" value="Login" type="submit">Login</button>
-    		</form>
-    	</div>
-    </div>
-		
-		<!-- Terms and conditions modal -->
-  <div class="form-group">
-        <label class="col-xs-3 control-label">Terms of use</label>
-        <div class="col-xs-9">
-            <div style="border: 1px solid #e5e5e5; height: 200px; overflow: auto; padding: 10px;">
-                <p>Lorem ipsum dolor sit amet, veniam numquam has te. No suas nonumes recusabo mea, est ut graeci definitiones. His ne melius vituperata scriptorem, cum paulo copiosae conclusionemque at. Facer inermis ius in, ad brute nominati referrentur vis. Dicat erant sit ex. Phaedrum imperdiet scribentur vix no, ad latine similique forensibus vel.</p>
-                <p>Dolore populo vivendum vis eu, mei quaestio liberavisse ex. Electram necessitatibus ut vel, quo at probatus oportere, molestie conclusionemque pri cu. Brute augue tincidunt vim id, ne munere fierent rationibus mei. Ut pro volutpat praesent qualisque, an iisque scripta intellegebat eam.</p>
-                <p>Mea ea nonumy labores lobortis, duo quaestio antiopam inimicus et. Ea natum solet iisque quo, prodesset mnesarchum ne vim. Sonet detraxit temporibus no has. Omnium blandit in vim, mea at omnium oblique.</p>
-                <p>Eum ea quidam oportere imperdiet, facer oportere vituperatoribus eu vix, mea ei iisque legendos hendrerit. Blandit comprehensam eu his, ad eros veniam ridens eum. Id odio lobortis elaboraret pro. Vix te fabulas partiendo.</p>
-                <p>Natum oportere et qui, vis graeco tincidunt instructior an, autem elitr noster per et. Mea eu mundi qualisque. Quo nemore nusquam vituperata et, mea ut abhorreant deseruisse, cu nostrud postulant dissentias qui. Postea tincidunt vel eu.</p>
-                <p>Ad eos alia inermis nominavi, eum nibh docendi definitionem no. Ius eu stet mucius nonumes, no mea facilis philosophia necessitatibus. Te eam vidit iisque legendos, vero meliore deserunt ius ea. An qui inimicus inciderint.</p>
-            </div>
-        </div>
-    </div>
+						<div class="form-group">
+								<label class="col-xs-3 control-label">Terms of use</label>
+								<div class="col-xs-9">
+										<div style="border: 1px solid #e5e5e5; height: 200px; overflow: auto; padding: 10px;">
+												<p>Lorem ipsum dolor sit amet, veniam numquam has te. No suas nonumes recusabo mea, est ut graeci definitiones. His ne melius vituperata scriptorem, cum paulo copiosae conclusionemque at. Facer inermis ius in, ad brute nominati referrentur vis. Dicat erant sit ex. Phaedrum imperdiet scribentur vix no, ad latine similique forensibus vel.</p>
+												<p>Dolore populo vivendum vis eu, mei quaestio liberavisse ex. Electram necessitatibus ut vel, quo at probatus oportere, molestie conclusionemque pri cu. Brute augue tincidunt vim id, ne munere fierent rationibus mei. Ut pro volutpat praesent qualisque, an iisque scripta intellegebat eam.</p>
+												<p>Mea ea nonumy labores lobortis, duo quaestio antiopam inimicus et. Ea natum solet iisque quo, prodesset mnesarchum ne vim. Sonet detraxit temporibus no has. Omnium blandit in vim, mea at omnium oblique.</p>
+												<p>Eum ea quidam oportere imperdiet, facer oportere vituperatoribus eu vix, mea ei iisque legendos hendrerit. Blandit comprehensam eu his, ad eros veniam ridens eum. Id odio lobortis elaboraret pro. Vix te fabulas partiendo.</p>
+												<p>Natum oportere et qui, vis graeco tincidunt instructior an, autem elitr noster per et. Mea eu mundi qualisque. Quo nemore nusquam vituperata et, mea ut abhorreant deseruisse, cu nostrud postulant dissentias qui. Postea tincidunt vel eu.</p>
+												<p>Ad eos alia inermis nominavi, eum nibh docendi definitionem no. Ius eu stet mucius nonumes, no mea facilis philosophia necessitatibus. Te eam vidit iisque legendos, vero meliore deserunt ius ea. An qui inimicus inciderint.</p>
+										</div>
+										<div class="col-xs-6 col-xs-offset-3">
+												<div class="checkbox">
+														<input type="checkbox" id="agree-button" name="agree" value="agree">
+														<label for="agree-button">Agree with the terms and conditions</label>
+												</div>
+										</div>
+								</div>
+						</div>
 
-<div class="form-group">
-        <div class="col-xs-6 col-xs-offset-3">
-            <div class="checkbox">
-                <label>
-                    <input type="checkbox" name="agree" value="agree" /> Agree with the terms and conditions
-                </label>
-            </div>
-        </div>
-    </div>
+    			  <button class="btn btn-lg btn-primary btn-block"  name="Submit" value="Login" type="submit">Login</button>
+				
+				</form>
 
     <script>
     $(document).ready(function() {
 
         $('#login').submit(function() {
+					
+						if (!validateForm(this)) {
+							alert("Invalid form");
+							return;
+						}
 
             $.ajax({
                 type: "POST",
@@ -106,8 +105,7 @@
                 {
                     if (data === 'Correct') { // or whatever response
                         window.location.replace('redirect url');
-                    }
-                    else {
+                    } else {
                         alert(data);
                     }
                 }
@@ -116,24 +114,15 @@
         });
 
     });
+		
+		function validateForm(form) {
+			if (!$(form).find("#agree-button").val() === "agree") return false;
+
+			return true;
+		}
     </script>
 		
 		<script>
-			            agree: {
-                // The plugin will ignore the hidden field
-                // By setting excluded: false, the field will be validated as usual
-                excluded: false,
-                validators: {
-                    callback: {
-                        message: 'You must agree with the terms and conditions',
-                        callback: function(value, validator, $field) {
-                            return value === 'yes';
-                        }
-                    }
-                }
-            }
-        }
-    });
 
     // Update the value of "agree" input when clicking the Agree/Disagree button
     $('#agreeButton, #disagreeButton').on('click', function() {
@@ -141,10 +130,7 @@
 
         $('#registrationForm')
             .find('[name="agree"]')
-                .val(whichButton === 'agreeButton' ? 'yes' : 'no')
-                .end()
-            // Revalidate the field manually
-            .formValidation('revalidateField', 'agree');
+                .val(whichButton === 'agreeButton' ? 'yes' : 'no');
     });
 });
 		</script>
