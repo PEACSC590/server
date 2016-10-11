@@ -26,7 +26,7 @@ Output: JSON
 Input: Body
 ```json
 {
-  "sellerID" : "...",
+  “userID" : "...",
   "description" : "...",
   "price" : [double],
   "tags" : [array[string]],
@@ -55,7 +55,7 @@ Input: query
 Output: JSON
 ```json
 {
-  "sellerID" : "...",
+  “userID" : "...",
   "description" : "...",
   "price" : [double],
   "tags" : [array[string]],
@@ -70,7 +70,7 @@ Use for Search. Assumes “status” = null.
 Input: Body
 ```json
 {
-  "sellerID" : "...",
+  “userID" : "...",
   "price" : [double],
   "tags" : [array[string]],
 }
@@ -114,5 +114,22 @@ Output: JSON
 ```json
 {
   “status” : [string] “sold”,
+}
+```
+
+**POST** Ban
+`/ban`
+
+Input: JSON
+```json
+{
+  “userID" : [int],
+}
+```
+
+Output: JSON
+```json
+{
+  “ban” : [string] “banned”,
 }
 ```
