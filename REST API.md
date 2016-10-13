@@ -98,8 +98,8 @@ Output: JSON
 ```json
 {
   "status" : [string] “pending”,
-  "buyer item count" : [int+1],
-  "counter" : [int=0],
+  "buyerItemCount" : [int]
+  "counter" : [int]
 }
 ```
 
@@ -118,7 +118,7 @@ Output: JSON
 ```json
 {
   "status" : [string] “sold”,
-  "buyer item count" : [int-1],
+  "buyerItemCount" : [int]
 }
 ```
 
@@ -136,7 +136,7 @@ Input: JSON
 Output: JSON
 ```json
 {
-
+  "success" : [boolean]
 }
 ```
 
