@@ -123,7 +123,7 @@ Output: JSON
 ```
 
 **POST** Cancel Sale
-`/cancel sale`
+`/cancel-sale`
 
 Input: JSON
 ```json
