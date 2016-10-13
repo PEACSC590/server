@@ -30,54 +30,26 @@
 </head>
 
   <body>
-    <nav class="navbar nav-custom navbar-fixed-top" data-spy="affix" data-offset-top="80" role="navigation">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="glyphicon glyphicon-th-list"></span>
-                </button>
-                <span class="rc">RC</span>
-            </div>
-            <div class="collapse navbar-collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="active">
-                        <a href="#home">Home</a>
-                    </li>
-                    <li>
-                        <a href="#design">Design</a>
-                    </li>
-                    <li>
-                        <a href="#develop">Develop</a>
-                    </li>
-                    <li>
-                        <a href="#contact">Contact</a>
-                    </li>
-                </ul>
-            </div><!-- /.navbar-collapse -->
-        </div><!-- /.container-fluid -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" id="title">PEABay</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="HomePage.html">Home</a></li>
+            <li><a href="about.html" id="about">About</a></li>
+            <li><a href="contact.html" id="contact">Contact</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
     </nav>
-      <script>
-        $(document).ready(function(){
-        	$('a[href*=#]').click(function() {
-        		if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'')
-        		&& location.hostname == this.hostname) {
-
-        			var $target = $(this.hash);
-        			$target = $target.length && $target
-        			|| $('[name=' + this.hash.slice(1) +']');
-
-        			if ($target.length) {
-        				var targetOffset = $target.offset().top - 70;
-        				$('html,body')
-        				.animate({scrollTop: targetOffset}, 1000);
-                        $('.navbar-collapse').removeClass('in');
-        				return false;
-        			}
-        		}
-        	});
-        });
-      </script>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
