@@ -1,6 +1,10 @@
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.bson.BSON;
+import org.bson.conversions.Bson;
+
 import java.net.UnknownHostException;
 
 import static spark.Spark.*;
@@ -9,6 +13,7 @@ import spark.ModelAndView;
 
 import com.mongodb.*;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.util.JSON;
 
 public class Main {
 
@@ -45,9 +50,9 @@ public class Main {
 			attributes.put("data", data);
 			return new ModelAndView(attributes, "display-data.ftl");
 		}, new FreeMarkerEngine());
-		
+
 		// login
-		post("/post-demo", (request, response) -> {
+		post("/login", (request, response) -> {
 			Map<String, String> data = api.getBody(request);
 
 			Map<String, Object> attributes = new HashMap<>();
@@ -55,12 +60,23 @@ public class Main {
 			return new ModelAndView(attributes, "login.ftl");
 		}, new FreeMarkerEngine());
 
-		// example using the db
+		// list items in the db that match the query provided as a querystring
+		// param
 		get("/list-items", (req, res) -> {
-			List<String> items = api.getItems();
-
 			Map<String, Object> attributes = new HashMap<>();
-			attributes.put("results", items);
+
+			String jsonStringQuery = req.queryParams("query");
+			if (jsonStringQuery == null || jsonStringQuery.length() == 0 || jsonStringQuery.charAt(0) != '{')
+				jsonStringQuery = "{}";
+			try {
+				Bson query = (Bson) JSON.parse(jsonStringQuery);
+				List<String> items = api.getItems(query);
+
+				attributes.put("results", items);
+			} catch (Exception e) {
+				attributes.put("error", e.toString());
+			}
+
 			return new ModelAndView(attributes, "db.ftl");
 		}, new FreeMarkerEngine());
 
