@@ -133,3 +133,19 @@ Output: JSON
   “ban” : [string] “banned”,
 }
 ```
+
+**GET** My Items
+`/my-items`
+
+Input: Body
+```json
+{
+  “userID" : "...",
+}
+```
+
+Output: JSON
+```json
+{
+  "items" : [array[item]]
+}
