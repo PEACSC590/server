@@ -47,7 +47,7 @@ public class Main {
 		}, new FreeMarkerEngine());
 		
 		// login
-		post("/post-demo", (request, response) -> {
+		post("/login", (request, response) -> {
 			Map<String, String> data = api.getBody(request);
 
 			Map<String, Object> attributes = new HashMap<>();
