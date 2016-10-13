@@ -1,38 +1,36 @@
-/* Login.java
- */
-
-import java.net.*;
 import java.io.*;
+import java.net.*;
 
-public class Login
-{
-	public static void main(String[] args) throws Exception {
-		// Inital e-mail URL
-		String temp_url = "https://www.outlook.com/owa/exeter.edu";
-		URL obj = new URL(temp_url);
-		HttpURLConnection connection = (HttpURLConnection) obj.openConnection();
-		connection.setRequestMethod("GET");
-		System.out.println(connection.getResponseCode());
+public class Login {
 
-		// Redirected e-mail URL
-		String url = connection.getURL();
+    static final String kuser = "asun"; // your account name
+    static final String kpass = "moomoo"; // retrieve password for your account 
 
-		req
-		/** BufferedReader in = new BufferedReader(
-		        new InputStreamReader(connection.getInputStream()));
-		String inputLine;
-		StringBuffer response = new StringBuffer();
+    static class MyAuthenticator extends Authenticator {
+        public PasswordAuthentication getPasswordAuthentication() {
+            // I haven't checked getRequestingScheme() here, since for NTLM
+            // and Negotiate, the usrname and password are all the same.
+            System.err.println("Feeding username and password for " + getRequestingScheme());
+            return (new PasswordAuthentication(kuser, kpass.toCharArray()));
+        }
+    }
 
-		while ((inputLine = in.readLine()) != null) {
-			response.append(inputLine);
-		}
-		in.close();
+    public static void main(String[] args) throws Exception {
+        String temp_url = "https://www.outlook.com/owa/exeter.edu";
+        URL obj = new URL(temp_url);
+        HttpURLConnection connection = (HttpURLConnection) obj.openConnection();
+        connection.setRequestMethod("GET");
+        System.out.println(connection.getResponseCode());
 
-		//print result
-		System.out.println(response.toString());**/
+        // Redirected e-mail URL
+        URL url = connection.getURL();
 
-		
-
-		System.out.println("Hello World!");
-	}
+        Authenticator.setDefault(new MyAuthenticator());
+        System.out.println("moo");
+        InputStream ins = url.openConnection().getInputStream();
+        BufferedReader reader = new BufferedReader(new InputStreamReader(ins));
+        String str;
+        while((str = reader.readLine()) != null)
+            System.out.println(str);
+    }
 }
