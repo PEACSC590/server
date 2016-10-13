@@ -19,7 +19,6 @@ Output: JSON
 }
 ```
 
-
 **POST** upload
 `/upload`
 
@@ -32,6 +31,7 @@ Input: Body
   "tags" : [array[string]],
   "image" : [jpg, bmp, png]
 }
+```
 
 Output: JSON
 ```json
@@ -48,14 +48,14 @@ Input: query
 
 ```
 {
-  “itemID” : [int],
+  "itemID” : [int],
 }
 ```
 
 Output: JSON
 ```json
 {
-  “userID" : "...",
+  “"serID" : "...",
   "description" : "...",
   "price" : [double],
   "tags" : [array[string]],
@@ -70,7 +70,7 @@ Use for Search. Assumes “status” = null.
 Input: Body
 ```json
 {
-  “userID" : "...",
+  "userID" : "...",
   "price" : [double],
   "tags" : [array[string]],
 }
@@ -89,14 +89,17 @@ Output: JSON
 Input: JSON
 ```json
 {
-  “itemID" : [int],
+  "itemID" : [int],
+  "userID" : [int],
 }
 ```
 
 Output: JSON
 ```json
 {
-  “status” : [string] “pending”,
+  "status" : [string] “pending”,
+  "buyer item count" : [int+1],
+  "counter" : [int=0],
 }
 ```
 
@@ -107,6 +110,7 @@ Input: JSON
 ```json
 {
   "itemID" : [int],
+  "userID" : [int],
 }
 ```
 
@@ -114,6 +118,25 @@ Output: JSON
 ```json
 {
   "status" : [string] “sold”,
+  "buyer item count" : [int-1],
+}
+```
+
+**POST** Cancel Sale
+`/cancel sale`
+
+Input: JSON
+```json
+{
+  "itemID" : [int],
+  "userID" : [int],
+}
+```
+
+Output: JSON
+```json
+{
+
 }
 ```
 
@@ -131,5 +154,22 @@ Output: JSON
 ```json
 {
   "ban" : [string] “banned”,
+}
+```
+
+**GET** My Items
+`/my-items`
+
+Input: Body
+```json
+{
+  "userID" : "...",
+}
+```
+
+Output: JSON
+```json
+{
+  "items" : [array[item]]
 }
 ```
