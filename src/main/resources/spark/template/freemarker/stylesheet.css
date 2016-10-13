@@ -98,6 +98,14 @@ button{
 	padding: 50px;
     text-align: center;
 }
+body {
+  padding-top: 50px;
+}
+.starter-template {
+  padding: 40px 15px;
+  text-align: center;
+}
+
 .contact-btn {
 	background-color: #fff;
 	color: #f87f73;
@@ -264,13 +272,12 @@ button{
   color: white;
 }
 
-#bodytext {
-  margin-top: 45px;
+#singleproduct {
+  width:140px;
+  height:140px;
 }
 
 #logintext {
   margin: auto;
   margin-top: 60px;
-
-
 }
