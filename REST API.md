@@ -26,7 +26,7 @@ Output: JSON
 Input: Body
 ```json
 {
-  “userID" : "...",
+  "userID" : "...",
   "description" : "...",
   "price" : [double],
   "tags" : [array[string]],
@@ -106,14 +106,14 @@ Output: JSON
 Input: JSON
 ```json
 {
-  “itemID" : [int],
+  "itemID" : [int],
 }
 ```
 
 Output: JSON
 ```json
 {
-  “status” : [string] “sold”,
+  "status" : [string] “sold”,
 }
 ```
 
@@ -123,13 +123,13 @@ Output: JSON
 Input: JSON
 ```json
 {
-  “userID" : [int],
+  "userID" : [int],
 }
 ```
 
 Output: JSON
 ```json
 {
-  “ban” : [string] “banned”,
+  "ban" : [string] “banned”,
 }
 ```
