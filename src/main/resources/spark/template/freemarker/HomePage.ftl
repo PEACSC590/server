@@ -44,9 +44,9 @@
         </div>
         <div id="navbar" id="navigationbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="HomePage.html">Home</a></li>
-            <li><a href="about.html" id="about">About</a></li>
-            <li><a href="contact.html" id="contact">Contact</a></li>
+            <li class="active"><a href="HomePage.ftl">Home</a></li>
+            <li><a href="about.ftl" id="about">About</a></li>
+            <li><a href="contact.ftl" id="contact">Contact</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
