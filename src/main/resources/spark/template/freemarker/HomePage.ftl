@@ -54,8 +54,13 @@
 
     <div class="container" id="bodytext">
 
+
+
+
+
+
       <div class="starter-template">
-        <h1 >Fighting Bookstore Prices since 2016</h1>
+        <h1 >Fighting Bookstore Prices since 2016.</h1>
         <p class="lead">When you login, you will need to agree to the terms.</p>
       </div>
 
