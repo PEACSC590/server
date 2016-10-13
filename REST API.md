@@ -55,7 +55,7 @@ Input: query
 Output: JSON
 ```json
 {
-  “"serID" : "...",
+  "userID" : "...",
   "description" : "...",
   "price" : [double],
   "tags" : [array[string]],
