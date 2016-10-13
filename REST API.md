@@ -98,7 +98,7 @@ Output: JSON
 ```json
 {
   "status" : [string] “pending”,
-  "buyerItemCount" : [int]
+  "buyerItemCount" : [int],
   "counter" : [int]
 }
 ```
