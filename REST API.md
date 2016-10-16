@@ -1,7 +1,5 @@
 # REST API Documentation
 
-test
-
 **POST** Authentication
 `/login`
 
@@ -21,19 +19,19 @@ Output: JSON
 }
 ```
 
-
 **POST** upload
 `/upload`
 
 Input: Body
 ```json
 {
-  “userID" : "...",
+  "userID" : "...",
   "description" : "...",
   "price" : [double],
   "tags" : [array[string]],
   "image" : [jpg, bmp, png]
 }
+```
 
 Output: JSON
 ```json
@@ -50,14 +48,14 @@ Input: query
 
 ```
 {
-  “itemID” : [int],
+  "itemID” : [int],
 }
 ```
 
 Output: JSON
 ```json
 {
-  “userID" : "...",
+  "userID" : "...",
   "description" : "...",
   "price" : [double],
   "tags" : [array[string]],
@@ -72,7 +70,7 @@ Use for Search. Assumes “status” = null.
 Input: Body
 ```json
 {
-  “userID" : "...",
+  "userID" : "...",
   "price" : [double],
   "tags" : [array[string]],
 }
@@ -91,14 +89,17 @@ Output: JSON
 Input: JSON
 ```json
 {
-  “itemID" : [int],
+  "itemID" : [int],
+  "userID" : [int],
 }
 ```
 
 Output: JSON
 ```json
 {
-  “status” : [string] “pending”,
+  "status" : [string] “pending”,
+  "buyerItemCount" : [int],
+  "counter" : [int]
 }
 ```
 
@@ -108,14 +109,34 @@ Output: JSON
 Input: JSON
 ```json
 {
-  “itemID" : [int],
+  "itemID" : [int],
+  "userID" : [int],
 }
 ```
 
 Output: JSON
 ```json
 {
-  “status” : [string] “sold”,
+  "status" : [string] “sold”,
+  "buyerItemCount" : [int]
+}
+```
+
+**POST** Cancel Sale
+`/cancel-sale`
+
+Input: JSON
+```json
+{
+  "itemID" : [int],
+  "userID" : [int],
+}
+```
+
+Output: JSON
+```json
+{
+  "success" : [boolean]
 }
 ```
 
@@ -125,14 +146,14 @@ Output: JSON
 Input: JSON
 ```json
 {
-  “userID" : [int],
+  "userID" : [int],
 }
 ```
 
 Output: JSON
 ```json
 {
-  “ban” : [string] “banned”,
+  "ban" : [string] “banned”,
 }
 ```
 
@@ -142,7 +163,7 @@ Output: JSON
 Input: Body
 ```json
 {
-  “userID" : "...",
+  "userID" : "...",
 }
 ```
 
@@ -151,3 +172,4 @@ Output: JSON
 {
   "items" : [array[item]]
 }
+```
