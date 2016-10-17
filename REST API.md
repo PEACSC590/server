@@ -4,6 +4,7 @@
 `/login`
 
 The login tries a username and password through NTLM authentication on Exeter Outlook mail server outlook.com/owa/exeter.edu and tests for a GET 200 response, which means that the credentials are valid. Only the username is taken as output.
+
 Input: Body
 ```json
 {
@@ -24,6 +25,7 @@ Output: JSON
 `/upload`
 
 The upload functionality allows users to input an item through POST, which will eventually be stored in the Item entity of the database.
+
 Input: Body
 ```json
 {
@@ -92,7 +94,8 @@ Output: JSON
 **POST** Buy
 `/buy`
 
-The buy function allows a user to purchase an item they have previously seen. The username of the current session buys the item and this item increases the count of a buyer's limit on pending purchases.
+The buy function allows a user to purchase an item they have previously seen, activating a time window for the seller to confirm the purchase. The username of the current session buys the item and this item increases the count of a buyer's limit on pending purchases.
+
 Input: JSON
 ```json
 {
@@ -113,6 +116,7 @@ Output: JSON
 **POST** Sell
 `/sell`
 
+This function marks an item as sold in the database after the seller has confirmed that they have sold the item to the buyer.
 
 Input: JSON
 ```json
