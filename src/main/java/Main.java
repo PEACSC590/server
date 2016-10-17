@@ -1,8 +1,9 @@
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import org.bson.BSON;
+import org.bson.Document;
 import org.bson.conversions.Bson;
 
 import java.net.UnknownHostException;
@@ -70,9 +71,13 @@ public class Main {
 				jsonStringQuery = "{}";
 			try {
 				Bson query = (Bson) JSON.parse(jsonStringQuery);
-				List<String> items = api.getItems(query);
+				List<Document> items = api.getItems(query);
+				List<String> itemStrings = new LinkedList<String>();
 
-				attributes.put("results", items);
+				for (Document item : items)
+					itemStrings.add(item.toJson());
+
+				attributes.put("results", itemStrings);
 			} catch (Exception e) {
 				attributes.put("error", e.toString());
 			}
