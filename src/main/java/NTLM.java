@@ -7,18 +7,18 @@ import java.net.HttpURLConnection;
 import java.net.PasswordAuthentication;
 import java.net.URL;
 
-public class NtlmTest01 {
+public class NTLM {
 
 	public static void main(String[] args) throws Exception {
 
-		String urlStr = “http://example.com/root/action.dll?p1=value1″;
-		String domain = “”; // May also be referred as realm
-		String userName = “CHANGE_ME”;
-		String password = “CHANGE_ME”;		
+		String urlStr = "http://example.com/root/action.dll?p1=value1";
+		String domain = ""; // May also be referred as realm
+		String userName = "CHANGE_ME";
+		String password = "CHANGE_ME";		
 
 		String responseText = getAuthenticatedResponse(urlStr, domain, userName, password);
 
-	    System.out.println(”response: ” + responseText);
+	    System.out.println("response: " + responseText);
 	}
 
 	private static String getAuthenticatedResponse(final String urlStr, final String domain, final String userName, final String password) throws IOException {
@@ -28,7 +28,7 @@ public class NtlmTest01 {
 		Authenticator.setDefault(new Authenticator() {
 	        @Override
 	        public PasswordAuthentication getPasswordAuthentication() {
-	            return new PasswordAuthentication(domain + “\\” + userName, password.toCharArray());
+	            return new PasswordAuthentication(domain + "\\" + userName, password.toCharArray());
 	        }
 	    });
 
@@ -36,11 +36,11 @@ public class NtlmTest01 {
 	    HttpURLConnection conn = (HttpURLConnection) urlRequest.openConnection();
 	    conn.setDoOutput(true);
 	    conn.setDoInput(true);
-	    conn.setRequestMethod(”GET”);
+	    conn.setRequestMethod("GET");
 
 	    InputStream stream = conn.getInputStream();
 	    BufferedReader in = new BufferedReader(new InputStreamReader(stream));
-	    String str = “”;
+	    String str = "";
 	    while ((str = in.readLine()) != null) {
 	        response.append(str);
 	    }
