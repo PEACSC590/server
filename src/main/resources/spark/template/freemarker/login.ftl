@@ -65,7 +65,7 @@
     			  <input type="password" class="form-control" id="password" name="Password" placeholder="Exeter Password" required=""/>
 
 
-            <!--
+            
 						<div class="form-group" id="terms">
 								<label class="col-xs-3 control-label">Terms of use</label>
 								<div class="col-xs-9">
@@ -85,7 +85,7 @@
 										</div>
 								</div>
 						</div>
-          -->
+          
 
     			  <button class="btn btn-lg btn-primary btn-block"  name="Submit" value="Login" type="submit">Login</button>
 
