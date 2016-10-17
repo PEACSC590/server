@@ -88,14 +88,29 @@ Output: JSON
   "items" : [array[item]]
 }
 ```
+**GET** Search Items
+`/search-items`
 
+The search-items function will list all the items with a given text search, retrieving all the items related to the string. This will be used for our search bar on the products for sale page.
 
+Input: Body
+```json
+{
+  "search" : [string],
+}
+```
 
+Output: JSON
+```json
+{
+  "items" : [array[item]]
+}
+```
 
 **GET** List Items
 `/list-items`
 
-The list-items function will list all the items with a specific parameter, retrieving all the items and displaying them similarly to all-items. This will be used for our sort filters used by buyers as they browse the items.
+The list-items function will list all the items with a specific parameter, retrieving all the items and displaying them similarly to all-items. This will be used for our sort filters used by buyers as they browse the items as well as any filtering we do when displaying items (i.e. show all books, etc.).
 
 Input: Body
 ```json
