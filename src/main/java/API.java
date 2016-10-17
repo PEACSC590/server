@@ -24,14 +24,24 @@ public class API {
 		this.itemsCollection = this.db.getCollection("items");
 	}
 
-	public List<String> getItems(Bson query) {
-		List<String> itemStrings = new LinkedList<String>();
+	public List<Document> getItems(Bson query) {
+		List<Document> documents = new LinkedList<Document>();
 
 		FindIterable<Document> items = itemsCollection.find(query);
 		for (Document item : items)
-			itemStrings.add(item.toJson());
+			documents.add(item);
 
-		return itemStrings;
+		return documents;
+	}
+
+	public List<Document> getItemsUploadedByUser(String userID) {
+		return getItems(new Document("userID", userID));
+	}
+
+	public List<Document> getItemsBoughtByUser(String userID) {
+		// 10.16.16: the item attribute might not be "boughtByUserID", but I'll
+		// use it for now
+		return getItems(new Document("boughtByUserID", userID));
 	}
 
 	public Map<String, String> getBody(Request request) {
