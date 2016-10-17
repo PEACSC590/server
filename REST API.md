@@ -138,6 +138,7 @@ Output: JSON
 `/cancel-sale`
 
 This function cancels the sale of an item if the seller chooses that the item will not be sold anymore. The function should remove the item from the item database.
+
 Input: JSON
 ```json
 {
@@ -157,6 +158,7 @@ Output: JSON
 `/ban`
 
 This function bans a user who has been acting inappropriately. The function should toggle the "banned" boolean associated to a username to True.
+
 Input: JSON
 ```json
 {
