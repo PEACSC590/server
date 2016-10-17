@@ -2,6 +2,7 @@
 
 **POST** Authentication
 `/login`
+
 The login tries a username and password through NTLM authentication on Exeter Outlook mail server outlook.com/owa/exeter.edu and tests for a GET 200 response, which means that the credentials are valid. Only the username is taken as output.
 Input: Body
 ```json
