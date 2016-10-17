@@ -132,6 +132,7 @@ Output: JSON
 **POST** Cancel Sale
 `/cancel-sale`
 
+This function cancels the sale of an item if the seller chooses that the item will not be sold anymore. The function should remove the item from the item database.
 Input: JSON
 ```json
 {
@@ -150,6 +151,7 @@ Output: JSON
 **POST** Ban
 `/ban`
 
+This function bans a user who has been acting inappropriately. The function should toggle the "banned" boolean associated to a username to True.
 Input: JSON
 ```json
 {
@@ -167,6 +169,7 @@ Output: JSON
 **GET** My Items
 `/my-items`
 
+This function generates a list of a user's personal items that he or she is selling or is buying, retrieving the desired items from the database.
 Input: Body
 ```json
 {
