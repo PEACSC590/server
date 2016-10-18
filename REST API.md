@@ -8,8 +8,8 @@ The login tries a username and password through NTLM authentication on Exeter Ou
 Input: Body
 ```json
 {
-  "login": "...",
-  "password": "..."
+  "login": [string],
+  "password": [string]
 }
 ```
 
@@ -17,20 +17,20 @@ Output: JSON
 ```json
 {
   "valid": [boolean],
-  "username": "..."
+  "userID": [int]
 }
 ```
 
 **POST** upload
 `/upload`
 
-The upload functionality allows users to input an item through POST, which will eventually be stored in the Item entity of the database.
+The upload functionality allows users to input an item through POST, which will eventually be stored in the Item entity of the database. This allows new products to be listed for sale.
 
 Input: Body
 ```json
 {
-  "userID" : "...",
-  "description" : "...",
+  "userID" : [int],
+  "description" : [string],
   "price" : [double],
   "tags" : [array[string]],
   "image" : [jpg, bmp, png]
@@ -41,46 +41,83 @@ Output: JSON
 ```json
 {
   "success": [boolean],
-  "redirect": "...url"
+  "redirect": [url]
 }
 ```
 
 **GET** List Item
 `/list-item:itemID`
 
-The list-item by ID page retrieves item information for a specific item ID, from the database to display to the user.
+The list-item by ID page retrieves item information for a specific item ID, from the database to display to the user. This will be used when buyers click on a specific item for more information.
 
 Input: query
 
 ```
 {
-  "itemID” : [int],
+  "itemID” : [int]
 }
 ```
 
 Output: JSON
 ```json
 {
-  "userID" : "...",
-  "description" : "...",
+  "userID" : [int],
+  "description" : [string],
   "price" : [double],
   "tags" : [array[string]],
   "image" : [jpg, bmp, png]
 }
 ```
 
-**GET** List Items
+**GET** All Items
 `/list-items`
-Use for Search. Assumes “status” = null.
 
-The list-items function lists all of the items in the database that are available to be bought. The function retrieves all items and displays them in a grid form.
+The all-items function lists all of the items in the database that are available to be bought. The function retrieves all items and displays them in a grid form. This will be used in the "buy" tab of our dashboard.
+
 
 Input: Body
 ```json
 {
-  "userID" : "...",
+  
+}
+```
+
+Output: JSON
+```json
+{
+  "items" : [array[item]]
+}
+```
+**GET** Search Items
+`/search-items`
+
+The search-items function will list all the items with a given text search, retrieving all the items related to the string. This will be used for our search bar on the products for sale page.
+
+Input: Body
+```json
+{
+  "search" : [string],
+}
+```
+
+Output: JSON
+```json
+{
+  "items" : [array[item]]
+}
+```
+
+**GET** List Items
+`/list-items`
+
+The list-items function will list all the items with a specific parameter, retrieving all the items and displaying them similarly to all-items. This will be used for our sort filters used by buyers as they browse the items as well as any filtering we do when displaying items (i.e. show all books, etc.).
+
+Input: Body
+```json
+{
+  "userID" : [int],
   "price" : [double],
-  "tags" : [array[string]],
+  "tags" : [array[string]]
 }
 ```
 
@@ -100,7 +137,7 @@ Input: JSON
 ```json
 {
   "itemID" : [int],
-  "userID" : [int],
+  "userID" : [int]
 }
 ```
 
@@ -122,7 +159,7 @@ Input: JSON
 ```json
 {
   "itemID" : [int],
-  "userID" : [int],
+  "userID" : [int]
 }
 ```
 
@@ -130,27 +167,51 @@ Output: JSON
 ```json
 {
   "status" : [string] “sold”,
-  "buyerItemCount" : [int]
+  "buyerItemCount" : [int],
+  "counter" : [int]
 }
 ```
 
-**POST** Cancel Sale
-`/cancel-sale`
+**POST** Cancel Pending Sale
+`/cancel-pending-sale`
 
-This function cancels the sale of an item if the seller chooses that the item will not be sold anymore. The function should remove the item from the item database.
+This function cancels the pending sale of an item if the seller chooses that the item will not be sold to the buyer or if the counter has risen to 3+ days. The function should remove the item from the pending sale database and return it to the active products database.
 
 Input: JSON
 ```json
 {
   "itemID" : [int],
-  "userID" : [int],
+  "userID" : [int]
 }
 ```
 
 Output: JSON
 ```json
 {
-  "success" : [boolean]
+  "success" : [boolean],
+  "buyerItemCount" : [int],
+  "counter" : [int],
+  "status" : [string] null
+}
+```
+
+**POST** Unlist 
+`/unlist`
+
+This function cancels the  sale of an item if the seller chooses that the item will not be sold anymore. The function should remove the item from the sale database and return it hide it unless the buyer wants to relist it.
+
+Input: JSON
+```json
+{
+  "itemID" : [int]
+}
+```
+
+Output: JSON
+```json
+{
+  "success" : [boolean],
+  "status" : [string] sold
 }
 ```
 
@@ -162,14 +223,14 @@ This function bans a user who has been acting inappropriately. The function shou
 Input: JSON
 ```json
 {
-  "userID" : [int],
+  "userID" : [int]
 }
 ```
 
 Output: JSON
 ```json
 {
-  "ban" : [string] “banned”,
+  "ban" : [string] “banned”
 }
 ```
 
@@ -177,10 +238,11 @@ Output: JSON
 `/my-items`
 
 This function generates a list of a user's personal items that he or she is selling or is buying, retrieving the desired items from the database.
+
 Input: Body
 ```json
 {
-  "userID" : "...",
+  "userID" : "..."
 }
 ```
 
