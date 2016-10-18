@@ -54,7 +54,7 @@
     <![endif]-->
 
     <!-- linking login stylesheet -->
-    <link href="login-style.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="stylesheet.css">
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
@@ -73,6 +73,12 @@
           <a class="navbar-brand" href="#">PEAbay</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="HomePage.ftl">Home</a></li>
+            <li><a href="about.ftl" id="about">About</a></li>
+            <li><a href="contact.ftl" id="contact">Contact</a></li>
+            <li><a href="search.ftl" id="buy">Search</a><li>
+          </ul>
           <ul class="nav navbar-nav navbar-right">
             <li><a href="#">Dashboard</a></li>
             <li><a href="#">Settings</a></li>
@@ -89,7 +95,7 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
-          
+
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
           <h1 class="page-header">Dashboard</h1>
@@ -134,93 +140,93 @@
                   <td>10/14/15</td>
                   <td>$5.00</td>
                   <td>me</td>
-                  
+
                 </tr>
                 <tr>
                   <td>insert item</td>
                   <td>10/14/15</td>
                   <td>$5.00</td>
                   <td>me</td>
-        
+
                 </tr>
                 <tr>
                   <td>insert item</td>
                   <td>10/14/15</td>
                   <td>$5.00</td>
                   <td>me</td>
-                
+
                 </tr>
                 <tr>
                   <td>insert item</td>
                   <td>10/14/15</td>
                   <td>$5.00</td>
                   <td>me</td>
-                  
+
                 </tr>
                 <tr>
                   <td>insert item</td>
                   <td>10/14/15</td>
                   <td>$5.00</td>
                   <td>me</td>
-                 
+
                 </tr>
                 <tr>
                   <td>insert item</td>
                   <td>10/14/15</td>
                   <td>$5.00</td>
                   <td>me</td>
-                  
+
                 </tr>
                 <tr>
                   <td>insert item</td>
                   <td>10/14/15</td>
                   <td>$5.00</td>
                   <td>me</td>
-                  
+
                 </tr>
                 <tr>
                   <td>insert item</td>
                   <td>10/14/15</td>
                   <td>$5.00</td>
                   <td>me</td>
-                 
+
                 </tr>
                 <tr>
                   <td>insert item</td>
                   <td>10/14/15</td>
                   <td>$5.00</td>
                   <td>me</td>
-               
+
                 </tr>
                 <tr>
                   <td>insert item</td>
                   <td>10/14/15</td>
                   <td>$5.00</td>
                   <td>me</td>
-                  
+
                 </tr>
                 <tr>
                   <td>insert item</td>
                   <td>10/14/15</td>
                   <td>$5.00</td>
                   <td>me</td>
-                  
+
                 </tr>
                 <tr>
                   <td>insert item</td>
                   <td>10/14/15</td>
                   <td>$5.00</td>
                   <td>me</td>
-                 
+
                 </tr>
                 <tr>
                   <td>insert item</td>
                   <td>10/14/15</td>
                   <td>$5.00</td>
                   <td>me</td>
-                  
+
                 </tr>
-                
+
               </tbody>
             </table>
           </div>
@@ -228,6 +234,6 @@
       </div>
     </div>
 
-   
+
   </body>
 </html>

@@ -92,11 +92,11 @@
             </div>
             <div>
             <div>
-              <a class="btn btn-default" href="#" role="button">Search by Keyword</a>
+              <a class="btn btn-default" href="" role="button">Search by Keyword</a>
 
             </div>
             <div>
-              <a class="btn btn-default" href="#" role="button">Search by Category</a>
+              <a class="btn btn-default" href="" role="button">Search by Category</a>
             </div>
           </div>
 
