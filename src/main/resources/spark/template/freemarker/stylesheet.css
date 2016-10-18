@@ -43,3 +43,28 @@ body {
   padding: 40px 15px;
   text-align: center;
 }
+
+#searchcategory {
+  margin-top: 7px;
+}
+
+#formwhole {
+  width: 100%;
+
+}
+
+
+#keywordsearch{
+  width:50%;
+  float: left;
+}
+
+#categorysearch{
+  width:50%;
+  float: right;
+}
+
+
+#bodysearch {
+  width:100%;
+}
