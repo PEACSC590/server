@@ -34,13 +34,15 @@ public class Main {
 		API api = new API(db); // note: the way the methods are organized and
 								// accessed is subject to change
 
+		FreeMarkerEngine templateEngine = new FreeMarkerEngine();
+
 		//
 		// demo page using a view
 		get("/", (request, response) -> {
 			Map<String, Object> attributes = new HashMap<>();
 			attributes.put("message", "Hello World!");
 			return new ModelAndView(attributes, "index.ftl");
-		}, new FreeMarkerEngine());
+		}, templateEngine);
 		//
 
 		// Using API.java (as all endpoints should)
@@ -50,7 +52,7 @@ public class Main {
 			Map<String, Object> attributes = new HashMap<>();
 			attributes.put("data", data);
 			return new ModelAndView(attributes, "display-data.ftl");
-		}, new FreeMarkerEngine());
+		}, templateEngine);
 
 		// login
 		post("/login", (request, response) -> {
@@ -59,7 +61,7 @@ public class Main {
 			Map<String, Object> attributes = new HashMap<>();
 			attributes.put("data", data);
 			return new ModelAndView(attributes, "login.ftl");
-		}, new FreeMarkerEngine());
+		}, templateEngine);
 
 		// list items in the db that match the query provided as a querystring
 		// param
@@ -83,7 +85,7 @@ public class Main {
 			}
 
 			return new ModelAndView(attributes, "db.ftl");
-		}, new FreeMarkerEngine());
+		}, templateEngine);
 
 		post("/upload", (req, res) -> {
 			Map<String, String> data = api.getBody(req);
@@ -99,7 +101,7 @@ public class Main {
 			Map<String, Object> attributes = new HashMap<>();
 			attributes.put("data", data);
 			return new ModelAndView(attributes, "display-data.ftl");
-		}, new FreeMarkerEngine());
+		}, templateEngine);
 
 	}
 
