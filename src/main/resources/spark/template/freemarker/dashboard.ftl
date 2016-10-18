@@ -80,7 +80,7 @@
             <li><a href="search.ftl" id="buy">Search</a><li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Dashboard</a></li>
+            <li><a href="dashboard.ftl">Dashboard</a></li>
             <li><a href="#">Settings</a></li>
             <li><a href="#">Profile</a></li>
             <li><a href="#">Help</a></li>
