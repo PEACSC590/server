@@ -6,6 +6,8 @@
 
  body {
     overflow-x: hidden;
+    background: url("http://faainc.com/wp-content/uploads/2013/08/Phillips-Exeter_Finegold-Alexander_20101030-DSC_0553.jpg") no-repeat;
+    background-size:100% 100%;
  }
 
 /* Toggle Styles */
@@ -37,16 +39,13 @@
     transition: all 0.5s ease;
 }
 
-#wrapper.toggled #sidebar-wrapper {
-    width: 250px;
-}
 
 #page-content-wrapper {
-    background: url("http://faainc.com/wp-content/uploads/2013/08/Phillips-Exeter_Finegold-Alexander_20101030-DSC_0553.jpg") no-repeat;
-    background-size: auto;
+
     width: 100%;
     position: absolute;
     padding: 15px;
+    margin-left: 250px;
 }
 
 #wrapper.toggled #page-content-wrapper {
