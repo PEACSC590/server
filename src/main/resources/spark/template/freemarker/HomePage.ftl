@@ -97,6 +97,7 @@
             <li class="active"><a href="HomePage.ftl">Home</a></li>
             <li><a href="about.ftl" id="about">About</a></li>
             <li><a href="contact.ftl" id="contact">Contact</a></li>
+            <li><a href="search.ftl" id="buy">Search</a><li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
