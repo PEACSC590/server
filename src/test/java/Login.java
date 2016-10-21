@@ -43,22 +43,21 @@ public class Login {
         //System.out.println("moo");
         try {
             Authenticator.setDefault(new MyAuthenticator());
-            CookieHandler.setDefault(new CookieManager(null, CookiePolicy.ACCEPT_ALL));
-            System.setProperty("-Dhttp.maxRedirects", "2");
-            System.setProperty("http.maxRedirects", "2");
-            HttpURLConnection.setFollowRedirects(false);
-            CookieHandler.setDefault(new CookieManager(null, CookiePolicy.ACCEPT_ALL));
+            //CookieHandler.setDefault(new CookieManager(null, CookiePolicy.ACCEPT_ALL));
+            //System.setProperty("-Dhttp.maxRedirects", "2");
+            //System.setProperty("http.maxRedirects", "2");
+            //HttpURLConnection.setFollowRedirects(false);
             connection = (HttpURLConnection) url.openConnection();
-            System.out.println("opened connection");
-            InputStream ins = connection.getInputStream();
+            System.out.println("login successful");
+            /**InputStream ins = connection.getInputStream();
             BufferedReader reader = new BufferedReader(new InputStreamReader(ins));
             String str;
             while((str = reader.readLine()) != null) {
                 System.out.println(str);
-            }
+            }**/
             
         } catch (Exception e) {
-            System.out.println("exception");
+            System.out.println("login failed");
             return false;
         }
         return true;
