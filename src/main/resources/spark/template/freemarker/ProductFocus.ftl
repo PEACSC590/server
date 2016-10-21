@@ -5,13 +5,13 @@
       <meta charset="utf-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1">
-      
+
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
 	<!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-      
-      
+
+
       <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
       <title>${item.name} | PEAbay</title>
 
@@ -67,7 +67,7 @@
 
     <div id="page-content-wrapper">
       <nav class="navbar navbar-inverse">
-       <div class="container">
+       <div class="container-fluid">
          <div class="navbar-header">
            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
              <span class="sr-only">Toggle navigation</span>
@@ -79,10 +79,25 @@
          </div>
          <div id="navbar" class="collapse navbar-collapse">
            <ul class="nav navbar-nav">
-             <li class="active"><a href="#">Home</a></li>
+             <li><a href="#">Home</a></li>
              <li><a href="#about">About</a></li>
              <li><a href="#contact">Contact</a></li>
            </ul>
+           <ul class="nav navbar-nav navbar-right">
+             <li><a href="dashboard.ftl">Dashboard</a></li>
+             <li><a href="#">Settings</a></li>
+             <li><a href="#">Profile</a></li>
+
+             <form class="navbar-form navbar-right">
+               <input type="text" class="form-control" placeholder="Search">
+             </form>
+
+             <li><a href="#">Advanced Search</a></li>
+             </ul>
+
+
+
+
          </div><!--/.nav-collapse -->
        </div>
      </nav>
@@ -99,13 +114,13 @@
                 	<#else>
                 		<img class="img-responsive" src="http://placehold.it/800x300" alt="No Product Image Provided">
                 	</#if>
-                    
+
                     <div class="caption-full">
                         <h4 class="pull-right">&#36;${item.price}</h4>
                         <h4>${item.name} <span class="label label-info">${item.status}</span></h4>
                         <p>${item.description}</p>
                     </div>
-                    
+
                     <!-- tags -->
                     <div>
                     	<#list item.tags as tag>
