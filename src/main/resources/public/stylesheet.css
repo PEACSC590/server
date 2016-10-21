@@ -37,7 +37,7 @@
 }
 
 body {
-  
+
 }
 .starter-template {
   padding: 40px 15px;
@@ -173,4 +173,8 @@ body {
 .placeholder img {
   display: inline-block;
   border-radius: 50%;
+}
+
+#navright {
+  margin-right: 10px;
 }
