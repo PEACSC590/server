@@ -62,7 +62,7 @@
   <body>
 
     <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
+      <div class="container-fluid">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
             <span class="sr-only">Toggle navigation</span>
@@ -73,16 +73,22 @@
           <a class="navbar-brand" href="#">PEAbay</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-         <!-- <form class="navbar-form navbar-right">
-            <div class="form-group">
-              <input type="text" placeholder="Email" class="form-control">
-            </div>
-            <div class="form-group">
-              <input type="password" placeholder="Password" class="form-control">
-            </div>
-            <button type="submit" class="btn btn-success">Sign in</button>
-          </form> -->
-        </div><!--/.navbar-collapse -->
+          <ul class="nav navbar-nav">
+            <li><a href="HomePage.ftl">Home</a></li>
+            <li><a href="about.ftl" id="about">About</a></li>
+            <li><a href="contact.ftl" id="contact">Contact</a></li>
+            <li><a href="search.ftl" id="buy">Search</a><li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="dashboard.ftl">Dashboard</a></li>
+            <li><a href="#">Settings</a></li>
+            <li><a href="#">Profile</a></li>
+            <li><a href="#">Help</a></li>
+          </ul>
+          <form class="navbar-form navbar-right">
+            <input type="text" class="form-control" placeholder="Search...">
+          </form>
+        </div>
       </div>
     </nav>
 
@@ -148,6 +154,6 @@
     </div> <!-- /container -->
 
 
-  
+
   </body>
 </html>
