@@ -5,12 +5,13 @@ public class TestLogin {
 
     public static void main(String[] args) {
         Login login = new Login();
+        boolean good = true;
         try {
-            boolean good = login.login("asun1", "moo");
+            good = login.login("asun1", "moo");
         } catch (Exception e) {
-            boolean good = false;
+            
         }
-        System.out.println(good)
+        System.out.println(good);
         
         
     }
