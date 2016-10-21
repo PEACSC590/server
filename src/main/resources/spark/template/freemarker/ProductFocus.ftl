@@ -1,17 +1,19 @@
 <html>
   <head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
       <meta charset="utf-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1">
+      
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+	<!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+      
+      
       <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-      <title>PEAbay</title>
+      <title>${item.name} | PEAbay</title>
 
       <!-- Bootstrap -->
       <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -92,18 +94,25 @@
             <div class="col-md-9">
 
                 <div class="thumbnail">
-                    <img class="img-responsive" src="http://placehold.it/800x300" alt="">
+                	<#if item.imageURL??>
+                		<img class="img-responsive" src="${item.imageURL}" alt="Product Image">
+                	<#else>
+                		<img class="img-responsive" src="http://placehold.it/800x300" alt="No Product Image Provided">
+                	</#if>
+                    
                     <div class="caption-full">
-                        <h4 class="pull-right">$24.99</h4>
-                        <h4><a href="#">Product Name</a>
-                        </h4>
-                        <p>See more snippets like these online store reviews at <a target="_blank" href="http://bootsnipp.com">Bootsnipp - http://bootsnipp.com</a>.</p>
-                        <p>Want to make these reviews work? Check out
-                            <strong><a href="http://maxoffsky.com/code-blog/laravel-shop-tutorial-1-building-a-review-system/">this building a review system tutorial</a>
-                            </strong>over at maxoffsky.com!</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+                        <h4 class="pull-right">&#36;${item.price}</h4>
+                        <h4>${item.name} <span class="label label-info">${item.status}</span></h4>
+                        <p>${item.description}</p>
                     </div>
-                    <div class="ratings">
+                    
+                    <!-- tags -->
+                    <div>
+                    	<#list item.tags as tag>
+                    		<span class="label label-default">${tag}</span>
+                    	</#list>
+                    </div>
+                    <!--<div class="ratings">
                         <p class="pull-right">3 reviews</p>
                         <p>
                             <span class="glyphicon glyphicon-star"></span>
@@ -113,10 +122,10 @@
                             <span class="glyphicon glyphicon-star-empty"></span>
                             4.0 stars
                         </p>
-                    </div>
+                    </div>-->
                 </div>
 
-                <div class="well">
+                <!--<div class="well">
 
                     <div class="text-right">
                         <a class="btn btn-success">Leave a Review</a>
@@ -167,7 +176,7 @@
                         </div>
                     </div>
 
-                </div>
+                </div>-->
 
             </div>
 
