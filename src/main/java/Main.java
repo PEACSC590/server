@@ -16,6 +16,7 @@ import com.mongodb.*;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.util.JSON;
 
+
 public class Main {
 
 	public static void main(String[] args) throws MongoException, UnknownHostException {
@@ -85,6 +86,28 @@ public class Main {
 			}
 
 			return new ModelAndView(attributes, "db.ftl");
+		}, templateEngine);
+
+		get("/list-item", (req, res) -> {
+			int itemID;
+			try {
+				itemID = Integer.parseInt(req.queryParams("itemID"));
+			} catch (NumberFormatException e) {
+				Map<String, Object> attributes = new HashMap<>();
+				attributes.put("message", e.toString());
+				return new ModelAndView(attributes, "error.ftl");
+			}
+
+			Document item = api.getItemByID(itemID);
+			if (item == null) {
+				Map<String, Object> attributes = new HashMap<>();
+				attributes.put("message", "Item with id: " + itemID + " could not be found");
+				return new ModelAndView(attributes, "error.ftl");
+			}
+
+			Map<String, Object> attributes = new HashMap<>();
+			attributes.put("item", item);
+			return new ModelAndView(attributes, "ProductFocus.ftl");
 		}, templateEngine);
 
 		post("/upload", (req, res) -> {
