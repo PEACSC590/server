@@ -37,7 +37,7 @@
 }
 
 body {
-  
+
 }
 .starter-template {
   padding: 40px 15px;
@@ -68,16 +68,6 @@ body {
 #bodysearch {
   width:100%;
 }
-
-/*
- * Base structure
- */
-
-/* Move down content because we have a fixed navbar that is 50px tall */
-body {
-  padding-top: 50px;
-}
-
 
 /*
  * Global add-ons
