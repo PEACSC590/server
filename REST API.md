@@ -7,6 +7,7 @@
 ```js
 {
   "itemID": [int],
+  "userID": [string],
   "name": [string],
   "description": [string],
   "price": [double],
