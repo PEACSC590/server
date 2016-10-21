@@ -63,7 +63,7 @@
 
     <!-- Page Content -->
     <div id="page-content-wrapper">
-      <#include "/navbar.ftl">
+      <#import "/navbar.ftl">
       <div class="container" id="bodytext">
 
         <div class="starter-template">
