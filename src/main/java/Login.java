@@ -38,7 +38,7 @@ public class Login {
             // make sure this returns 401 so that website has moved
             System.out.println(connection.getResponseCode());
 
-            // Redirected e-mail URL
+            // Redirected e-mail ULR
             // moo
             HttpURLConnection.setFollowRedirects(false);
             URL url = connection.getURL();
