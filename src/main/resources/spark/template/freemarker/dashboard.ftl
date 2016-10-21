@@ -9,7 +9,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>Dashboard Template for Bootstrap</title>
+    <title>PEAbay Dashboard</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
@@ -124,6 +124,113 @@
           </div>
 
           <h2 class="sub-header">Past purchases</h2>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Item</th>
+                  <th>Date</th>
+                  <th>Price</th>
+                  <th>Seller</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>insert item</td>
+                  <td>10/14/15</td>
+                  <td>$5.00</td>
+                  <td>me</td>
+
+                </tr>
+                <tr>
+                  <td>insert item</td>
+                  <td>10/14/15</td>
+                  <td>$5.00</td>
+                  <td>me</td>
+
+                </tr>
+                <tr>
+                  <td>insert item</td>
+                  <td>10/14/15</td>
+                  <td>$5.00</td>
+                  <td>me</td>
+
+                </tr>
+                <tr>
+                  <td>insert item</td>
+                  <td>10/14/15</td>
+                  <td>$5.00</td>
+                  <td>me</td>
+
+                </tr>
+                <tr>
+                  <td>insert item</td>
+                  <td>10/14/15</td>
+                  <td>$5.00</td>
+                  <td>me</td>
+
+                </tr>
+                <tr>
+                  <td>insert item</td>
+                  <td>10/14/15</td>
+                  <td>$5.00</td>
+                  <td>me</td>
+
+                </tr>
+                <tr>
+                  <td>insert item</td>
+                  <td>10/14/15</td>
+                  <td>$5.00</td>
+                  <td>me</td>
+
+                </tr>
+                <tr>
+                  <td>insert item</td>
+                  <td>10/14/15</td>
+                  <td>$5.00</td>
+                  <td>me</td>
+
+                </tr>
+                <tr>
+                  <td>insert item</td>
+                  <td>10/14/15</td>
+                  <td>$5.00</td>
+                  <td>me</td>
+
+                </tr>
+                <tr>
+                  <td>insert item</td>
+                  <td>10/14/15</td>
+                  <td>$5.00</td>
+                  <td>me</td>
+
+                </tr>
+                <tr>
+                  <td>insert item</td>
+                  <td>10/14/15</td>
+                  <td>$5.00</td>
+                  <td>me</td>
+
+                </tr>
+                <tr>
+                  <td>insert item</td>
+                  <td>10/14/15</td>
+                  <td>$5.00</td>
+                  <td>me</td>
+
+                </tr>
+                <tr>
+                  <td>insert item</td>
+                  <td>10/14/15</td>
+                  <td>$5.00</td>
+                  <td>me</td>
+
+                </tr>
+
+              </tbody>
+            </table>
+            
+            <h2 class="sub-header">Past purchases</h2>
           <div class="table-responsive">
             <table class="table table-striped">
               <thead>
