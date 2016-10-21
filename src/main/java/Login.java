@@ -37,6 +37,7 @@ public class Login {
         try {
             System.setProperty("http.maxRedirects", "3");
             connection = (HttpURLConnection) url.openConnection();
+            System.out.println("opened connection");
             InputStream ins = connection.getInputStream();
             BufferedReader reader = new BufferedReader(new InputStreamReader(ins));
             String str;
@@ -45,7 +46,7 @@ public class Login {
             }
             
         } catch (Exception e) {
-            System.out.println("moo");
+            System.out.println("exception");
             return false;
         }
         return true;
