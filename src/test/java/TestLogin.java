@@ -5,7 +5,9 @@ public class TestLogin {
         boolean good = false;
         try {
             good = Login.login("asun1", "moo");
-        } catch (Exception e) {}
+        } catch (Exception e) {
+
+        }
         System.out.println(good);
     }
 }
