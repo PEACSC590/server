@@ -236,7 +236,7 @@
         </div>
         <div class="col-xs-6">
               <h2 class="sub-header">Past purchases</h2>
-          <div class="table-responsive">
+          <div class="table-responsive" >
             <table class="table table-striped">
               <thead>
                 <tr>
