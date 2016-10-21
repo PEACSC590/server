@@ -55,6 +55,7 @@ public class Main {
 			return new ModelAndView(attributes, "display-data.ftl");
 		}, templateEngine);
 
+
 		get("/login", (request, response) -> {
 			Map<String, Object> attributes = new HashMap<>();
 

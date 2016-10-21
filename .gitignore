@@ -3,4 +3,3 @@ target
 .idea/
 *.iml
 *.class
-src/main/java/TestLogin.java
