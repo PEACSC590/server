@@ -55,6 +55,12 @@ public class Main {
 			return new ModelAndView(attributes, "display-data.ftl");
 		}, templateEngine);
 
+		get("/login", (request, response) -> {
+			Map<String, Object> attributes = new HashMap<>();
+
+			return new ModelAndView(attributes, "login.ftl");
+		}, templateEngine);
+
 		// login
 		post("/login", (request, response) -> {
 			Map<String, String> data = api.getBody(request);
@@ -64,8 +70,9 @@ public class Main {
 
 			// using Login.java, check if username/password is valid
 			boolean good = false;
-        	good = Login.login("asun1", "moo");
-        	
+			Login auth = new Login();
+        	good = auth.login("asun1", "moo");
+
         	//System.out.println(good);
 
 			Map<String, Object> attributes = new HashMap<>();
