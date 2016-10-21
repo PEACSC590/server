@@ -8,9 +8,16 @@ public class Login {
     static String password = ""; // retrieve password for your account 
 
     static class MyAuthenticator extends Authenticator {
+        static int tries = 0;
         public PasswordAuthentication getPasswordAuthentication() {
             System.err.println("Feeding username and password for " + getRequestingScheme());
-            return (new PasswordAuthentication(username, password.toCharArray()));
+            if (tries == 0) {
+                tries++;
+                return (new PasswordAuthentication(username, password.toCharArray()));
+            } else {
+                //throw an unchecked exception
+                throw new IndexOutOfBoundsException();
+            }
         }
     }
 
@@ -32,10 +39,15 @@ public class Login {
         HttpURLConnection.setFollowRedirects(false);
         URL url = connection.getURL();
 
-        Authenticator.setDefault(new MyAuthenticator());
+        
         //System.out.println("moo");
         try {
-            System.setProperty("http.maxRedirects", "3");
+            Authenticator.setDefault(new MyAuthenticator());
+            CookieHandler.setDefault(new CookieManager(null, CookiePolicy.ACCEPT_ALL));
+            System.setProperty("-Dhttp.maxRedirects", "2");
+            System.setProperty("http.maxRedirects", "2");
+            HttpURLConnection.setFollowRedirects(false);
+            CookieHandler.setDefault(new CookieManager(null, CookiePolicy.ACCEPT_ALL));
             connection = (HttpURLConnection) url.openConnection();
             System.out.println("opened connection");
             InputStream ins = connection.getInputStream();
@@ -53,6 +65,6 @@ public class Login {
     }
 
     public static void main(String[] args) throws Exception {
-        System.setProperty("http.maxRedirects", "1");
+
     }
 }
