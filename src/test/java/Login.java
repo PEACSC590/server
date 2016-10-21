@@ -21,35 +21,34 @@ public class Login {
         }
     }
 
-    public static boolean login(String user, String pass) throws Exception {
-        username = user;
-        password = pass;
-        // URL of exeter website
-        String temp_url = "https://www.outlook.com/owa/exeter.edu";
-        URL obj = new URL(temp_url);
-
-        HttpURLConnection connection = (HttpURLConnection) obj.openConnection();
-        connection.setRequestMethod("GET");
-
-        // make sure this returns 401 so that website has moved
-        System.out.println(connection.getResponseCode());
-
-        // Redirected e-mail URL
-        // moo
-        HttpURLConnection.setFollowRedirects(false);
-        URL url = connection.getURL();
+    public static boolean login(String user, String pass) {
 
         
         //System.out.println("moo");
         try {
-            Authenticator.setDefault(new MyAuthenticator());
-            CookieHandler.setDefault(new CookieManager(null, CookiePolicy.ACCEPT_ALL));
-            System.setProperty("-Dhttp.maxRedirects", "2");
-            System.setProperty("http.maxRedirects", "2");
+            username = user;
+            password = pass;
+            // URL of exeter website
+            String temp_url = "https://www.outlook.com/owa/exeter.edu";
+            URL obj = new URL(temp_url);
+
+            HttpURLConnection connection = (HttpURLConnection) obj.openConnection();
+            connection.setRequestMethod("GET");
+
+            // make sure this returns 401 so that website has moved
+            System.out.println(connection.getResponseCode());
+
+            // Redirected e-mail URL
+            // moo
             HttpURLConnection.setFollowRedirects(false);
-            CookieHandler.setDefault(new CookieManager(null, CookiePolicy.ACCEPT_ALL));
+            URL url = connection.getURL();
+            Authenticator.setDefault(new MyAuthenticator());
+            //CookieHandler.setDefault(new CookieManager(null, CookiePolicy.ACCEPT_ALL));
+            //System.setProperty("-Dhttp.maxRedirects", "2");
+            //System.setProperty("http.maxRedirects", "2");
+            //HttpURLConnection.setFollowRedirects(false);
             connection = (HttpURLConnection) url.openConnection();
-            System.out.println("opened connection");
+            System.out.println("login successful");
             InputStream ins = connection.getInputStream();
             BufferedReader reader = new BufferedReader(new InputStreamReader(ins));
             String str;
@@ -58,7 +57,7 @@ public class Login {
             }
             
         } catch (Exception e) {
-            System.out.println("exception");
+            System.out.println("login failed");
             return false;
         }
         return true;
