@@ -1,3 +1,4 @@
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -24,6 +25,7 @@ public class API {
 		this.itemsCollection = this.db.getCollection("items");
 	}
 
+	// Items
 	public List<Document> getItems(Bson query) {
 		List<Document> documents = new LinkedList<Document>();
 
@@ -44,6 +46,13 @@ public class API {
 		return getItems(new Document("boughtByUserID", userID));
 	}
 
+	public Document getItemByID(int itemID) {
+		List<Document> items = getItems(new Document("itemID", itemID));
+		return items.size() > 0 ? items.get(0) : null;
+		// return the first item matched
+	}
+
+	// Request/Response Utilities
 	public Map<String, String> getBody(Request request) {
 		// convert request.body() (structured=sdf&like=234&this=3) into a
 		// hashmap
