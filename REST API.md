@@ -4,8 +4,10 @@
 
 ### Item
 
-```json
+```js
 {
+  "itemID": [int],
+  "userID": [string],
   "name": [string],
   "description": [string],
   "price": [double],
@@ -45,7 +47,7 @@ The login tries a username and password through NTLM authentication on Exeter Ou
 An access token is generated and saved in the user's document in *Users*, and this token given in the output of this function for the client to save in local storage. This will be necessary for any POST requests made using the user's id.
 
 Input: Body
-```json
+```js
 {
   "login": [string],
   "password": [string]
@@ -53,7 +55,7 @@ Input: Body
 ```
 
 Output: JSON
-```json
+```js
 {
   "valid": [boolean],
   "userToken": [string]
@@ -68,16 +70,16 @@ The upload functionality allows users to input an item through POST, which will 
 The user's user token must be provided to verify that it is actually the user.
 
 Input: Body
-```json
+```js
 {
   "userID" : [string],
   "userToken": [string],
-  item: [Item]
+  "item": [Item]
 }
 ```
 
 Output: JSON
-```json
+```js
 {
   "status": [status], // "listed" if successful; else, "illegal"
   "redirect": [url]
@@ -92,7 +94,7 @@ The list-item by ID page retrieves item information for a specific item ID, from
 Input: query string
 
 Output: JSON
-```json
+```js
 {
   "userID": [string],
   "item": [Item]
@@ -109,7 +111,7 @@ This only displays items with `status == "listed"`.
 Input: none
 
 Output: JSON
-```json
+```js
 {
   "items" : [Item[]]
 }
@@ -123,7 +125,7 @@ The search-items function will list all the items related to the given text sear
 Input: query
 
 Output: JSON
-```json
+```js
 {
   "items" : [Item[]]
 }
@@ -141,7 +143,7 @@ If the buyer's current `pendingPurchases` count is greater than the limit, `stat
 The user's user token must be provided to verify that it is actually the user.
 
 Input: Body
-```json
+```js
 {
   "itemID" : [int],
   "userID" : [string],
@@ -150,7 +152,7 @@ Input: Body
 ```
 
 Output: JSON
-```json
+```js
 {
   "status" : [status], // "pending", if successful; else, "listed"
   "numPendingPurchases" : [int],
@@ -166,7 +168,7 @@ This function marks an item as sold in the database after the seller has confirm
 The user's user token must be provided to verify that it is actually the user.
 
 Input: Body
-```json
+```js
 {
   "itemID" : [int],
   "userID" : [string],
@@ -175,7 +177,7 @@ Input: Body
 ```
 
 Output: JSON
-```json
+```js
 {
   "status" : [status], // "sold", if successful; else, "pending"
   "numPendingPurchases" : [int],
@@ -191,7 +193,7 @@ This function cancels the pending sale of an item if the seller chooses that the
 The user's user token must be provided to verify that it is actually the user.
 
 Input: Body
-```json
+```js
 {
   "itemID" : [int],
   "userID" : [int],
@@ -200,7 +202,7 @@ Input: Body
 ```
 
 Output: JSON
-```json
+```js
 {
   "status" : [status], // the status of the item now; "listed", if successful; else, "pending"
 }
@@ -214,7 +216,7 @@ This function cancels the sale of an item if the seller chooses that the item wi
 The user's user token must be provided to verify that it is actually the user.
 
 Input: Body
-```json
+```js
 {
   "itemID" : [int],
   "userID" : [int],
@@ -223,7 +225,7 @@ Input: Body
 ```
 
 Output: JSON
-```json
+```js
 {
   "status" : [status], // "hidden", if successful; else, "listed"
 }
@@ -236,14 +238,14 @@ Output: JSON
 This function bans a user who has been acting inappropriately. The function should toggle the "banned" boolean associated to a username to True.
 
 Input: JSON
-```json
+```js
 {
   "userID" : [int]
 }
 ```
 
 Output: JSON
-```json
+```js
 {
   "ban" : [string] “banned”
 }
@@ -257,7 +259,7 @@ This function generates a list of a user's personal items that he or she is sell
 (This uses the same method(s) as `/search` internally)
 
 Input: Body
-```json
+```js
 {
   "userID" : [string],
   "userToken" : [string]
@@ -265,7 +267,7 @@ Input: Body
 ```
 
 Output: JSON
-```json
+```js
 {
   "items" : [Item[]]
 }
