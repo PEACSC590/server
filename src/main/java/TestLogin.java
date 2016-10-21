@@ -7,7 +7,7 @@ public class TestLogin {
         try {
             good = login.login("asun1", "moo");
         } catch (Exception e) {
-            
+            good = false;
         }
         System.out.println(good);
         
