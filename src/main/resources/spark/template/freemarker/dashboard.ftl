@@ -1,83 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="icon" href="../../favicon.ico">
 
-    <title>PEAbay Dashboard</title>
+  <title>PEAbay Dashboard</title>
 
-    <!-- Bootstrap core CSS -->
-    <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap core CSS -->
+  <link href="../../dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+  <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+  <link href="../../assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
 
-    <!-- Custom styles for this template -->
-    <link href="dashboard.css" rel="stylesheet">
+  <!-- Custom styles for this template -->
+  <link href="dashboard.css" rel="stylesheet">
 
-    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-    <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
+  <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+  <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+  <script src="../../assets/js/ie-emulation-modes-warning.js"></script>
 
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-    <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>PEAbay</title>
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <title>PEAbay</title>
 
-    <!-- Bootstrap -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
 
-    <!-- linking login stylesheet -->
-    <link rel="stylesheet" type="text/css" href="stylesheet.css">
+  <!-- linking login stylesheet -->
+  <link rel="stylesheet" type="text/css" href="stylesheet.css">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-  </head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
 
-  <body>
+<body>
 
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">PEAbay</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-            <li><a href="HomePage.ftl">Home</a></li>
-            <li><a href="about.ftl" id="about">About</a></li>
-            <li><a href="contact.ftl" id="contact">Contact</a></li>
-            <li><a href="search.ftl" id="buy">Search</a><li>
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">PEAbay</a>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="HomePage.ftl">Home</a></li>
+          <li><a href="about.ftl" id="about">About</a></li>
+          <li><a href="contact.ftl" id="contact">Contact</a></li>
+          <li><a href="search.ftl" id="buy">Search</a><li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li><a href="dashboard.ftl">Dashboard</a></li>
@@ -123,224 +123,233 @@
             </div>
           </div>
 
-          <h2 class="sub-header">Past purchases</h2>
-          <div class="table-responsive">
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th>Item</th>
-                  <th>Date</th>
-                  <th>Price</th>
-                  <th>Seller</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>insert item</td>
-                  <td>10/14/15</td>
-                  <td>$5.00</td>
-                  <td>me</td>
 
-                </tr>
-                <tr>
-                  <td>insert item</td>
-                  <td>10/14/15</td>
-                  <td>$5.00</td>
-                  <td>me</td>
+          <div class="container">
+            <div class="row">
+              <h2 class="sub-header">Past purchases</h2>
+              <div class="table-responsive col-md-6">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th>Item</th>
+                      <th>Date</th>
+                      <th>Price</th>
+                      <th>Seller</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>insert item</td>
+                      <td>10/14/15</td>
+                      <td>$5.00</td>
+                      <td>me</td>
 
-                </tr>
-                <tr>
-                  <td>insert item</td>
-                  <td>10/14/15</td>
-                  <td>$5.00</td>
-                  <td>me</td>
+                    </tr>
+                    <tr>
+                      <td>insert item</td>
+                      <td>10/14/15</td>
+                      <td>$5.00</td>
+                      <td>me</td>
 
-                </tr>
-                <tr>
-                  <td>insert item</td>
-                  <td>10/14/15</td>
-                  <td>$5.00</td>
-                  <td>me</td>
+                    </tr>
+                    <tr>
+                      <td>insert item</td>
+                      <td>10/14/15</td>
+                      <td>$5.00</td>
+                      <td>me</td>
 
-                </tr>
-                <tr>
-                  <td>insert item</td>
-                  <td>10/14/15</td>
-                  <td>$5.00</td>
-                  <td>me</td>
+                    </tr>
+                    <tr>
+                      <td>insert item</td>
+                      <td>10/14/15</td>
+                      <td>$5.00</td>
+                      <td>me</td>
 
-                </tr>
-                <tr>
-                  <td>insert item</td>
-                  <td>10/14/15</td>
-                  <td>$5.00</td>
-                  <td>me</td>
+                    </tr>
+                    <tr>
+                      <td>insert item</td>
+                      <td>10/14/15</td>
+                      <td>$5.00</td>
+                      <td>me</td>
 
-                </tr>
-                <tr>
-                  <td>insert item</td>
-                  <td>10/14/15</td>
-                  <td>$5.00</td>
-                  <td>me</td>
+                    </tr>
+                    <tr>
+                      <td>insert item</td>
+                      <td>10/14/15</td>
+                      <td>$5.00</td>
+                      <td>me</td>
 
-                </tr>
-                <tr>
-                  <td>insert item</td>
-                  <td>10/14/15</td>
-                  <td>$5.00</td>
-                  <td>me</td>
+                    </tr>
+                    <tr>
+                      <td>insert item</td>
+                      <td>10/14/15</td>
+                      <td>$5.00</td>
+                      <td>me</td>
 
-                </tr>
-                <tr>
-                  <td>insert item</td>
-                  <td>10/14/15</td>
-                  <td>$5.00</td>
-                  <td>me</td>
+                    </tr>
+                    <tr>
+                      <td>insert item</td>
+                      <td>10/14/15</td>
+                      <td>$5.00</td>
+                      <td>me</td>
 
-                </tr>
-                <tr>
-                  <td>insert item</td>
-                  <td>10/14/15</td>
-                  <td>$5.00</td>
-                  <td>me</td>
+                    </tr>
+                    <tr>
+                      <td>insert item</td>
+                      <td>10/14/15</td>
+                      <td>$5.00</td>
+                      <td>me</td>
 
-                </tr>
-                <tr>
-                  <td>insert item</td>
-                  <td>10/14/15</td>
-                  <td>$5.00</td>
-                  <td>me</td>
+                    </tr>
+                    <tr>
+                      <td>insert item</td>
+                      <td>10/14/15</td>
+                      <td>$5.00</td>
+                      <td>me</td>
 
-                </tr>
-                <tr>
-                  <td>insert item</td>
-                  <td>10/14/15</td>
-                  <td>$5.00</td>
-                  <td>me</td>
+                    </tr>
+                    <tr>
+                      <td>insert item</td>
+                      <td>10/14/15</td>
+                      <td>$5.00</td>
+                      <td>me</td>
 
-                </tr>
-                <tr>
-                  <td>insert item</td>
-                  <td>10/14/15</td>
-                  <td>$5.00</td>
-                  <td>me</td>
+                    </tr>
+                    <tr>
+                      <td>insert item</td>
+                      <td>10/14/15</td>
+                      <td>$5.00</td>
+                      <td>me</td>
 
-                </tr>
+                    </tr>
+                    <tr>
+                      <td>insert item</td>
+                      <td>10/14/15</td>
+                      <td>$5.00</td>
+                      <td>me</td>
 
-              </tbody>
-            </table>
-            
-            <h2 class="sub-header">Past purchases</h2>
-          <div class="table-responsive">
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th>Item</th>
-                  <th>Date</th>
-                  <th>Price</th>
-                  <th>Seller</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>insert item</td>
-                  <td>10/14/15</td>
-                  <td>$5.00</td>
-                  <td>me</td>
+                    </tr>
 
-                </tr>
-                <tr>
-                  <td>insert item</td>
-                  <td>10/14/15</td>
-                  <td>$5.00</td>
-                  <td>me</td>
+                  </tbody>
+                </table>
+              </div>
 
-                </tr>
-                <tr>
-                  <td>insert item</td>
-                  <td>10/14/15</td>
-                  <td>$5.00</td>
-                  <td>me</td>
+              <div class="table-responsive col-md-6">
+                <h2 class="sub-header">Past purchases</h2>
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th>Item</th>
+                      <th>Date</th>
+                      <th>Price</th>
+                      <th>Seller</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>insert item</td>
+                      <td>10/14/15</td>
+                      <td>$5.00</td>
+                      <td>me</td>
 
-                </tr>
-                <tr>
-                  <td>insert item</td>
-                  <td>10/14/15</td>
-                  <td>$5.00</td>
-                  <td>me</td>
+                    </tr>
+                    <tr>
+                      <td>insert item</td>
+                      <td>10/14/15</td>
+                      <td>$5.00</td>
+                      <td>me</td>
 
-                </tr>
-                <tr>
-                  <td>insert item</td>
-                  <td>10/14/15</td>
-                  <td>$5.00</td>
-                  <td>me</td>
+                    </tr>
+                    <tr>
+                      <td>insert item</td>
+                      <td>10/14/15</td>
+                      <td>$5.00</td>
+                      <td>me</td>
 
-                </tr>
-                <tr>
-                  <td>insert item</td>
-                  <td>10/14/15</td>
-                  <td>$5.00</td>
-                  <td>me</td>
+                    </tr>
+                    <tr>
+                      <td>insert item</td>
+                      <td>10/14/15</td>
+                      <td>$5.00</td>
+                      <td>me</td>
 
-                </tr>
-                <tr>
-                  <td>insert item</td>
-                  <td>10/14/15</td>
-                  <td>$5.00</td>
-                  <td>me</td>
+                    </tr>
+                    <tr>
+                      <td>insert item</td>
+                      <td>10/14/15</td>
+                      <td>$5.00</td>
+                      <td>me</td>
 
-                </tr>
-                <tr>
-                  <td>insert item</td>
-                  <td>10/14/15</td>
-                  <td>$5.00</td>
-                  <td>me</td>
+                    </tr>
+                    <tr>
+                      <td>insert item</td>
+                      <td>10/14/15</td>
+                      <td>$5.00</td>
+                      <td>me</td>
 
-                </tr>
-                <tr>
-                  <td>insert item</td>
-                  <td>10/14/15</td>
-                  <td>$5.00</td>
-                  <td>me</td>
+                    </tr>
+                    <tr>
+                      <td>insert item</td>
+                      <td>10/14/15</td>
+                      <td>$5.00</td>
+                      <td>me</td>
 
-                </tr>
-                <tr>
-                  <td>insert item</td>
-                  <td>10/14/15</td>
-                  <td>$5.00</td>
-                  <td>me</td>
+                    </tr>
+                    <tr>
+                      <td>insert item</td>
+                      <td>10/14/15</td>
+                      <td>$5.00</td>
+                      <td>me</td>
 
-                </tr>
-                <tr>
-                  <td>insert item</td>
-                  <td>10/14/15</td>
-                  <td>$5.00</td>
-                  <td>me</td>
+                    </tr>
+                    <tr>
+                      <td>insert item</td>
+                      <td>10/14/15</td>
+                      <td>$5.00</td>
+                      <td>me</td>
 
-                </tr>
-                <tr>
-                  <td>insert item</td>
-                  <td>10/14/15</td>
-                  <td>$5.00</td>
-                  <td>me</td>
+                    </tr>
+                    <tr>
+                      <td>insert item</td>
+                      <td>10/14/15</td>
+                      <td>$5.00</td>
+                      <td>me</td>
 
-                </tr>
-                <tr>
-                  <td>insert item</td>
-                  <td>10/14/15</td>
-                  <td>$5.00</td>
-                  <td>me</td>
+                    </tr>
+                    <tr>
+                      <td>insert item</td>
+                      <td>10/14/15</td>
+                      <td>$5.00</td>
+                      <td>me</td>
 
-                </tr>
+                    </tr>
+                    <tr>
+                      <td>insert item</td>
+                      <td>10/14/15</td>
+                      <td>$5.00</td>
+                      <td>me</td>
 
-              </tbody>
-            </table>
+                    </tr>
+                    <tr>
+                      <td>insert item</td>
+                      <td>10/14/15</td>
+                      <td>$5.00</td>
+                      <td>me</td>
+
+                    </tr>
+
+                  </tbody>
+                </table>
+              </div>
+
+
+
+
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
 
-  </body>
-</html>
+    </body>
+    </html>
