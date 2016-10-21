@@ -58,9 +58,30 @@ public class Main {
 		// login
 		post("/login", (request, response) -> {
 			Map<String, String> data = api.getBody(request);
+			// get username and password from login.ftl
+			String username = data.get("username");
+			String password = data.get("password");
+
+			// using Login.java, check if username/password is valid
+			boolean good = false;
+        	good = Login.login("asun1", "moo");
+        	
+        	//System.out.println(good);
 
 			Map<String, Object> attributes = new HashMap<>();
 			attributes.put("data", data);
+
+			// put username in attributes
+			attributes.put("correct", good);
+
+			// if good, put username
+			if (good) {
+				attributes.put("user", username);
+			} else {
+				// otherwise put EMPTY STRING
+				attributes.put("user", "");
+			}
+
 			return new ModelAndView(attributes, "login.ftl");
 		}, templateEngine);
 
