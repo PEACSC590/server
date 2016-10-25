@@ -16,7 +16,6 @@ import com.mongodb.*;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.util.JSON;
 
-
 public class Main {
 
 	public static void main(String[] args) throws MongoException, UnknownHostException {
@@ -55,7 +54,6 @@ public class Main {
 			return new ModelAndView(attributes, "display-data.ftl");
 		}, templateEngine);
 
-
 		get("/login", (request, response) -> {
 			Map<String, Object> attributes = new HashMap<>();
 
@@ -70,27 +68,25 @@ public class Main {
 			String password = data.get("password");
 
 			// using Login.java, check if username/password is valid
-			boolean good = false;
-			Login auth = new Login();
-        	good = auth.login("asun1", "moo");
+			boolean good = Login.login(username, password);
 
-        	//System.out.println(good);
+			// System.out.println(good);
+
+			Document user = api.upsertUser(username);
 
 			Map<String, Object> attributes = new HashMap<>();
-			attributes.put("data", data);
 
 			// put username in attributes
 			attributes.put("correct", good);
 
 			// if good, put username
 			if (good) {
-				attributes.put("user", username);
-			} else {
-				// otherwise put EMPTY STRING
-				attributes.put("user", "");
-			}	
+				response.redirect("/myproducts");
+				// TODO: halt
+				// attributes.put("user", username);
+			}
 
-			return new ModelAndView(attributes, "login.ftl");
+			return new ModelAndView(attributes, "login.ftl"); // FIXME
 		}, templateEngine);
 
 		// list items in the db that match the query provided as a querystring

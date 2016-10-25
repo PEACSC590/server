@@ -25,6 +25,34 @@ public class API {
 		this.itemsCollection = this.db.getCollection("items");
 	}
 
+	// Users
+
+	// Create and return a user file if nonexistent in the collection; otherwise
+	// return it
+	public Document upsertUser(String username) {
+		// if exists
+		FindIterable<Document> cursor = usersCollection.find(new Document("username", username));
+		if (cursor.first() != null) {
+			return cursor.first();
+		}
+
+		Document userDocument = createUserDocument(username);
+		usersCollection.insertOne(userDocument);
+
+		return userDocument;
+	}
+
+	// to access a file's attribute:
+	// usersCollection.find(new Document("username", username));
+	private Document createUserDocument(String username) {
+		Document userDocument = new Document();
+		userDocument.append("username", username);
+		userDocument.append("banned", false);
+		userDocument.append("numPendingPurchases", 0);
+		// is that all?
+		return userDocument;
+	}
+
 	// Items
 	public List<Document> getItems(Bson query) {
 		List<Document> documents = new LinkedList<Document>();
