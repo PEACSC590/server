@@ -88,7 +88,7 @@ public class Main {
 			} else {
 				// otherwise put EMPTY STRING
 				attributes.put("user", "");
-			}
+			}	
 
 			return new ModelAndView(attributes, "login.ftl");
 		}, templateEngine);
