@@ -77,13 +77,13 @@
             <li><a href="HomePage.ftl">Home</a></li>
             <li><a href="about.ftl" id="about">About</a></li>
             <li><a href="contact.ftl" id="contact">Contact</a></li>
-            <li><a href="search.ftl" id="buy">Search</a><li>
+
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li><a href="dashboard.ftl">Dashboard</a></li>
             <li><a href="#">Settings</a></li>
             <li><a href="#">Profile</a></li>
-            <li><a href="#">Help</a></li>
+            <li><a href="#">Advanced Search</a></li>
           </ul>
           <form class="navbar-form navbar-right">
             <input type="text" class="form-control" placeholder="Search...">
@@ -91,6 +91,21 @@
         </div>
       </div>
     </nav>
+  <div class="container-fluid">
+    <div class="col-sm-3 col-md-2 sidebar" role="navigation">
+      <div>
+            <ul class="nav nav-sidebar">
+                <li><a href="#">Books</a></li>
+                <li><a href="#">Clothes</a></li>
+                <li><a href="#">Furniture</a></li>
+                <li><a href="#">Supplies</a></li>
+                <li><a href="#">Best Value</a></li>
+                <li><a href="#">Athletics</a></li>
+                <li><a href="#">Services</a></li>
+            </ul>
+          </div>
+  </div>
+
 
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">
@@ -152,7 +167,7 @@
         <p>&copy; PEAbay, Inc.</p>
       </footer>
     </div> <!-- /container -->
-
+</div>
 
 
   </body>

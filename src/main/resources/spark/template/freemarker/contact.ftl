@@ -46,13 +46,13 @@
             <li><a href="HomePage.ftl">Home</a></li>
             <li><a href="about.ftl" id="about">About</a></li>
             <li><a href="contact.ftl" id="contact">Contact</a></li>
-            <li><a href="search.ftl" id="buy">Search</a><li>
+            
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <li><a href="dashboard.ftl">Dashboard</a></li>
             <li><a href="#">Settings</a></li>
             <li><a href="#">Profile</a></li>
-            <li><a href="#">Help</a></li>
+            <li><a href="#">Advanced Search</a></li>
           </ul>
           <form class="navbar-form navbar-right">
             <input type="text" class="form-control" placeholder="Search...">
