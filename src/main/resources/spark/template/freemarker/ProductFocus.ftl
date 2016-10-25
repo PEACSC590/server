@@ -38,53 +38,67 @@
 
   <body>
 
-    <div id="navbarheight">
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">PEAbay</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-            <li><a href="HomePage.ftl">Home</a></li>
-            <li><a href="about.ftl" id="about">About</a></li>
-            <li><a href="contact.ftl" id="contact">Contact</a></li>
+    <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+            <li class="sidebar-brand">
+                <a href="#">
+                    PEAbay
+                </a>
+            </li>
+            <li>
+                <a href="#">Books</a>
+            </li>
+            <li>
+                <a href="#">Clothes</a>
+            </li>
+            <li>
+                <a href="#">Furniture</a>
+            </li>
+            <li>
+                <a href="#">Food</a>
+            </li>
+            <li>
+                <a href="#">Other</a>
+            </li>
+        </ul>
+    </div>
+    <!-- /#sidebar-wrapper -->
 
-          </ul>
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="dashboard.ftl">Dashboard</a></li>
-            <li><a href="#">Settings</a></li>
-            <li><a href="#">Profile</a></li>
-            <li><a href="#">Advanced Search</a></li>
-          </ul>
-          <form class="navbar-form navbar-right">
-            <input type="text" class="form-control" placeholder="Search...">
-          </form>
-        </div>
-      </div>
-    </nav>
-  </div>
-  <div id="sidebarheight">
-  <div class="container-fluid">
-    <div class="col-sm-3 col-md-2 sidebar" role="navigation">
-      <div>
-            <ul class="nav nav-sidebar">
+    <div id="page-content-wrapper">
+      <nav class="navbar navbar-inverse">
+       <div class="container-fluid">
+         <div class="navbar-header">
+           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+             <span class="sr-only">Toggle navigation</span>
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+           </button>
+           <a class="navbar-brand" href="#">PEABay</a>
+         </div>
+         <div id="navbar" class="collapse navbar-collapse">
+           <ul class="nav navbar-nav">
+             <li><a href="#">Home</a></li>
+             <li><a href="#about">About</a></li>
+             <li><a href="#contact">Contact</a></li>
 
-                <li><a href="#">Books</a></li>
-                <li><a href="#">Clothes</a></li>
-                <li><a href="#">Furniture</a></li>
+             <li><a href="dashboard.ftl">Dashboard</a></li>
+             <li><a href="#">Settings</a></li>
+             <li><a href="#">Profile</a></li>
 
-            </ul>
-          </div>
-  </div>
-  </div>
-  </div>
+             <form class="navbar-form navbar-right">
+               <input type="text" class="form-control" placeholder="Search">
+             </form>
+
+             <li><a href="#">Advanced Search</a></li>
+             </ul>
+
+
+
+
+         </div><!--/.nav-collapse -->
+       </div>
+     </nav>
 
      <div class="container">
 
@@ -184,6 +198,7 @@
       <!-- /#wrapper -->
 
     </div>
+  </div>
     <!-- /.container -->
     <!-- jQuery -->
 
