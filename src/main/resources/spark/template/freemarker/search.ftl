@@ -18,6 +18,7 @@
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <link rel="stylesheet" type="text/css" href="stylesheet.css">
+<link rel="stylesheet" type="text/css" href="sidebar.css">
 
 <!-- Latest compiled and minified JavaScript -->
 
@@ -31,28 +32,67 @@
 
   <body>
 
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container" >
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" id="title">PEABay</a>
-        </div>
-        <div id="navbar" id="navigationbar" class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
-            <li><a href="HomePage.ftl">Home</a></li>
-            <li><a href="about.ftl" id="about">About</a></li>
-            <li><a href="contact.ftl" id="contact">Contact</a></li>
-            <li class="active"><a href="search.ftl" id="buy">Search</a><li>
-          </ul>
-        </div><!--/.nav-collapse -->
-      </div>
-    </nav>
+    <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+            <li class="sidebar-brand">
+                <a href="#">
+                    PEAbay
+                </a>
+            </li>
+            <li>
+                <a href="#">Books</a>
+            </li>
+            <li>
+                <a href="#">Clothes</a>
+            </li>
+            <li>
+                <a href="#">Furniture</a>
+            </li>
+            <li>
+                <a href="#">Food</a>
+            </li>
+            <li>
+                <a href="#">Other</a>
+            </li>
+        </ul>
+    </div>
+    <!-- /#sidebar-wrapper -->
 
+    <div id="page-content-wrapper">
+      <nav class="navbar navbar-inverse">
+       <div class="container-fluid">
+         <div class="navbar-header">
+           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+             <span class="sr-only">Toggle navigation</span>
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+           </button>
+           <a class="navbar-brand" href="#">PEABay</a>
+         </div>
+         <div id="navbar" class="collapse navbar-collapse">
+           <ul class="nav navbar-nav">
+             <li><a href="#">Home</a></li>
+             <li><a href="#about">About</a></li>
+             <li><a href="#contact">Contact</a></li>
+
+             <li><a href="dashboard.ftl">Dashboard</a></li>
+             <li><a href="#">Settings</a></li>
+             <li><a href="#">Profile</a></li>
+
+             <form class="navbar-form navbar-right">
+               <input type="text" class="form-control" placeholder="Search">
+             </form>
+
+             <li><a href="#">Advanced Search</a></li>
+             </ul>
+
+
+
+
+         </div><!--/.nav-collapse -->
+       </div>
+     </nav>
     <div class="container" id="bodytext">
 
 
@@ -107,6 +147,7 @@
 </div>
 
     </div><!-- /.container -->
+  </div>
 
 
     <!-- Bootstrap core JavaScript
