@@ -91,6 +91,27 @@ public class API {
 		return itemDocument;
 	}
 
+	public void buy(String userID, String itemID) {
+
+			// edit userDocument
+			Document userDocument = upsertUser(userID);
+			int numPendingPurchases = userDocument.get("numPendingPurchases");
+			if (numPendingPurchases >= 3) {
+				Map<String, Object> attributes = new HashMap<>();
+				attributes.put("message", e.toString());
+				return new ModelAndView(attributes, "error.ftl");
+			}
+			numPendingPurchases++;
+			userDocument.remove("numPendingPurchases");
+			userDocument.append("numPendingPurchases", numPendingPurchases);
+
+			// edit itemDocument
+			Document itemDocument = getItemByID(itemID);
+			itemDocument.append("buyerID", userID);
+			itemDocument.append("timeBought", System.currentTimeMillis());
+			itemDocument.append("status", "pending");
+	}
+
 	private Document createItemDocument(String username, String itemName, String itemDescription, Double itemPrice,
 			String[] tags, String imageURL) {
 		Document itemDocument = new Document();
