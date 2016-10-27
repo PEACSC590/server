@@ -66,7 +66,7 @@
       <ul class="sidebar-nav">
           <li class="sidebar-brand">
               <a href="#">
-                  PEAbay
+                  Categories
               </a>
           </li>
           <li>
