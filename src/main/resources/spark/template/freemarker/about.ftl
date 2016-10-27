@@ -1,4 +1,4 @@
-
+<!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
@@ -73,19 +73,20 @@
        </div>
        <div id="navbar" class="collapse navbar-collapse">
          <ul class="nav navbar-nav">
-           <li><a href="#">Home</a></li>
-           <li><a href="#about">About</a></li>
-           <li><a href="#contact">Contact</a></li>
+           <li><a href="HomePage.ftl">Home</a></li>
+           <li><a href="items-page.ftl">For Sale</a></li>
+           <li class="active"><a href="about.ftl">About</a></li>
+           <li><a href="contact.ftl">Contact</a></li>
 
            <li><a href="dashboard.ftl">Dashboard</a></li>
-           <li><a href="#">Settings</a></li>
-           <li><a href="#">Profile</a></li>
+           <li><a href="setting.ftl">Settings</a></li>
+           
 
            <form class="navbar-form navbar-right">
              <input type="text" class="form-control" placeholder="Search">
            </form>
 
-           <li><a href="#">Advanced Search</a></li>
+           <li><a href="search.ftl">Advanced Search</a></li>
            </ul>
 
 
