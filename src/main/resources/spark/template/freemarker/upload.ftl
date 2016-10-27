@@ -42,8 +42,8 @@
     <div id="sidebar-wrapper">
         <ul class="sidebar-nav">
             <li class="sidebar-brand">
-                <a href="#">
-                    Categories
+                <a>
+                    Profile
                 </a>
             </li>
             <li>
@@ -75,6 +75,7 @@
          <div id="navbar" class="collapse navbar-collapse">
            <ul class="nav navbar-nav">
              <li><a href="HomePage.ftl">Home</a></li>
+             <li><a href="items-page.ftl">For Sale</a></li>
              <li><a href="about.ftl">About</a></li>
              <li><a href="contact.ftl">Contact</a></li>
 
