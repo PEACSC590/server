@@ -46,12 +46,11 @@ public class API {
 
 		return userDocument;
 		}
-	private Document createUserDocument(String username, int itemsbought) {
-		itemsbought = 0;
+	private Document createUserDocument(String username) {
 		Document userDocument = new Document();
 		userDocument.append("username", username);
 		userDocument.append("banned", false);
-		userDocument.append("numPendingPurchases", itemsbought);
+		userDocument.append("numPendingPurchases", 0);
 		// is that all?
 		return userDocument;
 	}
