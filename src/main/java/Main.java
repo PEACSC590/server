@@ -118,17 +118,12 @@ public class Main {
 			try {
 				itemID = Integer.parseInt(req.queryParams("itemID"));
 			} catch (NumberFormatException e) {
-				Map<String, Object> attributes = new HashMap<>();
-				attributes.put("message", e.toString());
-				return new ModelAndView(attributes, "error.ftl");
+				return errorView(e.toString());
 			}
 
 			Document item = api.getItemByID(itemID);
-			if (item == null) {
-				Map<String, Object> attributes = new HashMap<>();
-				attributes.put("message", "Item with id: " + itemID + " could not be found");
-				return new ModelAndView(attributes, "error.ftl");
-			}
+			if (item == null)
+				return errorView("Item with id: " + itemID + " could not be found");
 
 			Map<String, Object> attributes = new HashMap<>();
 			attributes.put("item", item);
@@ -150,23 +145,32 @@ public class Main {
 			attributes.put("data", data);
 			return new ModelAndView(attributes, "display-data.ftl");
 		}, templateEngine);
-		
+
 		post("/buy", (req, res) -> {
-			int day = 0;
+			Map<String, String> body = api.getBody(req);
+
+			if (!body.containsKey("userID") || !body.containsKey("itemID"))
+				return errorView("Invalid input");
 			
-			usersCollection.find(new Document("username", username));
-			userDocument.append("numPendingPurchases", itemsbought++);
+			Map<String, String> output;
+			try {
+				output = api.buy(body.get("userID"), body.get("itemID"));
+			} catch (Exception e) {
+				return errorView(e.getMessage());
+			}
 			
-			itemsCollection.find(new Document("itemID", itemID));
-			itemDocument.append("buyerID", userID);
-			itemDocument.append("dateBought", day);
-			itemDocument.append("status", pending);
-			
+			// PLACEHOLDER: display the raw output
 			Map<String, Object> attributes = new HashMap<>();
-			attributes.put("data", data);
+			attributes.put("data", output);
 			return new ModelAndView(attributes, "display-data.ftl");
 		}, templateEngine);
 
+	}
+
+	private static ModelAndView errorView(String errmsg) {
+		Map<String, Object> attributes = new HashMap<>();
+		attributes.put("message", errmsg);
+		return new ModelAndView(attributes, "error.ftl");
 	}
 
 }
