@@ -41,6 +41,35 @@ public class API {
 
 		return userDocument;
 	}
+	public Document upsertItem(String username, String itemName, String itemDescription, Double itemPrice, String[] tags, String imageURL) {
+
+		Document itemDocument = createItemDocument(username, itemName, itemDescription, itemPrice, tags, imageURL);
+		itemsCollection.insertOne(itemDocument);
+
+		return userDocument;
+	}
+	
+	private Document createItemDocument(String username, String itemName, String itemDescription, Double itemPrice, String[] tags, String imageURL) {
+		Document itemDocument = new Document();
+		//assign random integer between 0 and 10,000, we can find a better way to assign item id
+		int itemID = (int) (Math.random() * (10000 - 0)) + 0;
+		FindIterable<Document> cursor = itemsCollection.find(new Document("itemID", itemID));
+		if(cursor.first() != null){
+			itemID = (int) (Math.random() * (10000 - 0)) + 0;
+		}
+		itemDocument.append("itemID", itemID);
+		itemDocument.append("username", username);
+		itemDocument.append("itemName", itemName);
+		itemDocument.appned("itemDescription", itemDescription);
+		itemDocument.append("itemPrice", itemPrice);
+		itemDocument.append("tags", tags);
+		itemDocument.append("imageURL", imageURL);
+		//true denotes unsold item
+		itemDocument.append("status", true);
+		itemDocument.append("dateBought", null);
+		// is that all?
+		return itemDocument;
+	}
 
 	// to access a file's attribute:
 	// usersCollection.find(new Document("username", username));
