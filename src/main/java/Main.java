@@ -160,51 +160,6 @@ public class Main {
 				return errorView(e.getMessage());
 			}
 
-			// get itemID from the req
-			int itemID;
-			try {
-				itemID = Integer.parseInt(req.queryParams("itemID"));
-			} catch (NumberFormatException e) {
-				Map<String, Object> attributes = new HashMap<>();
-				attributes.put("message", e.toString());
-				return new ModelAndView(attributes, "error.ftl");
-			}
-
-			// get username from the req
-			// TODO: THE USERNAME SHOULD EXIST AS A USER TOKEN
-			String username = req.queryParams("username")
-
-
-
-			// edit userDocument
-			Document userDocument = api.upsertUser(username);
-			int numPendingPurchases = userDocument.get("numPendingPurchases");
-			if (numPendingPurchases >= 3) {
-				Map<String, Object> attributes = new HashMap<>();
-				attributes.put("message", e.toString());
-				return new ModelAndView(attributes, "error.ftl");
-			}
-			numPendingPurchases++;
-			userDocument.remove("numPendingPurchases");
-			userDocument.append("numPendingPurchases", numPendingPurchases);
-
-			// edit itemDocument
-			Document itemDocument = api.getItemByID(itemID);
-			itemDocument.append("buyerID", userID);
-			itemDocument.append("timeBought", System.currentTimeMillis());
-			itemDocument.append("status", "pending");
-
-
-			/**int day = 0;
-			
-			Document userDocument = usersCollection.find(new Document("username", username));
-			userDocument.append("numPendingPurchases", itemsbought++);
-			
-			itemsCollection.find(new Document("itemID", itemID));
-			itemDocument.append("buyerID", userID);
-			itemDocument.append("dateBought", day);
-			itemDocument.append("status", pending);**/
-
 			
 			// PLACEHOLDER: display the raw output
 			Map<String, Object> attributes = new HashMap<>();
