@@ -37,10 +37,10 @@
       <ul class="sidebar-nav">
           <li class="sidebar-brand">
               <a href="#">
-                  Categories
+                  PEAbay
               </a>
           </li>
-          <li>
+          <li class="active">
               <a href="myitems.ftl">My Items</a>
           </li>
           <li>
