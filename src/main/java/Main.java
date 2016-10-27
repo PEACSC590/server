@@ -150,6 +150,22 @@ public class Main {
 			attributes.put("data", data);
 			return new ModelAndView(attributes, "display-data.ftl");
 		}, templateEngine);
+		
+		post("/buy", (req, res) -> {
+			int day = 0;
+			
+			usersCollection.find(new Document("username", username));
+			userDocument.append("numPendingPurchases", itemsbought++);
+			
+			itemsCollection.find(new Document("itemID", itemID));
+			itemDocument.append("buyerID", userID);
+			itemDocument.append("dateBought", day);
+			itemDocument.append("status", pending);
+			
+			Map<String, Object> attributes = new HashMap<>();
+			attributes.put("data", data);
+			return new ModelAndView(attributes, "display-data.ftl");
+		}, templateEngine);
 
 	}
 
