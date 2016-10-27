@@ -91,7 +91,7 @@
                <input type="text" class="form-control" placeholder="Search">
              </form>
 
-             <li><a href="search.ftl">Advanced Search</a></li>
+             <li><a href="profile.ftl">Profile</a></li>
              </ul>
 
 
