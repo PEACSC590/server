@@ -41,7 +41,7 @@ public class API {
 			return cursor.first();
 		}
 
-		Document userDocument = createUserDocument(username, 0);
+		Document userDocument = createUserDocument(username);
 		usersCollection.insertOne(userDocument);
 
 		return userDocument;
