@@ -47,20 +47,15 @@
                 </a>
             </li>
             <li>
-                <a href="#">Books</a>
+                <a href="myitems.ftl">My Items</a>
+            </li>
+            <li class="active">
+                <a href="upload.ftl">Upload</a>
             </li>
             <li>
-                <a href="#">Clothes</a>
+                <a href="#">Cancel Pending Sale</a>
             </li>
-            <li>
-                <a href="#">Furniture</a>
-            </li>
-            <li>
-                <a href="#">Food</a>
-            </li>
-            <li>
-                <a href="#">Other</a>
-            </li>
+
         </ul>
     </div>
     <!-- /#sidebar-wrapper -->
@@ -85,13 +80,13 @@
 
              <li><a href="dashboard.ftl">Dashboard</a></li>
              <li><a href="settings.ftl">Settings</a></li>
-             <li><a href="profile.ftl">Profile</a></li>
+
 
              <form class="navbar-form navbar-right">
                <input type="text" class="form-control" placeholder="Search">
              </form>
 
-             <li><a href="profile.ftl">Profile</a></li>
+             <li class="active"><a href="profile.ftl">Profile</a></li>
              </ul>
 
 

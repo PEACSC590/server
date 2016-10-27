@@ -40,7 +40,7 @@
                   PEAbay
               </a>
           </li>
-          <li>
+          <li class="active">
               <a href="myitems.ftl">My Items</a>
           </li>
           <li>
