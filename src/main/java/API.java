@@ -27,6 +27,9 @@ public class API {
 		this.itemsCollection = this.db.getCollection("items");
 	}
 
+	// to access a file's attribute:
+	// usersCollection.find(new Document("username", username));
+	
 	// Users
 
 	// Create and return a user file if nonexistent in the collection; otherwise
@@ -42,15 +45,13 @@ public class API {
 		usersCollection.insertOne(userDocument);
 
 		return userDocument;
-	}
-
-	// to access a file's attribute:
-	// usersCollection.find(new Document("username", username));
-	private Document createUserDocument(String username) {
+		}
+	private Document createUserDocument(String username, int itemsbought) {
+		itemsbought = 0;
 		Document userDocument = new Document();
 		userDocument.append("username", username);
 		userDocument.append("banned", false);
-		userDocument.append("numPendingPurchases", 0);
+		userDocument.append("numPendingPurchases", itemsbought);
 		// is that all?
 		return userDocument;
 	}
@@ -102,7 +103,8 @@ public class API {
 			itemID = (int) (Math.random() * (10000 - 0)) + 0;
 		}
 		itemDocument.append("itemID", itemID);
-		itemDocument.append("username", username);
+		itemDocument.append("buyerID", null);
+		itemDocument.append("userID", username);
 		itemDocument.append("itemName", itemName);
 		itemDocument.append("itemDescription", itemDescription);
 		itemDocument.append("itemPrice", itemPrice);
