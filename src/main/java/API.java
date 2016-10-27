@@ -25,22 +25,7 @@ public class API {
 		this.itemsCollection = this.db.getCollection("items");
 	}
 
-	// Users
-
-	// Create and return a user file if nonexistent in the collection; otherwise
-	// return it
-	public Document upsertUser(String username) {
-		// if exists
-		FindIterable<Document> cursor = usersCollection.find(new Document("username", username));
-		if (cursor.first() != null) {
-			return cursor.first();
-		}
-
-		Document userDocument = createUserDocument(username);
-		usersCollection.insertOne(userDocument);
-
-		return userDocument;
-	}
+	
 	public Document upsertItem(String username, String itemName, String itemDescription, Double itemPrice, String[] tags, String imageURL) {
 
 		Document itemDocument = createItemDocument(username, itemName, itemDescription, itemPrice, tags, imageURL);
@@ -58,14 +43,15 @@ public class API {
 			itemID = (int) (Math.random() * (10000 - 0)) + 0;
 		}
 		itemDocument.append("itemID", itemID);
-		itemDocument.append("username", username);
+		itemDocument.append("buyerID", null);
+		itemDocument.append("sellerID", username);
 		itemDocument.append("itemName", itemName);
-		itemDocument.appned("itemDescription", itemDescription);
+		itemDocument.append("itemDescription", itemDescription);
 		itemDocument.append("itemPrice", itemPrice);
 		itemDocument.append("tags", tags);
 		itemDocument.append("imageURL", imageURL);
 		//true denotes unsold item
-		itemDocument.append("status", true);
+		itemDocument.append("status", pending);
 		itemDocument.append("dateBought", null);
 		// is that all?
 		return itemDocument;
@@ -73,11 +59,29 @@ public class API {
 
 	// to access a file's attribute:
 	// usersCollection.find(new Document("username", username));
-	private Document createUserDocument(String username) {
+	
+	// Users
+
+	// Create and return a user file if nonexistent in the collection; otherwise
+	// return it
+	public Document upsertUser(String username) {
+		// if exists
+		FindIterable<Document> cursor = usersCollection.find(new Document("username", username));
+		if (cursor.first() != null) {
+			return cursor.first();
+		}
+
+		Document userDocument = createUserDocument(username);
+		usersCollection.insertOne(userDocument);
+
+		return userDocument;
+		}
+	private Document createUserDocument(String username, int itemsbought) {
+		itemsbought = 0;
 		Document userDocument = new Document();
 		userDocument.append("username", username);
 		userDocument.append("banned", false);
-		userDocument.append("numPendingPurchases", 0);
+		userDocument.append("numPendingPurchases", itemsbought);
 		// is that all?
 		return userDocument;
 	}
