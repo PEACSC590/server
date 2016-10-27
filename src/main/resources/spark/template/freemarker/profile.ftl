@@ -75,7 +75,7 @@
          <ul class="nav navbar-nav">
            <li><a href="HomePage.ftl">Home</a></li>
            <li><a href="items-page.ftl">For Sale</a></li>
-           <li class="active"><a href="about.ftl">About</a></li>
+           <li><a href="about.ftl">About</a></li>
            <li><a href="contact.ftl">Contact</a></li>
 
            <li><a href="dashboard.ftl">Dashboard</a></li>
@@ -86,7 +86,7 @@
              <input type="text" class="form-control" placeholder="Search">
            </form>
 
-           <li><a href="profile.ftl">Profile</a></li>
+           <li class="active"><a href="profile.ftl">Profile</a></li>
            </ul>
 
 
