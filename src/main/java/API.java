@@ -14,6 +14,8 @@ import spark.Request;
 
 public class API {
 
+	private static final int MAX_PENDING_PURCHASES = 5;
+
 	private MongoDatabase db;
 	private MongoCollection<Document> usersCollection;
 	private MongoCollection<Document> itemsCollection;
@@ -23,38 +25,6 @@ public class API {
 
 		this.usersCollection = this.db.getCollection("users");
 		this.itemsCollection = this.db.getCollection("items");
-	}
-
-	
-	public Document upsertItem(String username, String itemName, String itemDescription, Double itemPrice, String[] tags, String imageURL) {
-
-		Document itemDocument = createItemDocument(username, itemName, itemDescription, itemPrice, tags, imageURL);
-		itemsCollection.insertOne(itemDocument);
-
-		return userDocument;
-	}
-	
-	private Document createItemDocument(String username, String itemName, String itemDescription, Double itemPrice, String[] tags, String imageURL) {
-		Document itemDocument = new Document();
-		//assign random integer between 0 and 10,000, we can find a better way to assign item id
-		int itemID = (int) (Math.random() * (10000 - 0)) + 0;
-		FindIterable<Document> cursor = itemsCollection.find(new Document("itemID", itemID));
-		if(cursor.first() != null){
-			itemID = (int) (Math.random() * (10000 - 0)) + 0;
-		}
-		itemDocument.append("itemID", itemID);
-		itemDocument.append("buyerID", null);
-		itemDocument.append("sellerID", username);
-		itemDocument.append("itemName", itemName);
-		itemDocument.append("itemDescription", itemDescription);
-		itemDocument.append("itemPrice", itemPrice);
-		itemDocument.append("tags", tags);
-		itemDocument.append("imageURL", imageURL);
-		//true denotes unsold item
-		itemDocument.append("status", pending);
-		itemDocument.append("dateBought", null);
-		// is that all?
-		return itemDocument;
 	}
 
 	// to access a file's attribute:
@@ -113,12 +83,76 @@ public class API {
 		// return the first item matched
 	}
 
+	public Document upsertItem(String username, String itemName, String itemDescription, Double itemPrice,
+			String[] tags, String imageURL) {
+
+		Document itemDocument = createItemDocument(username, itemName, itemDescription, itemPrice, tags, imageURL);
+		itemsCollection.insertOne(itemDocument);
+
+		return itemDocument;
+	}
+
+	private Document createItemDocument(String username, String itemName, String itemDescription, Double itemPrice,
+			String[] tags, String imageURL) {
+		Document itemDocument = new Document();
+		// assign random integer between 0 and 10,000, we can find a better way
+		// to assign item id
+		int itemID = (int) (Math.random() * (10000 - 0)) + 0;
+		FindIterable<Document> cursor = itemsCollection.find(new Document("itemID", itemID));
+		if (cursor.first() != null) {
+			itemID = (int) (Math.random() * (10000 - 0)) + 0;
+		}
+		itemDocument.append("itemID", itemID);
+		itemDocument.append("buyerID", null);
+		itemDocument.append("userID", username);
+		itemDocument.append("itemName", itemName);
+		itemDocument.append("itemDescription", itemDescription);
+		itemDocument.append("itemPrice", itemPrice);
+		itemDocument.append("tags", tags);
+		itemDocument.append("imageURL", imageURL);
+		// true denotes unsold item
+		itemDocument.append("status", true);
+		itemDocument.append("dateBought", null);
+		// is that all?
+		return itemDocument;
+	}
+
 	// Request/Response Utilities
 	public Map<String, String> getBody(Request request) {
 		// convert request.body() (structured=sdf&like=234&this=3) into a
 		// hashmap
 		Map<String, String> body = Util.queryStringToHashMap(request.body());
 		return body;
+	}
+
+	public Map<String, String> buy(String userID, String itemID) throws Exception {
+
+		Document userDocument = usersCollection.find(new Document("username", userID)).first();
+		if (userDocument == null)
+			throw new Exception("Could not find user " + userID);
+
+		// if `numPendingPurchases` is greater than the maximum allowed, error
+		int numPendingPurchases = Integer.parseInt(userDocument.get("numPendingPurchases").toString());
+		if (numPendingPurchases >= MAX_PENDING_PURCHASES)
+			throw new Exception("Reached maximum number of currently pending purchases allowed");
+
+		// increment `numPendingPurchases`
+		usersCollection.updateOne(new Document("username", userID),
+				new Document("$inc", new Document("numPendingPurchases", 1)));
+
+		// update the item to be bought with the buyer id, the date this is
+		// being processed, and the new status of the item
+		long dateBought = System.currentTimeMillis();
+		Document updates = new Document().append("buyerID", userID).append("dateBought", dateBought)
+				.append("status", "pending");
+		itemsCollection.updateOne(new Document("itemID", itemID),
+				new Document("$set", updates));
+
+		Map<String, String> output = new HashMap<>();
+		output.put("status", "pending");
+		output.put("numPendingPurchases", numPendingPurchases + 1 + "");
+		output.put("dateBought", dateBought + "");
+		return output;
 	}
 
 }
