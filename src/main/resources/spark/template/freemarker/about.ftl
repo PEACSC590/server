@@ -79,7 +79,7 @@
            <li><a href="contact.ftl">Contact</a></li>
 
            <li><a href="dashboard.ftl">Dashboard</a></li>
-           <li><a href="setting.ftl">Settings</a></li>
+           <li><a href="settings.ftl">Settings</a></li>
 
 
            <form class="navbar-form navbar-right">
