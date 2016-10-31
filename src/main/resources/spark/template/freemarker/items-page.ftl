@@ -65,7 +65,7 @@
     <div id="sidebar-wrapper">
         <ul class="sidebar-nav">
             <li class="sidebar-brand">
-                <a href="#">
+                <a>
                     Categories
                 </a>
             </li>
@@ -180,11 +180,9 @@
         </div>
       </div>
 
-      <hr>
 
-      <footer>
-        <p>&copy; PEAbay, Inc.</p>
-      </footer>
+
+
     </div> <!-- /container -->
   </div>
 </div>

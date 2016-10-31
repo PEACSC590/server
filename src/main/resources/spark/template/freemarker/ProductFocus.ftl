@@ -41,8 +41,8 @@
     <div id="sidebar-wrapper">
         <ul class="sidebar-nav">
             <li class="sidebar-brand">
-                <a href="#">
-                    Categories
+                <a>
+                    ${item.name}
                 </a>
             </li>
             <li>
@@ -117,7 +117,9 @@
                     <div class="caption-full">
                         <h4 class="pull-right">&#36;${item.price}</h4>
                         <h4>${item.name} <span class="label label-info">${item.status}</span></h4>
-                        <p>${item.description}</p>
+                        <div>
+                        <a>${item.description}</a>
+                        </div>
                     </div>
 
                     <!-- tags -->
@@ -125,7 +127,14 @@
                     	<#list item.tags as tag>
                     		<span class="label label-default">${tag}</span>
                     	</#list>
+
                     </div>
+
+
+
+
+
+
                     <!--<div class="ratings">
                         <p class="pull-right">3 reviews</p>
                         <p>
@@ -202,6 +211,8 @@
   </div>
     <!-- /.container -->
     <!-- jQuery -->
+
+
 
 
        <!-- Menu Toggle Script -->
