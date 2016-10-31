@@ -42,7 +42,7 @@
         <ul class="sidebar-nav">
             <li class="sidebar-brand">
                 <a href="#">
-                    Categories
+                    ${item.name}
                 </a>
             </li>
             <li>
@@ -119,9 +119,6 @@
                         <h4>${item.name} <span class="label label-info">${item.status}</span></h4>
                         <div>
                         <a>${item.description}</a>
-                        <div class="pull-right">
-                          <button type="button" class="btn btn-success btn-lg">Buy</button>
-                        </div>
                         </div>
                     </div>
 
