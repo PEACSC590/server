@@ -172,6 +172,17 @@ public class API {
 		
 	}
 	
+	public Map<String, String> unlist(String itemID) {
+		Document unlist = new Document();
+		unlist.put("status", "hidden");
+		itemsCollection.updateOne(new Document("itemID", itemID),
+				new Document("$set", unlist));
+		
+		Map<String, String> output = new HashMap<>();
+		output.put("status", "hidden");
+		return output;	
+	}
+	
 	public Map<String, String> sell(String itemID) {
 		Document updates = new Document();
 		updates.put("status", "sold");
