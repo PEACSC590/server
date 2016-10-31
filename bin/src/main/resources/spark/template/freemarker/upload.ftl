@@ -42,25 +42,20 @@
     <div id="sidebar-wrapper">
         <ul class="sidebar-nav">
             <li class="sidebar-brand">
-                <a href="#">
-                    PEAbay
+                <a>
+                    Profile
                 </a>
             </li>
             <li>
-                <a href="#">Books</a>
+                <a href="myitems.ftl">My Items</a>
+            </li>
+            <li class="active">
+                <a href="upload.ftl">Upload</a>
             </li>
             <li>
-                <a href="#">Clothes</a>
+                <a href="cancelpendingsale.ftl">Cancel Pending Sale</a>
             </li>
-            <li>
-                <a href="#">Furniture</a>
-            </li>
-            <li>
-                <a href="#">Food</a>
-            </li>
-            <li>
-                <a href="#">Other</a>
-            </li>
+
         </ul>
     </div>
     <!-- /#sidebar-wrapper -->
@@ -75,23 +70,24 @@
              <span class="icon-bar"></span>
              <span class="icon-bar"></span>
            </button>
-           <a class="navbar-brand" href="#">PEABay</a>
+           <a class="navbar-brand" href="HomePage.ftl">PEABay</a>
          </div>
          <div id="navbar" class="collapse navbar-collapse">
            <ul class="nav navbar-nav">
-             <li><a href="#">Home</a></li>
-             <li><a href="#about">About</a></li>
-             <li><a href="#contact">Contact</a></li>
-           
-             <li><a href="dashboard.ftl">Dashboard</a></li>
-             <li><a href="#">Settings</a></li>
-             <li><a href="#">Profile</a></li>
+             <li><a href="HomePage.ftl">Home</a></li>
+             <li><a href="items-page.ftl">For Sale</a></li>
+             <li><a href="about.ftl">About</a></li>
+             <li><a href="contact.ftl">Contact</a></li>
 
-             <form class="navbar-form navbar-right">
+             <li><a href="dashboard.ftl">Dashboard</a></li>
+             <li><a href="settings.ftl">Settings</a></li>
+             <li class="active"><a href="profile.ftl">Profile</a></li>
+
+             <form class="navbar-form navbar-left" action="items-page.ftl">
                <input type="text" class="form-control" placeholder="Search">
              </form>
 
-             <li><a href="#">Advanced Search</a></li>
+             <li><a href="login.ftl">Log Out</a></li>
              </ul>
 
 

@@ -65,8 +65,8 @@
     <div id="sidebar-wrapper">
         <ul class="sidebar-nav">
             <li class="sidebar-brand">
-                <a href="#">
-                    PEAbay
+                <a>
+                    Categories
                 </a>
             </li>
             <li>
@@ -98,23 +98,24 @@
              <span class="icon-bar"></span>
              <span class="icon-bar"></span>
            </button>
-           <a class="navbar-brand" href="#">PEABay</a>
+           <a class="navbar-brand" href="HomePage.ftl">PEABay</a>
          </div>
          <div id="navbar" class="collapse navbar-collapse">
            <ul class="nav navbar-nav">
-             <li><a href="#">Home</a></li>
-             <li><a href="#about">About</a></li>
-             <li><a href="#contact">Contact</a></li>
+             <li><a href="HomePage.ftl">Home</a></li>
+             <li class="active"><a href="items-page.ftl">For Sale</a></li>
+             <li><a href="about.ftl">About</a></li>
+             <li><a href="contact.ftl">Contact</a></li>
 
              <li><a href="dashboard.ftl">Dashboard</a></li>
-             <li><a href="#">Settings</a></li>
-             <li><a href="#">Profile</a></li>
+             <li><a href="settings.ftl">Settings</a></li>
+             <li><a href="profile.ftl">Profile</a></li>
 
-             <form class="navbar-form navbar-right">
+             <form class="navbar-form navbar-left" action="items-page.ftl">
                <input type="text" class="form-control" placeholder="Search">
              </form>
 
-             <li><a href="#">Advanced Search</a></li>
+             <li><a href="login.ftl">Log Out</a></li>
              </ul>
 
 
@@ -140,50 +141,48 @@
         <div class="col-md-4">
           <h2>Product 1</h2>
           <p>info</p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+          <p><a class="btn btn-default" href="ProductFocus.ftl" role="button">View details &raquo;</a></p>
         </div>
         <div class="col-md-4">
           <h2>Product 2</h2>
          <p>info</p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+          <p><a class="btn btn-default" href="ProductFocus.ftl" role="button">View details &raquo;</a></p>
        </div>
         <div class="col-md-4">
           <h2>Product 3</h2>
           <p>info</p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+          <p><a class="btn btn-default" href="ProductFocus.ftl" role="button">View details &raquo;</a></p>
         </div>
         <div class="col-md-4">
           <h2>Heading</h2>
-          <p>Product 3--Learn more</p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+          <p>Product 4--Learn more</p>
+          <p><a class="btn btn-default" href="ProductFocus.ftl" role="button">View details &raquo;</a></p>
         </div><div class="col-md-4">
           <h2>Heading</h2>
-          <p>Product 3--Learn more</p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+          <p>Product 5--Learn more</p>
+          <p><a class="btn btn-default" href="ProductFocus.ftl" role="button">View details &raquo;</a></p>
         </div><div class="col-md-4">
           <h2>Heading</h2>
-          <p>Product 3--Learn more</p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+          <p>Product 6--Learn more</p>
+          <p><a class="btn btn-default" href="ProductFocus.ftl" role="button">View details &raquo;</a></p>
         </div><div class="col-md-4">
           <h2>Heading</h2>
-          <p>Product 3--Learn more</p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+          <p>Product 7--Learn more</p>
+          <p><a class="btn btn-default" href="ProductFocus.ftl" role="button">View details &raquo;</a></p>
         </div><div class="col-md-4">
           <h2>Heading</h2>
-          <p>Product 3--Learn more</p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+          <p>Product 8--Learn more</p>
+          <p><a class="btn btn-default" href="ProductFocus.ftl" role="button">View details &raquo;</a></p>
         </div><div class="col-md-4">
           <h2>Heading</h2>
-          <p>Product 3--Learn more</p>
-          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+          <p>Product 9--Learn more</p>
+          <p><a class="btn btn-default" href="ProductFocus.ftl" role="button">View details &raquo;</a></p>
         </div>
       </div>
 
-      <hr>
 
-      <footer>
-        <p>&copy; PEAbay, Inc.</p>
-      </footer>
+
+
     </div> <!-- /container -->
   </div>
 </div>

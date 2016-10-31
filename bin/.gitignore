@@ -4,5 +4,5 @@ target
 *.iml
 *.class
 
-.classpath
 .settings/
+/bin/
