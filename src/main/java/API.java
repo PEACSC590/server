@@ -3,6 +3,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.bson.Document;
 import org.bson.conversions.Bson;
@@ -97,12 +98,7 @@ public class API {
 		Document itemDocument = new Document();
 		// assign random integer between 0 and 10,000, we can find a better way
 		// to assign item id
-		int itemID = 0;
-		FindIterable<Document> cursor = itemsCollection.find();
-		for(Document d : cursor){
-			itemID++;
-		}
-		itemID = itemID+1;
+		UUID itemID = UUID.randomUUID();
 		itemDocument.append("itemID", itemID);
 		itemDocument.append("buyerID", null);
 		itemDocument.append("userID", username);
@@ -183,9 +179,6 @@ public class API {
 		output.put("numPendingPurchases", userDocument.get("numPendingPurchases") + "");
 		output.put("dateBought", itemDocument.get("dateBought") + "");
 		return output;
-	}
-	public Map<String, String> unlist(String itemID){
-		
 	}
 
 }
