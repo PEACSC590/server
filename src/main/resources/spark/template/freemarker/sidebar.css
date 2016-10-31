@@ -76,11 +76,15 @@
     background-color: #222;
 }
 
-.sidebar-nav li a:active,
-.sidebar-nav li a:focus {
-    background-color: #000;
 
+.sidebar-nav .active > a {
+    background-color:#000;
+    color: white;
 }
+
+
+
+
 
 .sidebar-nav li a:hover {
     text-decoration: none;
