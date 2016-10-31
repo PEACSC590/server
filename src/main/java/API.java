@@ -150,11 +150,10 @@ public class API {
 		Map<String, String> output = new HashMap<>();
 		output.put("status", "pending");
 		output.put("numPendingPurchases", numPendingPurchases + 1 + "");
-		output.put("dateBought", dateBought + "");
 		return output;
 	}
 	
-	public Map<String, String> cancelPendingSale (String itemID, String userID){
+	public Map<String, String> cancelPendingSale(String itemID, String userID) {
 		Document cancelSale = new Document();
 		cancelSale.put("status", "listed");
 		cancelSale.put("buyerID", null);
@@ -165,6 +164,10 @@ public class API {
 		usersCollection.updateOne(new Document("userID", userID),
 				new Document ("$inc", new Document("numPendingPurchases", -1)));
 		
+		Map<String, String> output = new HashMap<>();
+		output.put("status", "listed");
+		return output;
+		
 	}
 	
 	public Map<String, String> sell(String itemID) {
@@ -173,17 +176,9 @@ public class API {
 		itemsCollection.updateOne(new Document("itemID", itemID),
 				new Document("$set", updates));
 
-		Document itemDocument = itemsCollection.find(new Document("itemID", itemID)).first(),
-				userDocument = usersCollection.find(new Document("userID", itemDocument.get("buyerID"))).first();
-		long dateBought = System.currentTimeMillis();
 		Map<String, String> output = new HashMap<>();
 		output.put("status", "sold");
-		output.put("numPendingPurchases", userDocument.get("numPendingPurchases") + "");
-		output.put("dateBought", itemDocument.get("dateBought") + "");
 		return output;
-		
-		
-		
 	}
 
 }
