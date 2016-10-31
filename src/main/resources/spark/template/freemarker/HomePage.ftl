@@ -36,7 +36,7 @@
       <ul class="sidebar-nav">
           <li class="sidebar-brand">
               <a>
-                  Categories
+                  Home
               </a>
           </li>
           <li>
