@@ -180,11 +180,9 @@
         </div>
       </div>
 
-      <hr>
+    
 
-      <footer>
-        <p>&copy; PEAbay, Inc.</p>
-      </footer>
+
     </div> <!-- /container -->
   </div>
 </div>
