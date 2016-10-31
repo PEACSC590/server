@@ -40,8 +40,8 @@
                   Profile
               </a>
           </li>
-          <li class="active">
-              <a href="myitems.ftl">My Items</a>
+          <li>
+              <a class="active" href="myitems.ftl">My Items</a>
           </li>
           <li>
               <a href="upload.ftl">Upload</a>
@@ -64,7 +64,7 @@
            <span class="icon-bar"></span>
            <span class="icon-bar"></span>
          </button>
-         <a class="navbar-brand" href="#">PEABay</a>
+         <a class="navbar-brand" href="HomePage.ftl">PEABay</a>
        </div>
        <div id="navbar" class="collapse navbar-collapse">
          <ul class="nav navbar-nav">
