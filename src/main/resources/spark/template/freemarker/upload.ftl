@@ -53,7 +53,7 @@
                 <a href="upload.ftl">Upload</a>
             </li>
             <li>
-                <a href="#">Cancel Pending Sale</a>
+                <a href="cancelpendingsale.ftl">Cancel Pending Sale</a>
             </li>
 
         </ul>

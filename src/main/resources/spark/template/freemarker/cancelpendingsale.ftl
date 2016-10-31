@@ -40,13 +40,13 @@
                   Profile
               </a>
           </li>
-          <li class="active">
+          <li>
               <a href="myitems.ftl">My Items</a>
           </li>
           <li>
               <a href="upload.ftl">Upload</a>
           </li>
-          <li>
+          <li class="active">
               <a href="cancelpendingsale.ftl">Cancel Pending Sale</a>
           </li>
 
