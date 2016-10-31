@@ -1,3 +1,4 @@
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -96,11 +97,12 @@ public class API {
 		Document itemDocument = new Document();
 		// assign random integer between 0 and 10,000, we can find a better way
 		// to assign item id
-		int itemID = (int) (Math.random() * (10000 - 0)) + 0;
-		FindIterable<Document> cursor = itemsCollection.find(new Document("itemID", itemID));
-		if (cursor.first() != null) {
-			itemID = (int) (Math.random() * (10000 - 0)) + 0;
+		int itemID = 0;
+		FindIterable<Document> cursor = itemsCollection.find();
+		for(Document d : cursor){
+			itemID++;
 		}
+		itemID = itemID+1;
 		itemDocument.append("itemID", itemID);
 		itemDocument.append("buyerID", null);
 		itemDocument.append("userID", username);
@@ -167,8 +169,8 @@ public class API {
 		output.put("numPendingPurchases", userDocument.get("numPendingPurchases") + "");
 		output.put("dateBought", itemDocument.get("dateBought") + "");
 		return output;
-		
-		
+	}
+	public Map<String, String> unlist(String itemID){
 		
 	}
 
