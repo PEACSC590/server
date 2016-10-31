@@ -153,5 +153,17 @@ public class API {
 		output.put("dateBought", dateBought + "");
 		return output;
 	}
+	public Map<String, String> sold(String itemID){
+		//we should think about having this be the place where date bought is changed, but I'll leave it for now
+		Document itemDocument = itemsCollection.find(new Document("itemID", itemID)).first();
+		long dateBought = System.currentTimeMillis();
+		Map<String, String> output = new HashMap<>();
+		output.put("status", "sold");
+		output.put("dateBought", dateBought + "");
+		itemsCollection.updateOne(new Document("itemID", itemID),
+				new Document("$set", output));
+		return output;
+		
+	}
 
 }
