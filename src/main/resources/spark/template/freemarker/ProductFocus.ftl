@@ -74,7 +74,7 @@
              <span class="icon-bar"></span>
              <span class="icon-bar"></span>
            </button>
-           <a class="navbar-brand" href="#">PEABay</a>
+           <a class="navbar-brand" href="HomePage.ftl">PEABay</a>
          </div>
          <div id="navbar" class="collapse navbar-collapse">
            <ul class="nav navbar-nav">
@@ -85,13 +85,13 @@
 
              <li><a href="dashboard.ftl">Dashboard</a></li>
              <li><a href="settings.ftl">Settings</a></li>
+             <li><a href="profile.ftl">Profile</a></li>
 
-
-             <form class="navbar-form navbar-right">
+             <form class="navbar-form navbar-left" action="items-page.ftl">
                <input type="text" class="form-control" placeholder="Search">
              </form>
 
-             <li><a href="profile.ftl">Profile</a></li>
+             <li><a href="login.ftl">Log Out</a></li>
              </ul>
 
 
@@ -117,7 +117,12 @@
                     <div class="caption-full">
                         <h4 class="pull-right">&#36;${item.price}</h4>
                         <h4>${item.name} <span class="label label-info">${item.status}</span></h4>
-                        <p>${item.description}</p>
+                        <div>
+                        <a>${item.description}</a>
+                        <div class="pull-right">
+                          <button type="button" class="btn btn-success btn-lg">Buy</button>
+                        </div>
+                        </div>
                     </div>
 
                     <!-- tags -->
@@ -125,7 +130,14 @@
                     	<#list item.tags as tag>
                     		<span class="label label-default">${tag}</span>
                     	</#list>
+
                     </div>
+
+
+
+
+
+
                     <!--<div class="ratings">
                         <p class="pull-right">3 reviews</p>
                         <p>
@@ -202,6 +214,8 @@
   </div>
     <!-- /.container -->
     <!-- jQuery -->
+
+
 
 
        <!-- Menu Toggle Script -->

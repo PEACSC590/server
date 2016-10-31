@@ -36,25 +36,20 @@
   <div id="sidebar-wrapper">
       <ul class="sidebar-nav">
           <li class="sidebar-brand">
-              <a href="#">
-                  Categories
+              <a>
+                  Profile
               </a>
           </li>
           <li>
-              <a href="#">Books</a>
+              <a href="myitems.ftl">My Items</a>
           </li>
           <li>
-              <a href="#">Clothes</a>
+              <a href="upload.ftl">Upload</a>
           </li>
-          <li>
-              <a href="#">Furniture</a>
+          <li class="active">
+              <a href="cancelpendingsale.ftl">Cancel Pending Sale</a>
           </li>
-          <li>
-              <a href="#">Food</a>
-          </li>
-          <li>
-              <a href="#">Other</a>
-          </li>
+
       </ul>
   </div>
   <!-- /#sidebar-wrapper -->
@@ -75,20 +70,18 @@
          <ul class="nav navbar-nav">
            <li><a href="HomePage.ftl">Home</a></li>
            <li><a href="items-page.ftl">For Sale</a></li>
-           <li class="active"><a href="about.ftl">About</a></li>
+           <li><a href="about.ftl">About</a></li>
            <li><a href="contact.ftl">Contact</a></li>
 
            <li><a href="dashboard.ftl">Dashboard</a></li>
            <li><a href="settings.ftl">Settings</a></li>
-           <li><a href="profile.ftl">Profile</a></li>
+           <li class="active"><a href="profile.ftl">Profile</a></li>
 
            <form class="navbar-form navbar-left" action="items-page.ftl">
-             <input type="text" class="form-control" placeholder="Search">
+             <input type="text" href="items-page.ftl" class="form-control" placeholder="Search">
            </form>
 
            <li><a href="login.ftl">Log Out</a></li>
-
-
            </ul>
 
 

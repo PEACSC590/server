@@ -40,14 +40,14 @@
                   Profile
               </a>
           </li>
-          <li class="active">
-              <a href="myitems.ftl">My Items</a>
+          <li>
+              <a class="active" href="myitems.ftl">My Items</a>
           </li>
           <li>
               <a href="upload.ftl">Upload</a>
           </li>
           <li>
-              <a href="#">Cancel Pending Sale</a>
+              <a href="cancelpendingsale.ftl">Cancel Pending Sale</a>
           </li>
 
       </ul>
@@ -64,7 +64,7 @@
            <span class="icon-bar"></span>
            <span class="icon-bar"></span>
          </button>
-         <a class="navbar-brand" href="#">PEABay</a>
+         <a class="navbar-brand" href="HomePage.ftl">PEABay</a>
        </div>
        <div id="navbar" class="collapse navbar-collapse">
          <ul class="nav navbar-nav">
@@ -75,13 +75,13 @@
 
            <li><a href="dashboard.ftl">Dashboard</a></li>
            <li><a href="settings.ftl">Settings</a></li>
+           <li class="active"><a href="profile.ftl">Profile</a></li>
 
-
-           <form class="navbar-form navbar-right">
+           <form class="navbar-form navbar-left" action="items-page.ftl">
              <input type="text" class="form-control" placeholder="Search">
            </form>
 
-           <li class="active"><a href="profile.ftl">Profile</a></li>
+           <li><a href="login.ftl">Log Out</a></li>
            </ul>
 
 
