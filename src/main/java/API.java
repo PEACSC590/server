@@ -153,6 +153,20 @@ public class API {
 		output.put("dateBought", dateBought + "");
 		return output;
 	}
+	
+	public Map<String, String> cancelPendingSale (String itemID, String userID){
+		Document cancelSale = new Document();
+		cancelSale.put("status", "listed");
+		cancelSale.put("buyerID", null);
+		cancelSale.put("dateBought", null);
+		itemsCollection.updateOne(new Document("itemID", itemID),
+				new Document("$set", cancelSale));
+		
+		usersCollection.updateOne(new Document("userID", userID),
+				new Document ("$inc", new Document("numPendingPurchases", -1)));
+		
+	}
+	
 	public Map<String, String> sell(String itemID) {
 		Document updates = new Document();
 		updates.put("status", "sold");
