@@ -168,6 +168,22 @@ public class API {
 		
 	}
 	
+	public Map<String, String> refuseSale(String itemID, String userID) {
+		Document refuseSale = new Document();
+		refuseSale.put("status", "listed");
+		refuseSale.put("buyerID", null);
+		refuseSale.put("dateBought", null);
+		itemsCollection.updateOne(new Document("itemID", itemID),
+				new Document("$set", refuseSale));
+		
+		usersCollection.updateOne(new Document("userID", userID),
+				new Document ("$inc", new Document("numPendingPurchases", -1)));
+		
+		Map<String, String> output = new HashMap<>();
+		output.put("status", "listed");
+		return output;
+	}
+	
 	public Map<String, String> unlist(String itemID) {
 		Document unlist = new Document();
 		unlist.put("status", "hidden");
