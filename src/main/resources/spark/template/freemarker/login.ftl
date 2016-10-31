@@ -87,7 +87,7 @@
 						</div>
 
 
-    			  <button class="btn btn-lg btn-primary btn-block"  name="Submit" value="Login" type="submit">Login</button>
+    			  <button class="btn btn-lg btn-primary btn-block" href="HomePage.ftl" name="Submit" value="Login" type="submit">Login</button>
 
 				</form>
 

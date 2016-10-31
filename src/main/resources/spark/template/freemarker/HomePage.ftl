@@ -81,7 +81,7 @@
            <li><a href="settings.ftl">Settings</a></li>
            <li><a href="profile.ftl">Profile</a></li>
 
-           <form class="navbar-form navbar-left">
+           <form class="navbar-form navbar-left" action="items-page.ftl">
              <input type="text" class="form-control" placeholder="Search">
            </form>
 

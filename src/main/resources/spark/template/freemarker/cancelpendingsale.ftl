@@ -77,8 +77,8 @@
            <li><a href="settings.ftl">Settings</a></li>
            <li class="active"><a href="profile.ftl">Profile</a></li>
 
-           <form class="navbar-form navbar-left">
-             <input type="text" class="form-control" placeholder="Search">
+           <form class="navbar-form navbar-left" action="items-page.ftl">
+             <input type="text" href="items-page.ftl" class="form-control" placeholder="Search">
            </form>
 
            <li><a href="login.ftl">Log Out</a></li>
