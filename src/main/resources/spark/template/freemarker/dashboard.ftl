@@ -124,11 +124,8 @@
        </div><!--/.nav-collapse -->
      </div>
    </nav>
-
-        <div class="col-sm-3 col-md-2 sidebar">
-
-        </div>
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+    
+        <div class="container" style="width:100%">
           <h1 class="page-header">Dashboard</h1>
 
           <div class="row placeholders">
@@ -156,116 +153,8 @@
 
 
           <div class="container">
-            <div class="row">
-              <h2 class="sub-header">Past purchases</h2>
-              <div class="table-responsive col-md-6">
-                <table class="table table-striped">
-                  <thead>
-                    <tr>
-                      <th>Item</th>
-                      <th>Date</th>
-                      <th>Price</th>
-                      <th>Seller</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>insert item</td>
-                      <td>10/14/15</td>
-                      <td>$5.00</td>
-                      <td>me</td>
-
-                    </tr>
-                    <tr>
-                      <td>insert item</td>
-                      <td>10/14/15</td>
-                      <td>$5.00</td>
-                      <td>me</td>
-
-                    </tr>
-                    <tr>
-                      <td>insert item</td>
-                      <td>10/14/15</td>
-                      <td>$5.00</td>
-                      <td>me</td>
-
-                    </tr>
-                    <tr>
-                      <td>insert item</td>
-                      <td>10/14/15</td>
-                      <td>$5.00</td>
-                      <td>me</td>
-
-                    </tr>
-                    <tr>
-                      <td>insert item</td>
-                      <td>10/14/15</td>
-                      <td>$5.00</td>
-                      <td>me</td>
-
-                    </tr>
-                    <tr>
-                      <td>insert item</td>
-                      <td>10/14/15</td>
-                      <td>$5.00</td>
-                      <td>me</td>
-
-                    </tr>
-                    <tr>
-                      <td>insert item</td>
-                      <td>10/14/15</td>
-                      <td>$5.00</td>
-                      <td>me</td>
-
-                    </tr>
-                    <tr>
-                      <td>insert item</td>
-                      <td>10/14/15</td>
-                      <td>$5.00</td>
-                      <td>me</td>
-
-                    </tr>
-                    <tr>
-                      <td>insert item</td>
-                      <td>10/14/15</td>
-                      <td>$5.00</td>
-                      <td>me</td>
-
-                    </tr>
-                    <tr>
-                      <td>insert item</td>
-                      <td>10/14/15</td>
-                      <td>$5.00</td>
-                      <td>me</td>
-
-                    </tr>
-                    <tr>
-                      <td>insert item</td>
-                      <td>10/14/15</td>
-                      <td>$5.00</td>
-                      <td>me</td>
-
-                    </tr>
-                    <tr>
-                      <td>insert item</td>
-                      <td>10/14/15</td>
-                      <td>$5.00</td>
-                      <td>me</td>
-
-                    </tr>
-                    <tr>
-                      <td>insert item</td>
-                      <td>10/14/15</td>
-                      <td>$5.00</td>
-                      <td>me</td>
-
-                    </tr>
-
-                  </tbody>
-                </table>
-              </div>
-
-              <div class="table-responsive col-md-6">
+        
+              <div class="table-responsive col-md-5">
                 <h2 class="sub-header">Past purchases</h2>
                 <table class="table table-striped">
                   <thead>
@@ -373,10 +262,118 @@
                 </table>
               </div>
 
+              <div class="table-responsive col-md-5">
+                <h2 class="sub-header">Past sales</h2>
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th>Item</th>
+                      <th>Date</th>
+                      <th>Price</th>
+                      <th>Seller</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>insert item</td>
+                      <td>10/14/15</td>
+                      <td>$5.00</td>
+                      <td>me</td>
+
+                    </tr>
+                    <tr>
+                      <td>insert item</td>
+                      <td>10/14/15</td>
+                      <td>$5.00</td>
+                      <td>me</td>
+
+                    </tr>
+                    <tr>
+                      <td>insert item</td>
+                      <td>10/14/15</td>
+                      <td>$5.00</td>
+                      <td>me</td>
+
+                    </tr>
+                    <tr>
+                      <td>insert item</td>
+                      <td>10/14/15</td>
+                      <td>$5.00</td>
+                      <td>me</td>
+
+                    </tr>
+                    <tr>
+                      <td>insert item</td>
+                      <td>10/14/15</td>
+                      <td>$5.00</td>
+                      <td>me</td>
+
+                    </tr>
+                    <tr>
+                      <td>insert item</td>
+                      <td>10/14/15</td>
+                      <td>$5.00</td>
+                      <td>me</td>
+
+                    </tr>
+                    <tr>
+                      <td>insert item</td>
+                      <td>10/14/15</td>
+                      <td>$5.00</td>
+                      <td>me</td>
+
+                    </tr>
+                    <tr>
+                      <td>insert item</td>
+                      <td>10/14/15</td>
+                      <td>$5.00</td>
+                      <td>me</td>
+
+                    </tr>
+                    <tr>
+                      <td>insert item</td>
+                      <td>10/14/15</td>
+                      <td>$5.00</td>
+                      <td>me</td>
+
+                    </tr>
+                    <tr>
+                      <td>insert item</td>
+                      <td>10/14/15</td>
+                      <td>$5.00</td>
+                      <td>me</td>
+
+                    </tr>
+                    <tr>
+                      <td>insert item</td>
+                      <td>10/14/15</td>
+                      <td>$5.00</td>
+                      <td>me</td>
+
+                    </tr>
+                    <tr>
+                      <td>insert item</td>
+                      <td>10/14/15</td>
+                      <td>$5.00</td>
+                      <td>me</td>
+
+                    </tr>
+                    <tr>
+                      <td>insert item</td>
+                      <td>10/14/15</td>
+                      <td>$5.00</td>
+                      <td>me</td>
+
+                    </tr>
+
+                  </tbody>
+                </table>
+              </div>
 
 
 
-            </div>
+
+       
           </div>
         </div>
 
