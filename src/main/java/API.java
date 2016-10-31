@@ -189,5 +189,16 @@ public class API {
 		output.put("status", "sold");
 		return output;
 	}
-
+	
+	// ban a user
+	public Map<String, String> ban(String userID) {
+		Document updates = new Document();
+		updates.put("banned", true);
+		usersCollection.updateOne(new Document("userID", userID),
+				new Document("$set", updates));
+		
+		Map<String, String> output = new HashMap<>();
+		output.put("status", "banned");
+		return output;
+	}
 }
