@@ -136,7 +136,7 @@ public class API {
 			throw new Exception("Reached maximum number of currently pending purchases allowed");
 
 		// increment `numPendingPurchases`
-		usersCollection.updateOne(new Document("username", userID),
+		usersCollection.updateOne(new Document("userID", userID),
 				new Document("$inc", new Document("numPendingPurchases", 1)));
 
 		// update the item to be bought with the buyer id, the date this is
@@ -153,16 +153,19 @@ public class API {
 		output.put("dateBought", dateBought + "");
 		return output;
 	}
-	
-	public Map<String, String> sold(String itemID){
-		//we should think about having this be the place where date bought is changed, but I'll leave it for now
-		Document itemDocument = itemsCollection.find(new Document("itemID", itemID)).first();
+	public Map<String, String> sell(String itemID) {
+		Document updates = new Document();
+		updates.put("status", "sold");
+		itemsCollection.updateOne(new Document("itemID", itemID),
+				new Document("$set", updates));
+
+		Document itemDocument = itemsCollection.find(new Document("itemID", itemID)).first(),
+				userDocument = usersCollection.find(new Document("userID", itemDocument.get("buyerID"))).first();
 		long dateBought = System.currentTimeMillis();
 		Map<String, String> output = new HashMap<>();
 		output.put("status", "sold");
-		output.put("dateBought", dateBought + "");
-		itemsCollection.updateOne(new Document("itemID", itemID),
-				new Document("$set", output));
+		output.put("numPendingPurchases", userDocument.get("numPendingPurchases") + "");
+		output.put("dateBought", itemDocument.get("dateBought") + "");
 		return output;
 		
 		
