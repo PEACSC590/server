@@ -81,13 +81,13 @@
 
              <li><a href="dashboard.ftl">Dashboard</a></li>
              <li><a href="settings.ftl">Settings</a></li>
+             <li class="active"><a href="profile.ftl">Profile</a></li>
 
-
-             <form class="navbar-form navbar-right">
+             <form class="navbar-form navbar-left">
                <input type="text" class="form-control" placeholder="Search">
              </form>
 
-             <li class="active"><a href="profile.ftl">Profile</a></li>
+             <li><a href="login.ftl">Log Out</a></li>
              </ul>
 
 
