@@ -36,8 +36,8 @@
   <div id="sidebar-wrapper">
       <ul class="sidebar-nav">
           <li class="sidebar-brand">
-              <a href="#">
-                  PEAbay
+              <a>
+                  Profile
               </a>
           </li>
           <li class="active">
