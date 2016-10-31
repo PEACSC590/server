@@ -153,6 +153,7 @@ public class API {
 		output.put("dateBought", dateBought + "");
 		return output;
 	}
+<<<<<<< HEAD
 	public Map<String, String> sell(String itemID) {
 		Document updates = new Document();
 		updates.put("status", "sold");
@@ -162,11 +163,20 @@ public class API {
 		Document itemDocument = itemsCollection.find(new Document("itemID", itemID)).first(),
 				userDocument = usersCollection.find(new Document("userID", itemDocument.get("buyerID"))).first();
 		
+=======
+	
+	public Map<String, String> sold(String itemID){
+		//we should think about having this be the place where date bought is changed, but I'll leave it for now
+		Document itemDocument = itemsCollection.find(new Document("itemID", itemID)).first();
+		long dateBought = System.currentTimeMillis();
+>>>>>>> 6f3bcba903f9fe6613fcd59e584be8cfc5ed6dd3
 		Map<String, String> output = new HashMap<>();
 		output.put("status", "sold");
 		output.put("numPendingPurchases", userDocument.get("numPendingPurchases") + "");
 		output.put("dateBought", itemDocument.get("dateBought") + "");
 		return output;
+		
+		
 		
 	}
 
