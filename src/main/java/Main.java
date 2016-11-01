@@ -68,22 +68,18 @@ public class Main {
 			String password = data.get("password");
 
 			// using Login.java, check if username/password is valid
-			boolean good = Login.login(username, password);
-
-			// System.out.println(good);
-
-			Document user = api.upsertUser(username);
+			String user = api.login(username, password);
 
 			Map<String, Object> attributes = new HashMap<>();
-
-			// put username in attributes
-			attributes.put("correct", good);
+			// attributes.put("correct", good);
 
 			// if good, put username
-			if (good) {
+			if (user.length() > 0) {
 				response.redirect("/myproducts");
 				// TODO: halt
 				// attributes.put("user", username);
+			} else {
+				attributes.put("error", "Your username or password is incorrect.");
 			}
 
 			return new ModelAndView(attributes, "login.ftl"); // FIXME
@@ -130,14 +126,39 @@ public class Main {
 			return new ModelAndView(attributes, "ProductFocus.ftl");
 		}, templateEngine);
 
+		// get the page to upload an item
+		get("/upload", (request, response) -> {
+			Map<String, Object> attributes = new HashMap<>();
+
+			return new ModelAndView(attributes, "upload.ftl");
+		}, templateEngine);
+		
+		
+		// POST method for upload
 		post("/upload", (req, res) -> {
 			Map<String, String> data = api.getBody(req);
-
-			if (data.size() == 5) {
-				// actually do the upload
+			
+			// need to make sure all necessary data is present
+			if (data.size() >= 5) {
+				// do the upload
+				String username = data.get("username");
+				String itemName = data.get("itemName");
+				String itemDescription = data.get("itemDescription");
+				double itemPrice = Double.parseDouble(data.get("itemPrice"));
+				
+				// TODO: need to do something with get String[] from data
+				String tag = data.get("tags");
+				String[] tags = new String[10];
+				
+				String imageURL = data.get("imageURL");
+				api.upsertItem(username, itemName, itemDescription, itemPrice, tags, imageURL);
+				
+				// redirect after success
 				res.redirect("/myproducts");
+				Map<String, Object> attributes = new HashMap<>();
+				return new ModelAndView(attributes, "MyProducts.ftl");
 			} else {
-				// give an error msg
+				// wat?
 				res.redirect("/upload");
 			}
 

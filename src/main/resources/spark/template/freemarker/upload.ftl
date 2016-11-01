@@ -30,72 +30,73 @@
 
       <meta name="viewport" content="width=device-width, initial-scale=1">
 
-      <link rel="stylesheet" type="text/css" href="stylesheet.css">
-      <link rel="stylesheet" type="text/css" href="sidebar.css">
+      <link rel="stylesheet" type="text/css" href="upload.css">
+
 
 
   </head>
 
   <body>
 
-    <!-- Sidebar -->
-    <div id="sidebar-wrapper">
-        <ul class="sidebar-nav">
-            <li class="sidebar-brand">
-                <a>
-                    Profile
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+
+                <img id="brandimage" src="https://upload.wikimedia.org/wikipedia/en/d/d7/Phillips_Exeter_Academy_Seal.png">
+                <a class="navbar-brand">
+                  PEAbay
                 </a>
-            </li>
-            <li>
-                <a href="myitems.ftl">My Items</a>
-            </li>
-            <li class="active">
-                <a href="upload.ftl">Upload</a>
-            </li>
-            <li>
-                <a href="cancelpendingsale.ftl">Cancel Pending Sale</a>
-            </li>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="HomePage.ftl">Home</a>
+                    </li>
+                    <li>
+                        <a href="items-page.ftl">For Sale</a>
+                    </li>
+                    <li>
+                        <a href="about.ftl">About</a>
+                    </li>
+                    <li>
+                        <a href="contact.ftl">Contact</a>
+                    </li>
+                    <li>
+                        <a href="dashboard.ftl">Dashboard</a>
+                    </li>
+                    <li>
+                        <a href="settings.ftl">Settings</a>
+                    </li>
+                    <li class="active">
+                        <a href="profile.ftl">Profile</a>
+                    </li>
 
-        </ul>
-    </div>
-    <!-- /#sidebar-wrapper -->
+                    <li><a href="login.ftl">Log Out</a></li>
 
-    <div id="page-content-wrapper">
-      <nav class="navbar navbar-inverse">
-       <div class="container-fluid">
-         <div class="navbar-header">
-           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-             <span class="sr-only">Toggle navigation</span>
-             <span class="icon-bar"></span>
-             <span class="icon-bar"></span>
-             <span class="icon-bar"></span>
-           </button>
-           <a class="navbar-brand" href="HomePage.ftl">PEABay</a>
-         </div>
-         <div id="navbar" class="collapse navbar-collapse">
-           <ul class="nav navbar-nav">
-             <li><a href="HomePage.ftl">Home</a></li>
-             <li><a href="items-page.ftl">For Sale</a></li>
-             <li><a href="about.ftl">About</a></li>
-             <li><a href="contact.ftl">Contact</a></li>
+                    <form class="navbar-form navbar-right" action="items-page.ftl">
+                      <input type="text" href="items-page.ftl" class="form-control" placeholder="Search">
+                    </form>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
 
-             <li><a href="dashboard.ftl">Dashboard</a></li>
-             <li><a href="settings.ftl">Settings</a></li>
-             <li class="active"><a href="profile.ftl">Profile</a></li>
-
-             <form class="navbar-form navbar-left" action="items-page.ftl">
-               <input type="text" class="form-control" placeholder="Search">
-             </form>
-
-             <li><a href="login.ftl">Log Out</a></li>
-             </ul>
-
-
-
-
-         </div><!--/.nav-collapse -->
-       </div>
-     </nav>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-3">
+          <div class="list-group">
+            <a href="myitems.ftl" class="list-group-item">My Items</a>
+            <a href="upload.ftl" class="list-group-item active">Upload</a>
+            <a href="cancelpendingsale.ftl" class="list-group-item">Cancel Pending Sale</a>
+          </div>
+        </div>
+      </div>
+      <div>
 
      <div class="container">
        <div class="header">

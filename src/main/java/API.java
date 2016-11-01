@@ -1,7 +1,9 @@
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.bson.Document;
 import org.bson.conversions.Bson;
@@ -27,6 +29,20 @@ public class API {
 		this.itemsCollection = this.db.getCollection("items");
 	}
 
+	
+	
+	// login api function
+	public String login(String username, String password) {
+		boolean correct = Login.login(username, password);
+		if (correct) {
+			//System.out.println("login correct");
+			Document user = upsertUser(username);
+			return username;
+		} else {
+			return "";
+		}
+	}
+	
 	// to access a file's attribute:
 	// usersCollection.find(new Document("username", username));
 	
@@ -96,11 +112,7 @@ public class API {
 		Document itemDocument = new Document();
 		// assign random integer between 0 and 10,000, we can find a better way
 		// to assign item id
-		int itemID = (int) (Math.random() * (10000 - 0)) + 0;
-		FindIterable<Document> cursor = itemsCollection.find(new Document("itemID", itemID));
-		if (cursor.first() != null) {
-			itemID = (int) (Math.random() * (10000 - 0)) + 0;
-		}
+		UUID itemID = UUID.randomUUID();
 		itemDocument.append("itemID", itemID);
 		itemDocument.append("buyerID", null);
 		itemDocument.append("userID", username);
@@ -150,26 +162,75 @@ public class API {
 		Map<String, String> output = new HashMap<>();
 		output.put("status", "pending");
 		output.put("numPendingPurchases", numPendingPurchases + 1 + "");
-		output.put("dateBought", dateBought + "");
 		return output;
 	}
-	public Map<String, String> sell(String itemID) {
+	
+	public Map<String, String> cancelPendingSale(String itemID, String userID) {
+		Document cancelSale = new Document();
+		cancelSale.put("status", "listed");
+		cancelSale.put("buyerID", null);
+		cancelSale.put("dateBought", null);
+		itemsCollection.updateOne(new Document("itemID", itemID),
+				new Document("$set", cancelSale));
+		
+		usersCollection.updateOne(new Document("userID", userID),
+				new Document ("$inc", new Document("numPendingPurchases", -1)));
+		
+		Map<String, String> output = new HashMap<>();
+		output.put("status", "listed");
+		return output;
+		
+	}
+	
+	public Map<String, String> refuseSale(String itemID, String userID) {
+		Document refuseSale = new Document();
+		refuseSale.put("status", "listed");
+		refuseSale.put("buyerID", null);
+		refuseSale.put("dateBought", null);
+		itemsCollection.updateOne(new Document("itemID", itemID),
+				new Document("$set", refuseSale));
+		
+		usersCollection.updateOne(new Document("userID", userID),
+				new Document ("$inc", new Document("numPendingPurchases", -1)));
+		
+		Map<String, String> output = new HashMap<>();
+		output.put("status", "listed");
+		return output;
+	}
+	
+	public Map<String, String> unlist(String itemID) {
+		Document unlist = new Document();
+		unlist.put("status", "hidden");
+		itemsCollection.updateOne(new Document("itemID", itemID),
+				new Document("$set", unlist));
+		
+		Map<String, String> output = new HashMap<>();
+		output.put("status", "hidden");
+		return output;	
+	}
+	
+	public Map<String, String> sell(String itemID, String userID) {
 		Document updates = new Document();
 		updates.put("status", "sold");
 		itemsCollection.updateOne(new Document("itemID", itemID),
 				new Document("$set", updates));
-
-		Document itemDocument = itemsCollection.find(new Document("itemID", itemID)).first(),
-				userDocument = usersCollection.find(new Document("userID", itemDocument.get("buyerID"))).first();
-		long dateBought = System.currentTimeMillis();
+		usersCollection.updateOne(new Document ("userID", userID), 
+				new Document("$inc", new Document("numPendingPurchases", -1)));
+		
 		Map<String, String> output = new HashMap<>();
 		output.put("status", "sold");
-		output.put("numPendingPurchases", userDocument.get("numPendingPurchases") + "");
-		output.put("dateBought", itemDocument.get("dateBought") + "");
 		return output;
-		
-		
-		
 	}
-
+	
+	// ban a user
+	public Map<String, String> ban(String userID) {
+		Document updates = new Document();
+		updates.put("banned", true);
+		usersCollection.updateOne(new Document("userID", userID),
+				new Document("$set", updates));
+		
+		Map<String, String> output = new HashMap<>();
+		output.put("status", "banned");
+		return output;
+	}
 }
