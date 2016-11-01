@@ -3,4 +3,8 @@ body {
   background: url("http://faainc.com/wp-content/uploads/2013/08/Phillips-Exeter_Finegold-Alexander_20101030-DSC_0553.jpg") no-repeat;
   background-size: 100%,auto;
 }
-t
+
+#brandimage {
+  width: 70px;
+  height: 50px;
+}

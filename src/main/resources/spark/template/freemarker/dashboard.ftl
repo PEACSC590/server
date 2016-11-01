@@ -84,12 +84,17 @@
     <div class="row">
       <div class="col-md-3">
         <div class="list-group">
-          <a href="#" class="list-group-item active">Category</a>
-          <a href="#" class="list-group-item">Category</a>
-          <a href="#" class="list-group-item">Category</a>
+          <a href="#" class="list-group-item active">Books</a>
+          <a href="#" class="list-group-item">Clothes</a>
+          <a href="#" class="list-group-item">Furtinure</a>
+          <a href="#" class="list-group-item">Food</a>
+          <a href="#" class="list-group-item">Other</a>
         </div>
       </div>
     </div>
+
+    
+
     <div>
 
 
