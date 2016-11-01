@@ -1,0 +1,33 @@
+body {
+  padding-top: 7%;
+  background: url("http://faainc.com/wp-content/uploads/2013/08/Phillips-Exeter_Finegold-Alexander_20101030-DSC_0553.jpg") no-repeat;
+  background-size: 100%,auto;
+}
+
+#brandimage {
+  width: 70px;
+  height: 50px;
+}
+
+.bg-text-lgrey {
+   /*background-color:lightgrey;*/
+   background: rgba(211,211,211,0.8);
+   text-align:center;
+}
+
+.thumbnail img {
+    width: 100%;
+}
+
+.thumbnail {
+    padding: 0;
+}
+
+.thumbnail .caption-full {
+    padding: 9px;
+    color: #333;
+}
+
+footer {
+    margin: 50px 0;
+}
