@@ -49,7 +49,7 @@
                   <li>
                       <a href="HomePage.ftl">Home</a>
                   </li>
-                  <li>
+                  <li class="active">
                       <a href="items-page.ftl">For Sale</a>
                   </li>
                   <li>

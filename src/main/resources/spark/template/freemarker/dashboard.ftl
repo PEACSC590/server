@@ -58,7 +58,7 @@
                   <li>
                       <a href="contact.ftl">Contact</a>
                   </li>
-                  <li>
+                  <li class="active">
                       <a href="dashboard.ftl">Dashboard</a>
                   </li>
                   <li>

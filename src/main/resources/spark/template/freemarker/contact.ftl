@@ -55,7 +55,7 @@
                   <li>
                       <a href="about.ftl">About</a>
                   </li>
-                  <li>
+                  <li class="active">
                       <a href="contact.ftl">Contact</a>
                   </li>
                   <li>

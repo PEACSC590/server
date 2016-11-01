@@ -61,7 +61,7 @@
                   <li>
                       <a href="dashboard.ftl">Dashboard</a>
                   </li>
-                  <li>
+                  <li class="active">
                       <a href="settings.ftl">Settings</a>
                   </li>
                   <li>
