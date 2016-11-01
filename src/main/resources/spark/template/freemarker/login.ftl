@@ -26,7 +26,7 @@
     <![endif]-->
 
     <!-- linking login stylesheet -->
-    <link href="login-style.css" rel="stylesheet">
+    <link href="login.css" rel="stylesheet">
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
@@ -58,14 +58,14 @@
     <div class = "container">
     	<div class="wrapper">
     		<form id="login" name="Login_Form" class="form-signin">
-    		    <h3 class="form-signin-heading">PEAbay</h3>
+    		    <h3 class="form-signin-heading" style="text-align: center;">PEAbay</h3>
     			  <hr class="colorgraph"><br>
 
     			  <input type="text" class="form-control" id="username" name="Username" placeholder="Exeter Username" required="" autofocus="" />
     			  <input type="password" class="form-control" id="password" name="Password" placeholder="Exeter Password" required=""/>
 
 
-
+          <!-- Hunter dont add this back yet we gon talk about this in class
 						<div class="form-group" id="terms">
 								<label class="col-xs-3 control-label">Terms of use</label>
 								<div class="col-xs-9">
@@ -85,6 +85,7 @@
 										</div>
 								</div>
 						</div>
+          -->
 
 
     			  <button class="btn btn-lg btn-primary btn-block" href="HomePage.ftl" name="Submit" value="Login" type="submit">Login</button>
