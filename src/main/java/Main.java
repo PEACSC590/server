@@ -132,12 +132,28 @@ public class Main {
 
 		post("/upload", (req, res) -> {
 			Map<String, String> data = api.getBody(req);
-
-			if (data.size() == 5) {
-				// actually do the upload
+			
+			// need to make sure everything is there
+			if (data.size() >= 5) {
+				// do the upload
+				String username = data.get("username");
+				String itemName = data.get("itemName");
+				String itemDescription = data.get("itemDescription");
+				double itemPrice = Double.parseDouble(data.get("itemPrice"));
+				
+				// TODO: need to do something with get String[] from data
+				String tag = data.get("tags");
+				String[] tags = new String[10];
+				
+				String imageURL = data.get("imageURL");
+				api.upsertItem(username, itemName, itemDescription, itemPrice, tags, imageURL);
+				
+				// redirect after success
 				res.redirect("/myproducts");
+				Map<String, Object> attributes = new HashMap<>();
+				return new ModelAndView(attributes, "MyProducts.ftl");
 			} else {
-				// give an error msg
+				// wat?
 				res.redirect("/upload");
 			}
 
