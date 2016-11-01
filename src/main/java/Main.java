@@ -68,22 +68,18 @@ public class Main {
 			String password = data.get("password");
 
 			// using Login.java, check if username/password is valid
-			boolean good = Login.login(username, password);
-
-			// System.out.println(good);
-
-			Document user = api.upsertUser(username);
+			String user = api.login(username, password);
 
 			Map<String, Object> attributes = new HashMap<>();
-
-			// put username in attributes
-			attributes.put("correct", good);
+			// attributes.put("correct", good);
 
 			// if good, put username
-			if (good) {
+			if (user.length() > 0) {
 				response.redirect("/myproducts");
 				// TODO: halt
 				// attributes.put("user", username);
+			} else {
+				attributes.put("error", "Your username or password is incorrect.");
 			}
 
 			return new ModelAndView(attributes, "login.ftl"); // FIXME
@@ -130,10 +126,19 @@ public class Main {
 			return new ModelAndView(attributes, "ProductFocus.ftl");
 		}, templateEngine);
 
+		// get the page to upload an item
+		get("/upload", (request, response) -> {
+			Map<String, Object> attributes = new HashMap<>();
+
+			return new ModelAndView(attributes, "upload.ftl");
+		}, templateEngine);
+		
+		
+		// POST method for upload
 		post("/upload", (req, res) -> {
 			Map<String, String> data = api.getBody(req);
 			
-			// need to make sure everything is there
+			// need to make sure all necessary data is present
 			if (data.size() >= 5) {
 				// do the upload
 				String username = data.get("username");

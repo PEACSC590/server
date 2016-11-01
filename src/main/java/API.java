@@ -29,6 +29,20 @@ public class API {
 		this.itemsCollection = this.db.getCollection("items");
 	}
 
+	
+	
+	// login api function
+	public String login(String username, String password) {
+		boolean correct = Login.login(username, password);
+		if (correct) {
+			//System.out.println("login correct");
+			Document user = upsertUser(username);
+			return username;
+		} else {
+			return "";
+		}
+	}
+	
 	// to access a file's attribute:
 	// usersCollection.find(new Document("username", username));
 	
