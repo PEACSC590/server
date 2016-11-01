@@ -139,15 +139,19 @@ public class Main {
 				String username = data.get("username");
 				String itemName = data.get("itemName");
 				String itemDescription = data.get("itemDescription");
-				String itemPrice = data.get("itemPrice");
-				String tags = data.get("tags");
-				String image = data.get("imageURL");
+				double itemPrice = Double.parseDouble(data.get("itemPrice"));
+				
+				// TODO: need to do something with get String[] from data
+				String tag = data.get("tags");
+				String[] tags = new String[10];
+				
+				String imageURL = data.get("imageURL");
 				api.upsertItem(username, itemName, itemDescription, itemPrice, tags, imageURL);
 				
 				// redirect after success
 				res.redirect("/myproducts");
 				Map<String, Object> attributes = new HashMap<>();
-				return new ModelAndView(attributes, "MyProducts.ftl")
+				return new ModelAndView(attributes, "MyProducts.ftl");
 			} else {
 				// wat?
 				res.redirect("/upload");
