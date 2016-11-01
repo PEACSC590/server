@@ -29,6 +29,20 @@ public class API {
 		this.itemsCollection = this.db.getCollection("items");
 	}
 
+	
+	
+	// login api function
+	public String login(String username, String password) {
+		boolean correct = Login.login(username, password);
+		if (correct) {
+			//System.out.println("login correct");
+			Document user = upsertUser(username);
+			return username;
+		} else {
+			return "";
+		}
+	}
+	
 	// to access a file's attribute:
 	// usersCollection.find(new Document("username", username));
 	
@@ -195,12 +209,14 @@ public class API {
 		return output;	
 	}
 	
-	public Map<String, String> sell(String itemID) {
+	public Map<String, String> sell(String itemID, String userID) {
 		Document updates = new Document();
 		updates.put("status", "sold");
 		itemsCollection.updateOne(new Document("itemID", itemID),
 				new Document("$set", updates));
-
+		usersCollection.updateOne(new Document ("userID", userID), 
+				new Document("$inc", new Document("numPendingPurchases", -1)));
+		
 		Map<String, String> output = new HashMap<>();
 		output.put("status", "sold");
 		return output;
