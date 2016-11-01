@@ -15,7 +15,7 @@
 
   <!-- Latest compiled and minified JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-  <link rel="stylesheet" type="text/css" href="dashboard.css">
+  <link rel="stylesheet" type="text/css" href="background.css">
 
 
   <!-- Latest compiled and minified JavaScript -->
@@ -35,13 +35,11 @@
       <div class="container-fluid">
           <!-- Brand and toggle get grouped for better mobile display -->
           <div class="navbar-header">
-              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                  <span class="sr-only">Toggle navigation</span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-              </button>
-              <a class="navbar-brand">PEAbay</a>
+
+              <img id="brandimage" src="https://upload.wikimedia.org/wikipedia/en/d/d7/Phillips_Exeter_Academy_Seal.png">
+              <a class="navbar-brand">
+                PEAbay
+              </a>
           </div>
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -91,11 +89,262 @@
           <a href="#" class="list-group-item">Other</a>
         </div>
       </div>
+
+
+        <h1 class="page-header">Dashboard</h1>
+
+        <div class="row placeholders">
+          <div class="col-xs-6 col-sm-3 placeholder">
+            <img src="">
+            <h4>Label</h4>
+            <span class="text-muted">Product</span>
+          </div>
+          <div class="col-xs-6 col-sm-3 placeholder">
+            <img src="">
+            <h4>Label</h4>
+            <span class="text-muted">Product</span>
+          </div>
+          <div class="col-xs-6 col-sm-3 placeholder">
+            <img src="">
+            <h4>Label</h4>
+            <span class="text-muted">Product</span>
+          </div>
+          <div class="col-xs-6 col-sm-3 placeholder">
+            <img src="">
+            <h4>Label</h4>
+            <span class="text-muted">Product</span>
+          </div>
+        </div>
+
+
+        <div class="container">
+
+            <div class="table-responsive col-md-5">
+              <h2 class="sub-header bg-text-lgrey">Past purchases</h2>
+              <table  class="table bg-text-lgrey">
+                 <thead >
+                  <tr>
+                    <th>Item</th>
+                    <th>Date</th>
+                    <th>Price</th>
+                    <th>Seller</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>insert item</td>
+                    <td>10/14/15</td>
+                    <td>$5.00</td>
+                    <td>me</td>
+
+                  </tr>
+                  <tr>
+                    <td>insert item</td>
+                    <td>10/14/15</td>
+                    <td>$5.00</td>
+                    <td>me</td>
+
+                  </tr>
+                  <tr>
+                    <td>insert item</td>
+                    <td>10/14/15</td>
+                    <td>$5.00</td>
+                    <td>me</td>
+
+                  </tr>
+                  <tr>
+                    <td>insert item</td>
+                    <td>10/14/15</td>
+                    <td>$5.00</td>
+                    <td>me</td>
+
+                  </tr>
+                  <tr>
+                    <td>insert item</td>
+                    <td>10/14/15</td>
+                    <td>$5.00</td>
+                    <td>me</td>
+
+                  </tr>
+                  <tr>
+                    <td>insert item</td>
+                    <td>10/14/15</td>
+                    <td>$5.00</td>
+                    <td>me</td>
+
+                  </tr>
+                  <tr>
+                    <td>insert item</td>
+                    <td>10/14/15</td>
+                    <td>$5.00</td>
+                    <td>me</td>
+
+                  </tr>
+                  <tr>
+                    <td>insert item</td>
+                    <td>10/14/15</td>
+                    <td>$5.00</td>
+                    <td>me</td>
+
+                  </tr>
+                  <tr>
+                    <td>insert item</td>
+                    <td>10/14/15</td>
+                    <td>$5.00</td>
+                    <td>me</td>
+
+                  </tr>
+                  <tr>
+                    <td>insert item</td>
+                    <td>10/14/15</td>
+                    <td>$5.00</td>
+                    <td>me</td>
+
+                  </tr>
+                  <tr>
+                    <td>insert item</td>
+                    <td>10/14/15</td>
+                    <td>$5.00</td>
+                    <td>me</td>
+
+                  </tr>
+                  <tr>
+                    <td>insert item</td>
+                    <td>10/14/15</td>
+                    <td>$5.00</td>
+                    <td>me</td>
+
+                  </tr>
+                  <tr>
+                    <td>insert item</td>
+                    <td>10/14/15</td>
+                    <td>$5.00</td>
+                    <td>me</td>
+
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+
+            <div class="table-responsive col-md-5">
+              <h2 class="sub-header bg-text-lgrey">Past sales</h2>
+              <table  class="table bg-text-lgrey">
+                <thead>
+                  <tr>
+                    <th>Item</th>
+                    <th>Date</th>
+                    <th>Price</th>
+                    <th>Seller</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>insert item</td>
+                    <td>10/14/15</td>
+                    <td>$5.00</td>
+                    <td>me</td>
+
+                  </tr>
+                  <tr>
+                    <td>insert item</td>
+                    <td>10/14/15</td>
+                    <td>$5.00</td>
+                    <td>me</td>
+
+                  </tr>
+                  <tr>
+                    <td>insert item</td>
+                    <td>10/14/15</td>
+                    <td>$5.00</td>
+                    <td>me</td>
+
+                  </tr>
+                  <tr>
+                    <td>insert item</td>
+                    <td>10/14/15</td>
+                    <td>$5.00</td>
+                    <td>me</td>
+
+                  </tr>
+                  <tr>
+                    <td>insert item</td>
+                    <td>10/14/15</td>
+                    <td>$5.00</td>
+                    <td>me</td>
+
+                  </tr>
+                  <tr>
+                    <td>insert item</td>
+                    <td>10/14/15</td>
+                    <td>$5.00</td>
+                    <td>me</td>
+
+                  </tr>
+                  <tr>
+                    <td>insert item</td>
+                    <td>10/14/15</td>
+                    <td>$5.00</td>
+                    <td>me</td>
+
+                  </tr>
+                  <tr>
+                    <td>insert item</td>
+                    <td>10/14/15</td>
+                    <td>$5.00</td>
+                    <td>me</td>
+
+                  </tr>
+                  <tr>
+                    <td>insert item</td>
+                    <td>10/14/15</td>
+                    <td>$5.00</td>
+                    <td>me</td>
+
+                  </tr>
+                  <tr>
+                    <td>insert item</td>
+                    <td>10/14/15</td>
+                    <td>$5.00</td>
+                    <td>me</td>
+
+                  </tr>
+                  <tr>
+                    <td>insert item</td>
+                    <td>10/14/15</td>
+                    <td>$5.00</td>
+                    <td>me</td>
+
+                  </tr>
+                  <tr>
+                    <td>insert item</td>
+                    <td>10/14/15</td>
+                    <td>$5.00</td>
+                    <td>me</td>
+
+                  </tr>
+                  <tr>
+                    <td>insert item</td>
+                    <td>10/14/15</td>
+                    <td>$5.00</td>
+                    <td>me</td>
+
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+
+
+          </div>
+
+
+        </div>
+      </div>
+
+
+
     </div>
-
-
-
-    <div>
 
 
     </body>
