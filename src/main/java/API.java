@@ -98,7 +98,7 @@ public class API {
 		// return the first item matched
 	}
 
-	public Document upsertItem(String username, String itemName, String itemDescription, Double itemPrice,
+	public Document insertItem(String username, String itemName, String itemDescription, Double itemPrice,
 			String[] tags, String imageURL) {
 
 		Document itemDocument = createItemDocument(username, itemName, itemDescription, itemPrice, tags, imageURL);
