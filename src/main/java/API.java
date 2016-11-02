@@ -16,6 +16,7 @@ import spark.Request;
 public class API {
 
 	private static final int MAX_PENDING_PURCHASES = 5;
+	private static final int PENDING_PURCHASES_TIMEOUT = 1000 * 60 * 60 * 24 * 3; // 3 days; in ms
 
 	private MongoDatabase db;
 	private MongoCollection<Document> usersCollection;
@@ -115,9 +116,8 @@ public class API {
 			long time = (long) item.get("dateBought");
 			String buyerID = item.getString("buyerID");
 			String itemName = item.getString("itemName");
-			// TODO: CHANGE ARBITRARY TIME TO SOMETHING ELSE
 			if (status.equals("pending")) {
-				if (System.currentTimeMillis() - time < 500000) {
+				if (System.currentTimeMillis() - time < PENDING_PURCHASES_TIMEOUT) {
 					usersCollection.updateOne(new Document("userID", buyerID),
 							new Document("$inc", new Document("numPendingPurchases", -1)));
 					
@@ -305,10 +305,10 @@ public class API {
 	public Map<String, String> sellerApproveSale(int itemID, String userID) {
 		// see if the items have exceeeded the time out limit
 		// maybe change refreshitems to constant later
-		refreshItems();
+		refreshItems(); // (will be removed from here when made an async task)
 		
 		Document item = getItemByID(itemID);
-		long time = (long) item.get("dateBought");
+		int time = (int) item.get("dateBought");
 		String buyerID = item.getString("buyerID");
 		String itemName = item.getString("itemName");
 		
