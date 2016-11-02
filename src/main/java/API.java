@@ -1,4 +1,3 @@
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -36,7 +35,7 @@ public class API {
 		boolean correct = Login.login(username, password);
 		if (correct) {
 			//System.out.println("login correct");
-			Document user = upsertUser(username);
+			upsertUser(username);
 			return username;
 		} else {
 			return "";

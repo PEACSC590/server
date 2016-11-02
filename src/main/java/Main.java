@@ -146,12 +146,11 @@ public class Main {
 				String itemDescription = data.get("itemDescription");
 				double itemPrice = Double.parseDouble(data.get("itemPrice"));
 				
-				// TODO: need to do something with get String[] from data
-				String tag = data.get("tags");
-				String[] tags = new String[10];
+				// TODO: need to test this
+				String[] tags = (String[]) JSON.parse(data.get("tags"));
 				
 				String imageURL = data.get("imageURL");
-				api.upsertItem(username, itemName, itemDescription, itemPrice, tags, imageURL);
+				api.insertItem(username, itemName, itemDescription, itemPrice, tags, imageURL);
 				
 				// redirect after success
 				res.redirect("/myproducts");
