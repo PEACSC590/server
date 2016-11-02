@@ -106,14 +106,42 @@ public class API {
 		return documents;
 	}
 	
-	// get buyable items, items which are not hidden and items which have exceeded a certain time window
+	//TODO: maybe we can run this asynchronously so that the buyer gets a msg when the seller is inactive and fails to respond
+	// remove items with status "pending" that have exceeded a certain time window
+	public void refreshItems() {
+		FindIterable<Document> items = itemsCollection.find(new Document());
+		for (Document item : items) {
+			String status = item.getString("status");
+			long time = (long) item.get("dateBought");
+			String buyerID = item.getString("buyerID");
+			String itemName = item.getString("itemName");
+			// TODO: CHANGE ARBITRARY TIME TO SOMETHING ELSE
+			if (status.equals("pending")) {
+				if (System.currentTimeMillis() - time < 500000) {
+					usersCollection.updateOne(new Document("userID", buyerID),
+							new Document("$inc", new Document("numPendingPurchases", -1)));
+					
+					Document cancelSale = new Document();
+					cancelSale.put("status", "cancelled");
+					cancelSale.put("buyerID", null);
+					cancelSale.put("dateBought", null);
+					itemsCollection.updateOne(item, new Document("$set", cancelSale));
+					
+					Email.send(buyerID, "Your purchase has been cancelled", "Your purchase of " + itemName + " has been cancelled due to seller inactivity.");
+					
+				}
+			}
+		}
+	}
+	
+	// get buyable items, items which are not hidden
 	public List<Document> getBuyableItems() {
 		List<Document> documents = new LinkedList<Document>();
 		
 		FindIterable<Document> items = itemsCollection.find(new Document());
 		for (Document item : items) {
 			String status = item.getString("status");
-			if (!status.equals("hidden")) {
+			if (status.equals("listed")) {
 				documents.add(item);
 			}
 		}
@@ -206,6 +234,7 @@ public class API {
 		return output;
 	}
 
+	// userID = buyerID?
 	public Map<String, String> cancelPendingSale(String itemID, String userID) {
 		Document cancelSale = new Document();
 		cancelSale.put("status", "listed");
@@ -222,6 +251,7 @@ public class API {
 
 	}
 
+	// userID = buyerID i think?
 	public Map<String, String> refuseSale(String itemID, String userID) {
 		Document refuseSale = new Document();
 		refuseSale.put("status", "listed");
@@ -247,7 +277,7 @@ public class API {
 		return output;
 	}
 
-	// this is run after the buyer has paid for the item and has received it?
+	// this is run after the buyer has paid for the item and has received it
 	public Map<String, String> sell(String itemID, String userID) {
 		Document updates = new Document();
 		updates.put("status", "sold");
@@ -273,22 +303,24 @@ public class API {
 	
 	// method for seller to approve sale within 3 days
 	public Map<String, String> sellerApproveSale(int itemID, String userID) {
+		refreshItems();
 		Document item = getItemByID(itemID);
 		long time = (long) item.get("dateBought");
 		String buyerID = item.getString("buyerID");
 		String itemName = item.getString("itemName");
 		
-		// check if 3 days have passed
-		if ((System.currentTimeMillis() - time) < 259200) {
-			Email.send(buyerID + "@exeter.edu", "Seller has confirmed your purchase", "Seller has confirmed your purchase of item " + itemName + ". Please contact the seller for payment.");
-			Map<String, String> output = new HashMap<>();
-			output.put("status", "approved");
-			return output;
-		} else {
+		// check if the item has been cancelled due to inactivity
+		if (item.getString("status").equals("cancelled")) {
 			Map<String, String> output = new HashMap<>();
 			output.put("status", "error");
 			output.put("error", "seller has passed time window");
 			return output;
+		} else {
+			Email.send(buyerID + "@exeter.edu", "Seller has confirmed your purchase", "Seller has confirmed your purchase of item " + itemName + ". Please contact the seller for payment.");
+			Map<String, String> output = new HashMap<>();
+			output.put("status", "approved");
+			return output;
+
 		}
 		
 
