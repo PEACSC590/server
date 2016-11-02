@@ -84,11 +84,11 @@
         <div class="list-group">
           <a href="items-page.ftl" class="list-group-item active">All Categories</a>
           <a href="books.ftl" class="list-group-item">Books</a>
-          <a href="#" class="list-group-item">Clothes</a>
-          <a href="#" class="list-group-item">Furniture</a>
-          <a href="#" class="list-group-item">Services</a>
-          <a href="#" class="list-group-item">Best Deals</a>
-          <a href="#" class="list-group-item">Other</a>
+          <a href="clothes.ftl" class="list-group-item">Clothes</a>
+          <a href="furniture.ftl" class="list-group-item">Furniture</a>
+          <a href="services.ftl" class="list-group-item">Services</a>
+          <a href="bestdeals.ftl" class="list-group-item">Best Deals</a>
+          <a href="other.ftl" class="list-group-item active">Other</a>
         </div>
       </div>
 
