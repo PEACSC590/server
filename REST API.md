@@ -6,7 +6,7 @@
 
 ```js
 {
-  "itemID": [int],
+  "itemID": [string],
   "userID": [string],
   "name": [string],
   "description": [string],
@@ -125,14 +125,14 @@ Output: JSON
 }
 ```
 
-**GET** All Items
-`/list-items`
+**GET** buyableItems
+`/buyable-items`
 
 The all-items function lists all of the items in the database that are available to be bought. The function retrieves all items and displays them in a grid form. This is to be used to display items in the "buy" tab of the dashboard.
 
 This only displays items with `status == "listed"`.
 
-Input: none
+Input: query status == "listed"
 
 Output: JSON
 ```js
@@ -146,7 +146,7 @@ Output: JSON
 
 The search-items function will list all the items related to the given text search and that match the parameters given in the `filter` attribute. This will be used for our search bar on the products for sale page.
 
-Input: query
+Input: query string
 
 Output: JSON
 ```js
@@ -169,8 +169,8 @@ The user's user token must be provided to verify that it is actually the user.
 Input: Body
 ```js
 {
-  "itemID" : [int],
-  "userID" : [string],
+  "itemID" : [string],
+  "buyerID" : [string],
   "userToken" : [string]
 }
 ```
@@ -194,8 +194,8 @@ The user's user token must be provided to verify that it is actually the user.
 Input: Body
 ```js
 {
-  "itemID" : [int],
-  "userID" : [string],
+  "itemID" : [string],
+  "buyerID" : [string],
   "userToken" : [string]
 }
 ```
@@ -212,15 +212,15 @@ Output: JSON
 **POST** Cancel Pending Sale
 `/cancel-pending-sale`
 
-This function cancels the pending sale of an item if the seller chooses that the item will not be sold to the buyer or if the counter has risen to 3+ days. The function should remove the item from the pending sale database and return it to the active products database.
+This function cancels the pending sale of an item if the buyer decides that he no longer wants to buy the item.
 
 The user's user token must be provided to verify that it is actually the user.
 
 Input: Body
 ```js
 {
-  "itemID" : [int],
-  "userID" : [int],
+  "itemID" : [string],
+  "buyerID" : [string],
   "userToken" : [string]
 }
 ```
@@ -229,6 +229,32 @@ Output: JSON
 ```js
 {
   "status" : [status], // the status of the item now; "listed", if successful; else, "pending"
+  "numPendingPurchases" : [int]
+}
+```
+
+**POST** Refuse Sale
+`/refuse-sale`
+
+This function cancels the pending sale of an item if the seller chooses that the item will not be sold to the buyer. The function should remove the item from the pending sale database and return it to the active products database.
+
+The user's user token must be provided to verify that it is actually the user.
+
+Input: Body
+```js
+{
+  "itemID" : [string],
+  "buyerID" : [string],
+  "sellerID" : [string],
+  "userToken" : [string]
+}
+```
+
+Output: JSON
+```js
+{
+  "status" : [status], // the status of the item now; "listed", if successful; else, "pending"
+  "numPendingPurchases" : [int],
 }
 ```
 
@@ -242,8 +268,8 @@ The user's user token must be provided to verify that it is actually the user.
 Input: Body
 ```js
 {
-  "itemID" : [int],
-  "userID" : [int],
+  "itemID" : [string],
+  "userID" : [string],
   "userToken" : [string]
 }
 ```
@@ -264,7 +290,7 @@ This function bans a user who has been acting inappropriately. The function shou
 Input: JSON
 ```js
 {
-  "userID" : [int]
+  "userID" : [string]
 }
 ```
 

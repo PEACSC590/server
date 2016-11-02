@@ -56,7 +56,7 @@ public class Main {
 			String password = data.get("password");
 
 			// using Login.java, check if username/password is valid
-			Map<String, String> loginStatus = api.login(userID, password);
+			Map<String, String> loginStatus = api.users.login(userID, password);
 
 			Map<String, Object> attributes = new HashMap<>();
 			// if good, put username
@@ -77,7 +77,7 @@ public class Main {
 			String userID = data.get("userID");
 			String userToken = data.get("userToken");
 
-			return api.logout(userID, userToken);
+			return api.users.logout(userID, userToken);
 		}, jsonEngine);
 
 		// list items in the db that match the query provided as a querystring
@@ -91,7 +91,7 @@ public class Main {
 				jsonStringQuery = "{}";
 			try {
 				Bson query = (Bson) JSON.parse(jsonStringQuery);
-				List<Document> items = api.getItems(query);
+				List<Document> items = api.items.getItems(query);
 				List<String> itemStrings = new LinkedList<String>();
 
 				for (Document item : items)
@@ -115,7 +115,7 @@ public class Main {
 				return errorView(e.toString());
 			}
 
-			Document item = api.getItemByID(itemID);
+			Document item = api.items.getItemByID(itemID);
 			if (item == null)
 				return errorView("Item with id: " + itemID + " could not be found");
 
@@ -150,7 +150,7 @@ public class Main {
 				String[] tags = (String[]) JSON.parse((String) item.get("tags"));
 
 				String imageURL = (String) item.get("imageURL");
-				api.insertItem(username, itemName, itemDescription, itemPrice, tags, imageURL);
+				api.items.insertItem(username, itemName, itemDescription, itemPrice, tags, imageURL);
 
 				// redirect after success
 				res.redirect("/myproducts");
@@ -177,7 +177,7 @@ public class Main {
 
 			Map<String, String> output;
 			try {
-				output = api.buy(body.get("userID"), body.get("itemID"));
+				output = api.sales.buy(body.get("userID"), body.get("itemID"));
 			} catch (Exception e) {
 				return errorView(e.getMessage());
 			}
