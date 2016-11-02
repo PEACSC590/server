@@ -127,7 +127,7 @@ public class API {
 					
 				Email.send(buyerID, "Your purchase has been cancelled", "Your purchase of " + itemName + " has been cancelled due to seller inactivity.");
 					
-				}
+				
 			}
 		}
 	}
@@ -156,7 +156,7 @@ public class API {
 		return getItems(new Document("boughtByUserID", userID));
 	}
 
-	public Document getItemByID(int itemID) {
+	public Document getItemByID(String itemID) {
 		List<Document> items = getItems(new Document("itemID", itemID));
 		return items.size() > 0 ? items.get(0) : null;
 		// return the first item matched
@@ -179,7 +179,7 @@ public class API {
 		UUID itemID = UUID.randomUUID();
 		itemDocument.append("itemID", itemID);
 		itemDocument.append("buyerID", null);
-		itemDocument.append("userID", username);
+		itemDocument.append("sellerID", username);
 		itemDocument.append("itemName", itemName);
 		itemDocument.append("itemDescription", itemDescription);
 		itemDocument.append("itemPrice", itemPrice);
@@ -225,7 +225,17 @@ public class API {
 		Document updates = new Document().append("buyerID", userID).append("dateBought", dateBought).append("status",
 				"pending");
 		itemsCollection.updateOne(new Document("itemID", itemID), new Document("$set", updates));
-
+		
+		Document item = getItemByID(itemID);
+		String itemName = item.getString("itemName");
+		String sellerID = item.getString("sellerID");
+		
+		// send e-mail to buyer for confirmation
+		Email.send(userID, "Pending purchase", "Your purchase of " + itemName + " is pending.");
+	
+		// send e-mail to seller notifying bought item
+		Email.send(sellerID, "Buyer has bought item", "Buyer " + userID + " has bought your item " + itemName + ". Please confirm your sale of the item.");
+		
 		Map<String, String> output = new HashMap<>();
 		output.put("status", "pending");
 		output.put("numPendingPurchases", numPendingPurchases + 1 + "");
@@ -282,7 +292,15 @@ public class API {
 		itemsCollection.updateOne(new Document("itemID", itemID), new Document("$set", updates));
 		usersCollection.updateOne(new Document("userID", userID),
 				new Document("$inc", new Document("numPendingPurchases", -1)));
-
+		
+		Document item = getItemByID(itemID);
+		String itemName = item.getString("itemName");
+		String sellerID = item.getString("sellerID");
+		
+		// send e-mail to buyer 
+		Email.send(userID, "Successful purchase", "Successful purchase of " + itemName + ".");
+		
+		Email.send(sellerID, "Successful sale", "Successful sale of " + itemName + ".");
 		Map<String, String> output = new HashMap<>();
 		output.put("status", "sold");
 		return output;
