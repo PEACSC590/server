@@ -166,7 +166,8 @@ public class Main {
 			attributes.put("data", data);
 			return new ModelAndView(attributes, "display-data.ftl");
 		}, templateEngine);
-
+		
+		// Should be used by AJAX -> serves json
 		post("/buy", (req, res) -> {
 
 			Map<String, String> body = api.getBody(req);
@@ -181,11 +182,8 @@ public class Main {
 				return errorView(e.getMessage());
 			}
 
-			// PLACEHOLDER: display the raw output
-			Map<String, Object> attributes = new HashMap<>();
-			attributes.put("data", output);
-			return new ModelAndView(attributes, "display-data.ftl");
-		}, templateEngine);
+			return output;
+		}, jsonEngine);
 
 	}
 
