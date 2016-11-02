@@ -110,24 +110,22 @@ public class API {
 	//TODO: maybe we can run this asynchronously so that the buyer gets a msg when the seller is inactive and fails to respond
 	// remove items with status "pending" that have exceeded a certain time window
 	public void refreshItems() {
-		FindIterable<Document> items = itemsCollection.find(new Document());
+		FindIterable<Document> items = itemsCollection.find(new Document("status", "pending"));
 		for (Document item : items) {
-			String status = item.getString("status");
 			long time = (long) item.get("dateBought");
 			String buyerID = item.getString("buyerID");
 			String itemName = item.getString("itemName");
-			if (status.equals("pending")) {
-				if (System.currentTimeMillis() - time < PENDING_PURCHASES_TIMEOUT) {
-					usersCollection.updateOne(new Document("userID", buyerID),
-							new Document("$inc", new Document("numPendingPurchases", -1)));
+			if (System.currentTimeMillis() - time < PENDING_PURCHASES_TIMEOUT) {
+				usersCollection.updateOne(new Document("userID", buyerID),
+					new Document("$inc", new Document("numPendingPurchases", -1)));
 					
-					Document cancelSale = new Document();
-					cancelSale.put("status", "cancelled");
-					cancelSale.put("buyerID", null);
-					cancelSale.put("dateBought", null);
-					itemsCollection.updateOne(item, new Document("$set", cancelSale));
+				Document cancelSale = new Document();
+				cancelSale.put("status", "cancelled");
+				cancelSale.put("buyerID", null);
+				cancelSale.put("dateBought", null);
+				itemsCollection.updateOne(item, new Document("$set", cancelSale));
 					
-					Email.send(buyerID, "Your purchase has been cancelled", "Your purchase of " + itemName + " has been cancelled due to seller inactivity.");
+				Email.send(buyerID, "Your purchase has been cancelled", "Your purchase of " + itemName + " has been cancelled due to seller inactivity.");
 					
 				}
 			}
