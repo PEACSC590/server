@@ -71,7 +71,10 @@ public class Sales {
 
 	// userID = buyerID i think?
 	public Map<String, String> refuseSale(String itemID, String buyerID, String sellerID, String userToken) {
+		Map<String, String> output = new HashMap<>();
 		boolean success = api.userTokens.testUserTokenForUser(sellerID, userToken);
+		if (success) {
+
 		Document refuseSale = new Document();
 		refuseSale.put("status", "listed");
 		refuseSale.put("buyerID", null);
@@ -80,9 +83,12 @@ public class Sales {
 
 		api.usersCollection.updateOne(new Document("userID", buyerID),
 				new Document("$inc", new Document("numPendingPurchases", -1)));
-
-		Map<String, String> output = new HashMap<>();
 		output.put("status", "listed");
+		
+		}
+		else {
+			output.put("status", "pending");
+		}
 		return output;
 	}
 
