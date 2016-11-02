@@ -49,7 +49,7 @@ An access token is generated and saved in the user's document in *Users*, and th
 Input: Body
 ```js
 {
-  "username": [string],
+  "userID": [string],
   "password": [string]
 }
 ```
@@ -74,7 +74,7 @@ When the client receives "true" for "success", it should remove the userToken fr
 Input: Body
 ```js
 {
-  "username": [string],
+  "userID": [string],
   "userToken": [string]
 }
 ```

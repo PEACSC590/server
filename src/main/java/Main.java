@@ -39,9 +39,11 @@ public class Main {
 		ResponseTransformer jsonEngine = JsonUtil.json();
 
 		//
-
+		
+		// Browser page
 		get("/login", (request, response) -> {
 			Map<String, Object> attributes = new HashMap<>();
+			// no attributes needed?
 
 			return new ModelAndView(attributes, "login.ftl");
 		}, templateEngine);
@@ -50,7 +52,7 @@ public class Main {
 		// Should be used by a form -> serves a page
 		post("/login", (req, res) -> {
 			Map<String, String> data = api.getBody(req);
-			String userID = data.get("username");
+			String userID = data.get("userID");
 			String password = data.get("password");
 
 			// using Login.java, check if username/password is valid
@@ -72,7 +74,7 @@ public class Main {
 		// Should be used by AJAX -> serves json
 		post("/logout", (req, res) -> {
 			Map<String, String> data = api.getBody(req);
-			String userID = data.get("username");
+			String userID = data.get("userID");
 			String userToken = data.get("userToken");
 
 			return api.logout(userID, userToken);
@@ -80,6 +82,7 @@ public class Main {
 
 		// list items in the db that match the query provided as a querystring
 		// param
+		// Browser page
 		get("/list-items", (req, res) -> {
 			Map<String, Object> attributes = new HashMap<>();
 
@@ -98,10 +101,12 @@ public class Main {
 			} catch (Exception e) {
 				attributes.put("error", e.toString());
 			}
-
+			
+			// TODO: replace with a view-items template
 			return new ModelAndView(attributes, "db.ftl");
 		}, templateEngine);
-
+		
+		// Browser page
 		get("/list-item", (req, res) -> {
 			int itemID;
 			try {
@@ -120,28 +125,31 @@ public class Main {
 		}, templateEngine);
 
 		// get the page to upload an item
+		// Browser page
 		get("/upload", (request, response) -> {
 			Map<String, Object> attributes = new HashMap<>();
+			// no attributes?
 
 			return new ModelAndView(attributes, "upload.ftl");
 		}, templateEngine);
 
 		// POST method for upload
+		// Should be used by a form -> serves a page
 		post("/upload", (req, res) -> {
 			Map<String, String> data = api.getBody(req);
 
-			// need to make sure all necessary data is present
+			// need to make sure enough data are present
 			if (data.size() >= 5) {
-				// do the upload
-				String username = data.get("username");
-				String itemName = data.get("itemName");
-				String itemDescription = data.get("itemDescription");
-				double itemPrice = Double.parseDouble(data.get("itemPrice"));
-
+				String username = data.get("userID");
+				
+				Document item = (Document) JSON.parse(data.get("item"));
+				String itemName = (String) item.get("name");
+				String itemDescription = (String) item.get("description");
+				double itemPrice = Double.parseDouble((String) item.get("price"));
 				// TODO: need to test this
-				String[] tags = (String[]) JSON.parse(data.get("tags"));
+				String[] tags = (String[]) JSON.parse((String) item.get("tags"));
 
-				String imageURL = data.get("imageURL");
+				String imageURL = (String) item.get("imageURL");
 				api.insertItem(username, itemName, itemDescription, itemPrice, tags, imageURL);
 
 				// redirect after success
@@ -149,8 +157,9 @@ public class Main {
 				Map<String, Object> attributes = new HashMap<>();
 				return new ModelAndView(attributes, "MyProducts.ftl");
 			} else {
-				// wat?
+				// if upload has illegal inputs, redirect
 				res.redirect("/upload");
+				// TODO: have it redirect with an error
 			}
 
 			Map<String, Object> attributes = new HashMap<>();
