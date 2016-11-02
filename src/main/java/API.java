@@ -105,11 +105,13 @@ public class API {
 
 		return documents;
 	}
+	
+
 
 	public List<Document> getItemsUploadedByUser(String userID) {
 		return getItems(new Document("userID", userID));
 	}
-
+	
 	public List<Document> getItemsBoughtByUser(String userID) {
 		// 10.16.16: the item attribute might not be "boughtByUserID", but I'll
 		// use it for now
@@ -233,6 +235,7 @@ public class API {
 		return output;
 	}
 
+	// this is run after the buyer has paid for the item and has received it?
 	public Map<String, String> sell(String itemID, String userID) {
 		Document updates = new Document();
 		updates.put("status", "sold");
@@ -255,4 +258,24 @@ public class API {
 		output.put("status", "banned");
 		return output;
 	}
+	
+	// method for seller to approve sale within 3 days
+	public Map<String, String> sellerApproveSale(int itemID, String userID) {
+		Document item = getItemByID(itemID);
+		long time = (long) item.get("dateBought");
+		String buyerID = item.getString("buyerID");
+		String itemName = item.getString("itemName");
+		
+		// check if 3 days have passed
+		if ((System.currentTimeMillis() - time) < 259200) {
+			Email.send(buyerID + "@exeter.edu", "Seller has confirmed your purchase", "Seller has confirmed your purchase of item " + itemName + ". Please contact the seller for payment.");
+		} else {
+			
+		}
+		
+		Map<String, String> output = new HashMap<>();
+		output.put("status", "approved");
+		return output;
+	}
+	
 }
