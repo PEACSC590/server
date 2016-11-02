@@ -303,7 +303,10 @@ public class API {
 	
 	// method for seller to approve sale within 3 days
 	public Map<String, String> sellerApproveSale(int itemID, String userID) {
+		// see if the items have exceeeded the time out limit
+		// maybe change refreshitems to constant later
 		refreshItems();
+		
 		Document item = getItemByID(itemID);
 		long time = (long) item.get("dateBought");
 		String buyerID = item.getString("buyerID");
