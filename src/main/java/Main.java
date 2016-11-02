@@ -68,16 +68,13 @@ public class Main {
 			String password = data.get("password");
 
 			// using Login.java, check if username/password is valid
-			String user = api.login(username, password);
+			Map<String, String> loginStatus = api.login(username, password);
 
 			Map<String, Object> attributes = new HashMap<>();
-			// attributes.put("correct", good);
-
 			// if good, put username
-			if (user.length() > 0) {
+			if (loginStatus.get("valid") == "true") {
 				response.redirect("/myproducts");
-				// TODO: halt
-				// attributes.put("user", username);
+				// TODO: halt... how do redirects work in spark?
 			} else {
 				attributes.put("error", "Your username or password is incorrect.");
 			}

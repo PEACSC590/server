@@ -28,24 +28,22 @@ public class API {
 		this.itemsCollection = this.db.getCollection("items");
 	}
 
-	
-	
-	// login api function
-	public String login(String username, String password) {
-		boolean correct = Login.login(username, password);
-		if (correct) {
-			//System.out.println("login correct");
-			upsertUser(username);
-			return username;
-		} else {
-			return "";
-		}
-	}
-	
 	// to access a file's attribute:
 	// usersCollection.find(new Document("username", username));
-	
+
 	// Users
+
+	// login api function
+	public Map<String, String> login(String username, String password) {
+		// if the login is correct,
+		boolean correct = Login.login(username, password);
+		// add the user to the collection by their username
+		if (correct) upsertUser(username);
+		
+		Map<String, String> output = new HashMap<>();
+		output.put("valid", correct + "");
+		return output;
+	}
 
 	// Create and return a user file if nonexistent in the collection; otherwise
 	// return it
@@ -60,7 +58,8 @@ public class API {
 		usersCollection.insertOne(userDocument);
 
 		return userDocument;
-		}
+	}
+
 	private Document createUserDocument(String username) {
 		Document userDocument = new Document();
 		userDocument.append("username", username);
@@ -157,81 +156,75 @@ public class API {
 		// update the item to be bought with the buyer id, the date this is
 		// being processed, and the new status of the item
 		long dateBought = System.currentTimeMillis();
-		Document updates = new Document().append("buyerID", userID).append("dateBought", dateBought)
-				.append("status", "pending");
-		itemsCollection.updateOne(new Document("itemID", itemID),
-				new Document("$set", updates));
+		Document updates = new Document().append("buyerID", userID).append("dateBought", dateBought).append("status",
+				"pending");
+		itemsCollection.updateOne(new Document("itemID", itemID), new Document("$set", updates));
 
 		Map<String, String> output = new HashMap<>();
 		output.put("status", "pending");
 		output.put("numPendingPurchases", numPendingPurchases + 1 + "");
 		return output;
 	}
-	
+
 	public Map<String, String> cancelPendingSale(String itemID, String userID) {
 		Document cancelSale = new Document();
 		cancelSale.put("status", "listed");
 		cancelSale.put("buyerID", null);
 		cancelSale.put("dateBought", null);
-		itemsCollection.updateOne(new Document("itemID", itemID),
-				new Document("$set", cancelSale));
-		
+		itemsCollection.updateOne(new Document("itemID", itemID), new Document("$set", cancelSale));
+
 		usersCollection.updateOne(new Document("userID", userID),
-				new Document ("$inc", new Document("numPendingPurchases", -1)));
-		
+				new Document("$inc", new Document("numPendingPurchases", -1)));
+
 		Map<String, String> output = new HashMap<>();
 		output.put("status", "listed");
 		return output;
-		
+
 	}
-	
+
 	public Map<String, String> refuseSale(String itemID, String userID) {
 		Document refuseSale = new Document();
 		refuseSale.put("status", "listed");
 		refuseSale.put("buyerID", null);
 		refuseSale.put("dateBought", null);
-		itemsCollection.updateOne(new Document("itemID", itemID),
-				new Document("$set", refuseSale));
-		
+		itemsCollection.updateOne(new Document("itemID", itemID), new Document("$set", refuseSale));
+
 		usersCollection.updateOne(new Document("userID", userID),
-				new Document ("$inc", new Document("numPendingPurchases", -1)));
-		
+				new Document("$inc", new Document("numPendingPurchases", -1)));
+
 		Map<String, String> output = new HashMap<>();
 		output.put("status", "listed");
 		return output;
 	}
-	
+
 	public Map<String, String> unlist(String itemID) {
 		Document unlist = new Document();
 		unlist.put("status", "hidden");
-		itemsCollection.updateOne(new Document("itemID", itemID),
-				new Document("$set", unlist));
-		
+		itemsCollection.updateOne(new Document("itemID", itemID), new Document("$set", unlist));
+
 		Map<String, String> output = new HashMap<>();
 		output.put("status", "hidden");
-		return output;	
+		return output;
 	}
-	
+
 	public Map<String, String> sell(String itemID, String userID) {
 		Document updates = new Document();
 		updates.put("status", "sold");
-		itemsCollection.updateOne(new Document("itemID", itemID),
-				new Document("$set", updates));
-		usersCollection.updateOne(new Document ("userID", userID), 
+		itemsCollection.updateOne(new Document("itemID", itemID), new Document("$set", updates));
+		usersCollection.updateOne(new Document("userID", userID),
 				new Document("$inc", new Document("numPendingPurchases", -1)));
-		
+
 		Map<String, String> output = new HashMap<>();
 		output.put("status", "sold");
 		return output;
 	}
-	
+
 	// ban a user
 	public Map<String, String> ban(String userID) {
 		Document updates = new Document();
 		updates.put("banned", true);
-		usersCollection.updateOne(new Document("userID", userID),
-				new Document("$set", updates));
-		
+		usersCollection.updateOne(new Document("userID", userID), new Document("$set", updates));
+
 		Map<String, String> output = new HashMap<>();
 		output.put("status", "banned");
 		return output;
