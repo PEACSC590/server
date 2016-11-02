@@ -112,7 +112,7 @@ public class API {
 	public void refreshItems() {
 		FindIterable<Document> items = itemsCollection.find(new Document("status", "pending"));
 		for (Document item : items) {
-			long time = (long) item.get("dateBought");
+			int time = (int) item.get("dateBought");
 			String buyerID = item.getString("buyerID");
 			String itemName = item.getString("itemName");
 			if (System.currentTimeMillis() - time < PENDING_PURCHASES_TIMEOUT) {
@@ -126,24 +126,14 @@ public class API {
 				itemsCollection.updateOne(item, new Document("$set", cancelSale));
 					
 				Email.send(buyerID, "Your purchase has been cancelled", "Your purchase of " + itemName + " has been cancelled due to seller inactivity.");
-					
-				}
 			}
 		}
 	}
 	
+	
 	// get buyable items, items which are not hidden
 	public List<Document> getBuyableItems() {
-		List<Document> documents = new LinkedList<Document>();
-		
-		FindIterable<Document> items = itemsCollection.find(new Document());
-		for (Document item : items) {
-			String status = item.getString("status");
-			if (status.equals("listed")) {
-				documents.add(item);
-			}
-		}
-		return documents;
+		return getItems(new Document("status", "listed"));
 	}
 
 	public List<Document> getItemsUploadedByUser(String userID) {
@@ -156,7 +146,7 @@ public class API {
 		return getItems(new Document("boughtByUserID", userID));
 	}
 
-	public Document getItemByID(int itemID) {
+	public Document getItemByID(String itemID) {
 		List<Document> items = getItems(new Document("itemID", itemID));
 		return items.size() > 0 ? items.get(0) : null;
 		// return the first item matched
@@ -179,7 +169,7 @@ public class API {
 		UUID itemID = UUID.randomUUID();
 		itemDocument.append("itemID", itemID);
 		itemDocument.append("buyerID", null);
-		itemDocument.append("userID", username);
+		itemDocument.append("sellerID", username);
 		itemDocument.append("itemName", itemName);
 		itemDocument.append("itemDescription", itemDescription);
 		itemDocument.append("itemPrice", itemPrice);
@@ -225,7 +215,17 @@ public class API {
 		Document updates = new Document().append("buyerID", userID).append("dateBought", dateBought).append("status",
 				"pending");
 		itemsCollection.updateOne(new Document("itemID", itemID), new Document("$set", updates));
-
+		
+		Document item = getItemByID(itemID);
+		String itemName = item.getString("itemName");
+		String sellerID = item.getString("sellerID");
+		
+		// send e-mail to buyer for confirmation
+		Email.send(userID, "Pending purchase", "Your purchase of " + itemName + " is pending.");
+	
+		// send e-mail to seller notifying bought item
+		Email.send(sellerID, "Buyer has bought item", "Buyer " + userID + " has bought your item " + itemName + ". Please confirm your sale of the item.");
+		
 		Map<String, String> output = new HashMap<>();
 		output.put("status", "pending");
 		output.put("numPendingPurchases", numPendingPurchases + 1 + "");
@@ -250,14 +250,15 @@ public class API {
 	}
 
 	// userID = buyerID i think?
-	public Map<String, String> refuseSale(String itemID, String userID) {
+	public Map<String, String> refuseSale(String itemID, String buyerID, String sellerID, String userToken) {
+		boolean success = userTokens.testUserTokenForUser(sellerID, userToken);
 		Document refuseSale = new Document();
 		refuseSale.put("status", "listed");
 		refuseSale.put("buyerID", null);
 		refuseSale.put("dateBought", null);
 		itemsCollection.updateOne(new Document("itemID", itemID), new Document("$set", refuseSale));
 
-		usersCollection.updateOne(new Document("userID", userID),
+		usersCollection.updateOne(new Document("userID", buyerID),
 				new Document("$inc", new Document("numPendingPurchases", -1)));
 
 		Map<String, String> output = new HashMap<>();
@@ -282,7 +283,15 @@ public class API {
 		itemsCollection.updateOne(new Document("itemID", itemID), new Document("$set", updates));
 		usersCollection.updateOne(new Document("userID", userID),
 				new Document("$inc", new Document("numPendingPurchases", -1)));
-
+		
+		Document item = getItemByID(itemID);
+		String itemName = item.getString("itemName");
+		String sellerID = item.getString("sellerID");
+		
+		// send e-mail to buyer 
+		Email.send(userID, "Successful purchase", "Successful purchase of " + itemName + ".");
+		
+		Email.send(sellerID, "Successful sale", "Successful sale of " + itemName + ".");
 		Map<String, String> output = new HashMap<>();
 		output.put("status", "sold");
 		return output;
@@ -300,7 +309,7 @@ public class API {
 	}
 	
 	// method for seller to approve sale within 3 days
-	public Map<String, String> sellerApproveSale(int itemID, String userID) {
+	public Map<String, String> sellerApproveSale(String itemID, String userID) {
 		// see if the items have exceeeded the time out limit
 		// maybe change refreshitems to constant later
 		refreshItems(); // (will be removed from here when made an async task)
