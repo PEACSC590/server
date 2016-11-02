@@ -250,14 +250,15 @@ public class API {
 	}
 
 	// userID = buyerID i think?
-	public Map<String, String> refuseSale(String itemID, String userID) {
+	public Map<String, String> refuseSale(String itemID, String buyerID, String sellerID, String userToken) {
+		boolean success = userTokens.testUserTokenForUser(sellerID, userToken);
 		Document refuseSale = new Document();
 		refuseSale.put("status", "listed");
 		refuseSale.put("buyerID", null);
 		refuseSale.put("dateBought", null);
 		itemsCollection.updateOne(new Document("itemID", itemID), new Document("$set", refuseSale));
 
-		usersCollection.updateOne(new Document("userID", userID),
+		usersCollection.updateOne(new Document("userID", buyerID),
 				new Document("$inc", new Document("numPendingPurchases", -1)));
 
 		Map<String, String> output = new HashMap<>();
