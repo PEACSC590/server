@@ -128,6 +128,10 @@ public class API {
 		return itemDocument;
 	}
 
+	public List<Document> searchItemsByText(String searchBy) {
+		return getItems(new Document("$text", new Document("$search", searchBy)));
+	}
+
 	// Request/Response Utilities
 	public Map<String, String> getBody(Request request) {
 		// convert request.body() (structured=sdf&like=234&this=3) into a
