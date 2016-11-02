@@ -87,8 +87,69 @@
           <a href="#" class="list-group-item">Category</a>
         </div>
       </div>
+
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+
+        <h1>PEAbay</h1>
+        <p>List of Items on PEAbay</p>
+        <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
+
     </div>
-    <div>
+
+
+      <!-- Example row of columns -->
+      <div class="container">
+        <div class="col-md-4">
+          <h2>Product 1</h2>
+          <p>info</p>
+          <p><a class="btn btn-default" href="ProductFocus.ftl" role="button">View details &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+          <h2>Product 2</h2>
+         <p>info</p>
+          <p><a class="btn btn-default" href="ProductFocus.ftl" role="button">View details &raquo;</a></p>
+       </div>
+        <div class="col-md-4">
+          <h2>Product 3</h2>
+          <p>info</p>
+          <p><a class="btn btn-default" href="ProductFocus.ftl" role="button">View details &raquo;</a></p>
+        </div>
+        <div class="col-md-4">
+          <h2>Heading</h2>
+          <p>Product 4--Learn more</p>
+          <p><a class="btn btn-default" href="ProductFocus.ftl" role="button">View details &raquo;</a></p>
+        </div><div class="col-md-4">
+          <h2>Heading</h2>
+          <p>Product 5--Learn more</p>
+          <p><a class="btn btn-default" href="ProductFocus.ftl" role="button">View details &raquo;</a></p>
+        </div><div class="col-md-4">
+          <h2>Heading</h2>
+          <p>Product 6--Learn more</p>
+          <p><a class="btn btn-default" href="ProductFocus.ftl" role="button">View details &raquo;</a></p>
+        </div><div class="col-md-4">
+          <h2>Heading</h2>
+          <p>Product 7--Learn more</p>
+          <p><a class="btn btn-default" href="ProductFocus.ftl" role="button">View details &raquo;</a></p>
+        </div><div class="col-md-4">
+          <h2>Heading</h2>
+          <p>Product 8--Learn more</p>
+          <p><a class="btn btn-default" href="ProductFocus.ftl" role="button">View details &raquo;</a></p>
+        </div><div class="col-md-4">
+          <h2>Heading</h2>
+          <p>Product 9--Learn more</p>
+          <p><a class="btn btn-default" href="ProductFocus.ftl" role="button">View details &raquo;</a></p>
+        </div>
+
+
+
+
+      </div>
+    </div> <!-- /container -->
+  </div>
+
+
+
 
 
     </body>

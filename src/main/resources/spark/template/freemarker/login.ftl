@@ -66,10 +66,11 @@
     			  <input type="password" class="form-control" id="password" name="Password" placeholder="Exeter Password" required=""/>
 
 
-          <!-- Hunter dont add this back yet we gon talk about this in class
+
 						<div class="form-group" id="terms">
-								<label class="col-xs-3 control-label">Terms of use</label>
+
 								<div class="col-xs-9">
+                  <div><label>Terms of use</label></div>
 										<div style="border: 1px solid #e5e5e5; height: 200px; overflow: auto; padding: 10px; background:#fff;">
 												<p>Lorem ipsum dolor sit amet, veniam numquam has te. No suas nonumes recusabo mea, est ut graeci definitiones. His ne melius vituperata scriptorem, cum paulo copiosae conclusionemque at. Facer inermis ius in, ad brute nominati referrentur vis. Dicat erant sit ex. Phaedrum imperdiet scribentur vix no, ad latine similique forensibus vel.</p>
 												<p>Dolore populo vivendum vis eu, mei quaestio liberavisse ex. Electram necessitatibus ut vel, quo at probatus oportere, molestie conclusionemque pri cu. Brute augue tincidunt vim id, ne munere fierent rationibus mei. Ut pro volutpat praesent qualisque, an iisque scripta intellegebat eam.</p>
@@ -86,7 +87,7 @@
 										</div>
 								</div>
 						</div>
-          -->
+
 
 
     			  <button class="btn btn-lg btn-primary btn-block" href="HomePage.ftl" name="Submit" value="Login" type="submit">Login</button>
