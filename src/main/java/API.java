@@ -106,7 +106,19 @@ public class API {
 		return documents;
 	}
 	
-
+	// get buyable items, items which are not hidden and items which have exceeded a certain time window
+	public List<Document> getBuyableItems() {
+		List<Document> documents = new LinkedList<Document>();
+		
+		FindIterable<Document> items = itemsCollection.find(new Document());
+		for (Document item : items) {
+			String status = item.getString("status");
+			if (!status.equals("hidden")) {
+				documents.add(item);
+			}
+		}
+		return documents;
+	}
 
 	public List<Document> getItemsUploadedByUser(String userID) {
 		return getItems(new Document("userID", userID));
@@ -269,13 +281,17 @@ public class API {
 		// check if 3 days have passed
 		if ((System.currentTimeMillis() - time) < 259200) {
 			Email.send(buyerID + "@exeter.edu", "Seller has confirmed your purchase", "Seller has confirmed your purchase of item " + itemName + ". Please contact the seller for payment.");
+			Map<String, String> output = new HashMap<>();
+			output.put("status", "approved");
+			return output;
 		} else {
-			
+			Map<String, String> output = new HashMap<>();
+			output.put("status", "error");
+			output.put("error", "seller has passed time window");
+			return output;
 		}
 		
-		Map<String, String> output = new HashMap<>();
-		output.put("status", "approved");
-		return output;
+
 	}
 	
 }
