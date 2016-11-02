@@ -102,14 +102,22 @@
 
     </div>
 -->
-    <h1 class="page-header bg-text-lgrey">Items For Sale</h1>
+<div class="jumbotron">
+
+    <h1>PEAbay</h1>
+    <p>List of Items on PEAbay</p>
+    <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
+
+</div>
 
       <!-- Example row of columns -->
       <div class="container">
         <div class="col-md-4">
+          <div class="product">
           <h2>Product 1</h2>
           <p>info</p>
           <p><a class="btn btn-default" href="ProductFocus.ftl" role="button">View details &raquo;</a></p>
+        </div>
         </div>
         <div class="col-md-4">
           <h2>Product 2</h2>
