@@ -91,9 +91,9 @@
       </div>
 
 
-        <h1 class="page-header">Dashboard</h1>
+        <h1 class="page-header bg-text-lgrey">Dashboard</h1>
 
-        <div class="row placeholders">
+       <!-- <div class="row placeholders">
           <div class="col-xs-6 col-sm-3 placeholder">
             <img src="">
             <h4>Label</h4>
@@ -114,7 +114,7 @@
             <h4>Label</h4>
             <span class="text-muted">Product</span>
           </div>
-        </div>
+        </div> -->
 
 
         <div class="container">
