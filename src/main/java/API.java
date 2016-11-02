@@ -126,11 +126,10 @@ public class API {
 				itemsCollection.updateOne(item, new Document("$set", cancelSale));
 					
 				Email.send(buyerID, "Your purchase has been cancelled", "Your purchase of " + itemName + " has been cancelled due to seller inactivity.");
-					
-				}
 			}
 		}
 	}
+	
 	
 	// get buyable items, items which are not hidden
 	public List<Document> getBuyableItems() {
