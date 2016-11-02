@@ -108,9 +108,9 @@ public class Main {
 		
 		// Browser page
 		get("/list-item", (req, res) -> {
-			int itemID;
+			String itemID;
 			try {
-				itemID = Integer.parseInt(req.queryParams("itemID"));
+				itemID = (String) req.queryParams("itemID");
 			} catch (NumberFormatException e) {
 				return errorView(e.toString());
 			}
