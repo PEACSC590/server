@@ -80,11 +80,11 @@
 
   <div class="container-fluid">
     <div class="row">
-      <div class="col-md-3">
+      <div class="col-md-2">
         <div class="list-group">
           <a href="myitems.ftl" class="list-group-item active">My Items</a>
           <a href="upload.ftl" class="list-group-item">Upload</a>
-          <a href="cancelpendingsale.ftl" class="list-group-item">Cancel Pending Sale</a>
+          <a href="cancelpendingsale.ftl" class="list-group-item">Pending Sales</a>
         </div>
       </div>
     </div>
