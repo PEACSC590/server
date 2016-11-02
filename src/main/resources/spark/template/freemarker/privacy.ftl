@@ -50,7 +50,7 @@
                   <li>
                       <a href="items-page.ftl">For Sale</a>
                   </li>
-                  <li>
+                  <li class="active">
                       <a href="about.ftl">About</a>
                   </li>
                   <li>
@@ -82,9 +82,10 @@
     <div class="row">
       <div class="col-md-2">
         <div class="list-group">
-          <a href="#" class="list-group-item active">Category</a>
-          <a href="#" class="list-group-item">Category</a>
-          <a href="#" class="list-group-item">Category</a>
+          <a href="company.ftl" class="list-group-item">Company</a>
+          <a href="news.ftl" class="list-group-item">News</a>
+          <a href="opportunities.ftl" class="list-group-item">Opportunities</a>
+          <a href="privacy.ftl" class="list-group-item active">Privacy</a>
         </div>
       </div>
     </div>

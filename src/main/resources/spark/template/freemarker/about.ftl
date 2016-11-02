@@ -80,11 +80,11 @@
 
   <div class="container-fluid">
     <div class="row">
-      <div class="col-md-3">
+      <div class="col-md-2">
         <div class="list-group">
           <a href="company.ftl" class="list-group-item">Company</a>
           <a href="news.ftl" class="list-group-item">News</a>
-          <a href="opportunites.ftl" class="list-group-item">Opportunities</a>
+          <a href="opportunities.ftl" class="list-group-item">Opportunities</a>
           <a href="privacy.ftl" class="list-group-item">Privacy</a>
         </div>
       </div>
