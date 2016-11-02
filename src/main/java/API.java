@@ -318,7 +318,7 @@ public class API {
 	}
 	
 	// method for seller to approve sale within 3 days
-	public Map<String, String> sellerApproveSale(int itemID, String userID) {
+	public Map<String, String> sellerApproveSale(String itemID, String userID) {
 		// see if the items have exceeeded the time out limit
 		// maybe change refreshitems to constant later
 		refreshItems(); // (will be removed from here when made an async task)
