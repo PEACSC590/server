@@ -136,16 +136,7 @@ public class API {
 	
 	// get buyable items, items which are not hidden
 	public List<Document> getBuyableItems() {
-		List<Document> documents = new LinkedList<Document>();
-		
-		FindIterable<Document> items = itemsCollection.find(new Document());
-		for (Document item : items) {
-			String status = item.getString("status");
-			if (status.equals("listed")) {
-				documents.add(item);
-			}
-		}
-		return documents;
+		return getItems(new Document("status", "listed"));
 	}
 
 	public List<Document> getItemsUploadedByUser(String userID) {
