@@ -21,11 +21,15 @@ public class API {
 	private MongoCollection<Document> usersCollection;
 	private MongoCollection<Document> itemsCollection;
 
+	private UserTokenController userTokens;
+
 	public API(MongoDatabase db) {
 		this.db = db;
 
 		this.usersCollection = this.db.getCollection("users");
 		this.itemsCollection = this.db.getCollection("items");
+
+		userTokens = new UserTokenController(usersCollection);
 	}
 
 	// to access a file's attribute:
@@ -34,14 +38,36 @@ public class API {
 	// Users
 
 	// login api function
-	public Map<String, String> login(String username, String password) {
-		// if the login is correct,
-		boolean correct = Login.login(username, password);
-		// add the user to the collection by their username
-		if (correct) upsertUser(username);
-		
+	public Map<String, String> login(String userID, String password) {
 		Map<String, String> output = new HashMap<>();
-		output.put("valid", correct + "");
+
+		boolean correct = Login.login(userID, password);
+
+		// if the login is correct,
+		if (correct) {
+			// add the user to the collection by their username
+			upsertUser(userID);
+			// and assign a new user token for the user for this session
+			String userToken = userTokens.setUserTokenForNewSession(userID);
+
+			output.put("success", "true");
+			output.put("userToken", userToken);
+		} else {
+			output.put("success", "false");
+		}
+
+		return output;
+	}
+
+	public Map<String, String> logout(String userID, String userToken) {
+		// if the userToken is valid for the username,
+		boolean success = userTokens.testUserTokenForUser(userID, userToken);
+		// remove the userToken for the user
+		if (success)
+			userTokens.endSession(userID);
+
+		Map<String, String> output = new HashMap<>();
+		output.put("success", success + "");
 		return output;
 	}
 

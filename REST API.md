@@ -49,7 +49,7 @@ An access token is generated and saved in the user's document in *Users*, and th
 Input: Body
 ```js
 {
-  "login": [string],
+  "username": [string],
   "password": [string]
 }
 ```
@@ -57,8 +57,32 @@ Input: Body
 Output: JSON
 ```js
 {
-  "valid": [boolean],
+  "success": [boolean],
   "userToken": [string]
+}
+```
+
+**POST** Logging Out
+`/logout`
+
+Log the user out by their username.
+
+The user's user token must be provided to verify that it is actually the user.
+
+When the client receives "true" for "success", it should remove the userToken from the localStorage and redirect the browser to the homepage.
+
+Input: Body
+```js
+{
+  "username": [string],
+  "userToken": [string]
+}
+```
+
+Output: JSON
+```js
+{
+  "success": [boolean]
 }
 ```
 
@@ -247,7 +271,7 @@ Input: JSON
 Output: JSON
 ```js
 {
-  "ban" : [string] “banned”
+  "ban" : [string] â€œbannedâ€�
 }
 ```-->
 

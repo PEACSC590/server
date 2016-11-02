@@ -11,6 +11,7 @@ import java.net.UnknownHostException;
 import static spark.Spark.*;
 import spark.template.freemarker.FreeMarkerEngine;
 import spark.ModelAndView;
+import spark.ResponseTransformer;
 
 import com.mongodb.*;
 import com.mongodb.client.MongoDatabase;
@@ -35,24 +36,9 @@ public class Main {
 								// accessed is subject to change
 
 		FreeMarkerEngine templateEngine = new FreeMarkerEngine();
+		ResponseTransformer jsonEngine = JsonUtil.json();
 
 		//
-		// demo page using a view
-		get("/", (request, response) -> {
-			Map<String, Object> attributes = new HashMap<>();
-			attributes.put("message", "Hello World!");
-			return new ModelAndView(attributes, "index.ftl");
-		}, templateEngine);
-		//
-
-		// Using API.java (as all endpoints should)
-		post("/post-demo", (request, response) -> {
-			Map<String, String> data = api.getBody(request);
-
-			Map<String, Object> attributes = new HashMap<>();
-			attributes.put("data", data);
-			return new ModelAndView(attributes, "display-data.ftl");
-		}, templateEngine);
 
 		get("/login", (request, response) -> {
 			Map<String, Object> attributes = new HashMap<>();
@@ -61,19 +47,19 @@ public class Main {
 		}, templateEngine);
 
 		// login
-		post("/login", (request, response) -> {
-			Map<String, String> data = api.getBody(request);
-			// get username and password from login.ftl
-			String username = data.get("username");
+		// Should be used by a form -> serves a page
+		post("/login", (req, res) -> {
+			Map<String, String> data = api.getBody(req);
+			String userID = data.get("username");
 			String password = data.get("password");
 
 			// using Login.java, check if username/password is valid
-			Map<String, String> loginStatus = api.login(username, password);
+			Map<String, String> loginStatus = api.login(userID, password);
 
 			Map<String, Object> attributes = new HashMap<>();
 			// if good, put username
-			if (loginStatus.get("valid") == "true") {
-				response.redirect("/myproducts");
+			if (loginStatus.get("success") == "true") {
+				res.redirect("/myproducts");
 				// TODO: halt... how do redirects work in spark?
 			} else {
 				attributes.put("error", "Your username or password is incorrect.");
@@ -81,6 +67,16 @@ public class Main {
 
 			return new ModelAndView(attributes, "login.ftl"); // FIXME
 		}, templateEngine);
+
+		// logout
+		// Should be used by AJAX -> serves json
+		post("/logout", (req, res) -> {
+			Map<String, String> data = api.getBody(req);
+			String userID = data.get("username");
+			String userToken = data.get("userToken");
+
+			return api.logout(userID, userToken);
+		}, jsonEngine);
 
 		// list items in the db that match the query provided as a querystring
 		// param
@@ -129,12 +125,11 @@ public class Main {
 
 			return new ModelAndView(attributes, "upload.ftl");
 		}, templateEngine);
-		
-		
+
 		// POST method for upload
 		post("/upload", (req, res) -> {
 			Map<String, String> data = api.getBody(req);
-			
+
 			// need to make sure all necessary data is present
 			if (data.size() >= 5) {
 				// do the upload
@@ -142,13 +137,13 @@ public class Main {
 				String itemName = data.get("itemName");
 				String itemDescription = data.get("itemDescription");
 				double itemPrice = Double.parseDouble(data.get("itemPrice"));
-				
+
 				// TODO: need to test this
 				String[] tags = (String[]) JSON.parse(data.get("tags"));
-				
+
 				String imageURL = data.get("imageURL");
 				api.insertItem(username, itemName, itemDescription, itemPrice, tags, imageURL);
-				
+
 				// redirect after success
 				res.redirect("/myproducts");
 				Map<String, Object> attributes = new HashMap<>();
@@ -169,7 +164,7 @@ public class Main {
 
 			if (!body.containsKey("userID") || !body.containsKey("itemID"))
 				return errorView("Invalid input");
-			
+
 			Map<String, String> output;
 			try {
 				output = api.buy(body.get("userID"), body.get("itemID"));
@@ -177,7 +172,6 @@ public class Main {
 				return errorView(e.getMessage());
 			}
 
-			
 			// PLACEHOLDER: display the raw output
 			Map<String, Object> attributes = new HashMap<>();
 			attributes.put("data", output);
