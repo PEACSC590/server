@@ -25,5 +25,10 @@ public class Util {
 
 		return map;
 	}
+	
+	public static String generateUUID() {
+		// TODO: replace with actual uuid generation (using a lib)
+		return Math.random() * 1000 + "";
+	}
 
 }
