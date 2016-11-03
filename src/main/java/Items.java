@@ -31,7 +31,7 @@ public class Items {
 		return getItems(new Document("status", "listed"));
 	}
 
-	public List<Document> getItemsUploadedByUser(String userID) {
+	public List<Document> getItemsUploadedByUser(String userID, String userToken) {
 		return getItems(new Document("userID", userID));
 	}
 	
