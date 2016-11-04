@@ -165,7 +165,21 @@ public class Main {
 			Map<String, Object> attributes = new HashMap<>();
 			return new ModelAndView(attributes, "about.ftl");
 		}, templateEngine);
+		
+		// get settings for user
+		get("/settings", (req, res) -> {
+			Map<String, String> data = api.getBody(req);
+			Map<String, Object> attributes = new HashMap<>();
+			return new ModelAndView(attributes, "settings.ftl");
+		}, templateEngine);
 
+		// get profile info for user
+		get("/profile", (req, res) -> {
+			Map<String, String> data = api.getBody(req);
+			Map<String, Object> attributes = new HashMap<>();
+			return new ModelAndView(attributes, "profile.ftl");
+		}, templateEngine);
+		
 		// get the page to upload an item
 		// Browser page
 		get("/upload", (request, response) -> {
