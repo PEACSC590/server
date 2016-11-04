@@ -37,8 +37,20 @@ public class Main {
 
 		FreeMarkerEngine templateEngine = new FreeMarkerEngine();
 		ResponseTransformer jsonEngine = JsonUtil.json();
-
-		//
+		
+		
+		// constantly refresh items every 5 min
+		new Thread(() -> {
+		    while (true) {
+		    	try {
+					Thread.sleep(300000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		    	api.refreshItems();
+		    }
+		}).start();
 		
 		// Browser page
 		get("/login", (request, response) -> {
