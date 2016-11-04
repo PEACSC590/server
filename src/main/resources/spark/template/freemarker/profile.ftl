@@ -48,25 +48,25 @@
                       <a href="HomePage.ftl">Home</a>
                   </li>
                   <li>
-                      <a href="list-items">For Sale</a>
+                      <a href="items-page.ftl">For Sale</a>
                   </li>
                   <li>
-                      <a href="about">About</a>
+                      <a href="about.ftl">About</a>
+                  </li>
+                  <li>
+                      <a href="contact.ftl">Contact</a>
+                  </li>
+                  <li>
+                      <a href="dashboard.ftl">Dashboard</a>
+                  </li>
+                  <li>
+                      <a href="settings.ftl">Settings</a>
                   </li>
                   <li class="active">
-                      <a href="contact">Contact</a>
-                  </li>
-                  <li>
-                      <a href="dashboard">Dashboard</a>
-                  </li>
-                  <li>
-                      <a href="settings">Settings</a>
-                  </li>
-                  <li>
-                      <a href="profile">Profile</a>
+                      <a href="profile.ftl">Profile</a>
                   </li>
 
-                  <li><a href="logout">Log Out</a></li>
+                  <li><a href="logout.ftl">Log Out</a></li>
 
                   <form class="navbar-form navbar-right" action="items-page.ftl">
                     <input type="text" href="items-page.ftl" class="form-control" placeholder="Search">
