@@ -73,7 +73,7 @@ public class Main {
 			Map<String, Object> attributes = new HashMap<>();
 			// if good, put username
 			if (loginStatus.get("success") == "true") {
-				res.redirect("/myproducts");
+				res.redirect("/dashboard");
 				// TODO: halt... how do redirects work in spark?
 			} else {
 				attributes.put("error", "Your username or password is incorrect.");
