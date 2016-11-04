@@ -70,7 +70,7 @@
 						<div class="form-group" id="terms">
 
 								<div class="col-xs-9">
-                  <div><label>Terms of use</label></div>
+                  <label style="color: #fff">Terms and conditions</label>
 										<div style="border: 1px solid #e5e5e5; height: 200px; overflow: auto; padding: 10px; background:#fff;">
 												<p>These are the terms and conditions</p>
 										</div>
