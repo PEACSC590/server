@@ -35,5 +35,17 @@ footer {
 
 .product {
   background-color: gray;
-  opacity: 0.8;
+  opacity: 0.75;
+  padding-top:8%;
+  padding-bottom: 8%;
+  padding-left: 4%;
+  padding-right: 4%;
+  margin-top:8%;
+  margin-bottom: 8%;
+  margin-left: 4%;
+  margin-right: 4%;
+}
+
+.product:hover {
+  opacity:1.0;
 }
