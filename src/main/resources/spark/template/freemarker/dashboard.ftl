@@ -48,25 +48,25 @@
                       <a href="HomePage.ftl">Home</a>
                   </li>
                   <li>
-                      <a href="items-page.ftl">For Sale</a>
+                      <a href="list-items">For Sale</a>
                   </li>
                   <li>
-                      <a href="about.ftl">About</a>
-                  </li>
-                  <li>
-                      <a href="contact.ftl">Contact</a>
+                      <a href="about">About</a>
                   </li>
                   <li class="active">
-                      <a href="dashboard.ftl">Dashboard</a>
+                      <a href="contact">Contact</a>
                   </li>
                   <li>
-                      <a href="settings.ftl">Settings</a>
+                      <a href="dashboard">Dashboard</a>
                   </li>
                   <li>
-                      <a href="profile.ftl">Profile</a>
+                      <a href="settings">Settings</a>
+                  </li>
+                  <li>
+                      <a href="profile">Profile</a>
                   </li>
 
-                  <li><a href="login.ftl">Log Out</a></li>
+                  <li><a href="logout">Log Out</a></li>
 
                   <form class="navbar-form navbar-right" action="items-page.ftl">
                     <input type="text" href="items-page.ftl" class="form-control" placeholder="Search">
@@ -91,7 +91,7 @@
       </div>
 
 
-        <h1 class="page-header bg-text-lgrey">Dashboard</h1>
+        <h1 class="page-header textbg">Dashboard</h1>
 
        <!-- <div class="row placeholders">
           <div class="col-xs-6 col-sm-3 placeholder">
@@ -120,8 +120,8 @@
         <div class="container">
 
             <div class="table-responsive col-md-5">
-              <h2 class="sub-header bg-text-lgrey">Past purchases</h2>
-              <table  class="table bg-text-lgrey">
+              <h2 class="sub-header textbg">Past purchases</h2>
+              <table  class="table textbg">
                  <thead >
                   <tr>
                     <th>Item</th>
@@ -228,8 +228,8 @@
             </div>
 
             <div class="table-responsive col-md-5">
-              <h2 class="sub-header bg-text-lgrey">Past sales</h2>
-              <table  class="table bg-text-lgrey">
+              <h2 class="sub-header textbg">Past sales</h2>
+              <table  class="table textbg">
                 <thead>
                   <tr>
                     <th>Item</th>

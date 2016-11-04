@@ -35,12 +35,9 @@ public class API {
 		users = new Users(this);
 		items = new Items(this);
 		sales = new Sales(this);
+	
 	}
 
-	// TODO: maybe we can run this asynchronously so that the buyer gets a msg
-	// when the seller is inactive and fails to respond
-	// remove items with status "pending" that have exceeded a certain time
-	// window
 	public void refreshItems() {
 		FindIterable<Document> items = itemsCollection.find(new Document("status", "pending"));
 		for (Document item : items) {
