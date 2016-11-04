@@ -162,9 +162,6 @@ public class Sales {
 	
 	// method for seller to approve sale within 3 days
 	public Map<String, String> sellerApproveSale(String itemID, String userID) {
-		// see if the items have exceeeded the time out limit
-		// maybe change refreshitems to constant later
-		api.refreshItems(); // (will be removed from here when made an async task)
 
 		Document item = api.items.getItemByID(itemID);
 		String buyerID = item.getString("buyerID");

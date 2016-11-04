@@ -37,8 +37,20 @@ public class Main {
 
 		FreeMarkerEngine templateEngine = new FreeMarkerEngine();
 		ResponseTransformer jsonEngine = JsonUtil.json();
-
-		//
+		
+		
+		// constantly refresh items every 5 min
+		new Thread(() -> {
+		    while (true) {
+		    	try {
+					Thread.sleep(300000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		    	api.refreshItems();
+		    }
+		}).start();
 		
 		// Browser page
 		get("/login", (request, response) -> {
@@ -153,7 +165,21 @@ public class Main {
 			Map<String, Object> attributes = new HashMap<>();
 			return new ModelAndView(attributes, "about.ftl");
 		}, templateEngine);
+		
+		// get settings for user
+		get("/settings", (req, res) -> {
+			Map<String, String> data = api.getBody(req);
+			Map<String, Object> attributes = new HashMap<>();
+			return new ModelAndView(attributes, "settings.ftl");
+		}, templateEngine);
 
+		// get profile info for user
+		get("/profile", (req, res) -> {
+			Map<String, String> data = api.getBody(req);
+			Map<String, Object> attributes = new HashMap<>();
+			return new ModelAndView(attributes, "profile.ftl");
+		}, templateEngine);
+		
 		// get the page to upload an item
 		// Browser page
 		get("/upload", (request, response) -> {
