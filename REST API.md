@@ -6,7 +6,7 @@
 
 ```js
 {
-  "itemID": [string],
+  "itemID": [string]
   "userID": [string],
   "name": [string],
   "description": [string],
@@ -269,7 +269,7 @@ Input: Body
 ```js
 {
   "itemID" : [string],
-  "userID" : [string],
+  "sellerID" : [string],
   "userToken" : [string]
 }
 ```
