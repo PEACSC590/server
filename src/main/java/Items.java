@@ -1,5 +1,7 @@
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import org.bson.Document;
@@ -7,6 +9,9 @@ import org.bson.conversions.Bson;
 
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
+import com.mongodb.util.JSON;
+
+import spark.ModelAndView;
 
 public class Items {
 
@@ -56,12 +61,28 @@ public class Items {
 		return itemDocument;
 	}
 
+	public boolean upload(Document item, String userID) {
+		try {
+			String itemName = (String) item.get("name");
+			String itemDescription = (String) item.get("description");
+			double itemPrice = Double.parseDouble((String) item.get("price"));
+			// TODO: need to test this
+			String[] tags = (String[]) JSON.parse((String) item.get("tags"));
+	
+			String imageURL = (String) item.get("imageURL");
+			insertItem(userID, itemName, itemDescription, itemPrice, tags, imageURL);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+	
 	private Document createItemDocument(String username, String itemName, String itemDescription, Double itemPrice,
 			String[] tags, String imageURL) {
 		Document itemDocument = new Document();
 		// assign random integer between 0 and 10,000, we can find a better way
 		// to assign item id
-		UUID itemID = UUID.randomUUID();
+		String itemID = Util.generateUUID();
 		itemDocument.append("itemID", itemID);
 		itemDocument.append("buyerID", null);
 		itemDocument.append("sellerID", username);
