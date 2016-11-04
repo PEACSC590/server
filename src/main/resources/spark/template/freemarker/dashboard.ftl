@@ -66,7 +66,7 @@
                       <a href="profile.ftl">Profile</a>
                   </li>
 
-                  <li><a href="logout.ftl">Log Out</a></li>
+                  <li><a href="login.ftl">Log Out</a></li>
 
                   <form class="navbar-form navbar-right" action="items-page.ftl">
                     <input type="text" href="items-page.ftl" class="form-control" placeholder="Search">

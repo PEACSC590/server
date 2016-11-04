@@ -81,9 +81,9 @@
     <div class="row">
       <div class="col-md-2">
         <div class="list-group">
-          <a href="myitems.ftl" class="list-group-item active">Category</a>
-          <a href="upload.ftl" class="list-group-item">Category</a>
-          <a href="cancelpendingsale.ftl" class="list-group-item">Category</a>
+          <a href="#" class="list-group-item active">Category</a>
+          <a href="#" class="list-group-item">Category</a>
+          <a href="#" class="list-group-item">Category</a>
         </div>
       </div>
     </div>
