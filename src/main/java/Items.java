@@ -90,7 +90,7 @@ public class Items {
 		Document itemDocument = new Document();
 		// assign random integer between 0 and 10,000, we can find a better way
 		// to assign item id
-		UUID itemID = UUID.randomUUID();
+		String itemID = Util.generateUUID();
 		itemDocument.append("itemID", itemID);
 		itemDocument.append("buyerID", null);
 		itemDocument.append("sellerID", username);

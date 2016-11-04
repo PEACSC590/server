@@ -1,4 +1,5 @@
 import java.util.HashMap;
+import java.util.UUID;
 
 public class Util {
 
@@ -27,8 +28,7 @@ public class Util {
 	}
 	
 	public static String generateUUID() {
-		// TODO: replace with actual uuid generation (using a lib)
-		return Math.random() * 1000 + "";
+		return UUID.randomUUID().toString();
 	}
 
 }
