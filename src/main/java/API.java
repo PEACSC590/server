@@ -47,7 +47,7 @@ public class API {
 			int time = (int) item.get("dateBought");
 			String buyerID = item.getString("buyerID");
 			String itemName = item.getString("itemName");
-			if (System.currentTimeMillis() - time < PENDING_PURCHASES_TIMEOUT) {
+			if (System.currentTimeMillis() - time > PENDING_PURCHASES_TIMEOUT) {
 				usersCollection.updateOne(new Document("userID", buyerID),
 						new Document("$inc", new Document("numPendingPurchases", -1)));
 

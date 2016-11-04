@@ -106,6 +106,7 @@ public class Main {
 			return new ModelAndView(attributes, "db.ftl");
 		}, templateEngine);
 		
+		
 		// Browser page
 		get("/list-item", (req, res) -> {
 			String itemID;
@@ -122,6 +123,35 @@ public class Main {
 			Map<String, Object> attributes = new HashMap<>();
 			attributes.put("item", item);
 			return new ModelAndView(attributes, "ProductFocus.ftl");
+		}, templateEngine);
+		
+		// get list of items bought and list of items sold
+		get("/dashboard", (req, res) -> {
+			Map<String, String> data = api.getBody(req);
+			String userID = data.get("userID");
+			String userToken = data.get("userToken");
+			List<Document> itemsBought = api.items.getItemsBoughtByUser(userID);
+			
+			List<Document> itemsUploaded = api.items.getItemsUploadedByUser(userID, userToken);
+			
+			Map<String, Object> attributes = new HashMap<>();
+			attributes.put("itemsBought", itemsBought);
+			attributes.put("itemsUploaded", itemsUploaded);
+			return new ModelAndView(attributes, "dashboard.ftl");
+		}, templateEngine);
+		
+		// get contact info for peaBay company
+		get("/contact", (req, res) -> {
+			Map<String, String> data = api.getBody(req);
+			Map<String, Object> attributes = new HashMap<>();
+			return new ModelAndView(attributes, "contact.ftl");
+		}, templateEngine);
+		
+		// get about info for peaBay company
+		get("/about", (req, res) -> {
+			Map<String, String> data = api.getBody(req);
+			Map<String, Object> attributes = new HashMap<>();
+			return new ModelAndView(attributes, "about.ftl");
 		}, templateEngine);
 
 		// get the page to upload an item
@@ -184,6 +214,7 @@ public class Main {
 
 			return output;
 		}, jsonEngine);
+		
 
 	}
 
