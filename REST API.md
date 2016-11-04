@@ -6,7 +6,7 @@
 
 ```js
 {
-  "itemID": [string]
+  "itemID": [string],
   "userID": [string],
   "name": [string],
   "description": [string],
