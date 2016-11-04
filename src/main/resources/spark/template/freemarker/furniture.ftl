@@ -106,25 +106,25 @@
       <div class="container">
         <div class="col-md-4">
           <div class="product">
-          <h2>Product 1--Learn more</h2>
-          <p>info</p>
-          <p><a class="btn btn-default" href="ProductFocus.ftl" role="button">View details &raquo;</a></p>
+            <h2>Heading</h2>
+            <p>Product 1--Learn more</p>
+            <p><a class="btn btn-default" href="ProductFocus.ftl" role="button">View details &raquo;</a></p>
         </div>
         </div>
         <div class="col-md-4">
           <div class="product">
-          <h2>Product 2--Learn more</h2>
-         <p>info</p>
-          <p><a class="btn btn-default" href="ProductFocus.ftl" role="button">View details &raquo;</a></p>
+            <h2>Heading</h2>
+            <p>Product 2--Learn more</p>
+            <p><a class="btn btn-default" href="ProductFocus.ftl" role="button">View details &raquo;</a></p>
         </div>
        </div>
         <div class="col-md-4">
           <div class="product">
-          <h2>Product 3--Learn more</h2>
-          <p>info</p>
-          <p><a class="btn btn-default" href="ProductFocus.ftl" role="button">View details &raquo;</a></p>
+            <h2>Heading</h2>
+            <p>Product 3--Learn more</p>
+            <p><a class="btn btn-default" href="ProductFocus.ftl" role="button">View details &raquo;</a></p>
         </div>
-        </div>
+      </div>
         <div class="col-md-4">
           <div class="product">
           <h2>Heading</h2>
