@@ -153,33 +153,13 @@ public class Main {
 		}, templateEngine);
 		
 		// get contact info for peaBay company
-		get("/contact", (req, res) -> {
-			Map<String, String> data = api.getBody(req);
-			Map<String, Object> attributes = new HashMap<>();
-			return new ModelAndView(attributes, "contact.ftl");
-		}, templateEngine);
-		
+		get("/contact", (req, res) -> staticTemplate("contact.ftl"), templateEngine);
 		// get about info for peaBay company
-		get("/about", (req, res) -> {
-			Map<String, String> data = api.getBody(req);
-			Map<String, Object> attributes = new HashMap<>();
-			return new ModelAndView(attributes, "about.ftl");
-		}, templateEngine);
-		
+		get("/about", (req, res) -> staticTemplate("about.ftl"), templateEngine);
 		// get settings for user
-		get("/settings", (req, res) -> {
-			Map<String, String> data = api.getBody(req);
-			Map<String, Object> attributes = new HashMap<>();
-			return new ModelAndView(attributes, "settings.ftl");
-		}, templateEngine);
-		
-		// get profile info for user
-		get("/profile", (req, res) -> {
-			Map<String, String> data = api.getBody(req);
-			Map<String, Object> attributes = new HashMap<>();
-			return new ModelAndView(attributes, "profile.ftl");
-		}, templateEngine);
-		
+		get("/settings", (req, res) -> staticTemplate("settings.ftl"), templateEngine);
+		// get profile page for user
+		get("/profile", (req, res) -> staticTemplate("profile.ftl"), templateEngine);
 		
 		// get the page to upload an item
 		// Browser page
@@ -232,6 +212,10 @@ public class Main {
 		}, jsonEngine);
 		
 
+	}
+	
+	private static ModelAndView staticTemplate(String path) {
+		return new ModelAndView(new HashMap<>(), "contact.ftl");
 	}
 
 	private static ModelAndView errorView(String errmsg) {
