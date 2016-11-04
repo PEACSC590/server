@@ -172,14 +172,14 @@ public class Main {
 
 			Map<String, String> body = api.getBody(req);
 
-			if (!body.containsKey("userID") || !body.containsKey("itemID"))
-				return errorView("Invalid input");
+			if (!body.containsKey("userToken") || !body.containsKey("userID") || !body.containsKey("itemID"))
+				return jsonError("Invalid input");
 
 			Map<String, String> output;
 			try {
-				output = api.sales.buy(body.get("userID"), body.get("itemID"));
+				output = api.sales.buy(body.get("userID"), body.get("itemID"), body.get("userToken"));
 			} catch (Exception e) {
-				return errorView(e.getMessage());
+				return jsonError(e.getMessage());
 			}
 
 			return output;
@@ -191,6 +191,12 @@ public class Main {
 		Map<String, Object> attributes = new HashMap<>();
 		attributes.put("message", errmsg);
 		return new ModelAndView(attributes, "error.ftl");
+	}
+	
+	private static Map<String, String> jsonError(String errmsg) {
+		Map<String, String> output = new HashMap<>();
+		output.put("error", errmsg);
+		return output;
 	}
 
 }
