@@ -61,7 +61,7 @@ public class Items {
 		return itemDocument;
 	}
 
-	public boolean upload(Document item, String userID) {
+	public Map<String, String> upload(Document item, String userID) {
 		try {
 			String itemName = (String) item.get("name");
 			String itemDescription = (String) item.get("description");
@@ -70,10 +70,18 @@ public class Items {
 			String[] tags = (String[]) JSON.parse((String) item.get("tags"));
 	
 			String imageURL = (String) item.get("imageURL");
-			insertItem(userID, itemName, itemDescription, itemPrice, tags, imageURL);
-			return true;
+			String itemID = insertItem(userID, itemName, itemDescription, itemPrice, tags, imageURL).getString("itemID");
+			
+			Document status = new Document().append("status", "listed"); 
+			// set status to listed
+			itemsCollection.updateOne(new Document("itemID", itemID), new Document("$set", status));
+			
+			Map<String, String> output = new HashMap<>();
+			output.put("status", "listed");
+			return output;
 		} catch (Exception e) {
-			return false;
+			Map<String, String> output = new HashMap<>();
+			return null;
 		}
 	}
 	

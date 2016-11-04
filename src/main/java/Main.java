@@ -197,9 +197,9 @@ public class Main {
 			Document item = (Document) JSON.parse(data.get("item"));
 			String userID = data.get("userID");
 			
-			boolean success = api.items.upload(item, userID);
+			Map<String, String> success = api.items.upload(item, userID);
 			
-			if (success) {
+			if (success != null) {
 				res.redirect("/myproducts");
 				Map<String, Object> attributes = new HashMap<>();
 				return new ModelAndView(attributes, "MyProducts.ftl");
