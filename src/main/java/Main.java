@@ -159,8 +159,22 @@ public class Main {
 			return new ModelAndView(attributes, "contact.ftl");
 		}, templateEngine);
 		
+		// get contact info for peaBay company
+		get("/contact.ftl", (req, res) -> {
+			Map<String, String> data = api.getBody(req);
+			Map<String, Object> attributes = new HashMap<>();
+			return new ModelAndView(attributes, "contact.ftl");
+		}, templateEngine);
+		
 		// get about info for peaBay company
 		get("/about", (req, res) -> {
+			Map<String, String> data = api.getBody(req);
+			Map<String, Object> attributes = new HashMap<>();
+			return new ModelAndView(attributes, "about.ftl");
+		}, templateEngine);
+		
+		// get about info for peaBay company
+		get("/about.ftl", (req, res) -> {
 			Map<String, String> data = api.getBody(req);
 			Map<String, Object> attributes = new HashMap<>();
 			return new ModelAndView(attributes, "about.ftl");
@@ -172,9 +186,22 @@ public class Main {
 			Map<String, Object> attributes = new HashMap<>();
 			return new ModelAndView(attributes, "settings.ftl");
 		}, templateEngine);
+		
+		get("/settings.ftl", (req, res) -> {
+			Map<String, String> data = api.getBody(req);
+			Map<String, Object> attributes = new HashMap<>();
+			return new ModelAndView(attributes, "settings.ftl");
+		}, templateEngine);
 
 		// get profile info for user
 		get("/profile", (req, res) -> {
+			Map<String, String> data = api.getBody(req);
+			Map<String, Object> attributes = new HashMap<>();
+			return new ModelAndView(attributes, "profile.ftl");
+		}, templateEngine);
+		
+		// get profile info for user
+		get("/profile.ftl", (req, res) -> {
 			Map<String, String> data = api.getBody(req);
 			Map<String, Object> attributes = new HashMap<>();
 			return new ModelAndView(attributes, "profile.ftl");
