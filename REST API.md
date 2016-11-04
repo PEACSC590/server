@@ -269,7 +269,7 @@ Input: Body
 ```js
 {
   "itemID" : [string],
-  "userID" : [string],
+  "sellerID" : [string],
   "userToken" : [string]
 }
 ```
