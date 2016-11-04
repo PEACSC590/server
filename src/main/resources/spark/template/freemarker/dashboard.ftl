@@ -91,7 +91,7 @@
       </div>
 
 
-        <h1 class="page-header bg-text-lgrey">Dashboard</h1>
+        <h1 class="page-header textbg">Dashboard</h1>
 
        <!-- <div class="row placeholders">
           <div class="col-xs-6 col-sm-3 placeholder">
@@ -120,8 +120,8 @@
         <div class="container">
 
             <div class="table-responsive col-md-5">
-              <h2 class="sub-header bg-text-lgrey">Past purchases</h2>
-              <table  class="table bg-text-lgrey">
+              <h2 class="sub-header textbg">Past purchases</h2>
+              <table  class="table textbg">
                  <thead >
                   <tr>
                     <th>Item</th>
@@ -228,8 +228,8 @@
             </div>
 
             <div class="table-responsive col-md-5">
-              <h2 class="sub-header bg-text-lgrey">Past sales</h2>
-              <table  class="table bg-text-lgrey">
+              <h2 class="sub-header textbg">Past sales</h2>
+              <table  class="table textbg">
                 <thead>
                   <tr>
                     <th>Item</th>
