@@ -194,22 +194,12 @@ public class Main {
 		// Should be used by a form -> serves a page
 		post("/upload", (req, res) -> {
 			Map<String, String> data = api.getBody(req);
-
-			// need to make sure enough data are present
-			if (data.size() >= 5) {
-				String username = data.get("userID");
-				
-				Document item = (Document) JSON.parse(data.get("item"));
-				String itemName = (String) item.get("name");
-				String itemDescription = (String) item.get("description");
-				double itemPrice = Double.parseDouble((String) item.get("price"));
-				// TODO: need to test this
-				String[] tags = (String[]) JSON.parse((String) item.get("tags"));
-
-				String imageURL = (String) item.get("imageURL");
-				api.items.insertItem(username, itemName, itemDescription, itemPrice, tags, imageURL);
-
-				// redirect after success
+			Document item = (Document) JSON.parse(data.get("item"));
+			String userID = data.get("userID");
+			
+			boolean success = api.items.upload(item, userID);
+			
+			if (success) {
 				res.redirect("/myproducts");
 				Map<String, Object> attributes = new HashMap<>();
 				return new ModelAndView(attributes, "MyProducts.ftl");
@@ -218,10 +208,9 @@ public class Main {
 				res.redirect("/upload");
 				// TODO: have it redirect with an error
 			}
-
 			Map<String, Object> attributes = new HashMap<>();
 			attributes.put("data", data);
-			return new ModelAndView(attributes, "display-data.ftl");
+			return new ModelAndView(attributes, "upload.ftl");
 		}, templateEngine);
 		
 		// Should be used by AJAX -> serves json
