@@ -35,18 +35,7 @@ public class API {
 		users = new Users(this);
 		items = new Items(this);
 		sales = new Sales(this);
-		
-		new Thread(() -> {
-		    while (true) {
-		    	try {
-					Thread.sleep(300000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-		    	refreshItems();
-		    }
-		}).start();
+	
 	}
 
 	public void refreshItems() {
