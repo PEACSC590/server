@@ -103,7 +103,7 @@ public class Main {
 			}
 			
 			// TODO: replace with a view-items template
-			return new ModelAndView(attributes, "db.ftl");
+			return new ModelAndView(attributes, "items-page.ftl");
 		}, templateEngine);
 		
 		
