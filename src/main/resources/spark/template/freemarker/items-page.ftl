@@ -93,21 +93,11 @@
         </div>
       </div>
 
-    <!-- Main jumbotron for a primary marketing message or call to action
-    <div class="jumbotron">
 
-        <h1>PEAbay</h1>
-        <p>List of Items on PEAbay</p>
-        <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
-
-    </div>
--->
 <div class="jumbotron">
-  <div class="jumbotext">
     <h1>PEAbay</h1>
     <p>List of Items on PEAbay</p>
     <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
-  </div>
 </div>
 
       <!-- Example row of columns -->

@@ -117,7 +117,7 @@
         </div> -->
 
 
-        <div class="container">
+        <div class="container-fluid">
 
             <div class="table-responsive col-md-5">
               <h2 class="sub-header textbg">Past purchases</h2>

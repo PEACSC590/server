@@ -1,8 +1,10 @@
 body {
   padding-top: 7%;
-  background: url("http://faainc.com/wp-content/uploads/2013/08/Phillips-Exeter_Finegold-Alexander_20101030-DSC_0553.jpg") no-repeat;
-  background-size: 100%,auto;
-  background-repeat: repeat-y;
+  background: url("http://3.bp.blogspot.com/__O4NuhJ7ow8/TIVX8DbnNAI/AAAAAAAAAQ0/hG-LYXemfpU/s1600/woodTexture.jpg") no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+
+
 }
 
 #brandimage {
@@ -25,14 +27,28 @@ body {
     color: #333;
 }
 
+.lead {
+
+  color: lightgray;
+}
+
 footer {
-    margin: 50px 0;
+    color: lightgray;
+}
+
+
+.col-md-5 {
+    width: 40%;
 }
 
 .textbg {
    /*background-color:lightgrey;*/
    background: rgba(211,211,211,0.7);
    text-align:center;
+}
+
+.navbar-header > a {
+  color: white:
 }
 
 .product {
@@ -42,12 +58,12 @@ footer {
   opacity: 0.7;
   padding-top:8%;
   padding-bottom: 8%;
-  padding-left: 4%;
-  padding-right: 4%;
+  padding-left: 8%;
+  padding-right: 8%;
   margin-top:10%;
   margin-bottom: 10%;
-  margin-left: 4%;
-  margin-right: 4%;
+  margin-left: 8%;
+  margin-right: 8%;
   border-radius: 6px;
 }
 
@@ -55,37 +71,74 @@ footer {
   opacity:1.0;
   margin-left: 0%;
   margin-right: 0%;
-  margin-top: 8%;
-  margin-bottom: 8%;
-  padding-top: 10%;
-  padding-bottom: 10%;
-
-
-
-
-
-
-
-
+  margin-top: 4%;
+  margin-bottom: 4%;
+  padding-top: 14%;
+  padding-bottom: 14%;
 }
 
-
-
-.jumbotron {
-  opacity: 0.85;
-  padding-top: 35px;
-  margin-right: 25%;
-  margin-left: 16.5%;
-
-  height: 288px;
-
+.product:hover > h2 {
+  color: #990000;
 }
 
-.jumbotron:hover {
-
-}
-
-.btn-primary:hover {
+.product:hover > p > a {
   background-color: #990000;
   border-color: #990000;
+  color: white;
+}
+
+.product > p > a:hover {
+  border-color: #7d0202;
+  background-color: #7d0202;
+}
+
+.navbar-inverse .navbar-brand {
+  color: white;
+}
+
+.col-md-2 {
+
+  margin-left: 2%;
+  margin-right: 2%;
+  padding:0%;
+}
+
+.jumbotron {
+  opacity: 0.8;
+  padding-top: 35px;
+  margin-right: 25%;
+  margin-left: 21%;
+  height: 288px;
+}
+
+
+.jumbotron > h1 {
+  color: #990000;
+}
+
+.jumbotron:hover{
+
+}
+
+.btn-primary {
+  background-color: #990000;
+  border-color: #990000;
+}
+
+.btn-primary:hover, .btn-primary:focus {
+  border-color: #7d0202;
+  background-color: #7d0202;
+}
+
+.list-group {
+  opacity:0.8;
+}
+
+.list-group-item.active, .list-group-item.active:focus, .list-group-item.active:hover {
+  border-color: #7d0202;
+  background-color: #7d0202;
+}
+
+a.list-group-item:hover {
+  background-color: #fff2f2;
 }

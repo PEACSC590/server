@@ -82,7 +82,7 @@
         <div class="row">
 
             <div class="col-md-2">
-                <p class="lead">Shop Name</p>
+                <p class="lead">${item.name}</p>
                 <div class="list-group">
                     <a href="#" class="list-group-item active">Category 1</a>
                     <a href="#" class="list-group-item">Category 2</a>
