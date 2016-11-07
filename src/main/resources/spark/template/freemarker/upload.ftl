@@ -43,10 +43,8 @@
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
 
-                <img id="brandimage" src="https://upload.wikimedia.org/wikipedia/en/d/d7/Phillips_Exeter_Academy_Seal.png">
-                <a class="navbar-brand">
-                  PEAbay
-                </a>
+                <img class="navbar-brand" src="logo.png">
+
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -99,13 +97,13 @@
       </div>
 
    <!--       <div class="col-lg-12"> -->
-           
+
 
      <div class="container">
-       
+
 <div class="load">
        <span class="btn btn-default btn-file">
-         
+
 				 Browse Files <input type="file" class="file_bag" id="input">
        </span>
 </div>
@@ -121,13 +119,13 @@
          <label for="description">Description:</label>
          <input type="text" class="form-control" id="description">
        </form>
-			 
+
 			 <form class="tagsInput">
          <label for="tags">Tags:</label>
          <input type="text" class="form-control" id="tags">
        </form>
-			 
-			 
+
+
        <button class="btn btn-default btn-file" id="upload">Upload</button>
 
        <hr>

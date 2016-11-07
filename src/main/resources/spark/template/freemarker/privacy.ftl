@@ -36,10 +36,8 @@
           <!-- Brand and toggle get grouped for better mobile display -->
           <div class="navbar-header">
 
-              <img id="brandimage" src="https://upload.wikimedia.org/wikipedia/en/d/d7/Phillips_Exeter_Academy_Seal.png">
-              <a class="navbar-brand">
-                PEAbay
-              </a>
+              <img class="navbar-brand" src="logo.png">
+
           </div>
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
