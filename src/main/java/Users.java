@@ -51,7 +51,7 @@ public class Users {
 	// return it
 	public Document upsertUser(String username) {
 		// if exists
-		FindIterable<Document> cursor = api.usersCollection.find(new Document("username", username));
+		FindIterable<Document> cursor = api.usersCollection.find(new Document("userID", username));
 		if (cursor.first() != null) {
 			return cursor.first();
 		}
@@ -64,7 +64,7 @@ public class Users {
 
 	private Document createUserDocument(String username) {
 		Document userDocument = new Document();
-		userDocument.append("username", username);
+		userDocument.append("userID", username);
 		userDocument.append("banned", false);
 		userDocument.append("numPendingPurchases", 0);
 		// is that all?

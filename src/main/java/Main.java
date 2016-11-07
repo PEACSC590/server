@@ -14,6 +14,7 @@ import spark.ModelAndView;
 import spark.ResponseTransformer;
 
 import com.mongodb.*;
+import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.util.JSON;
 
@@ -38,12 +39,14 @@ public class Main {
 		FreeMarkerEngine templateEngine = new FreeMarkerEngine();
 		ResponseTransformer jsonEngine = JsonUtil.json();
 		
+		//System.out.println("Server is good!");
 		
 		// constantly refresh items every 5 min
 		new Thread(() -> {
 		    while (true) {
 		    	try {
 					Thread.sleep(300000);
+					//System.out.println("Refreshing pending items");
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -51,6 +54,7 @@ public class Main {
 		    	api.refreshItems();
 		    }
 		}).start();
+		
 		
 		// Browser page
 		get("/login", (request, response) -> {
