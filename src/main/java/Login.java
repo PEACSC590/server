@@ -22,8 +22,6 @@ public class Login {
     }
 
     public static boolean login(String user, String pass) {
-
-        
         //System.out.println("moo");
         try {
             username = user;
