@@ -121,7 +121,7 @@
 
             <div class="table-responsive col-md-5">
               <h2 class="sub-header textbgdash2">Past purchases</h2>
-              <table  class="table textbg">
+              <table  class="table textbgtable">
                  <thead >
                   <tr>
                     <th>Item</th>
@@ -229,7 +229,7 @@
 
             <div class="table-responsive col-md-5">
               <h2 class="sub-header textbgdash2">Past sales</h2>
-              <table  class="table textbg">
+              <table  class="table textbgtable">
                 <thead>
                   <tr>
                     <th>Item</th>

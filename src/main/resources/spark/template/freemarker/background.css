@@ -48,6 +48,12 @@ footer {
    
 }
 
+.textbgtable {
+   background: rgba(255,255,255,0.8);
+ /*  text-align:center; */
+   border-radius: 6px;
+}
+
 .textbglog {
    /*background-color:lightgrey;*/
 background: rgba(255,255,255,0.8);
@@ -97,6 +103,28 @@ background: rgba(255,255,255,0.8);
   margin-left: 20%;
   margin-right: 30%;
   border-radius: 6px;
+}
+
+.textbgup {
+   /*background-color:lightgrey;*/
+background: rgba(255,255,255,0.8);
+ text-align:center;
+ /*padding-top:8%;
+  padding-bottom: 8%;
+  padding-left: 8%;
+  padding-right: 8%;
+  margin-top:10%;
+  margin-bottom: 10%; */
+  padding-top:.5%;
+  padding-bottom: .5%; 
+  margin-left: 43%;
+  margin-right: 43%;
+  border-radius: 6px;
+   
+}
+
+.load{
+  text-align:center;
 }
 
 .navbar-header > a {

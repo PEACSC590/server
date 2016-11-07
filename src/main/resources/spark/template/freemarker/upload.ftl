@@ -94,22 +94,21 @@
             <a href="cancelpendingsale.ftl" class="list-group-item">Pending Sales</a>
           </div>
         </div>
+				<h1 class="page-header textbgup">Upload</h1>
       </div>
-      <div>
+      </div>
+
+   <!--       <div class="col-lg-12"> -->
+           
 
      <div class="container">
-       <div class="header">
-         <div class="col-lg-12">
-           <h1 class="page-header textbg">Upload
-
-           </h1>
-         </div>
-       </div>
-
+       
+<div class="load">
        <span class="btn btn-default btn-file">
-         Browse Files <input type="file" class="file_bag" id="input">
+         
+				 Browse Files <input type="file" class="file_bag" id="input">
        </span>
-
+</div>
        <form class="titleInput">
          <label for="title">Title:</label>
          <input type="text" class="form-control" id="title">
@@ -122,6 +121,13 @@
          <label for="description">Description:</label>
          <input type="text" class="form-control" id="description">
        </form>
+			 
+			 <form class="tagsInput">
+         <label for="tags">Tags:</label>
+         <input type="text" class="form-control" id="tags">
+       </form>
+			 
+			 
        <button class="btn btn-default btn-file" id="upload">Upload</button>
 
        <hr>
