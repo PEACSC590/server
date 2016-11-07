@@ -14,7 +14,7 @@
   "tags": [string[]],
   "imageURL": [string],
   "status": [status],
-  "dateBought": [int] // null if never bought
+  "dateBought": [long] // null if never bought
 }
 ```
 
@@ -112,7 +112,7 @@ Output: JSON
 **GET** getItems
 `/list-item?itemID=[int]`
 
-The list-item by ID page retrieves item information for a specific item ID, from the database to display to the user. This will be used when buyers click on a specific item for more information.
+The list item by ID page retrieves item information for a specific item ID, from the database to display to the user. This will be used when buyers click on a specific item for more information.
 
 Input: query string
 
@@ -182,7 +182,7 @@ Output: JSON
 {
   "status" : [status], // "pending", if successful; else, "listed"
   "numPendingPurchases" : [int],
-  "dateBought" : [int] // set to the milliseconds since the unix epoch at the time the request is receieved; null if status=="listed"
+  "dateBought" : [string] // set to the milliseconds since the unix epoch at the time the request is receieved; null if status=="listed"
 }
 ```
 
@@ -206,7 +206,6 @@ Output: JSON
 ```js
 {
   "status" : [status], // "sold", if successful; else, "pending"
-  "numPendingPurchases" : [int] //*** do we need this?
 }
 ```
 
@@ -255,7 +254,6 @@ Output: JSON
 ```js
 {
   "status" : [status], // the status of the item now; "listed", if successful; else, "pending"
-  "numPendingPurchases" : [int],
 }
 ```
 
