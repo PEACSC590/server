@@ -91,7 +91,7 @@
       </div>
 
 
-        <h1 class="page-header textbg">Dashboard</h1>
+        <h1 class="page-header textbgdash1">Dashboard</h1>
 
        <!-- <div class="row placeholders">
           <div class="col-xs-6 col-sm-3 placeholder">
@@ -120,7 +120,7 @@
         <div class="container-fluid">
 
             <div class="table-responsive col-md-5">
-              <h2 class="sub-header textbg">Past purchases</h2>
+              <h2 class="sub-header textbgdash2">Past purchases</h2>
               <table  class="table textbg">
                  <thead >
                   <tr>
@@ -228,7 +228,7 @@
             </div>
 
             <div class="table-responsive col-md-5">
-              <h2 class="sub-header textbg">Past sales</h2>
+              <h2 class="sub-header textbgdash2">Past sales</h2>
               <table  class="table textbg">
                 <thead>
                   <tr>

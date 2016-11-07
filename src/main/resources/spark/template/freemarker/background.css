@@ -45,6 +45,38 @@ footer {
    /*background-color:lightgrey;*/
    background: rgba(211,211,211,0.7);
    text-align:center;
+   
+}
+
+.textbgdash1 {
+   /*background-color:lightgrey;*/
+   background: rgba(211,211,211,0.7);
+  /* text-align:center;
+ padding-top:8%;
+  padding-bottom: 8%;
+  padding-left: 8%;
+  padding-right: 8%;
+  margin-top:10%;
+  margin-bottom: 10%;*/
+  margin-left: 52%;
+  margin-right: 34%;
+  border-radius: 6px;
+   
+}
+
+.textbgdash2 {
+   /*background-color:lightgrey;*/
+   background: rgba(211,211,211,0.7);
+   text-align:center;
+ /*padding-top:8%;
+  padding-bottom: 8%;
+  padding-left: 8%;
+  padding-right: 8%;
+  margin-top:10%;
+  margin-bottom: 10%;*/
+  margin-left: 20%;
+  margin-right: 30%;
+  border-radius: 6px;
 }
 
 .navbar-header > a {

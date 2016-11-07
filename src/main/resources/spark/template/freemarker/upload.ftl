@@ -100,7 +100,7 @@
      <div class="container">
        <div class="header">
          <div class="col-lg-12">
-           <h1 class="page-header">Upload
+           <h1 class="page-header textbg">Upload
 
            </h1>
          </div>
