@@ -176,8 +176,9 @@ public class Main {
 			Map<String, String> data = api.getBody(req);
 			Document item = (Document) JSON.parse(data.get("item"));
 			String userID = data.get("userID");
+			String userToken = data.get("userToken");
 			
-			Map<String, String> success = api.items.upload(item, userID);
+			Map<String, String> success = api.items.upload(item, userID, userToken);
 			
 			if (success != null) {
 				res.redirect("/myproducts");
