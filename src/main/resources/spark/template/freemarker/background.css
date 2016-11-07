@@ -43,30 +43,50 @@ footer {
 
 .textbg {
    /*background-color:lightgrey;*/
-   background: rgba(211,211,211,0.7);
+   background: rgba(255,255,255,0.8);
    text-align:center;
    
 }
 
-.textbgdash1 {
+.textbglog {
    /*background-color:lightgrey;*/
-   background: rgba(211,211,211,0.7);
-  /* text-align:center;
+background: rgba(255,255,255,0.8);
+ /*text-align:center;
  padding-top:8%;
   padding-bottom: 8%;
   padding-left: 8%;
   padding-right: 8%;
   margin-top:10%;
+  margin-bottom: 10%; */
+  padding-top:.5%;
+  padding-bottom: .5%; 
+  margin-left: 2%;
+  margin-right: 88%;
+  border-radius: 6px;
+   
+}
+
+.textbgdash1 {
+   /*background-color:lightgrey;*/
+background: rgba(255,255,255,0.8);
+ text-align:center;
+/* padding-top:8%;
+  padding-bottom: 8%;
+  padding-left: 8%;
+  padding-right: 8%;
+  margin-top:10%;
   margin-bottom: 10%;*/
-  margin-left: 52%;
-  margin-right: 34%;
+  padding-top:1%;
+  padding-bottom: 1%;
+  margin-left: 48%;
+  margin-right: 28%;
   border-radius: 6px;
    
 }
 
 .textbgdash2 {
    /*background-color:lightgrey;*/
-   background: rgba(211,211,211,0.7);
+   background: rgba(255,255,255,0.8);
    text-align:center;
  /*padding-top:8%;
   padding-bottom: 8%;

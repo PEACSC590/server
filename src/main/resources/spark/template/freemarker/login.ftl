@@ -59,7 +59,7 @@
     <div class = "container">
     	<div class="wrapper">
     		<form id="login" name="Login_Form" class="form-signin">
-    		    <h3 class="form-signin-heading" style="text-align: center;">PEAbay</h3>
+    		    <h3 class="form-signin-heading textbglog" style="text-align: center;">PEAbay</h3>
     			  <hr class="colorgraph"><br>
 
     			  <input type="text" class="form-control" id="username" name="Username" placeholder="Exeter Username" required="" autofocus="" />
