@@ -73,7 +73,7 @@ public class TestAPI {
 				.append("price", "5.99")
 				.append("tags", "[classic, english]")
 				.append("imageURL", "website");
-		System.out.println(api.items.upload(book2, "User1").get("status"));
+		System.out.println(api.items.upload(book2, "User1", "token").get("status"));
 		
 		// Test getItemsUploadedByID
 		book1 = api.items.getItemsUploadedByUser("User1", "token").get(0);
