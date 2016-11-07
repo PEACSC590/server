@@ -113,6 +113,15 @@ public class TestAPI {
 			System.out.println(book2.get("status"));
 		}
 		
+		//  Test seller approve sale
+		Map sellerApprove = api.sales.sellerApproveSale(itemID2);
+		
+		// should say approved
+		System.out.println(sellerApprove.get("status"));
+		book2 = api.items.getItemByID(itemID2);
+		System.out.println(book2.get("status"));
+		
+		
 		
 		
 	}

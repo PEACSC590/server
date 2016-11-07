@@ -1,5 +1,9 @@
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
 
 import org.bson.Document;
 
@@ -51,6 +55,9 @@ public class Sales {
 			Map<String, String> output = new HashMap<>();
 			output.put("status", "pending");
 			output.put("numPendingPurchases", numPendingPurchases + 1 + "");
+			DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
+			Date purchaseDate = new Date();
+			output.put("dateBought", purchaseDate + "");
 			return output;
 		}
 		else {
@@ -59,6 +66,7 @@ public class Sales {
 			Map<String, String> output = new HashMap<>();
 			output.put("status", "listed");
 			output.put("numPendingPurchases", numPendingPurchases + "");
+			output.put("dateBought", null);
 			return output;
 		}
 	}
@@ -161,7 +169,7 @@ public class Sales {
 	}
 	
 	// method for seller to approve sale within 3 days
-	public Map<String, String> sellerApproveSale(String itemID, String userID) {
+	public Map<String, String> sellerApproveSale(String itemID) {
 
 		Document item = api.items.getItemByID(itemID);
 		String buyerID = item.getString("buyerID");

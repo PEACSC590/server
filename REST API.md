@@ -106,11 +106,10 @@ Output: JSON
 ```js
 {
   "status": [status], // "listed" if successful; else, "illegal"
-  "redirect": [url]
 }
 ```
 
-**GET** List Item
+**GET** getItems
 `/list-item?itemID=[int]`
 
 The list-item by ID page retrieves item information for a specific item ID, from the database to display to the user. This will be used when buyers click on a specific item for more information.
@@ -120,7 +119,6 @@ Input: query string
 Output: JSON
 ```js
 {
-  "userID": [string],
   "item": [Item]
 }
 ```
@@ -146,7 +144,11 @@ Output: JSON
 
 The search-items function will list all the items related to the given text search and that match the parameters given in the `filter` attribute. This will be used for our search bar on the products for sale page.
 
-Input: query string
+Input: body
+```js
+{
+  "searchby" : [string]
+}
 
 Output: JSON
 ```js
@@ -204,8 +206,7 @@ Output: JSON
 ```js
 {
   "status" : [status], // "sold", if successful; else, "pending"
-  "numPendingPurchases" : [int],
-  "dateBought" : [int]
+  "numPendingPurchases" : [int] //*** do we need this?
 }
 ```
 
