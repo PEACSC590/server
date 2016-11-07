@@ -323,3 +323,22 @@ Output: JSON
   "items" : [Item[]]
 }
 ```
+
+**POST** Refresh Items
+`/refresh`
+
+This function runs asynchronously, which means that this function will be run periodically. Refresh items goes through all items with status 'pending'. If the item has been in the database for more than three days, or whatever the period of inactivity is, then the item should be cancelled because the seller could be inactive.
+
+
+Input: Body
+```js
+{
+ 
+}
+```
+
+Output: JSON
+```js
+{
+  "status" : [status], // "successful", if successful; else, "failed"
+}
