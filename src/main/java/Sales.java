@@ -161,7 +161,7 @@ public class Sales {
 	}
 	
 	// method for seller to approve sale within 3 days
-	public Map<String, String> sellerApproveSale(String itemID, String userID) {
+	public Map<String, String> sellerApproveSale(String itemID) {
 
 		Document item = api.items.getItemByID(itemID);
 		String buyerID = item.getString("buyerID");
