@@ -65,7 +65,7 @@ public class TestAPI {
 				.append("price", "5.99")
 				.append("tags", "[classic, english]")
 				.append("imageURL", "website");
-		Map map = api.items.upload(book1, "User1");
+		Map map = api.items.upload(book1, "User1", "token");
 		System.out.println(map.get("status"));
 		
 		Document book2 = new Document().append("name", "Cow")
