@@ -14,6 +14,8 @@ import com.mongodb.util.JSON;
 import spark.ModelAndView;
 
 public class Items {
+	
+	private API api;
 
 	MongoCollection<Document> itemsCollection;
 	
@@ -61,27 +63,34 @@ public class Items {
 		return itemDocument;
 	}
 
-	public Map<String, String> upload(Document item, String userID) {
-		try {
-			String itemName = (String) item.get("name");
-			String itemDescription = (String) item.get("description");
-			double itemPrice = Double.parseDouble((String) item.get("price"));
-			// TODO: need to test this
-			String[] tags = (String[]) JSON.parse((String) item.get("tags"));
+	public Map<String, String> upload(Document item, String userID, String userToken) {
+		boolean success = api.userTokens.testUserTokenForUser(userID, userToken);
+		if (success){
+			try {
+				String itemName = (String) item.get("name");
+				String itemDescription = (String) item.get("description");
+				double itemPrice = Double.parseDouble((String) item.get("price"));
+				// TODO: need to test this
+				String[] tags = (String[]) JSON.parse((String) item.get("tags"));
 	
-			String imageURL = (String) item.get("imageURL");
-			String itemID = insertItem(userID, itemName, itemDescription, itemPrice, tags, imageURL).getString("itemID");
+				String imageURL = (String) item.get("imageURL");
+				String itemID = insertItem(userID, itemName, itemDescription, itemPrice, tags, imageURL).getString("itemID");
 			
-			Document status = new Document().append("status", "listed"); 
-			// set status to listed
-			itemsCollection.updateOne(new Document("itemID", itemID), new Document("$set", status));
+				Document status = new Document().append("status", "listed"); 
+				// set status to listed
+				itemsCollection.updateOne(new Document("itemID", itemID), new Document("$set", status));
 			
+				Map<String, String> output = new HashMap<>();
+				output.put("status", "listed");
+				return output;
+			} catch (Exception e) {
+				return null;
+			}
+		}
+		else {
 			Map<String, String> output = new HashMap<>();
-			output.put("status", "listed");
+			output.put("status", "illegal");
 			return output;
-		} catch (Exception e) {
-			Map<String, String> output = new HashMap<>();
-			return null;
 		}
 	}
 	
