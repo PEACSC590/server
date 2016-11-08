@@ -166,6 +166,10 @@
 function submitForm() {
 	 var formData = $('#uploadForm').serializeArray();
 	 
+	 /*
+	  *formData: { name: "name", imageURL: "sdf" }
+	  */
+	 
 	 // TODO: validate form inputs
 	 
 	 var userID = localStorage.get('userID');
@@ -183,17 +187,19 @@ function submitForm() {
 	
 	console.log({ userID: userID, userToken: userToken, item: item });
 	 
-	 /*$.ajax({
+	$.ajax({
 	  type: 'POST',
 	  url: '/upload',
 	  data: { userID: userID, userToken: userToken, item: item },
 	  success: uploadSuccess,
 	  dataType: 'json'
-	});*/
+	});
 }
 
 
 function uploadSuccess() {
+
+alert("upload successful!");
 
 }
 
