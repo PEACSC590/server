@@ -100,36 +100,38 @@
 
 
      <div class="container">
-
-<div class="load">
-       <span class="btn btn-default btn-file">
-
+       
+	<div class="load">
+		<form id="uploadForm">		
+			 <!--<span class="btn btn-default btn-file">
 				 Browse Files <input type="file" class="file_bag" id="input">
-       </span>
-</div>
-       <form class="titleInput">
-         <label for="title">Title:</label>
-         <input type="text" class="form-control" id="title">
+			 </span>-->
+			 
+			 <div class="form-group">
+			 	<label for="imageUrl">Image URL</label>
+			 	<input type="text" class="form-control" name="imageURL" id="imageUrl">
+			 </div>
+	       	
+	       	 <div class="form-group">
+		         <label for="title">Title</label>
+		         <input type="text" class="form-control" name="name" id="title">
+	         </div>
+	         <div class="form-group">
+		         <label for="price">Price ($)</label>
+		         <input type="text" class="form-control" name="price" id="price">
+		     </div>
+		     <div class="form-group">
+		         <label for="description">Description</label>
+		         <input type="text" class="form-control" name="description" id="description">
+		     </div>
+		     <div class="form-group">
+		         <label for="tags">Tags (separate tags by commas)</label>
+		         <input type="text" class="form-control" name="tags" id="tags">
+	         </div>
+	         </div>
+		       <button class="btn btn-default btn-file" id="upload" onclick="submitForm()">Upload</button>
+		     </div>
        </form>
-       <form class="priceInput">
-         <label for="price">Price ($):</label>
-         <input type="text" class="form-control" id="price">
-       </form>
-       <form class="descriptionInput">
-         <label for="description">Description:</label>
-         <input type="text" class="form-control" id="description">
-       </form>
-
-			 <form class="tagsInput">
-         <label for="tags">Tags:</label>
-         <input type="text" class="form-control" id="tags">
-       </form>
-
-
-       <button class="btn btn-default btn-file" id="upload">Upload</button>
-
-       <hr>
-     </div>
 
     <!-- /.container -->
 
@@ -157,6 +159,46 @@
  <script src="../../dist/js/bootstrap.min.js"></script>
  <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
  <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+ 
+ <!--<script src="main.js"></script>-->
+ <script>
+
+function submitForm() {
+	 var formData = $('#uploadForm').serializeArray();
+	 
+	 // TODO: validate form inputs
+	 
+	 var userID = localStorage.get('userID');
+	 var userToken = localStorage.get('userToken');
+	 
+	 // TODO: validate that userID and userToken are not null
+	 
+	 var item = {
+	  name: formData.name,
+	  description: formData.description,
+	  price: parseInt(formData.price),
+	  tags: formData.tags.split(','),
+	  imageURL: formData.imageURL
+	};
+	
+	console.log({ userID: userID, userToken: userToken, item: item });
+	 
+	 /*$.ajax({
+	  type: 'POST',
+	  url: '/upload',
+	  data: { userID: userID, userToken: userToken, item: item },
+	  success: uploadSuccess,
+	  dataType: 'json'
+	});*/
+}
+
+
+function uploadSuccess() {
+
+}
+
+ 
+ </script>
   </body>
 
 </html>
