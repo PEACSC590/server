@@ -64,7 +64,6 @@ public class TestAPI {
 
 			// Test getItemsUploadedByID
 			book1 = api.items.getItemsUploadedByUser("User1", token1).get(0);
-			book2 = api.items.getItemsUploadedByUser("User1", token1).get(0);
 			System.out.println(book1.get("price"));
 			System.out.println(book1.get("tags"));
 			System.out.println(book1.get("status"));

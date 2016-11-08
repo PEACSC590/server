@@ -186,7 +186,30 @@ background: rgba(255,255,255,0.8);
   margin-left: 43%;
   margin-right: 43%;
   border-radius: 6px;
+   border-color: #990000;
+   border-style: solid;
+   border-width: medium;
 
+}
+
+.textbgform{
+     /*background-color:lightgrey;*/
+background: rgba(255,255,255,0.8);
+ text-align:center;
+ /*padding-top:8%;
+  padding-bottom: 8%;
+  padding-left: 8%;
+  padding-right: 8%;
+  margin-top:10%;
+  margin-bottom: 10%; */
+  padding-top:.5%;
+  padding-bottom: .5%;
+  margin-left: 23%;
+  margin-right: 23%;
+  border-radius: 6px;
+   border-color: #990000;
+   border-style: solid;
+   border-width: medium;
 }
 
 .load{
