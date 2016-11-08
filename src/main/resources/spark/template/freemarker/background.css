@@ -7,6 +7,21 @@ body {
 
 }
 
+.logintitlebackground {
+  
+}
+
+.logintitle {
+  padding: 8px;
+  background-color: lightgray;
+  border-radius: 6px;
+  opacity: 0.8;
+  margin-left: 40%;
+  margin-right: 40%;
+  width:20%;
+
+}
+
 .navbar-brand > img {
 
       height: 100%;
@@ -76,7 +91,7 @@ tbody > tr:hover {
   border-bottom-width: thin;
   padding-bottom: 2px;
   margin: 6px;
-  
+
   text
 
 }

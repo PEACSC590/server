@@ -58,9 +58,10 @@
 
     <div class = "container">
     	<div class="wrapper">
+        <div class="logintitlebackground"><img class="logintitle" src="logo.png"></div>
+
     		<form id="login" name="Login_Form" class="form-signin">
-    		    <h3 class="form-signin-heading textbglog" style="text-align: center;">PEAbay</h3>
-    			  <hr class="colorgraph"><br>
+
 
     			  <input type="text" class="form-control" id="username" name="Username" placeholder="Exeter Username" required="" autofocus="" />
     			  <input type="password" class="form-control" id="password" name="Password" placeholder="Exeter Password" required=""/>
