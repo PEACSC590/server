@@ -107,24 +107,24 @@
 				 Browse Files <input type="file" class="file_bag" id="input">
 			 </span>-->
 			 
-			 <div class="form-group">
+			 <div class="form-group textbgform">
 			 	<label for="imageUrl">Image URL</label>
 			 	<input type="text" class="form-control" name="imageURL" id="imageUrl">
 			 </div>
 	       	
-	       	 <div class="form-group">
+	       	 <div class="form-group textbgform">
 		         <label for="title">Title</label>
 		         <input type="text" class="form-control" name="name" id="title">
 	         </div>
-	         <div class="form-group">
+	         <div class="form-group textbgform">
 		         <label for="price">Price ($)</label>
 		         <input type="text" class="form-control" name="price" id="price">
 		     </div>
-		     <div class="form-group">
+		     <div class="form-group textbgform">
 		         <label for="description">Description</label>
 		         <input type="text" class="form-control" name="description" id="description">
 		     </div>
-		     <div class="form-group">
+		     <div class="form-group textbgform">
 		         <label for="tags">Tags (separate tags by commas)</label>
 		         <input type="text" class="form-control" name="tags" id="tags">
 	         </div>
