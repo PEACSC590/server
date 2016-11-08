@@ -68,7 +68,7 @@
 
 
 						<div class="form-group" id="terms">
-
+              <div class="conditions">
 								<div class="col-xs-9">
                   <label style="color: #fff">Terms and conditions</label>
 										<div style="border: 1px solid #e5e5e5; height: 200px; overflow: auto; padding: 10px; background:#fff;">
@@ -81,6 +81,7 @@
 												</div>
 										</div>
 								</div>
+              </div>
 						</div>
 
 
