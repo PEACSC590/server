@@ -6,19 +6,31 @@
 
 ```js
 {
+  "name": [string],
+  "description": [string],
+  "price": [number],
+  "tags": [string[]],
+  "imageURL": [string]
+}
+```
+
+This is used e.g. for the `item` attribute in the upload input.
+
+### Item document in the items collection
+
+```js
+{
   "itemID": [string],
   "userID": [string],
   "name": [string],
   "description": [string],
-  "price": [double],
+  "price": [number],
   "tags": [string[]],
   "imageURL": [string],
   "status": [status],
-  "dateBought": [long] // null if never bought
+  "dateBought": [number] // null if never bought
 }
-```
-
-**Note**: This is not exactly the same as the format of a document in the *Items* collection. That has also `"userID": [string]`. 
+``` 
 
 ### status
 i.e. Item status
@@ -37,7 +49,7 @@ A string containing JSON that the server will use to query the *Items* collectio
 
 e.g.: `"{"price": {"$lt": 100}}"` to query for items with `price` less than $100.
 
-## Endpoints
+## Endponumbers
 
 **POST** Authentication
 `/login`
@@ -110,7 +122,7 @@ Output: JSON
 ```
 
 **GET** getItems
-`/list-item?itemID=[int]`
+`/list-item?itemID=[number]`
 
 The list item by ID page retrieves item information for a specific item ID, from the database to display to the user. This will be used when buyers click on a specific item for more information.
 
@@ -181,7 +193,7 @@ Output: JSON
 ```js
 {
   "status" : [status], // "pending", if successful; else, "listed"
-  "numPendingPurchases" : [int],
+  "numPendingPurchases" : [number],
   "dateBought" : [string] // set to the milliseconds since the unix epoch at the time the request is receieved; null if status=="listed"
 }
 ```
@@ -212,7 +224,7 @@ Output: JSON
 **POST** Cancel Pending Sale
 `/cancel-pending-sale`
 
-This function cancels the pending sale of an item if the buyer decides that he no longer wants to buy the item.
+This function cancels the pending sale of an item if the buyer decides that he no numberer wants to buy the item.
 
 The user's user token must be provided to verify that it is actually the user.
 
@@ -229,7 +241,7 @@ Output: JSON
 ```js
 {
   "status" : [status], // the status of the item now; "listed", if successful; else, "pending"
-  "numPendingPurchases" : [int]
+  "numPendingPurchases" : [number]
 }
 ```
 
