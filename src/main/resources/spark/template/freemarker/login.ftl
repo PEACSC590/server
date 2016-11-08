@@ -58,8 +58,8 @@
 
     <div class = "container">
     	<div class="wrapper">
-    		<form id="login" name="Login_Form" class="form-signin">
-    		    <h3 class="form-signin-heading textbglog" style="text-align: center;">PEAbay</h3>
+    		<form id="login" name="Login_Form" class="form-signin" action="/login" method="post">
+    		    <h3 class="form-signin-heading" style="text-align: center;">PEAbay</h3>
     			  <hr class="colorgraph"><br>
 
     			  <input type="text" class="form-control" id="username" name="Username" placeholder="Exeter Username" required="" autofocus="" />
@@ -99,6 +99,7 @@
 							return;
 						}
 
+            /*
             $.ajax({
                 type: "POST",
                 url: '/login',
@@ -115,6 +116,7 @@
                     }
                 }
             });
+            */
 
         });
 
@@ -139,20 +141,6 @@
     });
 });
 		</script>
-
-  </div>
-  <div class="container">
-
-      <hr>
-
-      <!-- Footer -->
-      <footer>
-          <div class="row">
-              <div class="col-lg-12">
-                  <p>Copyright &copy; PEAbay 2016</p>
-              </div>
-          </div>
-      </footer>
 
   </div>
 
