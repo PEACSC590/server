@@ -59,14 +59,23 @@
     <div class = "container">
     	<div class="wrapper">
 
-        <div class="logintitlebackground"><img class="logintitle" src="logo.png"></div>
+        <div class="loginjumbo">
+        <div class="jumbotron jumbotron-fluid">
+            <h1><div><img class="logintitle" src="logo.png"></div></h1>
 
-    		<form id="login" name="Login_Form" class="form-signin">
 
 
 
-    			  <input type="text" class="form-control" id="username" name="Username" placeholder="Exeter Username" required="" autofocus="" />
-    			  <input type="password" class="form-control" id="password" name="Password" placeholder="Exeter Password" required=""/>
+
+
+      		<form id="login" name="Login_Form" class="form-signin">
+
+
+
+      			  <input type="text" class="form-control" id="username" name="Username" placeholder="Exeter Username" required="" autofocus="" />
+      			  <input type="password" class="form-control" id="password" name="Password" placeholder="Exeter Password" required=""/>
+        </div>
+      </div>
 
 
 
@@ -87,8 +96,9 @@
 						</div>
 
 
-
-    			  <button class="btn btn-lg btn-primary btn-block" href="HomePage.ftl" name="Submit" value="Login" type="submit">Login</button>
+            <div>
+    			       <button class="btn btn-lg btn-primary" href="HomePage.ftl" name="Submit" value="Login" type="submit">Login</button>
+               </div>
 
 				</form>
 
