@@ -19,7 +19,6 @@ public class API {
 	MongoCollection<Document> itemsCollection;
 
 	UserTokenController userTokens;
-
 	Users users;
 	Items items;
 	Sales sales;
@@ -30,11 +29,10 @@ public class API {
 		usersCollection = this.db.getCollection("users");
 		itemsCollection = this.db.getCollection("items");
 
-		userTokens = new UserTokenController(usersCollection);
-
 		users = new Users(this);
 		items = new Items(this);
 		sales = new Sales(this);
+		userTokens = new UserTokenController(this);
 	
 	}
 

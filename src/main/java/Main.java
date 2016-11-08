@@ -58,7 +58,7 @@ public class Main {
 		// BEGIN TESTING CODE
 		// PLEASE LEAVE THE TESTING CODE HERE BECAUSE IT IS THE ONLY WAY I CAN GET IT TO CONNECT TO THE DB
 		TestAPI test = new TestAPI(api);
-		TestAPI.test();
+		test.test();
 		// END TESTING CODE
 		
 		// Browser page

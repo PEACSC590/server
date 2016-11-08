@@ -53,6 +53,7 @@ public class Users {
 		// if exists
 		FindIterable<Document> cursor = api.usersCollection.find(new Document("userID", username));
 		if (cursor.first() != null) {
+			System.out.println("user exists");
 			return cursor.first();
 		}
 

@@ -20,42 +20,45 @@ import com.mongodb.util.JSON;
 
 public class TestAPI {
 
-	private static API api;
+	private API api;
 
 	public TestAPI(API api) {
 		this.api = api;
 	}
 
-	public static void test() throws MongoException, UnknownHostException {
+	public void test() throws MongoException, UnknownHostException {
 		try {
 			// Testing in progess
 
 			// Test upsert user
 			Document User1 = api.users.upsertUser("User1");
+			System.out.println(User1.get("userID"));
 
+			
+			// Test user tokens
 			String token1 = api.userTokens.setUserTokenForNewSession("User1");
 			System.out.println(token1);
 			System.out.println("User1 has been created");
+			
+			// This user will buy items from User1
 			Document User2 = api.users.upsertUser("User2");
 			String token2 = api.userTokens.setUserTokenForNewSession("User2");
 			System.out.println(token2);
 			System.out.println("User2 has been created");
 
-			/**
-
 			// Test upload item
 			Document book1 = new Document().append("name", "Hamlet")
 					.append("description", "King Hamlet")
 					.append("price", "5.99")
-					.append("tags", "[classic, english]")
+					.append("tags", "")
 					.append("imageURL", "website");
-			Map map = api.items.upload(book1, "User1", token1);
+			Map<String, String> map = api.items.upload(book1, "User1", token1);
 			System.out.println(map.get("status"));
-
+			
 			Document book2 = new Document().append("name", "Cow")
 					.append("description", "King Cow")
 					.append("price", "5.99")
-					.append("tags", "[classic, english]")
+					.append("tags", "")
 					.append("imageURL", "website");
 			System.out.println(api.items.upload(book2, "User1", token1).get("status"));
 
@@ -69,7 +72,7 @@ public class TestAPI {
 			String itemID2 = book2.getString("itemID");
 			System.out.println(itemID1);
 
-			// Test getItems functions
+			/** Test getItems functions
 			System.out.println(api.items.getBuyableItems());
 			System.out.println(api.items.getItemByID(itemID1));
 

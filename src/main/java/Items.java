@@ -16,17 +16,15 @@ import spark.ModelAndView;
 public class Items {
 	
 	private API api;
-
-	MongoCollection<Document> itemsCollection;
 	
 	public Items(API api) {
-		itemsCollection = api.itemsCollection;
+		this.api = api;
 	}
 	
 	public List<Document> getItems(Bson query) {
 		List<Document> documents = new LinkedList<Document>();
 
-		FindIterable<Document> items = itemsCollection.find(query);
+		FindIterable<Document> items = api.itemsCollection.find(query);
 		for (Document item : items)
 			documents.add(item);
 
@@ -39,7 +37,7 @@ public class Items {
 	}
 
 	public List<Document> getItemsUploadedByUser(String userID, String userToken) {
-		return getItems(new Document("userID", userID));
+		return getItems(new Document("sellerID", userID));
 	}
 	
 	public List<Document> getItemsBoughtByUser(String userID) {
@@ -58,13 +56,16 @@ public class Items {
 			String[] tags, String imageURL) {
 
 		Document itemDocument = createItemDocument(username, itemName, itemDescription, itemPrice, tags, imageURL);
-		itemsCollection.insertOne(itemDocument);
+		api.itemsCollection.insertOne(itemDocument);
 
 		return itemDocument;
 	}
 
 	public Map<String, String> upload(Document item, String userID, String userToken) {
+		System.out.println("Begin to upload item " + userID + " " + userToken);
+		
 		boolean success = api.userTokens.testUserTokenForUser(userID, userToken);
+		System.out.println(success);
 		if (success){
 			try {
 				String itemName = (String) item.get("name");
@@ -74,11 +75,13 @@ public class Items {
 				String[] tags = (String[]) JSON.parse((String) item.get("tags"));
 	
 				String imageURL = (String) item.get("imageURL");
+				
+				System.out.println("item info parsed succesfuly");
 				String itemID = insertItem(userID, itemName, itemDescription, itemPrice, tags, imageURL).getString("itemID");
 			
 				Document status = new Document().append("status", "listed"); 
 				// set status to listed
-				itemsCollection.updateOne(new Document("itemID", itemID), new Document("$set", status));
+				api.itemsCollection.updateOne(new Document("itemID", itemID), new Document("$set", status));
 			
 				Map<String, String> output = new HashMap<>();
 				output.put("status", "listed");
@@ -109,7 +112,7 @@ public class Items {
 		itemDocument.append("tags", tags);
 		itemDocument.append("imageURL", imageURL);
 		// true denotes unsold item
-		itemDocument.append("status", true);
+		itemDocument.append("status", "uploaded");
 		itemDocument.append("dateBought", null);
 		// is that all?
 		return itemDocument;
