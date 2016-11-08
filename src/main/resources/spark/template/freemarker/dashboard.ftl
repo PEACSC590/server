@@ -118,7 +118,7 @@
         <div class="container-fluid">
 
             <div class="table-responsive col-md-5">
-              <h2 class="sub-header textbgdash2">Past purchases</h2>
+              <h2 class="sub-header textbgdash2">Past Purchases</h2>
               <table  class="table textbgtable">
                  <thead >
                   <tr>
@@ -226,7 +226,7 @@
             </div>
 
             <div class="table-responsive col-md-5">
-              <h2 class="sub-header textbgdash2">Past sales</h2>
+              <h2 class="sub-header textbgdash2">Past Sales</h2>
               <table  class="table textbgtable">
                 <thead>
                   <tr>
@@ -343,7 +343,20 @@
 
 
     </div>
+    <div class="container">
 
+        <hr>
+
+        <!-- Footer -->
+        <footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Copyright &copy; PEAbay 2016</p>
+                </div>
+            </div>
+        </footer>
+
+    </div>
 
     </body>
     </html>
