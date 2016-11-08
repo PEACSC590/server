@@ -115,7 +115,10 @@
 
         <div class="container-fluid">
 
+
             <div class="table-responsive col-md-6">
+
+            
               <h2 class="sub-header textbgdash2">Past Purchases</h2>
               <table  class="table textbgtable">
                  <thead >
@@ -123,7 +126,7 @@
                     <th>Item</th>
                     <th>Date</th>
                     <th>Price</th>
-                    
+
                   </tr>
                 </thead>
                 <tbody>
@@ -133,21 +136,23 @@
                     <td>$5.00</td>
 
                   </tr>
-                  
+
 
                 </tbody>
               </table>
             </div>
 
+
             <div class="table-responsive col-md-6">
               <h2 class="sub-header textbgdash2">Items for Sale</h2>
+
               <table  class="table textbgtable">
                 <thead>
                   <tr>
                     <th>Item</th>
                     <th>Date</th>
                     <th>Price</th>
-                   
+
                   </tr>
                 </thead>
                 <tbody>
@@ -179,11 +184,14 @@
                     <td>10/14/15</td>
                     <td>$5.00</td>
 
+
                   </tr>
 
                 </tbody>
               </table>
             </div>
+
+            
 
 
           

@@ -56,16 +56,27 @@
     </nav>
   -->
 
-    <div class = "container">
-    	<div class="wrapper">
-    		<form id="login" name="Login_Form" class="form-signin">
-    		    <h3 class="form-signin-heading" style="text-align: center;">PEAbay</h3>
-    			  <hr class="colorgraph"><br>
+  <div class="container">
 
-    			  <input type="text" class="form-control" id="username" name="Username" placeholder="Exeter Username" required="" autofocus="" />
-    			  <input type="password" class="form-control" id="password" name="Password" placeholder="Exeter Password" required=""/>
+    <div class="load">
+      <form id="loginForm">
+        <!--<span class="btn btn-default btn-file">
+        Browse Files <input type="file" class="file_bag" id="input">
+      </span>-->
 
+      <div class="form-group textbgform">
+        <label for="imageUrl">Exeter Username</label>
+        <input type="text" class="form-control" name="userID" id="userID">
+      </div>
 
+      <div class="form-group textbgform">
+        <label for="title">Exeter Password</label>
+        <input type="text" class="form-control" name="password" id="password">
+      </div>
+    </div>
+    <button class="btn btn-default btn-file" id="upload" onclick="submitForm()">Upload</button>
+  </div>
+</form>
 
 						<div class="form-group" id="terms">
               <div class="conditions">
@@ -88,65 +99,8 @@
 						</div>
 
 
-
-<<<<<<< HEAD
-=======
     			  <button class="btn btn-lg btn-primary btn-block" href="HomePage.ftl" name="Submit" value="Login" type="submit">Login</button>
->>>>>>> 4d8b3d541193cfb9fa5887977306025669808875
 
-				</form>
-
-    <script>
-    
-    $(document).ready(function() {
-
-        $('#login').submit(function() {
-
-						if (!validateForm(this)) {
-							alert("Invalid form");
-							return;
-						}
-
-            $.ajax({
-                type: "POST",
-                url: '/login',
-                data: {
-                    username: $("#username").val(),
-                    password: $("#password").val()
-                },
-                success: function(data)
-                {
-                    if (data === 'correct') { // or whatever response
-                        window.location.replace('redirect url');
-                    } else {
-                        alert(data);
-                    }
-                }
-            });
-
-        });
-
-    });
-
-		function validateForm(form) {
-			if (!$(form).find("#agree-button").val() === "agree") return false;
-
-			return true;
-		}
-    </script>
-
-		<script>
-
-    // Update the value of "agree" input when clicking the Agree/Disagree button
-    $('#agreeButton, #disagreeButton').on('click', function() {
-        var whichButton = $(this).attr('id');
-
-        $('#registrationForm')
-            .find('[name="agree"]')
-                .val(whichButton === 'agreeButton' ? 'yes' : 'no');
-    });
-});
-		</script>
 
   </div>
 
@@ -159,5 +113,37 @@
     <script src="../../dist/js/bootstrap.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+
+    <script>
+
+    function submitForm() {
+      var formData = $('#loginForm').serializeArray();
+
+      var userData = {
+        userID: formData.userID,
+        password: formData.password,
+      };
+
+      console.log({ userID: userID, password: password });
+
+      $.ajax({
+        type: 'POST',
+        url: '/login',
+        data: { userID: userID, password: password},
+        success: uploadSuccess,
+        dataType: 'json'
+      });
+    }
+
+
+    function uploadSuccess() {
+
+      alert("login successful!");
+
+      // TODO: redirect to homepage
+    }
+
+
+    </script>
   </body>
 </html>
