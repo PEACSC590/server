@@ -125,7 +125,7 @@
                     <th>Item</th>
                     <th>Date</th>
                     <th>Price</th>
-                    <th>Seller</th>
+                    
                   </tr>
                 </thead>
                 <tbody>
@@ -133,93 +133,9 @@
                     <td>insert item</td>
                     <td>10/14/15</td>
                     <td>$5.00</td>
-                    <td>me</td>
 
                   </tr>
-                  <tr>
-                    <td>insert item</td>
-                    <td>10/14/15</td>
-                    <td>$5.00</td>
-                    <td>me</td>
-
-                  </tr>
-                  <tr>
-                    <td>insert item</td>
-                    <td>10/14/15</td>
-                    <td>$5.00</td>
-                    <td>me</td>
-
-                  </tr>
-                  <tr>
-                    <td>insert item</td>
-                    <td>10/14/15</td>
-                    <td>$5.00</td>
-                    <td>me</td>
-
-                  </tr>
-                  <tr>
-                    <td>insert item</td>
-                    <td>10/14/15</td>
-                    <td>$5.00</td>
-                    <td>me</td>
-
-                  </tr>
-                  <tr>
-                    <td>insert item</td>
-                    <td>10/14/15</td>
-                    <td>$5.00</td>
-                    <td>me</td>
-
-                  </tr>
-                  <tr>
-                    <td>insert item</td>
-                    <td>10/14/15</td>
-                    <td>$5.00</td>
-                    <td>me</td>
-
-                  </tr>
-                  <tr>
-                    <td>insert item</td>
-                    <td>10/14/15</td>
-                    <td>$5.00</td>
-                    <td>me</td>
-
-                  </tr>
-                  <tr>
-                    <td>insert item</td>
-                    <td>10/14/15</td>
-                    <td>$5.00</td>
-                    <td>me</td>
-
-                  </tr>
-                  <tr>
-                    <td>insert item</td>
-                    <td>10/14/15</td>
-                    <td>$5.00</td>
-                    <td>me</td>
-
-                  </tr>
-                  <tr>
-                    <td>insert item</td>
-                    <td>10/14/15</td>
-                    <td>$5.00</td>
-                    <td>me</td>
-
-                  </tr>
-                  <tr>
-                    <td>insert item</td>
-                    <td>10/14/15</td>
-                    <td>$5.00</td>
-                    <td>me</td>
-
-                  </tr>
-                  <tr>
-                    <td>insert item</td>
-                    <td>10/14/15</td>
-                    <td>$5.00</td>
-                    <td>me</td>
-
-                  </tr>
+                  
 
                 </tbody>
               </table>
@@ -233,7 +149,7 @@
                     <th>Item</th>
                     <th>Date</th>
                     <th>Price</th>
-                    <th>Seller</th>
+                   
                   </tr>
                 </thead>
                 <tbody>
@@ -241,92 +157,10 @@
                     <td>insert item</td>
                     <td>10/14/15</td>
                     <td>$5.00</td>
-                    <td>me</td>
+                 
 
-                  </tr>
-                  <tr>
-                    <td>insert item</td>
-                    <td>10/14/15</td>
-                    <td>$5.00</td>
-                    <td>me</td>
 
-                  </tr>
-                  <tr>
-                    <td>insert item</td>
-                    <td>10/14/15</td>
-                    <td>$5.00</td>
-                    <td>me</td>
-
-                  </tr>
-                  <tr>
-                    <td>insert item</td>
-                    <td>10/14/15</td>
-                    <td>$5.00</td>
-                    <td>me</td>
-
-                  </tr>
-                  <tr>
-                    <td>insert item</td>
-                    <td>10/14/15</td>
-                    <td>$5.00</td>
-                    <td>me</td>
-
-                  </tr>
-                  <tr>
-                    <td>insert item</td>
-                    <td>10/14/15</td>
-                    <td>$5.00</td>
-                    <td>me</td>
-
-                  </tr>
-                  <tr>
-                    <td>insert item</td>
-                    <td>10/14/15</td>
-                    <td>$5.00</td>
-                    <td>me</td>
-
-                  </tr>
-                  <tr>
-                    <td>insert item</td>
-                    <td>10/14/15</td>
-                    <td>$5.00</td>
-                    <td>me</td>
-
-                  </tr>
-                  <tr>
-                    <td>insert item</td>
-                    <td>10/14/15</td>
-                    <td>$5.00</td>
-                    <td>me</td>
-
-                  </tr>
-                  <tr>
-                    <td>insert item</td>
-                    <td>10/14/15</td>
-                    <td>$5.00</td>
-                    <td>me</td>
-
-                  </tr>
-                  <tr>
-                    <td>insert item</td>
-                    <td>10/14/15</td>
-                    <td>$5.00</td>
-                    <td>me</td>
-
-                  </tr>
-                  <tr>
-                    <td>insert item</td>
-                    <td>10/14/15</td>
-                    <td>$5.00</td>
-                    <td>me</td>
-
-                  </tr>
-                  <tr>
-                    <td>insert item</td>
-                    <td>10/14/15</td>
-                    <td>$5.00</td>
-                    <td>me</td>
-
+                 
                   </tr>
 
                 </tbody>
