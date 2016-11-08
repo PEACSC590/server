@@ -58,29 +58,17 @@
 
     <div class = "container">
     	<div class="wrapper">
+    		<form id="login" name="Login_Form" class="form-signin">
+    		    <h3 class="form-signin-heading" style="text-align: center;">PEAbay</h3>
+    			  <hr class="colorgraph"><br>
 
-        <div class="loginjumbo">
-        <div class="jumbotron jumbotron-fluid">
-            <h1><div><img class="logintitle" src="logo.png"></div></h1>
-
-
-
-
-
-
-      		<form id="login" name="Login_Form" class="form-signin">
-
-
-
-      			  <input type="text" class="form-control" id="username" name="Username" placeholder="Exeter Username" required="" autofocus="" />
-      			  <input type="password" class="form-control" id="password" name="Password" placeholder="Exeter Password" required=""/>
-        </div>
-      </div>
+    			  <input type="text" class="form-control" id="username" name="Username" placeholder="Exeter Username" required="" autofocus="" />
+    			  <input type="password" class="form-control" id="password" name="Password" placeholder="Exeter Password" required=""/>
 
 
 
 						<div class="form-group" id="terms">
-
+              <div class="conditions">
 								<div class="col-xs-9">
                   <label style="color: #fff">Terms and conditions</label>
 										<div style="border: 1px solid #e5e5e5; height: 200px; overflow: auto; padding: 10px; background:#fff;">
@@ -93,16 +81,17 @@
 												</div>
 										</div>
 								</div>
+              </div>
 						</div>
 
 
-            <div>
-    			       <button class="btn btn-lg btn-primary" href="HomePage.ftl" name="Submit" value="Login" type="submit">Login</button>
-               </div>
+
+    			  <button class="btn btn-lg btn-primary btn-block" href="HomePage.ftl" name="Submit" value="Login" type="submit">Login</button>
 
 				</form>
 
     <script>
+    
     $(document).ready(function() {
 
         $('#login').submit(function() {
@@ -112,7 +101,6 @@
 							return;
 						}
 
-            /*
             $.ajax({
                 type: "POST",
                 url: '/login',
@@ -129,7 +117,6 @@
                     }
                 }
             });
-            */
 
         });
 
