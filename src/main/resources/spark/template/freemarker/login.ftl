@@ -81,7 +81,7 @@
 
 						<div class="form-group" id="terms">
               <div class="conditions">
-								<div class="col-xs-9">
+								<div class="col-xs-12">
                   <label style="color: #fff">Terms and conditions</label>
 										<div style="border: 1px solid #e5e5e5; height: 200px; overflow: auto; padding: 10px; background:#fff;">
 												<p>These are the terms and conditions</p>
@@ -92,14 +92,15 @@
 														<label for="agree-button" style="color: #fff">Agree with the terms and conditions</label>
 												</div>
 										</div>
+                    <div>
+            			       <button class="btn login" href="HomePage.ftl" name="Submit" value="Login" type="submit">Login</button>
+                       </div>
 								</div>
               </div>
 						</div>
 
 
-            <div>
-    			       <button class="btn btn-lg btn-primary" href="HomePage.ftl" name="Submit" value="Login" type="submit">Login</button>
-               </div>
+
 
 				</form>
 

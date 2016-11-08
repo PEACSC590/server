@@ -80,11 +80,9 @@
     <div class="row">
       <div class="col-md-2">
         <div class="list-group">
-          <a href="#" class="list-group-item active">Books</a>
-          <a href="#" class="list-group-item">Clothes</a>
-          <a href="#" class="list-group-item">Furtinure</a>
-          <a href="#" class="list-group-item">Food</a>
-          <a href="#" class="list-group-item">Other</a>
+          <a href="myitems.ftl" class="list-group-item">My Items</a>
+          <a href="upload.ftl" class="list-group-item">Upload</a>
+          <a href="cancelpendingsale.ftl" class="list-group-item">Pending Sales</a>
         </div>
       </div>
 

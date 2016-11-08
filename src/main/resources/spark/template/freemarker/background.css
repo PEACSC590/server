@@ -280,10 +280,12 @@ background: rgba(255,255,255,0.8);
   margin-left: 21%;
   height: 288px;
 }
+
 .conditions {
+  margin-left: 21%;
+  margin-right: 25%;
   
 }
-
 
 .jumbotron > h1 {
   color: #990000;
