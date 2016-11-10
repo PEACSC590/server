@@ -42,27 +42,19 @@
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
               <ul class="nav navbar-nav">
-                  <li>
-                      <a href="HomePage.ftl">Home</a>
-                  </li>
+
                   <li>
                       <a href="items-page.ftl">For Sale</a>
                   </li>
                   <li>
                       <a href="about.ftl">About</a>
                   </li>
-                  <li>
-                      <a href="contact.ftl">Contact</a>
-                  </li>
+
                   <li class="active">
                       <a href="dashboard.ftl">Dashboard</a>
                   </li>
-                  <li>
-                      <a href="settings.ftl">Settings</a>
-                  </li>
-                  <li>
-                      <a href="profile.ftl">Profile</a>
-                  </li>
+
+
 
                   <li><a href="login.ftl">Log Out</a></li>
 
@@ -118,7 +110,7 @@
 
             <div class="table-responsive col-md-6">
 
-            
+
               <h2 class="sub-header textbgdash2">Past Purchases</h2>
               <table  class="table textbgtable">
                  <thead >
@@ -166,7 +158,7 @@
                 </tbody>
               </table>
             </div>
-            
+
             <div class="table-responsive col-md-6">
               <h2 class="sub-header textbgdash2">Past Sales</h2>
               <table  class="table textbgtable">
@@ -175,7 +167,7 @@
                     <th>Item</th>
                     <th>Date</th>
                     <th>Price</th>
-                   
+
                   </tr>
                 </thead>
                 <tbody>
@@ -191,18 +183,18 @@
               </table>
             </div>
 
-            
 
 
-          
-        
-        
-        
-        
-        
-        
-        
-        
+
+
+
+
+
+
+
+
+
+
         </div>
 
 

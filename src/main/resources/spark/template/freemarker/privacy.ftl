@@ -42,27 +42,18 @@
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
               <ul class="nav navbar-nav">
-                  <li>
-                      <a href="HomePage.ftl">Home</a>
-                  </li>
+
                   <li>
                       <a href="items-page.ftl">For Sale</a>
                   </li>
                   <li class="active">
                       <a href="about.ftl">About</a>
                   </li>
-                  <li>
-                      <a href="contact.ftl">Contact</a>
-                  </li>
+
                   <li>
                       <a href="dashboard.ftl">Dashboard</a>
                   </li>
-                  <li>
-                      <a href="settings.ftl">Settings</a>
-                  </li>
-                  <li>
-                      <a href="profile.ftl">Profile</a>
-                  </li>
+
 
                   <li><a href="login.ftl">Log Out</a></li>
 
@@ -80,27 +71,28 @@
     <div class="row">
       <div class="col-md-2">
         <div class="list-group">
-          <a href="company.ftl" class="list-group-item">Company</a>
-          <a href="news.ftl" class="list-group-item">News</a>
-          <a href="opportunities.ftl" class="list-group-item">Opportunities</a>
-          <a href="privacy.ftl" class="list-group-item active">Privacy</a>
+          <a href="about.ftl" class="list-group-item">About</a>
+          <a href="contact.ftl" class="list-group-item">Contact Us</a>
+          <a href="privacy.ftl" class="list-group-item active">Privacy and Legal Terms</a>
         </div>
       </div>
     </div>
-    <div class="container">
 
-        <hr>
+  </div>
+  <div class="container">
 
-        <!-- Footer -->
-        <footer>
-            <div class="row">
-                <div class="col-lg-12">
-                    <p>Copyright &copy; PEAbay 2016</p>
-                </div>
-            </div>
-        </footer>
+      <hr>
 
-    </div>
+      <!-- Footer -->
+      <footer>
+          <div class="row">
+              <div class="col-lg-12">
+                  <p>Copyright &copy; PEAbay 2016</p>
+              </div>
+          </div>
+      </footer>
+
+  </div>
 
 
     </body>
