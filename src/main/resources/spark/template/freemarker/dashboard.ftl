@@ -121,14 +121,14 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <#list attributes as itemsBought, itemsBought>
-                    <td>${attributes.itemsBought.get("itemName")}</td>
+                    <#list itemsBought as document, itemName>
+                    <td>${itemName}</td>
                    </#list>
-                    <#list attributes as itemsBought, itemsBought>
-                    <td>${attributes.itemsBought.get("dateBought")}</td>
+                    <#list itemsBought as document, dateBought>
+                    <td>${dateBought}</td>
                    </#list>
-                    <#list attributes as itemsBought, itemsBought>
-                    <td>"$" + ${attributes.itemsBought.get("itemPrice")}</td>
+                    <#list itemsBought as document, itemPrice>
+                    <td>"$" + ${"itemPrice"}</td>
                    </#list>
 
                   </tr>
@@ -153,14 +153,14 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <#list attributes as itemsUploaded, itemsUploaded>
-                    <td>${attributes.itemsUploaded.get("itemName")}</td>
+                    <#list itemsUploaded as document, itemName>
+                    <td>${itemName}</td>
                    </#list>
-                    <#list attributes as itemsUploaded, itemsUploaded>
-                    <td>${attributes.itemsUploaded.get("dateBought")}</td>
+                    <#list itemsUploaded as document, dateBought>
+                    <td>${dateBought}</td>
                    </#list>
-                    <#list attributes as itemsUploaded, itemsUploaded>
-                    <td>"$" + ${attributes.itemsUploaded.get("itemPrice")}</td>
+                    <#list itemsUploaded as itemsUploaded, itemPrice>
+                    <td>"$" + ${itemPrice}</td>
                    </#list>
 
                   </tr>
@@ -182,37 +182,25 @@
                 </thead>
                 <tbody>
                    <tr>
-                    <#list attributes as pastPurchases, pastPurchases>
+                    <#list itemsSold as document, itemName>
 
-                    <td>${attributes.pastPurchases.get("itemName")}</td>
-
-                   </#list>
-                    <#list attributes as pastPurchases, pastPurchases>
-
-                    <td>"$" + ${attributes.pastPurchases.get("dateBought")}</td>
+                    <td>${itemName}</td>
 
                    </#list>
-                    <#list attributes as pastPurchases, pastPurchases>
+                    <#list itemsSold as document, dateBought>
 
-                    <td>"$" + ${attributes.pastPurchases.get("itemPrice")}</td>
+                    <td>${dateBought}</td>
+
+                   </#list>
+                    <#list itemsSold as document, itemPrice>
+
+                    <td>"$" + ${itemPrice}</td>
 
                     </#list>
     </tr>
                 </tbody>
               </table>
             </div>
-
-
-
-
-
-
-
-
-
-
-
-
 
         </div>
 
