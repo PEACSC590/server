@@ -99,9 +99,7 @@ tbody > tr {
   opacity:0.75;
 }
 
-tbody > tr:hover {
-  opacity:1.0;
-}
+
 .table>thead>tr>th  {
   border-bottom-color: #990000;
   border-bottom-style: solid;
