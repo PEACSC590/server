@@ -29,22 +29,21 @@ public class TestAPI {
 	public void test() throws MongoException, UnknownHostException {
 		try {
 			// Testing in progess
-
+						
 			// Test upsert user
 			Document User1 = api.users.upsertUser("User1");
-			System.out.println(User1.get("userID"));
-
+			//System.out.println(User1.get("userID"));
 			
 			// Test user tokens
 			String token1 = api.userTokens.setUserTokenForNewSession("User1");
-			System.out.println(token1);
-			System.out.println("User1 has been created");
+			//System.out.println(token1);
+			//System.out.println("User1 has been created");
 			
 			// This user will buy items from User1
 			Document User2 = api.users.upsertUser("User2");
 			String token2 = api.userTokens.setUserTokenForNewSession("User2");
-			System.out.println(token2);
-			System.out.println("User2 has been created");
+			//System.out.println(token2);
+			//System.out.println("User2 has been created");
 
 			// Test upload item
 			Document book1 = new Document().append("name", "Hamlet")
@@ -53,28 +52,54 @@ public class TestAPI {
 					.append("tags", "")
 					.append("imageURL", "website");
 			Map<String, String> map = api.items.upload(book1, "User1", token1);
-			System.out.println(map.get("status"));
+			//System.out.println(map.get("status"));
+			String book1ID = map.get("itemID");
+			//System.out.println(book1ID);
 			
 			Document book2 = new Document().append("name", "Cow")
 					.append("description", "King Cow")
-					.append("price", "5.99")
+					.append("price", "4.99")
 					.append("tags", "")
 					.append("imageURL", "website");
-			System.out.println(api.items.upload(book2, "User1", token1).get("status"));
-
+			//System.out.println(api.items.upload(book2, "User1", token1).get("status"));
+			String book2ID = map.get("itemID");
+			
 			// Test getItemsUploadedByID
-			book1 = api.items.getItemsUploadedByUser("User1", token1).get(0);
-			System.out.println(book1.get("price"));
-			System.out.println(book1.get("tags"));
-			System.out.println(book1.get("status"));
-			String itemID1 = book1.getString("itemID");
-			String itemID2 = book2.getString("itemID");
-			System.out.println(itemID1);
+			book1 = api.items.getItemByID(book1ID);
+			//System.out.println(book1.get("itemPrice"));
+			//System.out.println(book1.get("tags"));
+			//System.out.println(book1.get("status"));
+			
+			// Test getItemsUploadedByID
+			book2 = api.items.getItemByID(book2ID);
+			//System.out.println(book1.get("status"));
 
-			/** Test getItems functions
-			System.out.println(api.items.getBuyableItems());
-			System.out.println(api.items.getItemByID(itemID1));
-
+			/**System.out.println("TEST: getBuyableItems");
+			// Test getBuyable Items
+			for (Document item : api.items.getBuyableItems()) {
+				System.out.println(item.get("itemID") + " " + item.get("itemName") + " " + item.get("sellerID") + " " + item.get("status"));
+			}
+			
+			System.out.println("TEST: getUploadedByUserItems");
+			// Test getBuyable Items
+			for (Document item : api.items.getItemsUploadedByUser("User1", token1)) {
+				System.out.println(item.get("itemID") + " " + item.get("itemName") + " " + item.get("sellerID") + " " + item.get("status"));
+			}**/
+			
+			
+			/** TEST BAN USER2
+			System.out.println(api.usersCollection.find(new Document("userID", "User2")).first().get("banned"));
+			api.users.ban("User2");
+			System.out.println(api.usersCollection.find(new Document("userID", "User2")).first().get("banned"));**/
+			
+			
+			/**TEST LOGOUT
+			api.users.unban("User2");
+			System.out.println(token2);
+			api.users.logout("User2", token2);
+			System.out.println(api.usersCollection.find(new Document("userID", "User2")).first().get("userToken"));**/
+			
+			/***
 			// Test unlist function
 			Map unlist = api.sales.unlist(itemID1, "User1", token1);
 			System.out.println(unlist.get("status"));

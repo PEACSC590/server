@@ -154,12 +154,10 @@ public class Main {
 			List<Document> itemsBought = api.items.getItemsBoughtByUser(userID);
 			
 			List<Document> itemsUploaded = api.items.getItemsUploadedByUser(userID, userToken);
-			List<Document> pastPurchases = api.items.getPastPurchases(userID);
 			
 			Map<String, Object> attributes = new HashMap<>();
 			attributes.put("itemsBought", itemsBought);
 			attributes.put("itemsUploaded", itemsUploaded);
-			attributes.put("pastPurchases", pastPurchases);
 			return new ModelAndView(attributes, "dashboard.ftl");
 		}, templateEngine);
 		
