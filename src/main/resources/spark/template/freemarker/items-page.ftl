@@ -59,7 +59,7 @@
                   <li><a href="login.ftl">Log Out</a></li>
 
                   <form class="navbar-form navbar-right" action="items-page.ftl">
-                    <input type="text" href="items-page.ftl" class="form-control" placeholder="Search">
+                    <input type="text" href="items-page.ftl" class="form-control" placeholder="Search for Products">
                   </form>
               </ul>
           </div>
@@ -82,7 +82,7 @@
       </div>
 
 
-<div class="jumbotron">
+<div class="jumbotron jumbotron-forsale">
     <h1>PEAbay</h1>
     <p>List of Items on PEAbay</p>
     <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>

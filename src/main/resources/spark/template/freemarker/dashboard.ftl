@@ -59,7 +59,7 @@
                   <li><a href="login.ftl">Log Out</a></li>
 
                   <form class="navbar-form navbar-right" action="items-page.ftl">
-                    <input type="text" href="items-page.ftl" class="form-control" placeholder="Search">
+                    <input type="text" href="items-page.ftl" class="form-control" placeholder="Search for Products">
                   </form>
               </ul>
           </div>
@@ -70,16 +70,12 @@
 
   <div class="container-fluid">
     <div class="row">
-      <div class="col-md-2">
-        <div class="list-group">
-          <a href="myitems.ftl" class="list-group-item">My Items</a>
-          <a href="upload.ftl" class="list-group-item">Upload</a>
-          <a href="cancelpendingsale.ftl" class="list-group-item">Pending Sales</a>
-        </div>
+
+
+      <div class="jumbotron jumbotron-dashboard">
+        <h1 id="dashboard">Dashboard</h1>
+        <h4 id="subdash">- Your Transaction History on PEAbay -</h4>
       </div>
-
-
-        <h1 class="page-header textbgdash1">Dashboard</h1>
 
        <!-- <div class="row placeholders">
           <div class="col-xs-6 col-sm-3 placeholder">
@@ -108,7 +104,7 @@
         <div class="container-fluid">
 
 
-            <div class="table-responsive col-md-6">
+            <div class="table-responsive col-md-4">
 
 
               <h2 class="sub-header textbgdash2">Past Purchases</h2>
@@ -135,7 +131,7 @@
             </div>
 
 
-            <div class="table-responsive col-md-6">
+            <div class="table-responsive col-md-4">
               <h2 class="sub-header textbgdash2">Items for Sale</h2>
 
               <table  class="table textbgtable">
@@ -159,7 +155,7 @@
               </table>
             </div>
 
-            <div class="table-responsive col-md-6">
+            <div class="table-responsive col-md-4">
               <h2 class="sub-header textbgdash2">Past Sales</h2>
               <table  class="table textbgtable">
                 <thead>
