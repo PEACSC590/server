@@ -75,7 +75,7 @@ footer {
 }
 
 
-.col-md-4 {
+.col-md-5 {
     width: 33%;
 }
 
@@ -99,9 +99,7 @@ tbody > tr {
   opacity:0.75;
 }
 
-tbody > tr:hover {
-  opacity:1.0;
-}
+
 .table>thead>tr>th  {
   border-bottom-color: #990000;
   border-bottom-style: solid;
@@ -285,7 +283,7 @@ background: rgba(255,255,255,0.8);
 .jumbotron-dashboard {
   opacity: 0.8;
   padding-top: 1%;
-  padding-bottom: 12%;
+  padding-bottom: 13%;
   margin-right: 0%;
   margin-left: 0%;
   height: 100px;
@@ -312,6 +310,10 @@ background: rgba(255,255,255,0.8);
   border-right-style: double;
   border-right-width: thick;
   border-right-color: #990000;
+}
+
+.lead {
+  color: gray;
 }
 
 .conditions {

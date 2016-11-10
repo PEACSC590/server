@@ -42,7 +42,9 @@
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
               <ul class="nav navbar-nav">
-
+                <li class="active">
+                    <a href="dashboard.ftl">Dashboard</a>
+                </li>
                   <li>
                       <a href="items-page.ftl">For Sale</a>
                   </li>
@@ -50,9 +52,7 @@
                       <a href="about.ftl">About</a>
                   </li>
 
-                  <li class="active">
-                      <a href="dashboard.ftl">Dashboard</a>
-                  </li>
+
 
 
 
@@ -73,9 +73,9 @@
 
 
       <div class="jumbotron jumbotron-dashboard">
-        
-        <h1 id="display-3">Dashboard</h1>
-        <h4 id="lead">- Your Transaction History on PEAbay -</h4>
+
+        <h1 class="display-3">Dashboard</h1>
+        <h4 class="lead">- Your Transaction History on PEAbay -</h4>
 
       </div>
 
