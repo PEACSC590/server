@@ -164,8 +164,8 @@ color: #990000;
   padding-right: 8%;
   margin-top:10%;
   margin-bottom: 10%;*/
-  margin-left: 25%;
-  margin-right: 25%;
+  margin-left: 15%;
+  margin-right: 15%;
 
   border-radius: 6px;
   border-color: #990000;
@@ -273,7 +273,7 @@ background: rgba(255,255,255,0.8);
   padding:0%;
 }
 
-.jumbotron {
+.jumbotron-forsale {
   opacity: 0.8;
   padding-top: 35px;
   margin-right: 25%;
@@ -281,10 +281,46 @@ background: rgba(255,255,255,0.8);
   height: 288px;
 }
 
+.container-fluid .jumbotron-dashboard {
+  border-radius: 0%;
+}
+
+.jumbotron-dashboard {
+  opacity: 0.8;
+  padding-top: 1%;
+  padding-bottom: 12%;
+  margin-right: 0%;
+  margin-left: 0%;
+  height: 100px;
+  margin-bottom: 2%;
+  border-radius: 0px;
+}
+
+#subdash {
+  margin-left: 35%;
+  width:30%;
+  margin-right: 35%;
+  text-align: center;
+}
+
+#dashboard {
+  width: 30%;
+  margin-left: 35%;
+  margin-right: 35%;
+  padding-left: 1%;
+  padding-right: 1%;
+  border-left-style: double;
+  border-left-width: thick;
+  border-left-color: #990000;
+  border-right-style: double;
+  border-right-width: thick;
+  border-right-color: #990000;
+}
+
 .conditions {
   margin-left: 21%;
   margin-right: 25%;
-  
+
 }
 
 .jumbotron > h1 {

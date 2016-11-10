@@ -47,7 +47,7 @@ public class Items {
 	public List<Document> getItemsBoughtByUser(String userID) {
 		// 10.16.16: the item attribute might not be "boughtByUserID", but I'll
 		// use it for now
-		return getItems(new Document("boughtByUserID", userID));
+		return getItems(new Document("buyerID", userID));
 	}
 
 	// TESTED: SUCCESS
@@ -127,5 +127,8 @@ public class Items {
 
 	public List<Document> searchItemsByText(String searchBy) {
 		return getItems(new Document("$text", new Document("$search", searchBy)));
+	}
+	public List<Document> getPastPurchases(String userID) {
+		return getItems(new Document("sellerID", userID, "status", sold));
 	}
 }
