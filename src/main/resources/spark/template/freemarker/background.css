@@ -75,8 +75,8 @@ footer {
 }
 
 
-.col-md-5 {
-    width: 40%;
+.col-md-4 {
+    width: 33%;
 }
 
 .textbg {
@@ -108,9 +108,6 @@ tbody > tr:hover {
   border-bottom-width: thin;
   padding-bottom: 2px;
   margin: 6px;
-
-  text
-
 }
 
 .textbglog {
