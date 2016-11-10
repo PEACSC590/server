@@ -72,7 +72,7 @@
     <div class="row">
 
 
-      <div class="jumbotron jumbotron-dashboard">
+      <div class="jumbotron-dashboard jumbotron">
         <h1 id="dashboard">Dashboard</h1>
         <h4 id="subdash">- Your Transaction History on PEAbay -</h4>
       </div>
@@ -179,22 +179,23 @@
                   </tr>
                 </thead>
                 <tbody>
+                   <tr>
                     <#list attributes as pastPurchases, pastPurchases>
-                    <tr>
+                    
                     <td>${attributes.pastPurchases.get("itemName")}</td>
-                    </tr>
+              
                    </#list>
                     <#list attributes as pastPurchases, pastPurchases>
-                    <tr>
+             
                     <td>"$" + ${attributes.pastPurchases.get("dateBought")}</td>
-                    </tr>
+                   
                    </#list>
                     <#list attributes as pastPurchases, pastPurchases>
-                    <tr>
+                 
                     <td>"$" + ${attributes.pastPurchases.get("itemPrice")}</td>
-                    </tr>
+                
                     </#list>
-
+    </tr>
                 </tbody>
               </table>
             </div>

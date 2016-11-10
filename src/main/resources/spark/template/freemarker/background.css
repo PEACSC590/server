@@ -281,6 +281,10 @@ background: rgba(255,255,255,0.8);
   height: 288px;
 }
 
+.container-fluid .jumbotron-dashboard {
+  border-radius: 0%;
+}
+
 .jumbotron-dashboard {
   opacity: 0.8;
   padding-top: 1%;
@@ -289,6 +293,7 @@ background: rgba(255,255,255,0.8);
   margin-left: 0%;
   height: 100px;
   margin-bottom: 2%;
+  border-radius: 0px;
 }
 
 #subdash {
