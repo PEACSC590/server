@@ -232,7 +232,7 @@
         </footer>
 
     </div>
-    
+
     <script>
 
   /*
@@ -253,7 +253,7 @@
     success: uploadSuccess,
     dataType: 'json'
   });
-  
+
 </script>
 
     </body>
