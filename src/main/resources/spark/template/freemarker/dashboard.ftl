@@ -184,9 +184,15 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td>insert item</td>
-                    <td>10/14/15</td>
-                    <td>$5.00</td>
+                    <#list attributes as pastPurchases, pastPurchases>
+                    <td>${attributes.pastPurchases.get("itemName")}</td>
+                   </#list>
+                    <#list attributes as pastPurchases, pastPurchases>
+                    <td>"$" + ${attributes.pastPurchases.get("dateBought")}</td>
+                   </#list>
+                    <#list attributes as pastPurchases, pastPurchases>
+                    <td>"$" + ${attributes.pastPurchases.get("itemPrice")}</td>
+                    </#list>
 
 
                   </tr>
