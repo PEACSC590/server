@@ -25,7 +25,7 @@ public class UserTokenController {
 	
 	public boolean testUserTokenForUser(String userID, String userToken) {
 		Document item = api.usersCollection.find(new Document("userID", userID)).first();
-		return item.get("userToken").equals(userToken);
+		return item.isEmpty() || item.get("userToken").equals(userToken);
 	}
 
 }

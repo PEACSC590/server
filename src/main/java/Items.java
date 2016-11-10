@@ -62,39 +62,39 @@ public class Items {
 	}
 
 	public Map<String, String> upload(Document item, String userID, String userToken) {
-		System.out.println("Begin to upload item " + userID + " " + userToken);
+		Map<String, String> output = new HashMap<>();
 		
-		boolean success = api.userTokens.testUserTokenForUser(userID, userToken);
-		System.out.println(success);
-		if (success){
+		System.out.println("Begin to upload item " + userID + " " + userToken);
+
+		if (api.userTokens.testUserTokenForUser(userID, userToken)){
 			try {
-				String itemName = (String) item.get("name");
-				String itemDescription = (String) item.get("description");
-				double itemPrice = Double.parseDouble((String) item.get("price"));
+				String itemName = item.getString("name");
+				String itemDescription = item.getString("description");
+				double itemPrice = item.getDouble("price");
 				// TODO: need to test this
-				String[] tags = (String[]) JSON.parse((String) item.get("tags"));
+				String[] tags = (String[]) JSON.parse(item.getString("tags"));
 	
-				String imageURL = (String) item.get("imageURL");
-				
+				String imageURL = item.getString("imageURL");
+
 				System.out.println("item info parsed succesfuly");
-				String itemID = insertItem(userID, itemName, itemDescription, itemPrice, tags, imageURL).getString("itemID");
-			
-				Document status = new Document().append("status", "listed"); 
+				String itemID = insertItem(userID, itemName, itemDescription, itemPrice, tags, imageURL)
+						.getString("itemID");
+
+				Document status = new Document().append("status", "listed");
 				// set status to listed
 				api.itemsCollection.updateOne(new Document("itemID", itemID), new Document("$set", status));
-			
-				Map<String, String> output = new HashMap<>();
+
 				output.put("status", "listed");
-				return output;
 			} catch (Exception e) {
-				return null;
+				output.put("status", "illegal");
+				output.put("error", "internal error: " + e.getMessage());
 			}
-		}
-		else {
-			Map<String, String> output = new HashMap<>();
+		} else {
 			output.put("status", "illegal");
-			return output;
+			output.put("error", "invalid user token for user id");
 		}
+		
+		return output;
 	}
 	
 	private Document createItemDocument(String username, String itemName, String itemDescription, Double itemPrice,

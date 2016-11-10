@@ -183,24 +183,26 @@ public class Main {
 		// Should be used by a form -> serves a page
 		post("/upload", (req, res) -> {
 			Map<String, String> data = api.getBody(req);
+			System.out.println(data);
 			Document item = (Document) JSON.parse(data.get("item"));
 			String userID = data.get("userID");
 			String userToken = data.get("userToken");
 			
-			Map<String, String> success = api.items.upload(item, userID, userToken);
+			Map<String, String> result = api.items.upload(item, userID, userToken);
 			
-			if (success != null) {
-				res.redirect("/myproducts");
-				Map<String, Object> attributes = new HashMap<>();
-				return new ModelAndView(attributes, "MyProducts.ftl");
+			if (result.get("status").equals("listed")) {
+				res.redirect("/dashboard");
+				return new ModelAndView(new HashMap<>(), "redirecting.ftl");
+				// return new ModelAndView(new HashMap<>(), "MyProducts.ftl");
 			} else {
 				// if upload has illegal inputs, redirect
-				res.redirect("/upload");
+				// res.redirect("/upload"); // can't use this for now; adds the
+				// params to the url as qs params
+				Map<String, Object> attributes = new HashMap<>();
+				attributes.put("error", result.get("error"));
+				return new ModelAndView(attributes, "upload.ftl");
 				// TODO: have it redirect with an error
 			}
-			Map<String, Object> attributes = new HashMap<>();
-			attributes.put("data", data);
-			return new ModelAndView(attributes, "upload.ftl");
 		}, templateEngine);
 		
 		// Should be used by AJAX -> serves json
