@@ -21,21 +21,25 @@ public class Items {
 		this.api = api;
 	}
 	
+	// TESTED AS PART OF GETITEMSBYID: SUCCESS
 	public List<Document> getItems(Bson query) {
 		List<Document> documents = new LinkedList<Document>();
 
 		FindIterable<Document> items = api.itemsCollection.find(query);
-		for (Document item : items)
+		for (Document item : items) {
 			documents.add(item);
+		}
+			
 
 		return documents;
 	}
 	
-	// get buyable items, items which are not hidden
+	// TESTED: SUCCESS
 	public List<Document> getBuyableItems() {
 		return getItems(new Document("status", "listed"));
 	}
 
+	// TESTED: SUCCESS
 	public List<Document> getItemsUploadedByUser(String userID, String userToken) {
 		return getItems(new Document("sellerID", userID));
 	}
@@ -46,12 +50,14 @@ public class Items {
 		return getItems(new Document("boughtByUserID", userID));
 	}
 
+	// TESTED: SUCCESS
 	public Document getItemByID(String itemID) {
 		List<Document> items = getItems(new Document("itemID", itemID));
 		return items.size() > 0 ? items.get(0) : null;
 		// return the first item matched
 	}
-
+	
+	// TESTED AS PART OF UPLOAD: SUCCESS
 	public Document insertItem(String username, String itemName, String itemDescription, Double itemPrice,
 			String[] tags, String imageURL) {
 
@@ -60,36 +66,35 @@ public class Items {
 
 		return itemDocument;
 	}
-
+	
+	// TESTED: SUCCESS
+	// TODO: EXCEPT FOR TAGS WITH ACTUAL ARRAY OF TAGS
 	public Map<String, String> upload(Document item, String userID, String userToken) {
 		Map<String, String> output = new HashMap<>();
-		
-		System.out.println("Begin to upload item " + userID + " " + userToken);
 
 		if (api.userTokens.testUserTokenForUser(userID, userToken)){
 			try {
 				String itemName = item.getString("name");
 				String itemDescription = item.getString("description");
-				double itemPrice = item.getDouble("price");
+				double itemPrice = Double.parseDouble(item.getString("price"));
 				// TODO: need to test this
 				String[] tags = (String[]) JSON.parse(item.getString("tags"));
-	
 				String imageURL = item.getString("imageURL");
-
-				System.out.println("item info parsed succesfuly");
-				String itemID = insertItem(userID, itemName, itemDescription, itemPrice, tags, imageURL)
-						.getString("itemID");
+				Document itemget = insertItem(userID, itemName, itemDescription, itemPrice, tags, imageURL);
+				
+				String itemID = itemget.getString("itemID");
 
 				Document status = new Document().append("status", "listed");
-				// set status to listed
 				api.itemsCollection.updateOne(new Document("itemID", itemID), new Document("$set", status));
 
 				output.put("status", "listed");
+				output.put("itemID", itemID);
 			} catch (Exception e) {
 				output.put("status", "illegal");
 				output.put("error", "internal error: " + e.getMessage());
 			}
 		} else {
+			System.out.println("token incorrect");
 			output.put("status", "illegal");
 			output.put("error", "invalid user token for user id");
 		}
@@ -97,6 +102,8 @@ public class Items {
 		return output;
 	}
 	
+	// TESTED AS PART OF UPLOAD: SUCCESS
+	// TODO: DO WE NEED TO FIX ATTRIBUTE NAMES?
 	private Document createItemDocument(String username, String itemName, String itemDescription, Double itemPrice,
 			String[] tags, String imageURL) {
 		Document itemDocument = new Document();
