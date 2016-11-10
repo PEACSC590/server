@@ -21,11 +21,13 @@ public class Login {
         }
     }
 
-    public static boolean login(String user, String pass) {
+    public static boolean login(String userID, String password) {
+
+        
         //System.out.println("moo");
         try {
-            username = user;
-            password = pass;
+            username = userID;
+            password = password;
             // URL of exeter website
             String temp_url = "https://www.outlook.com/owa/exeter.edu";
             URL obj = new URL(temp_url);
