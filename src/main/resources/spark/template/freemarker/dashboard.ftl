@@ -179,19 +179,21 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
                     <#list attributes as pastPurchases, pastPurchases>
+                    <tr>
                     <td>${attributes.pastPurchases.get("itemName")}</td>
+                    </tr>
                    </#list>
                     <#list attributes as pastPurchases, pastPurchases>
+                    <tr>
                     <td>"$" + ${attributes.pastPurchases.get("dateBought")}</td>
+                    </tr>
                    </#list>
                     <#list attributes as pastPurchases, pastPurchases>
+                    <tr>
                     <td>"$" + ${attributes.pastPurchases.get("itemPrice")}</td>
+                    </tr>
                     </#list>
-
-
-                  </tr>
 
                 </tbody>
               </table>
