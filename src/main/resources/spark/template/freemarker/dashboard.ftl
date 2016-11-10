@@ -107,7 +107,10 @@
 
         <div class="container-fluid">
 
-            <div class="table-responsive col-md-3">
+
+            <div class="table-responsive col-md-6">
+
+            
               <h2 class="sub-header textbgdash2">Past Purchases</h2>
               <table  class="table textbgtable">
                  <thead >
@@ -131,7 +134,32 @@
               </table>
             </div>
 
-            <div class="table-responsive col-md-3">
+
+            <div class="table-responsive col-md-6">
+              <h2 class="sub-header textbgdash2">Items for Sale</h2>
+
+              <table  class="table textbgtable">
+                <thead>
+                  <tr>
+                    <th>Item</th>
+                    <th>Date</th>
+                    <th>Price</th>
+
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>insert item</td>
+                    <td>10/14/15</td>
+                    <td>$5.00</td>
+
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+            
+            <div class="table-responsive col-md-6">
               <h2 class="sub-header textbgdash2">Past Sales</h2>
               <table  class="table textbgtable">
                 <thead>
@@ -139,7 +167,7 @@
                     <th>Item</th>
                     <th>Date</th>
                     <th>Price</th>
-
+                   
                   </tr>
                 </thead>
                 <tbody>
@@ -149,42 +177,25 @@
                     <td>$5.00</td>
 
 
-
-
                   </tr>
 
                 </tbody>
               </table>
             </div>
 
-            <div class="table-responsive col-md-3">
-              <h2 class="sub-header textbgdash2">Current Items</h2>
-              <table  class="table textbgtable">
-                <thead>
-                  <tr>
-                    <th>Item</th>
-                    <th>Date</th>
-                    <th>Price</th>
-
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>insert item</td>
-                    <td>10/14/15</td>
-                    <td>$5.00</td>
+            
 
 
-
-
-                  </tr>
-
-                </tbody>
-              </table>
-            </div>
-
-
-          </div>
+          
+        
+        
+        
+        
+        
+        
+        
+        
+        </div>
 
 
         </div>
