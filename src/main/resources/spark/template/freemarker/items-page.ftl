@@ -77,8 +77,6 @@
           <a href="books.ftl" class="list-group-item">Books</a>
           <a href="clothes.ftl" class="list-group-item">Clothes</a>
           <a href="furniture.ftl" class="list-group-item">Furniture</a>
-          
-
           <a href="other.ftl" class="list-group-item">Other</a>
         </div>
       </div>

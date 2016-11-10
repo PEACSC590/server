@@ -110,7 +110,7 @@
 
             <div class="table-responsive col-md-6">
 
-            
+
               <h2 class="sub-header textbgdash2">Past Purchases</h2>
               <table  class="table textbgtable">
                  <thead >
@@ -158,7 +158,7 @@
                 </tbody>
               </table>
             </div>
-            
+
             <div class="table-responsive col-md-6">
               <h2 class="sub-header textbgdash2">Past Sales</h2>
               <table  class="table textbgtable">
@@ -167,7 +167,7 @@
                     <th>Item</th>
                     <th>Date</th>
                     <th>Price</th>
-                   
+
                   </tr>
                 </thead>
                 <tbody>
@@ -183,18 +183,18 @@
               </table>
             </div>
 
-            
 
 
-          
-        
-        
-        
-        
-        
-        
-        
-        
+
+
+
+
+
+
+
+
+
+
         </div>
 
 

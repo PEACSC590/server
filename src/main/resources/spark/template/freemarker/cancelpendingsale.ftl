@@ -41,35 +41,27 @@
           </div>
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-              <ul class="nav navbar-nav">
-                  <li>
-                      <a href="HomePage.ftl">Home</a>
-                  </li>
-                  <li>
-                      <a href="items-page.ftl">For Sale</a>
-                  </li>
-                  <li>
-                      <a href="about.ftl">About</a>
-                  </li>
-                  <li>
-                      <a href="contact.ftl">Contact</a>
-                  </li>
-                  <li>
-                      <a href="dashboard.ftl">Dashboard</a>
-                  </li>
-                  <li>
-                      <a href="settings.ftl">Settings</a>
-                  </li>
-                  <li class="active">
-                      <a href="profile.ftl">Profile</a>
-                  </li>
+            <ul class="nav navbar-nav">
 
-                  <li><a href="login.ftl">Log Out</a></li>
+                <li class="active">
+                    <a href="items-page.ftl">For Sale</a>
+                </li>
+                <li>
+                    <a href="about.ftl">About</a>
+                </li>
 
-                  <form class="navbar-form navbar-right" action="items-page.ftl">
-                    <input type="text" href="items-page.ftl" class="form-control" placeholder="Search">
-                  </form>
-              </ul>
+                <li>
+                    <a href="dashboard.ftl">Dashboard</a>
+                </li>
+
+
+
+                <li><a href="login.ftl">Log Out</a></li>
+
+                <form class="navbar-form navbar-right" action="items-page.ftl">
+                  <input type="text" href="items-page.ftl" class="form-control" placeholder="Search">
+                </form>
+            </ul>
           </div>
           <!-- /.navbar-collapse -->
       </div>
