@@ -119,9 +119,15 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td>insert item</td>
-                    <td>10/14/15</td>
-                    <td>$5.00</td>
+                    <#list attributes as itemsBought, itemsBought>
+                    <td>${attributes.itemsBought.get("itemName")}</td>
+                   </#list>
+                    <#list attributes as itemsBought, itemsBought>
+                    <td>${attributes.itemsBought.get("dateBought")}</td>
+                   </#list>
+                    <#list attributes as itemsBought, itemsBought>
+                    <td>"$" + ${attributes.itemsBought.get("itemPrice")}</td>
+                   </#list>
 
                   </tr>
 
@@ -145,9 +151,15 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <td>insert item</td>
-                    <td>10/14/15</td>
-                    <td>$5.00</td>
+                    <#list attributes as itemsUploaded, itemsUploaded>
+                    <td>${attributes.itemsUploaded.get("itemName")}</td>
+                   </#list>
+                    <#list attributes as itemsUploaded, itemsUploaded>
+                    <td>${attributes.itemsUploaded.get("dateBought")}</td>
+                   </#list>
+                    <#list attributes as itemsUploaded, itemsUploaded>
+                    <td>"$" + ${attributes.itemsUploaded.get("itemPrice")}</td>
+                   </#list>
 
                   </tr>
 
@@ -214,6 +226,29 @@
         </footer>
 
     </div>
+    
+    <script>
+
+  /*
+  *formData: { name: "name", imageURL: "sdf" }
+  */
+
+  // TODO: validate form inputs
+
+  var userID = localStorage.get('userID');
+  var userToken = localStorage.get('userToken');
+
+  // TODO: validate that userID and userToken are not null
+
+  $.ajax({
+    type: 'GET',
+    url: '/dashboard',
+    data: { userID: userID, userToken: userToken},
+    success: uploadSuccess,
+    dataType: 'json'
+  });
+  
+</script>
 
     </body>
     </html>
