@@ -150,4 +150,7 @@ public class Items {
 	public List<Document> searchItemsByText(String searchBy) {
 		return getItems(new Document("$text", new Document("$search", searchBy)));
 	}
+	public List<Document> getItemsSold(String userID) {
+		return getItems(new Document("sellerID", userID).append("status", "sold"));
+	}
 }
