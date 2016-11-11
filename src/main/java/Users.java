@@ -43,8 +43,7 @@ public class Users {
 		output.put("success", "logout " + success);
 		return output;
 	}
-	
-	
+
 	// TESTED: SUCCESS
 	public Document upsertUser(String username) {
 		// if exists

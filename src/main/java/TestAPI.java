@@ -1,22 +1,7 @@
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-
+import java.util.*;
 import org.bson.Document;
-import org.bson.conversions.Bson;
-
 import java.net.UnknownHostException;
-
-import static spark.Spark.*;
-import spark.template.freemarker.FreeMarkerEngine;
-import spark.ModelAndView;
-import spark.ResponseTransformer;
-
 import com.mongodb.*;
-import com.mongodb.client.FindIterable;
-import com.mongodb.client.MongoDatabase;
-import com.mongodb.util.JSON;
 
 public class TestAPI {
 
@@ -58,7 +43,7 @@ public class TestAPI {
 			
 			Document book2 = new Document().append("name", "Cow")
 					.append("description", "King Cow")
-					.append("price", "4.99")
+					.append("price", "4100.99")
 					.append("tags", "")
 					.append("imageURL", "website");
 			//System.out.println(api.items.upload(book2, "User1", token1).get("status"));
@@ -74,6 +59,20 @@ public class TestAPI {
 			book2 = api.items.getItemByID(book2ID);
 			//System.out.println(book1.get("status"));
 
+			// test searchby
+			for (Document item : api.items.searchItemsByText("Cow")) {
+				System.out.println(item.get("itemID") + " " + item.get("itemName") + " " + item.get("sellerID") + " " + item.get("status"));
+			}
+			
+			
+			
+			
+			
+			
+			/**TEST UNLIST
+			api.items.unlist(book2ID, "User1", token1);
+			System.out.println(api.items.getItemByID(book2ID).get("status"))**/
+			
 			/**System.out.println("TEST: getBuyableItems");
 			// Test getBuyable Items
 			for (Document item : api.items.getBuyableItems()) {

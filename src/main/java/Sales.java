@@ -120,25 +120,6 @@ public class Sales {
 		return output;
 	}
 
-	public Map<String, String> unlist(String itemID, String sellerID, String userToken) {
-		boolean success = api.userTokens.testUserTokenForUser(sellerID, userToken);
-		if (success) {
-	
-			Document unlist = new Document();
-			unlist.put("status", "hidden");
-			api.itemsCollection.updateOne(new Document("itemID", itemID), new Document("$set", unlist));
-
-			Map<String, String> output = new HashMap<>();
-			output.put("status", "hidden");
-			return output;
-		}
-		else {
-			Map<String, String> output = new HashMap<>();
-			output.put("status", "listed");
-			return output;
-		}
-	}
-
 	// this is run after the buyer has paid for the item and has received it
 	public Map<String, String> sell(String itemID, String userID, String userToken) {
 		Document item = api.items.getItemByID(itemID);

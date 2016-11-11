@@ -44,6 +44,7 @@ public class Items {
 		return getItems(new Document("sellerID", userID));
 	}
 	
+	// SEMI-TESTED: SHOULD WORK
 	public List<Document> getItemsBoughtByUser(String userID) {
 		// 10.16.16: the item attribute might not be "boughtByUserID", but I'll
 		// use it for now
@@ -113,9 +114,9 @@ public class Items {
 		itemDocument.append("itemID", itemID);
 		itemDocument.append("buyerID", null);
 		itemDocument.append("sellerID", username);
-		itemDocument.append("itemName", itemName);
-		itemDocument.append("itemDescription", itemDescription);
-		itemDocument.append("itemPrice", itemPrice);
+		itemDocument.append("name", itemName);
+		itemDocument.append("description", itemDescription);
+		itemDocument.append("price", itemPrice);
 		itemDocument.append("tags", tags);
 		itemDocument.append("imageURL", imageURL);
 		// true denotes unsold item
@@ -125,6 +126,27 @@ public class Items {
 		return itemDocument;
 	}
 
+	// TESTED: SUCCESS
+	public Map<String, String> unlist(String itemID, String sellerID, String userToken) {
+		boolean success = api.userTokens.testUserTokenForUser(sellerID, userToken);
+		if (success) {
+	
+			Document unlist = new Document();
+			unlist.put("status", "hidden");
+			api.itemsCollection.updateOne(new Document("itemID", itemID), new Document("$set", unlist));
+
+			Map<String, String> output = new HashMap<>();
+			output.put("status", "hidden");
+			return output;
+		}
+		else {
+			Map<String, String> output = new HashMap<>();
+			output.put("status", "listed");
+			return output;
+		}
+	}
+	
+	// TESTED: FAIL
 	public List<Document> searchItemsByText(String searchBy) {
 		return getItems(new Document("$text", new Document("$search", searchBy)));
 	}
