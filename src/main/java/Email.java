@@ -16,6 +16,7 @@ public class Email {
 	final static String username = "peabay.bot@gmail.com";
 	final static String password = "peAbAy$!598";
 
+	// TESTED: SUCCESS
 	public static void send(String toAddress, String subject, String body) {
 		Properties props = new Properties();
 		props.put("mail.smtp.starttls.enable", "true");

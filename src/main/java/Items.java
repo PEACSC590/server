@@ -55,7 +55,6 @@ public class Items {
 	public Document getItemByID(String itemID) {
 		List<Document> items = getItems(new Document("itemID", itemID));
 		return items.size() > 0 ? items.get(0) : null;
-		// return the first item matched
 	}
 	
 	// TESTED AS PART OF UPLOAD: SUCCESS
@@ -78,7 +77,7 @@ public class Items {
 				String itemName = item.getString("name");
 				String itemDescription = item.getString("description");
 				double itemPrice = Double.parseDouble(item.getString("price"));
-				// TODO: need to test this
+				// TODO: NEED TO TEST WHEN INTEGRATION IN FRONTEND HAPPENS
 				String[] tags = (String[]) JSON.parse(item.getString("tags"));
 				String imageURL = item.getString("imageURL");
 				Document itemget = insertItem(userID, itemName, itemDescription, itemPrice, tags, imageURL);
@@ -95,7 +94,6 @@ public class Items {
 				output.put("error", "internal error: " + e.getMessage());
 			}
 		} else {
-			System.out.println("token incorrect");
 			output.put("status", "illegal");
 			output.put("error", "invalid user token for user id");
 		}
@@ -104,12 +102,9 @@ public class Items {
 	}
 	
 	// TESTED AS PART OF UPLOAD: SUCCESS
-	// TODO: DO WE NEED TO FIX ATTRIBUTE NAMES?
 	private Document createItemDocument(String username, String itemName, String itemDescription, Double itemPrice,
 			String[] tags, String imageURL) {
 		Document itemDocument = new Document();
-		// assign random integer between 0 and 10,000, we can find a better way
-		// to assign item id
 		String itemID = Util.generateUUID();
 		itemDocument.append("itemID", itemID);
 		itemDocument.append("buyerID", null);
@@ -119,10 +114,8 @@ public class Items {
 		itemDocument.append("price", itemPrice);
 		itemDocument.append("tags", tags);
 		itemDocument.append("imageURL", imageURL);
-		// true denotes unsold item
 		itemDocument.append("status", "uploaded");
 		itemDocument.append("dateBought", null);
-		// is that all?
 		return itemDocument;
 	}
 
@@ -146,10 +139,14 @@ public class Items {
 		}
 	}
 	
-	// TESTED: FAIL
+	// TESTED: SUCCESS
+	// TODO: THIS MAY BE A LITTLE FINNICKY
 	public List<Document> searchItemsByText(String searchBy) {
+		// RETURNS ITMES WITH SEARCHBY IN TITLE, DESCRIPTION, OR TAGS
 		return getItems(new Document("$text", new Document("$search", searchBy)));
 	}
+	
+	// SEMI-TESTED: SHOULD WORK
 	public List<Document> getItemsSold(String userID) {
 		return getItems(new Document("sellerID", userID).append("status", "sold"));
 	}

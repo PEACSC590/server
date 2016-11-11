@@ -13,51 +13,55 @@ public class Sales {
 	public Sales(API api) {
 		this.api = api;
 	}
-
-	public Map<String, String> buy(String userID, String itemID, String userToken) throws Exception {
-		boolean success = api.userTokens.testUserTokenForUser(userID, userToken);
+	
+	// TESTED: SUCCESS
+	public Map<String, String> buy(String buyerID, String itemID, String userToken) throws Exception {
+		boolean success = api.userTokens.testUserTokenForUser(buyerID, userToken);
+		
 		if (success){
-			
-			Document userDocument = api.usersCollection.find(new Document("username", userID)).first();
-			if (userDocument == null)
-				throw new Exception("Could not find user " + userID);
+			Document userDocument = api.usersCollection.find(new Document("userID", buyerID)).first();
+			if (userDocument == null) {
+				throw new Exception("Could not find user " + buyerID);
+			}
 
 			// if `numPendingPurchases` is greater than the maximum allowed, error
 			int numPendingPurchases = Integer.parseInt(userDocument.get("numPendingPurchases").toString());
-			if (numPendingPurchases >= MAX_PENDING_PURCHASES)
-				throw new Exception("Reached maximum number of currently pending purchases allowed");
+			if (numPendingPurchases >= MAX_PENDING_PURCHASES) {
+				Map<String, String> output = new HashMap<>();
+				output.put("status", "listed");
+				output.put("error", "MAXIMUM ALLOWED PURCHASES REACHED");
+				output.put("numPendingPurchases", numPendingPurchases + "");
+				output.put("dateBought", null);
+				return output;
+			}
 
-			// increment `numPendingPurchases`
-			api.usersCollection.updateOne(new Document("userID", userID),
+			api.usersCollection.updateOne(new Document("userID", buyerID),
 				new Document("$inc", new Document("numPendingPurchases", 1)));
 
-			// update the item to be bought with the buyer id, the date this is
-			// being processed, and the new status of the item
 			long dateBought = System.currentTimeMillis();
-			Document updates = new Document().append("buyerID", userID).append("dateBought", dateBought).append("status",
+			Document updates = new Document().append("buyerID", buyerID).append("dateBought", dateBought).append("status",
 				"pending");
 			api.itemsCollection.updateOne(new Document("itemID", itemID), new Document("$set", updates));
 
 			Document item = api.items.getItemByID(itemID);
-			String itemName = item.getString("itemName");
+			String itemName = item.getString("name");
 			String sellerID = item.getString("sellerID");
 
-			// send e-mail to buyer for confirmation
-			Email.send(userID, "Pending purchase", "Your purchase of " + itemName + " is pending.");
+			// BUYER CONFIRMATION EMAIL
+			Email.send(buyerID + "@exeter.edu", "Pending purchase", "Your purchase of " + itemName + " is pending.");
 
-			// send e-mail to seller notifying bought item
-			Email.send(sellerID, "Buyer has bought item",
-				"Buyer " + userID + " has bought your item " + itemName + ". Please confirm your sale of the item.");
+			// SELLER CONFIRMATION EMAIL
+			Email.send(sellerID + "@exeter.edu", "Buyer has bought item",
+				"Buyer " + buyerID + " has bought your item " + itemName + ". Please confirm your sale of the item.");
 
 			Map<String, String> output = new HashMap<>();
 			output.put("status", "pending");
 			output.put("numPendingPurchases", numPendingPurchases + 1 + "");
-			long buyDate = System.currentTimeMillis();
-			output.put("dateBought", buyDate + "");
+			output.put("dateBought", dateBought + "");
 			return output;
 		}
 		else {
-			Document userDocument = api.usersCollection.find(new Document("username", userID)).first();
+			Document userDocument = api.usersCollection.find(new Document("userID", buyerID)).first();
 			int numPendingPurchases = Integer.parseInt(userDocument.get("numPendingPurchases").toString());
 			Map<String, String> output = new HashMap<>();
 			output.put("status", "listed");
@@ -67,7 +71,6 @@ public class Sales {
 		}
 	}
 
-	// userID = buyerID?
 	public Map<String, String> cancelPendingSale(String itemID, String userID, String userToken) {
 		boolean success = api.userTokens.testUserTokenForUser(userID, userToken);
 		Document userDocument = api.usersCollection.find(new Document("username", userID)).first();

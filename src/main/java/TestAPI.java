@@ -14,19 +14,22 @@ public class TestAPI {
 	public void test() throws MongoException, UnknownHostException {
 		try {
 			// Testing in progess
-						
+			
+			String user1 = "asun1";
+			String user2 = "ASUN1";
+			
 			// Test upsert user
-			Document User1 = api.users.upsertUser("User1");
+			Document User1 = api.users.upsertUser(user1);
 			//System.out.println(User1.get("userID"));
 			
 			// Test user tokens
-			String token1 = api.userTokens.setUserTokenForNewSession("User1");
+			String token1 = api.userTokens.setUserTokenForNewSession(user1);
 			//System.out.println(token1);
 			//System.out.println("User1 has been created");
 			
 			// This user will buy items from User1
-			Document User2 = api.users.upsertUser("User2");
-			String token2 = api.userTokens.setUserTokenForNewSession("User2");
+			Document User2 = api.users.upsertUser(user2);
+			String token2 = api.userTokens.setUserTokenForNewSession(user2);
 			//System.out.println(token2);
 			//System.out.println("User2 has been created");
 
@@ -36,7 +39,7 @@ public class TestAPI {
 					.append("price", "5.99")
 					.append("tags", "")
 					.append("imageURL", "website");
-			Map<String, String> map = api.items.upload(book1, "User1", token1);
+			Map<String, String> map = api.items.upload(book1, user1, token1);
 			//System.out.println(map.get("status"));
 			String book1ID = map.get("itemID");
 			//System.out.println(book1ID);
@@ -46,6 +49,7 @@ public class TestAPI {
 					.append("price", "4100.99")
 					.append("tags", "")
 					.append("imageURL", "website");
+			api.items.upload(book2, user1, token1);
 			//System.out.println(api.items.upload(book2, "User1", token1).get("status"));
 			String book2ID = map.get("itemID");
 			
@@ -58,14 +62,29 @@ public class TestAPI {
 			// Test getItemsUploadedByID
 			book2 = api.items.getItemByID(book2ID);
 			//System.out.println(book1.get("status"));
-
-			// test searchby
-			for (Document item : api.items.searchItemsByText("Cow")) {
-				System.out.println(item.get("itemID") + " " + item.get("itemName") + " " + item.get("sellerID") + " " + item.get("status"));
-			}
+			
+			map = api.sales.buy(user2, book1ID, token2);
+			System.out.println(map.get("status") + " " + map.get("numPendingPurchases") + " " + map.get("dateBought"));
+			book1 = api.items.getItemByID(book1ID);
+			System.out.println(book1.get("buyerID") + " " + book1.get("status"));
 			
 			
 			
+			/** test searchby: now successful
+			for (Document item : api.items.searchItemsByText("King")) {
+				System.out.println(item.get("itemID") + " " + item.get("name") + " " + item.get("sellerID") + " " + item.get("status"));
+			} **/
+			
+			/** test buy function
+			map = api.sales.buy(user2, book1ID, token2);
+			System.out.println(map.get("status") + " " + map.get("numPendingPurchases") + " " + map.get("dateBought"));
+			book1 = api.items.getItemByID(book1ID);
+			System.out.println(book1.get("buyerID") + " " + book1.get("status"));
+			
+			map = api.sales.buy(user2, book2ID, token2);
+			System.out.println(map.get("status") + " " + map.get("numPendingPurchases") + " " + map.get("dateBought"));
+			book1 = api.items.getItemByID(book1ID);
+			System.out.println(book1.get("buyerID") + " " + book1.get("status"));**/
 			
 			
 			

@@ -64,12 +64,13 @@ public class Users {
 		Document userDocument = new Document();
 		userDocument.append("userID", username);
 		userDocument.append("banned", false);
-		userDocument.append("numPendingPurchases", 0);
+		userDocument.append("numPendingPurchases", "0");
 		// TODO: IS THAT ALL?
 		return userDocument;
 	}
 	
 	// TESTED: SUCCESS
+	// TODO: NEED TO GO OVER ALL API FUNCTIONS AND ADD CONDITION FOR USER BANNED
 	public Map<String, String> ban(String userID) {
 		Document updates = new Document();
 		updates.put("banned", true);
