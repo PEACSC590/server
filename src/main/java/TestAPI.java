@@ -15,8 +15,6 @@ public class TestAPI {
 		try {
 			// Testing in progess
 			
-			Login.login("asun1", "Quantal^1");
-			
 			/**String user1 = "asuN1";
 			String user2 = "asUn1";
 			
