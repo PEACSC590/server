@@ -88,18 +88,19 @@
 
       console.log("formData: " + formData);
       console.log("userID:" + formData.userID)
-      console.log("userID value: " + document.getElementById("userID").value;
+      console.log("userID value: " + document.getElementById("userID").value);
+      console.log("password value: " + document.getElementById("password").value);
       var userData = {
-        userID: formData.userID,
-        password: formData.password,
+        userID: document.getElementById("userID").value,
+        password: document.getElementById("password").value,
       };
 
-      console.log({ userID: userID, password: password });
+      //console.log({ userID: userID, password: password });
 
       $.ajax({
         type: 'POST',
         url: '/login',
-        data: { userID: userID, password: password},
+        data: { userID: document.getElementById("userID").value, password: document.getElementById("password").value},
         success: uploadSuccess,
         dataType: 'json'
       });
