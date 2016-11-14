@@ -121,14 +121,14 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <#list itemsBought as document, itemName>
+                    <#list itemsBought as itemName>
                     <td>${itemName}</td>
                    </#list>
-                    <#list itemsBought as document, dateBought>
+                    <#list itemsBought as dateBought>
                     <td>${dateBought}</td>
                    </#list>
-                    <#list itemsBought as document, itemPrice>
-                    <td>"$" + ${"itemPrice"}</td>
+                    <#list itemsBought as itemPrice>
+                    <td>$ ${"itemPrice"}</td>
                    </#list>
 
                   </tr>
@@ -153,14 +153,14 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <#list itemsUploaded as document, itemName>
+                    <#list itemsUploaded as itemName>
                     <td>${itemName}</td>
                    </#list>
-                    <#list itemsUploaded as document, dateBought>
+                    <#list itemsUploaded as dateBought>
                     <td>${dateBought}</td>
                    </#list>
-                    <#list itemsUploaded as itemsUploaded, itemPrice>
-                    <td>"$" + ${itemPrice}</td>
+                    <#list itemsUploaded as itemPrice>
+                    <td>$ ${itemPrice}</td>
                    </#list>
 
                   </tr>
@@ -182,19 +182,19 @@
                 </thead>
                 <tbody>
                    <tr>
-                    <#list itemsSold as document, itemName>
+                    <#list itemsSold as itemName>
 
                     <td>${itemName}</td>
 
                    </#list>
-                    <#list itemsSold as document, dateBought>
+                    <#list itemsSold as dateBought>
 
                     <td>${dateBought}</td>
 
                    </#list>
-                    <#list itemsSold as document, itemPrice>
+                    <#list itemsSold as itemPrice>
 
-                    <td>"$" + ${itemPrice}</td>
+                    <td>$ ${itemPrice}</td>
 
                     </#list>
     </tr>
