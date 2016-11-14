@@ -85,11 +85,11 @@
 <div class="jumbotron jumbotron-forsale">
     <h1>PEAbay</h1>
     <p>List of Items on PEAbay</p>
-    <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
+    <p><a class="btn btn-primary btn-lg" href="about.ftl" role="button">Learn more &raquo;</a></p>
 </div>
 
       <!-- Example row of columns -->
-      
+
       <div class="container">
         <div class="col-md-4">
           <div class="product">
