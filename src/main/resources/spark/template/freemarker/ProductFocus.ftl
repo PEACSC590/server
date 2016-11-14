@@ -75,6 +75,34 @@
 
   <#include "/partials/scripts.js">
 
+    <script>
+
+  /*
+  *formData: { name: "name", imageURL: "sdf" }
+  */
+
+  // TODO: validate form inputs
+
+  var item.name = localStorage.get('name');
+  var item.imageURL = localStorage.get('imageURL');
+  var item.description = localStorage.get('description');
+  var item.status = localStorage.get('status');
+  var item.price = localStorage.get('price');
+  var item.tags = localStorage.get('tags');
+
+
+  // TODO: validate that item are not null
+
+  $.ajax({
+    type: 'GET',
+    url: '/list-item?itemID=[number]',
+    data: { item: name, item: imageURL, item: description, item: status, item: price, item: tags},
+    success: uploadSuccess,
+    dataType: 'json'
+  });
+
+</script>
+
 </body>
 
 </html>
