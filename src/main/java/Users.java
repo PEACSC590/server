@@ -64,7 +64,7 @@ public class Users {
 		Document userDocument = new Document();
 		userDocument.append("userID", username);
 		userDocument.append("banned", false);
-		userDocument.append("numPendingPurchases", "0");
+		userDocument.append("numPendingPurchases", 0);
 		// TODO: IS THAT ALL?
 		return userDocument;
 	}
