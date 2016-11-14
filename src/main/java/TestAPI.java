@@ -15,7 +15,9 @@ public class TestAPI {
 		try {
 			// Testing in progess
 			
-			String user1 = "asuN1";
+			Login.login("asun1", "Quantal^1");
+			
+			/**String user1 = "asuN1";
 			String user2 = "asUn1";
 			
 			// Test upsert user
@@ -85,18 +87,6 @@ public class TestAPI {
 			book2 = api.items.getItemByID(book2ID);
 			System.out.println(book2.get("buyerID") + " " + book2.get("status"));
 			
-			System.out.println("TEST: getBuyableItems");
-			// Test getBuyable Items
-			for (Document item : api.items.getBuyableItems()) {
-				System.out.println(item.get("itemID") + " " + item.get("itemName") + " " + item.get("sellerID") + " " + item.get("status"));
-			}
-			
-			System.out.println("TEST: getUploadedByUserItems");
-			// Test getBuyable Items
-			for (Document item : api.items.getItemsUploadedByUser("User1", token1)) {
-				System.out.println(item.get("itemID") + " " + item.get("itemName") + " " + item.get("sellerID") + " " + item.get("status"));
-			}
-			
 			Thread.sleep(1000);
 			
 			// test sold
@@ -104,7 +94,7 @@ public class TestAPI {
 			System.out.println(map.get("status"));
 			System.out.println(api.usersCollection.find(new Document("userID", user2)).first().get("numPendingPurchases"));
 			
-			Thread.sleep(1000);
+			Thread.sleep(1000);**/
 			
 			/**test refuse sale
 			map = api.sales.refuseSale(book1ID, user1, token2);
