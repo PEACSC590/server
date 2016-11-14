@@ -7,17 +7,17 @@ import org.bson.Document;
 public class Sales {
 
 	private static final int MAX_PENDING_PURCHASES = 5;
-	
+
 	private API api;
 
 	public Sales(API api) {
 		this.api = api;
 	}
-	
+
 	// TESTED: SUCCESS
 	public Map<String, String> buy(String buyerID, String itemID, String userToken) throws Exception {
 		boolean success = api.userTokens.testUserTokenForUser(buyerID, userToken);
-		
+
 		if (success){
 			Document userDocument = api.usersCollection.find(new Document("userID", buyerID)).first();
 			if (userDocument == null) {
@@ -36,11 +36,11 @@ public class Sales {
 			}
 
 			api.usersCollection.updateOne(new Document("userID", buyerID),
-				new Document("$inc", new Document("numPendingPurchases", 1)));
+					new Document("$inc", new Document("numPendingPurchases", 1)));
 
 			long dateBought = System.currentTimeMillis();
 			Document updates = new Document().append("buyerID", buyerID).append("dateBought", dateBought).append("status",
-				"pending");
+					"pending");
 			api.itemsCollection.updateOne(new Document("itemID", itemID), new Document("$set", updates));
 
 			Document item = api.items.getItemByID(itemID);
@@ -52,11 +52,11 @@ public class Sales {
 
 			// SELLER CONFIRMATION EMAIL
 			Email.send(sellerID + "@exeter.edu", "Confirm your sale",
-				"Buyer " + buyerID + " has bought your item " + itemName + ". Please confirm your sale of the item.");
+					"Buyer " + buyerID + " has bought your item " + itemName + ". Please confirm your sale of the item.");
 
 			Map<String, String> output = new HashMap<>();
 			output.put("status", "pending");
-			output.put("numPendingPurchases", numPendingPurchases + 1 + "");
+			output.put("numPendingPurchases", (numPendingPurchases + 1) + "");
 			output.put("dateBought", dateBought + "");
 			return output;
 		}
@@ -65,15 +65,17 @@ public class Sales {
 			int numPendingPurchases = Integer.parseInt(userDocument.get("numPendingPurchases").toString());
 			Map<String, String> output = new HashMap<>();
 			output.put("status", "listed");
+			output.put("error", "INVALID USERTOKEN");
 			output.put("numPendingPurchases", numPendingPurchases + "");
 			output.put("dateBought", null);
 			return output;
 		}
 	}
 
-	public Map<String, String> cancelPendingSale(String itemID, String userID, String userToken) {
-		boolean success = api.userTokens.testUserTokenForUser(userID, userToken);
-		Document userDocument = api.usersCollection.find(new Document("username", userID)).first();
+	// TESTED: SUCCESS
+	public Map<String, String> cancelPendingSale(String itemID, String buyerID, String userToken) {
+		boolean success = api.userTokens.testUserTokenForUser(buyerID, userToken);
+		Document userDocument = api.usersCollection.find(new Document("userID", buyerID)).first();
 		if (success){
 			Document cancelSale = new Document();
 			cancelSale.put("status", "listed");
@@ -81,9 +83,21 @@ public class Sales {
 			cancelSale.put("dateBought", null);
 			api.itemsCollection.updateOne(new Document("itemID", itemID), new Document("$set", cancelSale));
 
-			api.usersCollection.updateOne(new Document("userID", userID),
-				new Document("$inc", new Document("numPendingPurchases", -1)));
+			api.usersCollection.updateOne(new Document("userID", buyerID),
+					new Document("$inc", new Document("numPendingPurchases", -1)));
+			userDocument = api.usersCollection.find(new Document("userID", buyerID)).first();
 			int numPendingPurchases = Integer.parseInt(userDocument.get("numPendingPurchases").toString());
+
+			Document item = api.items.getItemByID(itemID);
+			String itemName = item.getString("name");
+			String sellerID = item.getString("sellerID");
+
+			// BUYER CONFIRMATION EMAIL
+			Email.send(buyerID + "@exeter.edu", "You have cancelled a purchase", "You have cancelled purchase of " + itemName + ".");
+
+			// SELLER CONFIRMATION EMAIL
+			Email.send(sellerID + "@exeter.edu", "Buyer has cancelled your sale",
+					"Buyer has cancelled your sale of " + itemName + ". Your item has automatically been marked as listed.");
 
 			Map<String, String> output = new HashMap<>();
 			output.put("status", "listed");
@@ -94,68 +108,103 @@ public class Sales {
 			int numPendingPurchases = Integer.parseInt(userDocument.get("numPendingPurchases").toString());
 			Map<String, String> output = new HashMap<>();
 			output.put("status", "pending");
+			output.put("error", "INVALID USERTOKEN");
 			output.put("numPendingPurchases", numPendingPurchases + "");
 			return output;
 		}
 
 	}
 
-	public Map<String, String> refuseSale(String itemID, String buyerID, String sellerID, String userToken) {
+	// TESTED: SUCCESS
+	public Map<String, String> refuseSale(String itemID, String sellerID, String userToken) {
 		Map<String, String> output = new HashMap<>();
 		boolean success = api.userTokens.testUserTokenForUser(sellerID, userToken);
 		if (success) {
+			String buyerID = api.items.getItemByID(itemID).getString("buyerID");
+			Document refuseSale = new Document();
+			refuseSale.put("status", "listed");
+			refuseSale.put("buyerID", null);
+			refuseSale.put("dateBought", null);
+			api.itemsCollection.updateOne(new Document("itemID", itemID), new Document("$set", refuseSale));
 
-		Document refuseSale = new Document();
-		refuseSale.put("status", "listed");
-		refuseSale.put("buyerID", null);
-		refuseSale.put("dateBought", null);
-		api.itemsCollection.updateOne(new Document("itemID", itemID), new Document("$set", refuseSale));
+			api.usersCollection.updateOne(new Document("userID", buyerID),
+					new Document("$inc", new Document("numPendingPurchases", -1)));
 
-		api.usersCollection.updateOne(new Document("userID", buyerID),
-				new Document("$inc", new Document("numPendingPurchases", -1)));
-		output.put("status", "listed");
-		
+			Document userDocument = api.usersCollection.find(new Document("userID", buyerID)).first();
+			int numPendingPurchases = Integer.parseInt(userDocument.get("numPendingPurchases").toString());
+
+			Document item = api.items.getItemByID(itemID);
+			String itemName = item.getString("name");
+
+			// BUYER CONFIRMATION EMAIL
+			Email.send(buyerID + "@exeter.edu", "Seller has cancelled your purchase", "Your purchase of " + itemName + " has been cancelled by seller " + sellerID + ".");
+
+			// SELLER CONFIRMATION EMAIL
+			Email.send(sellerID + "@exeter.edu", "You have refused a sale",
+					"You have refused a sale of " + itemName + " to " + buyerID + ". Your item has automatically been marked as listed.");
+
+			output.put("status", "listed");
+			output.put("numPendingPurchases", numPendingPurchases + "");
 		}
 		else {
-			output.put("status", "pending");
+			String buyerID = api.items.getItemByID(itemID).getString("buyerID");
+			Document userDocument = api.usersCollection.find(new Document("userID", buyerID)).first();
+			int numPendingPurchases = Integer.parseInt(userDocument.get("numPendingPurchases").toString());
+			Document item = api.items.getItemByID(itemID);
+			String status = item.getString("status");
+			output.put("status", status);
+			output.put("error", "INVALID USERTOKEN");
+			output.put("numPendingPurchases", numPendingPurchases + "");
 		}
 		return output;
 	}
 
-	// this is run after the buyer has paid for the item and has received it
-	public Map<String, String> sell(String itemID, String userID, String userToken) {
+	// TESTED: SUCCESS
+	public Map<String, String> sell(String itemID, String buyerID, String userToken) {
 		Document item = api.items.getItemByID(itemID);
-		boolean success = api.userTokens.testUserTokenForUser(userID, userToken);
+		boolean success = api.userTokens.testUserTokenForUser(buyerID, userToken);
 		if (success) {
-			if (item.getString("status").equals("listed")) {
+			if (item.getString("status").equals("cancelled")) {
 				Map<String, String> output = new HashMap<>();
 				output.put("status", "error");
-				output.put("error", "seller has passed time window");
+				output.put("error", "EXPIRED ITEM");
 				return output;
 			}
-			
+
 			else {
 				Document updates = new Document();
 				updates.put("status", "sold");
 				api.itemsCollection.updateOne(new Document("itemID", itemID), new Document("$set", updates));
-				api.usersCollection.updateOne(new Document("userID", userID),
+				api.usersCollection.updateOne(new Document("userID", buyerID),
 						new Document("$inc", new Document("numPendingPurchases", -1)));
 
-				String itemName = item.getString("itemName");
+				String itemName = item.getString("name");
 				String sellerID = item.getString("sellerID");
+				
+				try {
+				// BUYER EMAIL
+				Email.send(buyerID + "@exeter.edu", "Successful purchase", "Successful purchase of " + itemName + ".");
 
-				// send e-mail to buyer
-				Email.send(userID, "Successful purchase", "Successful purchase of " + itemName + ".");
-
-				Email.send(sellerID, "Successful sale", "Successful sale of " + itemName + ".");
+				// SELLER EMAIL
+				Email.send(sellerID + "@exeter.edu", "Successful sale", "Successful sale of " + itemName + ".");
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				
+				Document userDocument = api.usersCollection.find(new Document("userID", buyerID)).first();
+				int numPendingPurchases = Integer.parseInt(userDocument.get("numPendingPurchases").toString());
+				
 				Map<String, String> output = new HashMap<>();
 				output.put("status", "sold");
+				output.put("numPendingPurchases", numPendingPurchases + "");
 				return output;
 			}
 		}
-		else{
+		else {
 			Map<String, String> output = new HashMap<>();
-			output.put("status", "pending");
+			String status = item.getString("status");
+			output.put("status", status);
+			output.put("error", "INVALID USERTOKEN");
 			return output;
 		}
 	}

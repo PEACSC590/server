@@ -95,7 +95,7 @@ public class Items {
 			}
 		} else {
 			output.put("status", "illegal");
-			output.put("error", "invalid user token for user id");
+			output.put("error", "INVALID USERTOKEN");
 		}
 		
 		return output;
@@ -135,6 +135,7 @@ public class Items {
 		else {
 			Map<String, String> output = new HashMap<>();
 			output.put("status", "listed");
+			output.put("error", "INVALID USERTOKEN");
 			return output;
 		}
 	}

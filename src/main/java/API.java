@@ -1,4 +1,5 @@
-import java.util.Map;
+import java.util.*;
+
 
 import org.bson.Document;
 
@@ -10,8 +11,8 @@ import spark.Request;
 
 public class API {
 
-	private static final int PENDING_PURCHASES_TIMEOUT = 1000 * 60 * 60 * 24 * 3;
-	// 3 days; in ms
+	private static final long PENDING_PURCHASES_TIMEOUT = 1000 * 60 * 60 * 24 * 3;
+	// 3 days
 
 	private MongoDatabase db;
 
@@ -37,11 +38,14 @@ public class API {
 	}
 
 	public void refreshItems() {
-		FindIterable<Document> items = itemsCollection.find(new Document("status", "pending"));
-		for (Document item : items) {
+		List<Document> list = items.getItems(new Document("status", "pending"));
+		System.out.println(list.size());
+		for (Document item : list) {
+			System.out.println("checking item");
 			long time = (long) item.get("dateBought");
 			String buyerID = item.getString("buyerID");
-			String itemName = item.getString("itemName");
+			String sellerID = item.getString("sellerID");
+			String itemName = item.getString("name");
 			if (System.currentTimeMillis() - time > PENDING_PURCHASES_TIMEOUT) {
 				usersCollection.updateOne(new Document("userID", buyerID),
 						new Document("$inc", new Document("numPendingPurchases", -1)));
@@ -51,9 +55,14 @@ public class API {
 				cancelSale.put("buyerID", null);
 				cancelSale.put("dateBought", null);
 				itemsCollection.updateOne(item, new Document("$set", cancelSale));
-
-				Email.send(buyerID, "Your purchase has been cancelled",
+				
+				// BUYER EMAIL
+				Email.send(buyerID + "@exeter.edu", "Your purchase has been cancelled due to inactivity",
 						"Your purchase of " + itemName + " has been cancelled due to seller inactivity.");
+				
+				// SELLER EMAIL
+				Email.send(sellerID + "@exeter.edu", "Your sale has been cancelled due to inactivity",
+						"Your sale of " + itemName + " has been cancelled due to seller inactivity.");
 			}
 		}
 	}

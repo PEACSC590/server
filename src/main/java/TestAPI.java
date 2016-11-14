@@ -33,6 +33,12 @@ public class TestAPI {
 			//System.out.println(token2);
 			//System.out.println("User2 has been created");
 
+			
+			api.usersCollection.updateOne(new Document("userID", user2),
+					new Document("$set", new Document("numPendingPurchases", 0)));
+			api.usersCollection.updateOne(new Document("userID", user1),
+					new Document("$set", new Document("numPendingPurchases", 0)));
+			
 			// Test upload item
 			Document book1 = new Document().append("name", "Hamlet")
 					.append("description", "King Hamlet")
@@ -63,11 +69,46 @@ public class TestAPI {
 			book2 = api.items.getItemByID(book2ID);
 			//System.out.println(book1.get("status"));
 			
+			
+			// test buy
 			map = api.sales.buy(user2, book1ID, token2);
 			System.out.println(map.get("status") + " " + map.get("numPendingPurchases") + " " + map.get("dateBought"));
+			System.out.println(api.usersCollection.find(new Document("userID", user2)).first().get("numPendingPurchases"));
 			book1 = api.items.getItemByID(book1ID);
 			System.out.println(book1.get("buyerID") + " " + book1.get("status"));
 			
+			
+			// test sold
+			map = api.sales.buy(user2, book2ID, token2);
+			System.out.println(map.get("status") + " " + map.get("numPendingPurchases") + " " + map.get("dateBought"));
+			System.out.println(api.usersCollection.find(new Document("userID", user2)).first().get("numPendingPurchases"));
+			book2 = api.items.getItemByID(book2ID);
+			System.out.println(book2.get("buyerID") + " " + book2.get("status"));
+			
+			
+			Thread.sleep(20000);
+			
+			// test sold
+			map = api.sales.sell(book1ID, user2, token2);
+			System.out.println(map.get("status"));
+			System.out.println(api.usersCollection.find(new Document("userID", user2)).first().get("numPendingPurchases"));
+			
+			
+			/**test refuse sale
+			map = api.sales.refuseSale(book1ID, user1, token2);
+			System.out.println(map.get("status") + " " + map.get("numPendingPurchases"));
+			System.out.println(api.usersCollection.find(new Document("userID", user2)).first().get("numPendingPurchases"));**?
+			
+			map = api.sales.refuseSale(book1ID, user1, token1);
+			System.out.println(map.get("status") + " " + map.get("numPendingPurchases"));
+			System.out.println(api.usersCollection.find(new Document("userID", user2)).first().get("numPendingPurchases"));
+			
+			/** test cancel pending sale
+			map = api.sales.cancelPendingSale(book1ID, user2, token2);
+			System.out.println(map.get("status") + " " + map.get("numPendingPurchases"));
+			System.out.println(api.usersCollection.find(new Document("userID", user2)).first().get("numPendingPurchases"));
+			book1 = api.items.getItemByID(book1ID);
+			System.out.println(book1.get("status") + " " + book1.get("buyerID")); **/
 			
 			
 			/** test searchby: now successful

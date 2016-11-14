@@ -278,6 +278,8 @@ background: rgba(255,255,255,0.8);
 
 .container-fluid .jumbotron-dashboard {
   border-radius: 0%;
+  text-align: center;
+
 }
 
 .jumbotron-dashboard {
