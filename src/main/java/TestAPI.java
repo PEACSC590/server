@@ -85,14 +85,26 @@ public class TestAPI {
 			book2 = api.items.getItemByID(book2ID);
 			System.out.println(book2.get("buyerID") + " " + book2.get("status"));
 			
+			System.out.println("TEST: getBuyableItems");
+			// Test getBuyable Items
+			for (Document item : api.items.getBuyableItems()) {
+				System.out.println(item.get("itemID") + " " + item.get("itemName") + " " + item.get("sellerID") + " " + item.get("status"));
+			}
 			
-			Thread.sleep(20000);
+			System.out.println("TEST: getUploadedByUserItems");
+			// Test getBuyable Items
+			for (Document item : api.items.getItemsUploadedByUser("User1", token1)) {
+				System.out.println(item.get("itemID") + " " + item.get("itemName") + " " + item.get("sellerID") + " " + item.get("status"));
+			}
+			
+			Thread.sleep(1000);
 			
 			// test sold
 			map = api.sales.sell(book1ID, user2, token2);
 			System.out.println(map.get("status"));
 			System.out.println(api.usersCollection.find(new Document("userID", user2)).first().get("numPendingPurchases"));
 			
+			Thread.sleep(1000);
 			
 			/**test refuse sale
 			map = api.sales.refuseSale(book1ID, user1, token2);
