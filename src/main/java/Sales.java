@@ -51,7 +51,7 @@ public class Sales {
 			Email.send(buyerID + "@exeter.edu", "Pending purchase", "Your purchase of " + itemName + " is pending.");
 
 			// SELLER CONFIRMATION EMAIL
-			Email.send(sellerID + "@exeter.edu", "Buyer has bought item",
+			Email.send(sellerID + "@exeter.edu", "Confirm your sale",
 				"Buyer " + buyerID + " has bought your item " + itemName + ". Please confirm your sale of the item.");
 
 			Map<String, String> output = new HashMap<>();
@@ -100,7 +100,6 @@ public class Sales {
 
 	}
 
-	// userID = buyerID i think?
 	public Map<String, String> refuseSale(String itemID, String buyerID, String sellerID, String userToken) {
 		Map<String, String> output = new HashMap<>();
 		boolean success = api.userTokens.testUserTokenForUser(sellerID, userToken);

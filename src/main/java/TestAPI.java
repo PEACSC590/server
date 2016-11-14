@@ -15,8 +15,8 @@ public class TestAPI {
 		try {
 			// Testing in progess
 			
-			String user1 = "asun1";
-			String user2 = "ASUN1";
+			String user1 = "asuN1";
+			String user2 = "asUn1";
 			
 			// Test upsert user
 			Document User1 = api.users.upsertUser(user1);

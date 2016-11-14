@@ -39,7 +39,7 @@ public class API {
 	public void refreshItems() {
 		FindIterable<Document> items = itemsCollection.find(new Document("status", "pending"));
 		for (Document item : items) {
-			int time = (int) item.get("dateBought");
+			long time = (long) item.get("dateBought");
 			String buyerID = item.getString("buyerID");
 			String itemName = item.getString("itemName");
 			if (System.currentTimeMillis() - time > PENDING_PURCHASES_TIMEOUT) {
