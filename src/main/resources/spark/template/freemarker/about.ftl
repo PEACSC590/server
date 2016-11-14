@@ -20,7 +20,7 @@
 
   </div>
   
-  <#include "/partials/scripts.js">
+  <#include "/partials/scripts.ftl">
 
     </body>
     </html>
