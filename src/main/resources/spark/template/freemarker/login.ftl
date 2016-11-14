@@ -27,7 +27,7 @@
     <![endif]-->
 
     <!-- linking login stylesheet -->
-    <link href="login.css" rel="stylesheet">
+    <link href="public/login-style.css" rel="stylesheet">
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
@@ -99,7 +99,7 @@
 						</div>
 
 
-    			  
+
 
 
   </div>
@@ -117,8 +117,13 @@
     <script>
 
     function submitForm() {
+      console.log("in submitForm");
+
       var formData = $('#loginForm').serializeArray();
 
+      console.log("formData: " + formData);
+      console.log("userID:" + formData.userID)
+      console.log("userID value: " + document.getElementById("userID").value;
       var userData = {
         userID: formData.userID,
         password: formData.password,
