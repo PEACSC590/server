@@ -126,7 +126,7 @@ public class Main {
 			}
 			
 			// TODO: replace with a view-items template
-			return new ModelAndView(attributes, "items-page.ftl");
+			return new ModelAndView(attributes, "browse.ftl");
 		}, templateEngine);
 		
 		
