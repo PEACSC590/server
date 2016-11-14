@@ -113,12 +113,14 @@ public class Main {
 			try {
 				Bson query = (Bson) JSON.parse(jsonStringQuery);
 				List<Document> items = api.items.getItems(query);
+				//not sure we need this 
 				List<String> itemStrings = new LinkedList<String>();
 
 				for (Document item : items)
 					itemStrings.add(item.toJson());
 
 				attributes.put("results", itemStrings);
+				attributes.put("items", items);
 			} catch (Exception e) {
 				attributes.put("error", e.toString());
 			}

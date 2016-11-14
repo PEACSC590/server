@@ -89,13 +89,15 @@
 </div>
 
       <!-- Example row of columns -->
+      <#list items as Document>
       <div class="container">
         <div class="col-md-4">
           <div class="product">
-            <h2>Heading</h2>
-            <p>Product 1--Learn more</p>
+            <h2>${Document.get("itemName")}</h2>
+            <p>${Document.get("itemName")}--Learn more</p>
             <p><a class="btn btn-default" href="ProductFocus.ftl" role="button">View details &raquo;</a></p>
         </div>
+        </#list>
         </div>
         <div class="col-md-4">
           <div class="product">
