@@ -7,6 +7,7 @@
 <body>
 
   <#include "/partials/nav.ftl">
+  <#include "/partials/details-menu.ftl">
   
   <div class="container-fluid">
     <div class="row">

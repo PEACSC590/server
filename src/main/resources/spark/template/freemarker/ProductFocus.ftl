@@ -9,6 +9,7 @@
 <body>
 
     <#include "/partials/nav.ftl">
+    <#include "/partials/details-menu.ftl">
 
     <!-- Page Content -->
     <div class="container-fluid">

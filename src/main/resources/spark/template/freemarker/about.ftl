@@ -8,20 +8,12 @@
 <body>
 
   <#include "/partials/nav.ftl">
-
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-2">
-        <div class="list-group">
-          <a href="about.ftl" class="list-group-item active">About</a>
-          <a href="contact.ftl" class="list-group-item">Contact Us</a>
-          <a href="privacy.ftl" class="list-group-item">Privacy and Legal Terms</a>
-        </div>
-      </div>
-    </div>
+  <#include "/partials/details-menu.ftl">
 
   </div>
   <div class="container">
+  
+  		<p>[about us]</p>
 
       <hr>
       <#include "/partials/footer.ftl">

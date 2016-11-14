@@ -8,8 +8,11 @@
 <body>
 
   <#include "/partials/nav.ftl">
+  <#include "/partials/details-menu.ftl">
 
-  <div class="container-fluid">
+	<!-- TODO: implement this using a query string -->
+	<!-- @assignee: Jacob -->
+  <!--<div class="container-fluid">
     <div class="row">
       <div class="col-md-2">
         <div class="list-group">
@@ -20,7 +23,7 @@
           <a href="furniture.ftl" class="list-group-item">Furniture</a>
           <a href="other.ftl" class="list-group-item">Other</a>
         </div>
-      </div>
+      </div>-->
 
 
 <div class="jumbotron jumbotron-forsale">
