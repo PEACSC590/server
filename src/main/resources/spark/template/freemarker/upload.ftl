@@ -50,20 +50,21 @@
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
 
-            <li class="active">
-                <a href="items-page.ftl">For Sale</a>
+            <li>
+                <a href="dashboard.ftl">Dashboard</a>
             </li>
+
+            <li class="active">
+                <a href="items-page.ftl">Browse</a>
+            </li>
+            
             <li>
                 <a href="about.ftl">About</a>
             </li>
 
             <li>
-                <a href="dashboard.ftl">Dashboard</a>
+            	<a href="login.ftl">Log Out</a>
             </li>
-
-
-
-            <li><a href="login.ftl">Log Out</a></li>
 
             <form class="navbar-form navbar-right" action="items-page.ftl">
               <input type="text" href="items-page.ftl" class="form-control" placeholder="Search">
@@ -79,9 +80,9 @@
     <div class="row">
       <div class="col-md-2">
         <div class="list-group">
-          <a href="myitems.ftl" class="list-group-item">My Items</a>
+          <a href="dashboard.ftl" class="list-group-item">My Items</a>
           <a href="upload.ftl" class="list-group-item active">Upload</a>
-          <a href="cancelpendingsale.ftl" class="list-group-item">Pending Sales</a>
+          <a href="pendingitems.ftl" class="list-group-item">Pending Sales</a>
         </div>
       </div>
       <h1 class="page-header textbgup">Upload</h1>
