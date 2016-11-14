@@ -45,8 +45,8 @@ public class Main {
 		new Thread(() -> {
 		    while (true) {
 		    	try {
-					Thread.sleep(300000);
-					//System.out.println("Refreshing pending items");
+					Thread.sleep(100000);
+					System.out.println("Refreshing pending items");
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
