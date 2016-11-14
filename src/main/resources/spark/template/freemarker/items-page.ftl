@@ -89,12 +89,12 @@
 </div>
 
       <!-- Example row of columns -->
-      <#list items as Document>
+      
       <div class="container">
         <div class="col-md-4">
           <div class="product">
             <h2>${Document.get("itemName")}</h2>
-            <p>${Document.get("itemName")}--Learn more</p>
+            <p>${Document.get("itemName")}</p>
             <p><a class="btn btn-default" href="ProductFocus.ftl" role="button">View details &raquo;</a></p>
         </div>
         </#list>
@@ -102,51 +102,51 @@
         <div class="col-md-4">
           <div class="product">
             <h2>Heading</h2>
-            <p>Product 2--Learn more</p>
+            <p>Product 2</p>
             <p><a class="btn btn-default" href="ProductFocus.ftl" role="button">View details &raquo;</a></p>
         </div>
        </div>
         <div class="col-md-4">
           <div class="product">
             <h2>Heading</h2>
-            <p>Product 3--Learn more</p>
+            <p>Product 3</p>
             <p><a class="btn btn-default" href="ProductFocus.ftl" role="button">View details &raquo;</a></p>
         </div>
         </div>
         <div class="col-md-4">
           <div class="product">
           <h2>Heading</h2>
-          <p>Product 4--Learn more</p>
+          <p>Product 4</p>
           <p><a class="btn btn-default" href="ProductFocus.ftl" role="button">View details &raquo;</a></p>
         </div>
         </div><div class="col-md-4">
           <div class="product">
           <h2>Heading</h2>
-          <p>Product 5--Learn more</p>
+          <p>Product 5</p>
           <p><a class="btn btn-default" href="ProductFocus.ftl" role="button">View details &raquo;</a></p>
         </div>
         </div><div class="col-md-4">
           <div class="product">
           <h2>Heading</h2>
-          <p>Product 6--Learn more</p>
+          <p>Product 6</p>
           <p><a class="btn btn-default" href="ProductFocus.ftl" role="button">View details &raquo;</a></p>
         </div>
         </div><div class="col-md-4">
           <div class="product">
           <h2>Heading</h2>
-          <p>Product 7--Learn more</p>
+          <p>Product 7</p>
           <p><a class="btn btn-default" href="ProductFocus.ftl" role="button">View details &raquo;</a></p>
         </div>
         </div><div class="col-md-4">
           <div class="product">
           <h2>Heading</h2>
-          <p>Product 8--Learn more</p>
+          <p>Product 8</p>
           <p><a class="btn btn-default" href="ProductFocus.ftl" role="button">View details &raquo;</a></p>
         </div>
         </div><div class="col-md-4">
           <div class="product">
           <h2>Heading</h2>
-          <p>Product 9--Learn more</p>
+          <p>Product 9</p>
           <p><a class="btn btn-default" href="ProductFocus.ftl" role="button">View details &raquo;</a></p>
         </div>
         </div>

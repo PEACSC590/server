@@ -41,7 +41,7 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="HomePage.ftl">Home</a>
+                        <a href="dashboard.ftl">Dashboard</a>
                     </li>
                     <li>
                         <a href="items-page.ftl">For Sale</a>
@@ -49,23 +49,14 @@
                     <li>
                         <a href="about.ftl">About</a>
                     </li>
-                    <li>
-                        <a href="contact.ftl">Contact</a>
-                    </li>
-                    <li>
-                        <a href="dashboard.ftl">Dashboard</a>
-                    </li>
-                    <li>
-                        <a href="settings.ftl">Settings</a>
-                    </li>
-                    <li>
-                        <a href="profile.ftl">Profile</a>
-                    </li>
+
+
+
 
                     <li><a href="login.ftl">Log Out</a></li>
 
                     <form class="navbar-form navbar-left" action="items-page.ftl">
-                      <input type="text" href="items-page.ftl" class="form-control" placeholder="Search">
+                      <input type="text" href="items-page.ftl" class="form-control" placeholder="Search for Products">
                     </form>
                 </ul>
             </div>
@@ -142,6 +133,34 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
+
+    <script>
+
+  /*
+  *formData: { name: "name", imageURL: "sdf" }
+  */
+
+  // TODO: validate form inputs
+
+  var item.name = localStorage.get('name');
+  var item.imageURL = localStorage.get('imageURL');
+  var item.description = localStorage.get('description');
+  var item.status = localStorage.get('status');
+  var item.price = localStorage.get('price');
+  var item.tags = localStorage.get('tags');
+
+
+  // TODO: validate that item are not null
+
+  $.ajax({
+    type: 'GET',
+    url: '/list-item?itemID=[number]',
+    data: { item: name, item: imageURL, item: description, item: status, item: price, item: tags},
+    success: uploadSuccess,
+    dataType: 'json'
+  });
+
+</script>
 
 </body>
 
