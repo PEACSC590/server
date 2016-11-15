@@ -164,14 +164,8 @@ public class Main {
 			return new ModelAndView(attributes, "dashboard.ftl");
 		}, templateEngine);
 		
-		// get contact info for peaBay company
-		get("/contact", (req, res) -> staticTemplate("contact.ftl"), templateEngine);
 		// get about info for peaBay company
 		get("/about", (req, res) -> staticTemplate("about.ftl"), templateEngine);
-		// get settings for user
-		get("/settings", (req, res) -> staticTemplate("settings.ftl"), templateEngine);
-		// get profile page for user
-		get("/profile", (req, res) -> staticTemplate("profile.ftl"), templateEngine);
 		
 		// get the page to upload an item
 		// Browser page
