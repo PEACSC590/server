@@ -13,7 +13,7 @@ body {
 
 .form-control {
 
-
+  
   margin-top: 1%;
   border-radius: 6px;
   border-color: #990000;
@@ -348,7 +348,7 @@ background: rgba(255,255,255,0.8);
 
 .list-group-item.active, .list-group-item.active:focus, .list-group-item.active:hover {
   border-color: #7d0202;
-  background-color: #7d0202;
+  background-color: #990000;
 }
 
 a.list-group-item:hover {
