@@ -14,7 +14,7 @@
                       <a href="dashboard">Dashboard</a>
                   </li>
                   <li>
-                      <a href="browse">For Sale</a>
+                      <a href="list-items">For Sale</a>
                   </li>
                   <li class="active">
                       <a href="about">About</a>
