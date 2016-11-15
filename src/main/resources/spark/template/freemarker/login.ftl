@@ -64,7 +64,7 @@
 												</div>
 										</div>
                     <div>
-            			       <button class="btn login" href="HomePage.ftl" name="Submit" value="Login" type="submit">Login</button>
+            			       <button class="btn btn-default btn-file" id="upload" onclick="submitForm()">Upload</button>
                        </div>
 								</div>
               </div>
