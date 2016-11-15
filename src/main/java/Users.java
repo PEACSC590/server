@@ -16,8 +16,8 @@ public class Users {
 	// TESTED: SUCCESS
 	public Map<String, String> login(String userID, String password) {
 		Map<String, String> output = new HashMap<>();
-
-		boolean correct = Login.login(userID, password);
+		Login login = new Login();
+		boolean correct = login.login(userID, password);
 
 		if (correct) {
 			upsertUser(userID);

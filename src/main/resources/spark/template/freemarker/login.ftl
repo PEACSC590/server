@@ -47,7 +47,6 @@
         <input type="password" class="form-control" name="password" id="password">
       </div>
     </div>
-    <button class="btn btn-default btn-file" id="upload" onclick="submitForm()">Upload</button>
   </div>
 </form>
 

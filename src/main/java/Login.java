@@ -4,11 +4,11 @@ import java.net.*;
 public class Login {
 
     // username and pw
-    static String username = ""; // your account name
-    static String password = ""; // retrieve password for your account 
+    String username = ""; // your account name
+    String password = ""; // retrieve password for your account 
 
-    static class MyAuthenticator extends Authenticator {
-        static int tries = 0;
+    class MyAuthenticator extends Authenticator {
+        int tries = 0;
         public PasswordAuthentication getPasswordAuthentication() {
             System.err.println("Feeding username and password for " + getRequestingScheme());
             if (tries == 0) {
@@ -21,7 +21,7 @@ public class Login {
         }
     }
 
-    public static boolean login(String userID, String pw) {
+    public boolean login(String userID, String pw) {
 
         
         //System.out.println("moo");
@@ -48,7 +48,6 @@ public class Login {
             //System.setProperty("http.maxRedirects", "2");
             //HttpURLConnection.setFollowRedirects(false);
             connection = (HttpURLConnection) url.openConnection();
-            System.out.println("login successful");
             InputStream ins = connection.getInputStream();
             BufferedReader reader = new BufferedReader(new InputStreamReader(ins));
             String str;
@@ -60,6 +59,7 @@ public class Login {
             System.out.println("login failed");
             return false;
         }
+        System.out.println("login successful");
         return true;
     }
 

@@ -57,8 +57,8 @@ public class Main {
 		
 		// BEGIN TESTING CODE
 		// PLEASE LEAVE THE TESTING CODE HERE BECAUSE IT IS THE ONLY WAY I CAN GET IT TO CONNECT TO THE DB
-		TestAPI test = new TestAPI(api);
-		test.test();
+		//TestAPI test = new TestAPI(api);
+		//test.test();
 		// END TESTING CODE
 		
 		// Browser page
@@ -75,7 +75,7 @@ public class Main {
 			Map<String, String> data = api.getBody(req);
 			String userID = data.get("userID");
 			String password = data.get("password");
-
+			System.out.println(userID + " " + password);
 			// using Login.java, check if username/password is valid
 			Map<String, String> loginStatus = api.users.login(userID, password);
 
@@ -126,7 +126,7 @@ public class Main {
 			}
 			
 			// TODO: replace with a view-items template
-			return new ModelAndView(attributes, "items-page.ftl");
+			return new ModelAndView(attributes, "browse.ftl");
 		}, templateEngine);
 		
 		

@@ -10,6 +10,10 @@ public class TestAPI {
 	public TestAPI(API api) {
 		this.api = api;
 	}
+	
+	public static void main(String[] args) throws MongoException, UnknownHostException {
+		
+	}
 
 	public void test() throws MongoException, UnknownHostException {
 		try {
@@ -196,8 +200,6 @@ public class TestAPI {
 
 	}
 
-	public static void main(String[] args) throws MongoException, UnknownHostException {
 
-	}
 
 }
