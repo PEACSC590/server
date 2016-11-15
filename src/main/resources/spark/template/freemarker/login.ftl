@@ -99,7 +99,7 @@
       $.ajax({
         type: 'POST',
         url: '/login',
-        data: { userID: document.getElementById("userID").value), password: document.getElementById("password").value},
+        data: { userID: document.getElementById("userID").value, password: document.getElementById("password").value},
         success: uploadSuccess,
         dataType: 'json'
       });

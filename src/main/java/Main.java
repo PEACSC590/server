@@ -62,6 +62,7 @@ public class Main {
 		
 		// Browser page
 		get("/login", (request, response) -> {
+			System.out.println("GET LOGIN");
 			Map<String, Object> attributes = new HashMap<>();
 			// no attributes needed?
 
@@ -71,6 +72,7 @@ public class Main {
 		// login
 		// Should be used by a form -> serves a page
 		post("/login", (req, res) -> {
+			System.out.println("POST LOGIN");
 			Map<String, String> data = api.getBody(req);
 			String userID = data.get("userID");
 			String password = data.get("password");
