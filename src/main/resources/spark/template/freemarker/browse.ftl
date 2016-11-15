@@ -29,11 +29,15 @@
 <div class="jumbotron jumbotron-forsale">
     <h1>PEAbay</h1>
     <p>List of Items on PEAbay</p>
-    <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
+    <p><a class="btn btn-primary btn-lg" href="about.ftl" role="button">Learn more &raquo;</a></p>
 </div>
 
       <!-- Example row of columns -->
+<<<<<<< HEAD
+
+=======
       <#list items as document>
+>>>>>>> 195e75810009154f7ab7b568d33c4f26d4275e0f
       <div class="container">
         <div class="col-md-4">
           <div class="product">

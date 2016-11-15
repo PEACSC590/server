@@ -14,7 +14,6 @@ import spark.ModelAndView;
 import spark.ResponseTransformer;
 
 import com.mongodb.*;
-import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.util.JSON;
 
@@ -45,7 +44,7 @@ public class Main {
 		new Thread(() -> {
 		    while (true) {
 		    	try {
-					Thread.sleep(100000);
+					Thread.sleep(1000 * 60 * 5);
 					System.out.println("Refreshing pending items");
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
@@ -57,12 +56,13 @@ public class Main {
 		
 		// BEGIN TESTING CODE
 		// PLEASE LEAVE THE TESTING CODE HERE BECAUSE IT IS THE ONLY WAY I CAN GET IT TO CONNECT TO THE DB
-		TestAPI test = new TestAPI(api);
-		test.test();
+		//TestAPI test = new TestAPI(api);
+		//test.test();
 		// END TESTING CODE
 		
 		// Browser page
 		get("/login", (request, response) -> {
+			System.out.println("GET LOGIN");
 			Map<String, Object> attributes = new HashMap<>();
 			// no attributes needed?
 
@@ -72,11 +72,11 @@ public class Main {
 		// login
 		// Should be used by a form -> serves a page
 		post("/login", (req, res) -> {
+			System.out.println("POST LOGIN");
 			Map<String, String> data = api.getBody(req);
 			String userID = data.get("userID");
 			String password = data.get("password");
-
-			// using Login.java, check if username/password is valid
+			
 			Map<String, String> loginStatus = api.users.login(userID, password);
 
 			Map<String, Object> attributes = new HashMap<>();
@@ -126,7 +126,7 @@ public class Main {
 			}
 			
 			// TODO: replace with a view-items template
-			return new ModelAndView(attributes, "items-page.ftl");
+			return new ModelAndView(attributes, "browse.ftl");
 		}, templateEngine);
 		
 		
@@ -164,26 +164,19 @@ public class Main {
 			return new ModelAndView(attributes, "dashboard.ftl");
 		}, templateEngine);
 		
-		// get contact info for peaBay company
-		get("/contact", (req, res) -> staticTemplate("contact.ftl"), templateEngine);
 		// get about info for peaBay company
 		get("/about", (req, res) -> staticTemplate("about.ftl"), templateEngine);
 		// get settings for user
 		get("/settings", (req, res) -> staticTemplate("settings.ftl"), templateEngine);
 		// get profile page for user
 		get("/profile", (req, res) -> staticTemplate("profile.ftl"), templateEngine);
-		
-		// get the page to upload an item
-		// Browser page
-		get("/upload", (request, response) -> {
-			Map<String, Object> attributes = new HashMap<>();
-			// no attributes?
 
+		get("/upload", (req, res) -> {
+			Map<String, Object> attributes = new HashMap<>();
+			
 			return new ModelAndView(attributes, "upload.ftl");
 		}, templateEngine);
 
-		// POST method for upload
-		// Should be used by a form -> serves a page
 		post("/upload", (req, res) -> {
 			Map<String, String> data = api.getBody(req);
 			System.out.println(data);
@@ -192,7 +185,7 @@ public class Main {
 			String userToken = data.get("userToken");
 			
 			Map<String, String> result = api.items.upload(item, userID, userToken);
-			
+			System.out.println(userID);
 			if (result.get("status").equals("listed")) {
 				res.redirect("/dashboard");
 				return new ModelAndView(new HashMap<>(), "redirecting.ftl");

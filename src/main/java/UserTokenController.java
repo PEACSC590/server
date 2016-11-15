@@ -1,7 +1,5 @@
 import org.bson.Document;
 
-import com.mongodb.client.MongoCollection;
-
 public class UserTokenController {
 
 	private API api;

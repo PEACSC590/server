@@ -44,10 +44,9 @@
 
       <div class="form-group textbgform">
         <label for="title">Exeter Password</label>
-        <input type="text" class="form-control" name="password" id="password">
+        <input type="password" class="form-control" name="password" id="password">
       </div>
     </div>
-    <button class="btn btn-default btn-file" id="upload" onclick="submitForm()">Upload</button>
   </div>
 </form>
 
@@ -72,29 +71,35 @@
 						</div>
 
 
-    			  
+
 
 
   </div>
-	
+
 	<#include "/partials/scripts.ftl">
-    
+
     <script>
 
     function submitForm() {
+      console.log("in submitForm");
+
       var formData = $('#loginForm').serializeArray();
 
+      console.log("formData: " + formData);
+      console.log("userID:" + formData.userID)
+      console.log("userID value: " + document.getElementById("userID").value);
+      console.log("password value: " + document.getElementById("password").value);
       var userData = {
-        userID: formData.userID,
-        password: formData.password,
+        userID: document.getElementById("userID").value,
+        password: document.getElementById("password").value,
       };
 
-      console.log({ userID: userID, password: password });
+      //console.log({ userID: userID, password: password });
 
       $.ajax({
         type: 'POST',
         url: '/login',
-        data: { userID: userID, password: password},
+        data: { userID: document.getElementById("userID").value, password: document.getElementById("password").value},
         success: uploadSuccess,
         dataType: 'json'
       });

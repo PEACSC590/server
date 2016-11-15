@@ -2,25 +2,21 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 import org.bson.Document;
 import org.bson.conversions.Bson;
 
 import com.mongodb.client.FindIterable;
-import com.mongodb.client.MongoCollection;
 import com.mongodb.util.JSON;
 
-import spark.ModelAndView;
-
 public class Items {
-	
+
 	private API api;
-	
+
 	public Items(API api) {
 		this.api = api;
 	}
-	
+
 	// TESTED AS PART OF GETITEMSBYID: SUCCESS
 	public List<Document> getItems(Bson query) {
 		List<Document> documents = new LinkedList<Document>();
@@ -29,11 +25,10 @@ public class Items {
 		for (Document item : items) {
 			documents.add(item);
 		}
-			
 
 		return documents;
 	}
-	
+
 	// TESTED: SUCCESS
 	public List<Document> getBuyableItems() {
 		return getItems(new Document("status", "listed"));
@@ -43,7 +38,7 @@ public class Items {
 	public List<Document> getItemsUploadedByUser(String userID, String userToken) {
 		return getItems(new Document("sellerID", userID));
 	}
-	
+
 	// SEMI-TESTED: SHOULD WORK
 	public List<Document> getItemsBoughtByUser(String userID) {
 		// 10.16.16: the item attribute might not be "boughtByUserID", but I'll
@@ -56,7 +51,7 @@ public class Items {
 		List<Document> items = getItems(new Document("itemID", itemID));
 		return items.size() > 0 ? items.get(0) : null;
 	}
-	
+
 	// TESTED AS PART OF UPLOAD: SUCCESS
 	public Document insertItem(String username, String itemName, String itemDescription, Double itemPrice,
 			String[] tags, String imageURL) {
@@ -66,13 +61,14 @@ public class Items {
 
 		return itemDocument;
 	}
-	
+
 	// TESTED: SUCCESS
 	// TODO: EXCEPT FOR TAGS WITH ACTUAL ARRAY OF TAGS
 	public Map<String, String> upload(Document item, String userID, String userToken) {
 		Map<String, String> output = new HashMap<>();
+		boolean authenticated = api.userTokens.testUserTokenForUser(userID, userToken);
 
-		if (api.userTokens.testUserTokenForUser(userID, userToken)){
+		if (authenticated) {
 			try {
 				String itemName = item.getString("name");
 				String itemDescription = item.getString("description");
@@ -81,7 +77,7 @@ public class Items {
 				String[] tags = (String[]) JSON.parse(item.getString("tags"));
 				String imageURL = item.getString("imageURL");
 				Document itemget = insertItem(userID, itemName, itemDescription, itemPrice, tags, imageURL);
-				
+
 				String itemID = itemget.getString("itemID");
 
 				Document status = new Document().append("status", "listed");
@@ -97,10 +93,10 @@ public class Items {
 			output.put("status", "illegal");
 			output.put("error", "INVALID USERTOKEN");
 		}
-		
+
 		return output;
 	}
-	
+
 	// TESTED AS PART OF UPLOAD: SUCCESS
 	private Document createItemDocument(String username, String itemName, String itemDescription, Double itemPrice,
 			String[] tags, String imageURL) {
@@ -121,32 +117,30 @@ public class Items {
 
 	// TESTED: SUCCESS
 	public Map<String, String> unlist(String itemID, String sellerID, String userToken) {
-		boolean success = api.userTokens.testUserTokenForUser(sellerID, userToken);
-		if (success) {
-	
+		Map<String, String> output = new HashMap<>();
+
+		boolean authenticated = api.userTokens.testUserTokenForUser(sellerID, userToken);
+		if (authenticated) {
 			Document unlist = new Document();
 			unlist.put("status", "hidden");
 			api.itemsCollection.updateOne(new Document("itemID", itemID), new Document("$set", unlist));
 
-			Map<String, String> output = new HashMap<>();
 			output.put("status", "hidden");
-			return output;
-		}
-		else {
-			Map<String, String> output = new HashMap<>();
+		} else {
 			output.put("status", "listed");
 			output.put("error", "INVALID USERTOKEN");
-			return output;
 		}
+
+		return output;
 	}
-	
+
 	// TESTED: SUCCESS
 	// TODO: THIS MAY BE A LITTLE FINNICKY
 	public List<Document> searchItemsByText(String searchBy) {
 		// RETURNS ITMES WITH SEARCHBY IN TITLE, DESCRIPTION, OR TAGS
 		return getItems(new Document("$text", new Document("$search", searchBy)));
 	}
-	
+
 	// SEMI-TESTED: SHOULD WORK
 	public List<Document> getItemsSold(String userID) {
 		return getItems(new Document("sellerID", userID).append("status", "sold"));

@@ -1,14 +1,18 @@
 import java.io.*;
 import java.net.*;
 
+import sun.net.www.protocol.http.AuthCacheValue;
+import sun.net.www.protocol.http.ntlm.NTLMAuthenticationCallback;
+
 public class Login {
 
     // username and pw
-    static String username = ""; // your account name
-    static String password = ""; // retrieve password for your account 
-
+    private static String username = ""; // your account name
+    private static String password = ""; // retrieve password for your account 
+    private static URL url = null;
+    
     static class MyAuthenticator extends Authenticator {
-        static int tries = 0;
+    	int tries;
         public PasswordAuthentication getPasswordAuthentication() {
             System.err.println("Feeding username and password for " + getRequestingScheme());
             if (tries == 0) {
@@ -21,34 +25,81 @@ public class Login {
         }
     }
 
-    public static boolean login(String userID, String password) {
+    static {
+        NTLMAuthenticationCallback.setNTLMAuthenticationCallback(new NTLMAuthenticationCallback()
+        {
+            @Override
+            public boolean isTrustedSite(URL url)
+            {
+                return false;
+            }
+        });
+    }
+    
+    static class MyCache implements sun.net.www.protocol.http.AuthCache{
+        public void put(String pkey, sun.net.www.protocol.http.AuthCacheValue value){
 
-        
+        }
+        public sun.net.www.protocol.http.AuthCacheValue get(String pkey, String skey){
+            return null;
+        }
+        public void remove(String pkey, sun.net.www.protocol.http.AuthCacheValue entry){
+
+        }
+   }
+    
+    
+    public static boolean login(String userID1, String pw1) {
+    	// TODO: CHECK IF THIS ACTUALLY RESTS THE AUTHENTICATOR CACHE
+    	AuthCacheValue.setAuthCache(new MyCache());
+    	
+    	Authenticator.setDefault(null);
+    	
+    	System.out.println(userID1 + " " + pw1);
+		
+		// ESCAPE THE JAVASCRIPT STRING
+		// TODO: SOME CASES MIGHT NOT ESCAPE CORRECTLY
+		String userID = "";
+		String pw = "";
+		try {
+			userID = URLDecoder.decode(userID1, "UTF-8");
+			pw = URLDecoder.decode(pw1, "UTF-8");
+		} catch (UnsupportedEncodingException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		System.out.println(userID + " " + pw);
+		
         //System.out.println("moo");
         try {
+        	
             username = userID;
-            password = password;
-            // URL of exeter website
-            String temp_url = "https://www.outlook.com/owa/exeter.edu";
-            URL obj = new URL(temp_url);
+            password = pw;
+            
+            if (url == null) {
+            	// URL of exeter website
+                String temp_url = "https://www.outlook.com/owa/exeter.edu";
+                URL obj = new URL(temp_url);
 
-            HttpURLConnection connection = (HttpURLConnection) obj.openConnection();
-            connection.setRequestMethod("GET");
+                HttpURLConnection connection = (HttpURLConnection) obj.openConnection();
+                connection.setRequestMethod("GET");
 
-            // make sure this returns 401 so that website has moved
-            System.out.println(connection.getResponseCode());
+                // make sure this returns 401 so that website has moved
+                System.out.println(connection.getResponseCode());
 
-            // Redirected e-mail ULR
-            // moo
-            HttpURLConnection.setFollowRedirects(false);
-            URL url = connection.getURL();
+                // Redirected e-mail ULR
+                // moo
+                HttpURLConnection.setFollowRedirects(false);
+                url = connection.getURL();
+            }
+            HttpURLConnection connection;
             Authenticator.setDefault(new MyAuthenticator());
             //CookieHandler.setDefault(new CookieManager(null, CookiePolicy.ACCEPT_ALL));
             //System.setProperty("-Dhttp.maxRedirects", "2");
             //System.setProperty("http.maxRedirects", "2");
             //HttpURLConnection.setFollowRedirects(false);
             connection = (HttpURLConnection) url.openConnection();
-            System.out.println("login successful");
             InputStream ins = connection.getInputStream();
             BufferedReader reader = new BufferedReader(new InputStreamReader(ins));
             String str;
@@ -58,8 +109,10 @@ public class Login {
             
         } catch (Exception e) {
             System.out.println("login failed");
+            Authenticator.setDefault(null);
             return false;
         }
+        System.out.println("login successful");
         return true;
     }
 
