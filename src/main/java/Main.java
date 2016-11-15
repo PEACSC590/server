@@ -192,7 +192,7 @@ public class Main {
 			String userToken = data.get("userToken");
 			
 			Map<String, String> result = api.items.upload(item, userID, userToken);
-			
+			System.out.println(userID);
 			if (result.get("status").equals("listed")) {
 				res.redirect("/dashboard");
 				return new ModelAndView(new HashMap<>(), "redirecting.ftl");
