@@ -14,10 +14,8 @@ import spark.ModelAndView;
 import spark.ResponseTransformer;
 
 import com.mongodb.*;
-import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.util.JSON;
-import org.apache.commons.lang3.*;
 
 public class Main {
 

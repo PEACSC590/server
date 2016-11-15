@@ -1,8 +1,10 @@
 import java.io.*;
 import java.net.*;
+
+import org.apache.commons.lang3.StringEscapeUtils;
+
 import sun.net.www.protocol.http.AuthCacheValue;
 import sun.net.www.protocol.http.AuthCacheImpl;
-import org.apache.commons.lang3.*;
 
 public class Login {
 
@@ -32,8 +34,8 @@ public class Login {
 		
 		// ESCAPE THE JAVASCRIPT STRING
 		// TODO: SOME CASES MIGHT NOT ESCAPE CORRECTLY
-		String userID = org.apache.commons.lang3.StringEscapeUtils.escapeEcmaScript(userID1);
-		String pw = org.apache.commons.lang3.StringEscapeUtils.escapeEcmaScript(pw1);
+		String userID = StringEscapeUtils.escapeEcmaScript(userID1);
+		String pw = StringEscapeUtils.escapeEcmaScript(pw1);
 		
 		System.out.println(userID + " " + pw);
 		

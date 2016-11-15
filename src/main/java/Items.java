@@ -2,16 +2,12 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 import org.bson.Document;
 import org.bson.conversions.Bson;
 
 import com.mongodb.client.FindIterable;
-import com.mongodb.client.MongoCollection;
 import com.mongodb.util.JSON;
-
-import spark.ModelAndView;
 
 public class Items {
 
