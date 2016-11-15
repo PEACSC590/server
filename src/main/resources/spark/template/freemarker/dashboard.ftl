@@ -62,14 +62,14 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <#list itemsBought as itemName>
-                    <td>${itemName}</td>
+                    <#list itemsBought as item>
+                    <td>${item.name}</td>
                    </#list>
-                    <#list itemsBought as dateBought>
-                    <td>${dateBought}</td>
+                    <#list itemsBought as item>
+                    <td>${item.get("dateBought")}</td>
                    </#list>
-                    <#list itemsBought as itemPrice>
-                    <td>$ ${"itemPrice"}</td>
+                    <#list itemsBought as item>
+                    <td>$ ${item.get("itemPrice")}</td>
                    </#list>
 
                   </tr>
@@ -94,14 +94,14 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <#list itemsUploaded as itemName>
-                    <td>${itemName}</td>
+                    <#list itemsUploaded as item>
+                    <td>${item.get("itemName")}</td>
                    </#list>
-                    <#list itemsUploaded as dateBought>
-                    <td>${dateBought}</td>
+                    <#list itemsUploaded as item>
+                    <td>${item.get("dateBought")}</td>
                    </#list>
-                    <#list itemsUploaded as itemPrice>
-                    <td>$ ${itemPrice}</td>
+                    <#list itemsUploaded as item>
+                    <td>$ ${item.get("itemPrice")}</td>
                    </#list>
 
                   </tr>
@@ -123,19 +123,19 @@
                 </thead>
                 <tbody>
                    <tr>
-                    <#list itemsSold as itemName>
+                    <#list itemsSold as item>
 
-                    <td>${itemName}</td>
-
-                   </#list>
-                    <#list itemsSold as dateBought>
-
-                    <td>${dateBought}</td>
+                    <td>${item.get("itemName")}</td>
 
                    </#list>
-                    <#list itemsSold as itemPrice>
+                    <#list itemsSold as item>
 
-                    <td>$ ${itemPrice}</td>
+                    <td>${item.get("dateBought")}</td>
+
+                   </#list>
+                    <#list itemsSold as item>
+
+                    <td>$ ${item.get("itemPrice")}</td>
 
                     </#list>
     </tr>

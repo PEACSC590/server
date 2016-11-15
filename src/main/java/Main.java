@@ -153,9 +153,9 @@ public class Main {
 			Map<String, String> data = api.getBody(req);
 			String userID = data.get("userID");
 			String userToken = data.get("userToken");
-			List<Document> itemsBought = api.items.getItemsBoughtByUser(userID);
-			List<Document> itemsUploaded = api.items.getItemsUploadedByUser(userID, userToken);
-			List<Document> itemsSold = api.items.getItemsSold(userID);
+			List<HashMap<String, Object>> itemsBought = Util.convertListOfDocsIntoListOfMaps(api.items.getItemsBoughtByUser(userID));
+			List<HashMap<String, Object>> itemsUploaded = Util.convertListOfDocsIntoListOfMaps(api.items.getItemsUploadedByUser(userID, userToken));
+			List<HashMap<String, Object>> itemsSold = Util.convertListOfDocsIntoListOfMaps(api.items.getItemsSold(userID));
 			
 			Map<String, Object> attributes = new HashMap<>();
 			attributes.put("itemsBought", itemsBought);
