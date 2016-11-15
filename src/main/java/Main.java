@@ -90,7 +90,7 @@ public class Main {
 
 			return new ModelAndView(attributes, "login.ftl"); // FIXME
 		}, templateEngine);
-
+		//not sure we need this 
 		// logout
 		// Should be used by AJAX -> serves json
 		post("/logout", (req, res) -> {
@@ -113,7 +113,6 @@ public class Main {
 			try {
 				Bson query = (Bson) JSON.parse(jsonStringQuery);
 				List<Document> items = api.items.getItems(query);
-				//not sure we need this 
 				List<String> itemStrings = new LinkedList<String>();
 
 				for (Document item : items)
