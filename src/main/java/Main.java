@@ -80,8 +80,8 @@ public class Main {
 			Map<String, String> loginStatus = api.users.login(userID, password);
 
 			Map<String, Object> attributes = new HashMap<>();
-			// if good, put username
-			if (loginStatus.get("success") == "true") {
+
+			if (loginStatus.get("success").equals("true")) {
 				res.redirect("/dashboard");
 				// TODO: halt... how do redirects work in spark?
 			} else {
@@ -104,7 +104,7 @@ public class Main {
 		// list items in the db that match the query provided as a querystring
 		// param
 		// Browser page
-		get("/list-items", (req, res) -> {
+		get("/browse", (req, res) -> {
 			Map<String, Object> attributes = new HashMap<>();
 
 			String jsonStringQuery = req.queryParams("query");

@@ -64,7 +64,7 @@
 												</div>
 										</div>
                     <div>
-            			       <button class="btn btn-default btn-file" id="upload" onclick="submitForm()">Upload</button>
+            			       <button class="btn btn-default btn-file" id="upload" onclick="submitForm()">Login</button>
                        </div>
 								</div>
               </div>
