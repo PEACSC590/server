@@ -4,6 +4,7 @@ import java.net.*;
 import org.apache.commons.lang3.StringEscapeUtils;
 
 import sun.net.www.protocol.http.AuthCacheValue;
+import sun.net.www.protocol.http.ntlm.NTLMAuthenticationCallback;
 import sun.net.www.protocol.http.AuthCacheImpl;
 
 public class Login {
@@ -11,7 +12,8 @@ public class Login {
     // username and pw
     private static String username = ""; // your account name
     private static String password = ""; // retrieve password for your account 
-
+    private static URL url = null;
+    
     static class MyAuthenticator extends Authenticator {
     	int tries;
         public PasswordAuthentication getPasswordAuthentication() {
@@ -26,9 +28,35 @@ public class Login {
         }
     }
 
+    static {
+        NTLMAuthenticationCallback.setNTLMAuthenticationCallback(new NTLMAuthenticationCallback()
+        {
+            @Override
+            public boolean isTrustedSite(URL url)
+            {
+                return false;
+            }
+        });
+    }
+    
+    static class MyCache implements sun.net.www.protocol.http.AuthCache{
+        public void put(String pkey, sun.net.www.protocol.http.AuthCacheValue value){
+
+        }
+        public sun.net.www.protocol.http.AuthCacheValue get(String pkey, String skey){
+            return null;
+        }
+        public void remove(String pkey, sun.net.www.protocol.http.AuthCacheValue entry){
+
+        }
+   }
+    
+    
     public static boolean login(String userID1, String pw1) {
     	// TODO: CHECK IF THIS ACTUALLY RESTS THE AUTHENTICATOR CACHE
-    	AuthCacheValue.setAuthCache(new AuthCacheImpl());
+    	AuthCacheValue.setAuthCache(new MyCache());
+    	
+    	Authenticator.setDefault(null);
     	
     	System.out.println(userID1 + " " + pw1);
 		
@@ -51,20 +79,24 @@ public class Login {
         	
             username = userID;
             password = pw;
-            // URL of exeter website
-            String temp_url = "https://www.outlook.com/owa/exeter.edu";
-            URL obj = new URL(temp_url);
+            
+            if (url == null) {
+            	// URL of exeter website
+                String temp_url = "https://www.outlook.com/owa/exeter.edu";
+                URL obj = new URL(temp_url);
 
-            HttpURLConnection connection = (HttpURLConnection) obj.openConnection();
-            connection.setRequestMethod("GET");
+                HttpURLConnection connection = (HttpURLConnection) obj.openConnection();
+                connection.setRequestMethod("GET");
 
-            // make sure this returns 401 so that website has moved
-            System.out.println(connection.getResponseCode());
+                // make sure this returns 401 so that website has moved
+                System.out.println(connection.getResponseCode());
 
-            // Redirected e-mail ULR
-            // moo
-            HttpURLConnection.setFollowRedirects(false);
-            URL url = connection.getURL();
+                // Redirected e-mail ULR
+                // moo
+                HttpURLConnection.setFollowRedirects(false);
+                url = connection.getURL();
+            }
+            HttpURLConnection connection;
             Authenticator.setDefault(new MyAuthenticator());
             //CookieHandler.setDefault(new CookieManager(null, CookiePolicy.ACCEPT_ALL));
             //System.setProperty("-Dhttp.maxRedirects", "2");
@@ -80,6 +112,7 @@ public class Login {
             
         } catch (Exception e) {
             System.out.println("login failed");
+            Authenticator.setDefault(null);
             return false;
         }
         System.out.println("login successful");
