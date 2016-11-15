@@ -1,11 +1,8 @@
 import java.io.*;
 import java.net.*;
 
-import org.apache.commons.lang3.StringEscapeUtils;
-
 import sun.net.www.protocol.http.AuthCacheValue;
 import sun.net.www.protocol.http.ntlm.NTLMAuthenticationCallback;
-import sun.net.www.protocol.http.AuthCacheImpl;
 
 public class Login {
 

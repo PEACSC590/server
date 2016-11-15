@@ -172,18 +172,13 @@ public class Main {
 		get("/settings", (req, res) -> staticTemplate("settings.ftl"), templateEngine);
 		// get profile page for user
 		get("/profile", (req, res) -> staticTemplate("profile.ftl"), templateEngine);
-		
-		// get the page to upload an item
-		// Browser page
-		get("/upload", (request, response) -> {
-			Map<String, Object> attributes = new HashMap<>();
-			// no attributes?
 
+		get("/upload", (req, res) -> {
+			Map<String, Object> attributes = new HashMap<>();
+			
 			return new ModelAndView(attributes, "upload.ftl");
 		}, templateEngine);
 
-		// POST method for upload
-		// Should be used by a form -> serves a page
 		post("/upload", (req, res) -> {
 			Map<String, String> data = api.getBody(req);
 			System.out.println(data);
