@@ -13,7 +13,7 @@ public class Login {
     private static String password = ""; // retrieve password for your account 
 
     static class MyAuthenticator extends Authenticator {
-        int tries = 0;
+    	int tries;
         public PasswordAuthentication getPasswordAuthentication() {
             System.err.println("Feeding username and password for " + getRequestingScheme());
             if (tries == 0) {
@@ -34,8 +34,15 @@ public class Login {
 		
 		// ESCAPE THE JAVASCRIPT STRING
 		// TODO: SOME CASES MIGHT NOT ESCAPE CORRECTLY
-		String userID = StringEscapeUtils.escapeEcmaScript(userID1);
-		String pw = StringEscapeUtils.escapeEcmaScript(pw1);
+		String userID = "";
+		String pw = "";
+		try {
+			userID = URLDecoder.decode(userID1, "UTF-8");
+			pw = URLDecoder.decode(pw1, "UTF-8");
+		} catch (UnsupportedEncodingException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		
 		System.out.println(userID + " " + pw);
 		

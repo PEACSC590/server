@@ -87,8 +87,8 @@
 
       console.log("formData: " + formData);
       console.log("userID:" + formData.userID)
-      console.log("userID value: " + unescape(document.getElementById("userID").value));
-      console.log("password value: " + unescape(document.getElementById("password").value));
+      console.log("userID value: " + document.getElementById("userID").value);
+      console.log("password value: " + document.getElementById("password").value);
       var userData = {
         userID: document.getElementById("userID").value,
         password: document.getElementById("password").value,
@@ -99,7 +99,7 @@
       $.ajax({
         type: 'POST',
         url: '/login',
-        data: { userID: unescape(document.getElementById("userID").value), password: unescape(document.getElementById("userID").value)},
+        data: { userID: document.getElementById("userID").value), password: document.getElementById("password").value},
         success: uploadSuccess,
         dataType: 'json'
       });
