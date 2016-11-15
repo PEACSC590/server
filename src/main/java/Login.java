@@ -1,13 +1,16 @@
 import java.io.*;
 import java.net.*;
+import sun.net.www.protocol.http.AuthCacheValue;
+import sun.net.www.protocol.http.AuthCacheImpl;
+import org.apache.commons.lang3.*;
 
 public class Login {
 
     // username and pw
-    String username = ""; // your account name
-    String password = ""; // retrieve password for your account 
+    private static String username = ""; // your account name
+    private static String password = ""; // retrieve password for your account 
 
-    class MyAuthenticator extends Authenticator {
+    static class MyAuthenticator extends Authenticator {
         int tries = 0;
         public PasswordAuthentication getPasswordAuthentication() {
             System.err.println("Feeding username and password for " + getRequestingScheme());
@@ -21,11 +24,22 @@ public class Login {
         }
     }
 
-    public boolean login(String userID, String pw) {
-
-        
+    public static boolean login(String userID1, String pw1) {
+    	// TODO: CHECK IF THIS ACTUALLY RESTS THE AUTHENTICATOR CACHE
+    	AuthCacheValue.setAuthCache(new AuthCacheImpl());
+    	
+    	System.out.println(userID1 + " " + pw1);
+		
+		// ESCAPE THE JAVASCRIPT STRING
+		// TODO: SOME CASES MIGHT NOT ESCAPE CORRECTLY
+		String userID = org.apache.commons.lang3.StringEscapeUtils.escapeEcmaScript(userID1);
+		String pw = org.apache.commons.lang3.StringEscapeUtils.escapeEcmaScript(pw1);
+		
+		System.out.println(userID + " " + pw);
+		
         //System.out.println("moo");
         try {
+        	
             username = userID;
             password = pw;
             // URL of exeter website

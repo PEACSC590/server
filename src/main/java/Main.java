@@ -17,6 +17,7 @@ import com.mongodb.*;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.util.JSON;
+import org.apache.commons.lang3.*;
 
 public class Main {
 
@@ -75,8 +76,7 @@ public class Main {
 			Map<String, String> data = api.getBody(req);
 			String userID = data.get("userID");
 			String password = data.get("password");
-			System.out.println(userID + " " + password);
-			// using Login.java, check if username/password is valid
+			
 			Map<String, String> loginStatus = api.users.login(userID, password);
 
 			Map<String, Object> attributes = new HashMap<>();
