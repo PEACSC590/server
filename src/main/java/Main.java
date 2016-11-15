@@ -222,7 +222,7 @@ public class Main {
 	}
 	
 	private static ModelAndView staticTemplate(String path) {
-		return new ModelAndView(new HashMap<>(), "contact.ftl");
+		return new ModelAndView(new HashMap<>(), path);
 	}
 
 	private static ModelAndView errorView(String errmsg) {
