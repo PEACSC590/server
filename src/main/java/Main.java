@@ -104,7 +104,7 @@ public class Main {
 		// list items in the db that match the query provided as a querystring
 		// param
 		// Browser page
-		get("/list-items", (req, res) -> {
+		get("/browse", (req, res) -> {
 			Map<String, Object> attributes = new HashMap<>();
 
 			String jsonStringQuery = req.queryParams("query");
