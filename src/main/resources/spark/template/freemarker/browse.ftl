@@ -8,7 +8,6 @@
 <body>
 
   <#include "/partials/nav.ftl">
-  <#include "/partials/details-menu.ftl">
 
 	<!-- TODO: implement this using a query string -->
 	<!-- @assignee: Jacob -->
