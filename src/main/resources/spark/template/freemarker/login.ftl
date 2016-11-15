@@ -44,7 +44,7 @@
 
       <div class="form-group textbgform">
         <label for="title">Exeter Password</label>
-        <input type="text" class="form-control" name="password" id="password">
+        <input type="password" class="form-control" name="password" id="password">
       </div>
     </div>
     <button class="btn btn-default btn-file" id="upload" onclick="submitForm()">Upload</button>
@@ -88,8 +88,8 @@
 
       console.log("formData: " + formData);
       console.log("userID:" + formData.userID)
-      console.log("userID value: " + document.getElementById("userID").value);
-      console.log("password value: " + document.getElementById("password").value);
+      console.log("userID value: " + unescape(document.getElementById("userID").value));
+      console.log("password value: " + unescape(document.getElementById("password").value));
       var userData = {
         userID: document.getElementById("userID").value,
         password: document.getElementById("password").value,
@@ -100,7 +100,7 @@
       $.ajax({
         type: 'POST',
         url: '/login',
-        data: { userID: document.getElementById("userID").value, password: document.getElementById("password").value},
+        data: { userID: unescape(document.getElementById("userID").value), password: unescape(document.getElementById("userID").value)},
         success: uploadSuccess,
         dataType: 'json'
       });
