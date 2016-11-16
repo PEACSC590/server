@@ -18,12 +18,12 @@
 	        <label for="imageUrl">Exeter Username</label>
 	        <input type="text" class="form-control" name="userID" id="userID" required>
 	      </div>
-	
+
 	      <div class="form-group textbgform">
 	        <label for="title">Exeter Password</label>
 	        <input type="password" class="form-control" name="password" id="password" required>
 	      </div>
-	      
+
 	      <div class="form-group" id="terms">
               <div class="conditions">
 								<div class="col-xs-12">
@@ -56,7 +56,7 @@
 	<#include "/partials/scripts.ftl">
 
     <script>
-    
+
     $("#loginForm").on('submit', function(e) {
     	submitForm();
     	e.preventDefault();
@@ -67,23 +67,24 @@
     	var requestError = function requestError(err) {
 	    	alert("Request error: " + err);
 	    };
-	
+
 	    var requestSuccess = function requestSuccess(data) {
 	      if (data.success === "true") console.log("login successful!");
 	      else if (data.success === "false") console.log("login failed.");
-	
+
 	      if (data.success === "true" && data.userToken) {
 	      	localStorage.setItem("userID", userID);
 	      	localStorage.setItem("userToken", userToken);
+          window.location.replace("/dashboard");
 	      } else {
 	      	alert("login failed.");
 	      }
 	    };
-    
+
       //console.log("in submitForm");
 
       var formData = $('#loginForm').serializeObject();
-      
+
       if (formData.agree !== 'agree') {
       	alert('You must accept the terms and conditions.');
       	return;
