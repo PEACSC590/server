@@ -20,6 +20,8 @@
 <![endif]-->
 
 <!-- linking login stylesheet -->
+<#if pageName?? && pageName == "login">
 <link href="login.css" rel="stylesheet">
+</#if>
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
