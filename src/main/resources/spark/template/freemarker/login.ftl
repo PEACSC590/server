@@ -14,6 +14,7 @@
 
     <div class="load">
       <form id="loginForm">
+      <div class="jumbotron">
 	      <div class="form-group textbgform">
 	        <label for="imageUrl">Exeter Username</label>
 	        <input type="text" class="form-control" name="userID" id="userID" required>
@@ -22,6 +23,7 @@
 	      <div class="form-group textbgform">
 	        <label for="title">Exeter Password</label>
 	        <input type="password" class="form-control" name="password" id="password" required>
+	      </div>
 	      </div>
 
 	      <div class="form-group" id="terms">

@@ -67,12 +67,13 @@ body {
 .logologin {
 	width:20%;
 	height: auto;
+	margin-top:2%;
 	margin-left:40%;
 	margin-right:40%;
 	padding-left:0%;
 	padding-right:0%;
 	padding-top:0%;
-	padding-bottom:2%;
+	padding-bottom:1%;
 	border-bottom-style: solid;
 	border-bottom-color: #990000;
 	border-bottom-width: medium;
