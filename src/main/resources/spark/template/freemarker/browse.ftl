@@ -32,16 +32,15 @@
 </div>
 
       <!-- Example row of columns -->
-<<<<<<< HEAD
 
-=======
+<!-- WHAT IS THE FUNCTION OF THE BELOW LINE-->
       <#list items as document>
->>>>>>> 195e75810009154f7ab7b568d33c4f26d4275e0f
+
       <div class="container">
         <div class="col-md-4">
           <div class="product">
-            <h2>${document.get("itemName")}</h2>
-            <p>${document.get("itemName")}--Learn more</p>
+            <h2>${document.get("name")}</h2>
+            <p>${document.get("name")}--Learn more</p>
             <p><a class="btn btn-default" href="ProductFocus.ftl" role="button">View details &raquo;</a></p>
         </div>
         </#list>

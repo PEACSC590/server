@@ -60,6 +60,7 @@ public class Main {
 		//test.test();
 		// END TESTING CODE
 		
+		// DONE AND TESTED
 		get("/login", (request, response) -> {
 			System.out.println("GET LOGIN");
 			Map<String, Object> attributes = new HashMap<>();
@@ -67,6 +68,7 @@ public class Main {
 		}, templateEngine);
 
 
+		// DONE AND TESTED
 		post("/login", (req, res) -> {
 			System.out.println("POST LOGIN");
 			Map<String, String> data = api.getBody(req);
@@ -86,7 +88,8 @@ public class Main {
 
 			return new ModelAndView(attributes, "login.ftl"); // FIXME
 		}, templateEngine);
-
+		
+		// ALMOST DONE, MISSING USER DATA
 		get("/logout", (req, res) -> {
 			// TODO: HOW DO WE STORE USER DATA?
 			//Map<String, String> data = api.getBody(req);
