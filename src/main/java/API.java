@@ -11,7 +11,6 @@ import spark.Request;
 public class API {
 
 	private static final long PENDING_PURCHASES_TIMEOUT = 1000 * 60 * 60 * 24 * 3;
-	// 3 days
 
 	private MongoDatabase db;
 
@@ -36,6 +35,7 @@ public class API {
 	
 	}
 
+	// TESTED: SUCCESS
 	public void refreshItems() {
 		List<Document> list = items.getItems(new Document("status", "pending"));
 		System.out.println(list.size());

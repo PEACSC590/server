@@ -33,13 +33,13 @@
 
       <div class="container">
         <div class="col-md-4">
-        <#list items as item>
-          <div class="product">
-            <h2>${item.name}</h2>
-            <p>${item.name}--Learn more</p>
-            <p><a class="btn btn-default" href="list-item?itemID=${item.itemID}" role="button">View details &raquo;</a></p>
-        	</div>
-        	</#list>
+	        <#list items as item>
+	          <div class="product">
+	            <h2>${item.name}</h2>
+	            <p>${item.name}--Learn more</p>
+	            <p><a class="btn btn-default" href="list-item?itemID=${item.itemID}" role="button">View details &raquo;</a></p>
+	    	</div>
+	    	</#list>
         </div>
         
         <!--<div class="col-md-4">

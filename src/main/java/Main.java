@@ -61,17 +61,15 @@ public class Main {
 		// test.test();
 		// END TESTING CODE
 
-		// Browser page
+		// DONE AND TESTED (actually?)
 		get("/login", (request, response) -> {
 			System.out.println("GET LOGIN");
 			Map<String, Object> attributes = new HashMap<>();
-			// no attributes needed?
-
 			return new ModelAndView(attributes, "login.ftl");
 		}, templateEngine);
 
-		// login
-		// Should be used by a form -> serves a page
+
+		// DONE AND TESTED (actually?)
 		post("/login", (req, res) -> {
 			System.out.println("POST LOGIN");
 			Map<String, String> data = api.getBody(req);
@@ -91,12 +89,8 @@ public class Main {
 			return api.users.logout(userID, userToken);
 		}, jsonEngine);
 
-		// list items in the db that match the query provided as a querystring
-		// param
-		// Browser page
 		get("/browse", (req, res) -> {
 			Map<String, Object> attributes = new HashMap<>();
-
 			String jsonStringQuery = req.queryParams("query");
 			if (jsonStringQuery == null || jsonStringQuery.length() == 0 || jsonStringQuery.charAt(0) != '{')
 				jsonStringQuery = "{}";
@@ -169,9 +163,40 @@ public class Main {
 
 			return api.items.upload(item, userID, userToken);
 		}, jsonEngine);
-
+		
 		// Should be used by AJAX -> serves json
 		post("/buy", (req, res) -> {
+
+			Map<String, String> body = api.getBody(req);
+			if (!body.containsKey("userID") || !body.containsKey("userToken") || !body.containsKey("itemID"))
+				return jsonError("Invalid input");
+
+			Map<String, String> output;
+			try {
+				output = api.sales.buy(body.get("userID"), body.get("userToken"), body.get("itemID"));
+			} catch (Exception e) {
+				return jsonError(e.getMessage());
+			}
+
+			return output;
+		}, jsonEngine);
+		
+
+		post("/sell", (req, res) -> {
+					Map<String, String> body = api.getBody(req);
+					if (!body.containsKey("userID") || !body.containsKey("userToken") || !body.containsKey("itemID"))
+						return jsonError("Invalid input");
+
+					Map<String, String> output;
+					try {
+						output = api.sales.sell(body.get("userID"), body.get("userToken"), body.get("itemID"));
+					} catch (Exception e) {
+						return jsonError(e.getMessage());
+					}
+					return output;
+				}, jsonEngine);
+		
+		post("/cancelPendingSale", (req, res) -> {
 
 			Map<String, String> body = api.getBody(req);
 
@@ -180,14 +205,51 @@ public class Main {
 
 			Map<String, String> output;
 			try {
-				output = api.sales.buy(body.get("userID"), body.get("itemID"), body.get("userToken"));
+				output = api.sales.cancelPendingSale(body.get("userID"), body.get("userToken"), body.get("itemID"));
+				res.redirect("/pendingitems");
 			} catch (Exception e) {
 				return jsonError(e.getMessage());
 			}
 
 			return output;
+			
 		}, jsonEngine);
+		
+		post("/refuseSale", (req, res) -> {
 
+			Map<String, String> body = api.getBody(req);
+
+			if (!body.containsKey("userToken") || !body.containsKey("userID") || !body.containsKey("itemID"))
+				return jsonError("Invalid input");
+
+			Map<String, String> output;
+			try {
+				output = api.sales.refuseSale(body.get("userID"), body.get("userToken"), body.get("itemID"));
+				res.redirect("/pendingitems");
+			} catch (Exception e) {
+				return jsonError(e.getMessage());
+			}
+
+			return output;
+			
+		}, jsonEngine);
+			
+		post("/unlist", (req, res) -> {
+			Map<String, String> body = api.getBody(req);
+			if (!body.containsKey("userID") || !body.containsKey("userToken") || !body.containsKey("itemID"))
+				return jsonError("Invalid input");
+
+			Map<String, String> output;
+			try {
+				output = api.items.unlist(body.get("userID"), body.get("userToken"), body.get("itemID"));
+				res.redirect("/dashboard");
+			} catch (Exception e) {
+				return jsonError(e.getMessage());
+			}
+			return output;
+			
+		}, jsonEngine);
+		
 	}
 
 	private static ModelAndView staticTemplate(String path, String pageName) {
