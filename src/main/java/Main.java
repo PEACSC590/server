@@ -61,17 +61,15 @@ public class Main {
 		//test.test();
 		// END TESTING CODE
 		
-		// Browser page
+		// DONE AND TESTED
 		get("/login", (request, response) -> {
 			System.out.println("GET LOGIN");
 			Map<String, Object> attributes = new HashMap<>();
-			// no attributes needed?
-
 			return new ModelAndView(attributes, "login.ftl");
 		}, templateEngine);
 
-		// login
-		// Should be used by a form -> serves a page
+
+		// DONE AND TESTED
 		post("/login", (req, res) -> {
 			System.out.println("POST LOGIN");
 			Map<String, String> data = api.getBody(req);
@@ -81,40 +79,37 @@ public class Main {
 			Map<String, String> loginStatus = api.users.login(userID, password);
 
 			Map<String, Object> attributes = new HashMap<>();
-			// if good, put username
-			if (loginStatus.get("success") == "true") {
+
+			if (loginStatus.get("success").equals("true")) {
+				// TODO: MUST PASS USERID WHEN REDIRECT HAPPENS
 				res.redirect("/dashboard");
-				// TODO: halt... how do redirects work in spark?
 			} else {
-				attributes.put("error", "Your username or password is incorrect.");
+				attributes.put("error", "INCORRECT CREDENTIALS");
 			}
 
 			return new ModelAndView(attributes, "login.ftl"); // FIXME
 		}, templateEngine);
-
-		// logout
-		// Should be used by AJAX -> serves json
-		post("/logout", (req, res) -> {
-			Map<String, String> data = api.getBody(req);
-			String userID = data.get("userID");
-			String userToken = data.get("userToken");
-
-			return api.users.logout(userID, userToken);
-		}, jsonEngine);
-
-		// list items in the db that match the query provided as a querystring
-		// param
-		// Browser page
-		get("/list-items", (req, res) -> {
+		
+		// ALMOST DONE, MISSING USER DATA
+		get("/logout", (req, res) -> {
+			// TODO: HOW DO WE STORE USER DATA?
+			//Map<String, String> data = api.getBody(req);
+			//String userID = data.get("userID");
+			//String userToken = data.get("userToken");
+			//Map status = api.users.logout(userID, userToken);
 			Map<String, Object> attributes = new HashMap<>();
+			res.redirect("/login");
+			return new ModelAndView(attributes, "login.ftl");
+		}, templateEngine);
 
+		get("/browse", (req, res) -> {
+			Map<String, Object> attributes = new HashMap<>();
 			String jsonStringQuery = req.queryParams("query");
 			if (jsonStringQuery == null || jsonStringQuery.length() == 0 || jsonStringQuery.charAt(0) != '{')
 				jsonStringQuery = "{}";
 			try {
 				Bson query = (Bson) JSON.parse(jsonStringQuery);
 				List<Document> items = api.items.getItems(query);
-				//not sure we need this 
 				List<String> itemStrings = new LinkedList<String>();
 
 				for (Document item : items)
@@ -126,7 +121,7 @@ public class Main {
 				attributes.put("error", e.toString());
 			}
 			
-			// TODO: replace with a view-items template
+			attributes.put("pageName", "browse");
 			return new ModelAndView(attributes, "browse.ftl");
 		}, templateEngine);
 		
@@ -149,7 +144,6 @@ public class Main {
 			return new ModelAndView(attributes, "ProductFocus.ftl");
 		}, templateEngine);
 		
-		// get list of items bought and list of items sold
 		get("/dashboard", (req, res) -> {
 			Map<String, String> data = api.getBody(req);
 			String userID = data.get("userID");
@@ -166,35 +160,31 @@ public class Main {
 			attributes.put("itemPrices", itemPrices);
 			attributes.put("itemsUploaded", itemsUploaded);
 			attributes.put("itemsSold", itemsSold);
+			attributes.put("pageName", "dashboard");
 			return new ModelAndView(attributes, "dashboard.ftl");
 		}, templateEngine);
 		
-		// get about info for peaBay company
-		get("/about", (req, res) -> staticTemplate("about.ftl"), templateEngine);
-		// get settings for user
-		get("/settings", (req, res) -> staticTemplate("settings.ftl"), templateEngine);
-		// get profile page for user
-		get("/profile", (req, res) -> staticTemplate("profile.ftl"), templateEngine);
+		get("/about", (req, res) -> {
+			Map<String, Object> attributes = new HashMap<>();
+			return new ModelAndView(attributes, "about.ftl");
+		}, templateEngine);
 
 		get("/upload", (req, res) -> {
 			Map<String, Object> attributes = new HashMap<>();
-			
 			return new ModelAndView(attributes, "upload.ftl");
 		}, templateEngine);
 
 		post("/upload", (req, res) -> {
 			Map<String, String> data = api.getBody(req);
-			System.out.println(data);
 			Document item = (Document) JSON.parse(data.get("item"));
 			String userID = data.get("userID");
 			String userToken = data.get("userToken");
 			
-			Map<String, String> result = api.items.upload(item, userID, userToken);
+			Map<String, String> result = api.items.upload(userID, userToken, item);
 			System.out.println(userID);
 			if (result.get("status").equals("listed")) {
 				res.redirect("/dashboard");
 				return new ModelAndView(new HashMap<>(), "redirecting.ftl");
-				// return new ModelAndView(new HashMap<>(), "MyProducts.ftl");
 			} else {
 				// if upload has illegal inputs, redirect
 				// res.redirect("/upload"); // can't use this for now; adds the
@@ -210,13 +200,12 @@ public class Main {
 		post("/buy", (req, res) -> {
 
 			Map<String, String> body = api.getBody(req);
-
-			if (!body.containsKey("userToken") || !body.containsKey("userID") || !body.containsKey("itemID"))
+			if (!body.containsKey("userID") || !body.containsKey("userToken") || !body.containsKey("itemID"))
 				return jsonError("Invalid input");
 
 			Map<String, String> output;
 			try {
-				output = api.sales.buy(body.get("userID"), body.get("itemID"), body.get("userToken"));
+				output = api.sales.buy(body.get("userID"), body.get("userToken"), body.get("itemID"));
 			} catch (Exception e) {
 				return jsonError(e.getMessage());
 			}
@@ -225,10 +214,80 @@ public class Main {
 		}, jsonEngine);
 		
 
+		post("/sell", (req, res) -> {
+					Map<String, String> body = api.getBody(req);
+					if (!body.containsKey("userID") || !body.containsKey("userToken") || !body.containsKey("itemID"))
+						return jsonError("Invalid input");
+
+					Map<String, String> output;
+					try {
+						output = api.sales.sell(body.get("userID"), body.get("userToken"), body.get("itemID"));
+					} catch (Exception e) {
+						return jsonError(e.getMessage());
+					}
+					return output;
+				}, jsonEngine);
+		
+		post("/cancelPendingSale", (req, res) -> {
+
+			Map<String, String> body = api.getBody(req);
+
+			if (!body.containsKey("userToken") || !body.containsKey("userID") || !body.containsKey("itemID"))
+				return jsonError("Invalid input");
+
+			Map<String, String> output;
+			try {
+				output = api.sales.cancelPendingSale(body.get("userID"), body.get("userToken"), body.get("itemID"));
+				res.redirect("/pendingitems");
+			} catch (Exception e) {
+				return jsonError(e.getMessage());
+			}
+
+			return output;
+			
+		}, jsonEngine);
+		
+		post("/refuseSale", (req, res) -> {
+
+			Map<String, String> body = api.getBody(req);
+
+			if (!body.containsKey("userToken") || !body.containsKey("userID") || !body.containsKey("itemID"))
+				return jsonError("Invalid input");
+
+			Map<String, String> output;
+			try {
+				output = api.sales.refuseSale(body.get("userID"), body.get("userToken"), body.get("itemID"));
+				res.redirect("/pendingitems");
+			} catch (Exception e) {
+				return jsonError(e.getMessage());
+			}
+
+			return output;
+			
+		}, jsonEngine);
+			
+		post("/unlist", (req, res) -> {
+			Map<String, String> body = api.getBody(req);
+			if (!body.containsKey("userID") || !body.containsKey("userToken") || !body.containsKey("itemID"))
+				return jsonError("Invalid input");
+
+			Map<String, String> output;
+			try {
+				output = api.items.unlist(body.get("userID"), body.get("userToken"), body.get("itemID"));
+				res.redirect("/dashboard");
+			} catch (Exception e) {
+				return jsonError(e.getMessage());
+			}
+			return output;
+			
+		}, jsonEngine);
+		
 	}
 	
-	private static ModelAndView staticTemplate(String path) {
-		return new ModelAndView(new HashMap<>(), "contact.ftl");
+	private static ModelAndView staticTemplate(String path, String pageName) {
+		Map<String, Object> attributes = new HashMap<>();
+		if (!pageName.isEmpty()) attributes.put("pageName", pageName);
+		return new ModelAndView(attributes, path);
 	}
 
 	private static ModelAndView errorView(String errmsg) {

@@ -64,7 +64,7 @@ public class Items {
 
 	// TESTED: SUCCESS
 	// TODO: EXCEPT FOR TAGS WITH ACTUAL ARRAY OF TAGS
-	public Map<String, String> upload(Document item, String userID, String userToken) {
+	public Map<String, String> upload(String userID, String userToken, Document item) {
 		Map<String, String> output = new HashMap<>();
 		boolean authenticated = api.userTokens.testUserTokenForUser(userID, userToken);
 
@@ -116,7 +116,7 @@ public class Items {
 	}
 
 	// TESTED: SUCCESS
-	public Map<String, String> unlist(String itemID, String sellerID, String userToken) {
+	public Map<String, String> unlist(String sellerID, String userToken, String itemID) {
 		Map<String, String> output = new HashMap<>();
 
 		boolean authenticated = api.userTokens.testUserTokenForUser(sellerID, userToken);

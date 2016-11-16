@@ -1,9 +1,6 @@
 import java.io.*;
 import java.net.*;
 
-import sun.net.www.protocol.http.AuthCacheValue;
-import sun.net.www.protocol.http.ntlm.NTLMAuthenticationCallback;
-
 public class Login {
 
     // username and pw
@@ -24,36 +21,9 @@ public class Login {
             }
         }
     }
-
-    static {
-        NTLMAuthenticationCallback.setNTLMAuthenticationCallback(new NTLMAuthenticationCallback()
-        {
-            @Override
-            public boolean isTrustedSite(URL url)
-            {
-                return false;
-            }
-        });
-    }
-    
-    static class MyCache implements sun.net.www.protocol.http.AuthCache{
-        public void put(String pkey, sun.net.www.protocol.http.AuthCacheValue value){
-
-        }
-        public sun.net.www.protocol.http.AuthCacheValue get(String pkey, String skey){
-            return null;
-        }
-        public void remove(String pkey, sun.net.www.protocol.http.AuthCacheValue entry){
-
-        }
-   }
     
     
     public static boolean login(String userID1, String pw1) {
-    	// TODO: CHECK IF THIS ACTUALLY RESTS THE AUTHENTICATOR CACHE
-    	AuthCacheValue.setAuthCache(new MyCache());
-    	
-    	Authenticator.setDefault(null);
     	
     	System.out.println(userID1 + " " + pw1);
 		

@@ -14,7 +14,7 @@ public class Sales {
 	}
 
 	// TESTED: SUCCESS
-	public Map<String, String> buy(String buyerID, String itemID, String userToken) throws Exception {
+	public Map<String, String> buy(String buyerID, String userToken, String itemID) throws Exception {
 		Map<String, String> output = new HashMap<>();
 		boolean authenticated = api.userTokens.testUserTokenForUser(buyerID, userToken);
 
@@ -70,7 +70,7 @@ public class Sales {
 	}
 
 	// TESTED: SUCCESS
-	public Map<String, String> cancelPendingSale(String itemID, String buyerID, String userToken) {
+	public Map<String, String> cancelPendingSale(String buyerID, String userToken, String itemID) {
 		Map<String, String> output = new HashMap<>();
 		boolean authenticated = api.userTokens.testUserTokenForUser(buyerID, userToken);
 
@@ -112,7 +112,7 @@ public class Sales {
 	}
 
 	// TESTED: SUCCESS
-	public Map<String, String> refuseSale(String itemID, String sellerID, String userToken) {
+	public Map<String, String> refuseSale(String sellerID, String userToken, String itemID) {
 		Map<String, String> output = new HashMap<>();
 		boolean authenticated = api.userTokens.testUserTokenForUser(sellerID, userToken);
 
@@ -157,7 +157,7 @@ public class Sales {
 	}
 
 	// TESTED: SUCCESS
-	public Map<String, String> sell(String itemID, String buyerID, String userToken) {
+	public Map<String, String> sell(String buyerID, String userToken, String itemID) {
 		Map<String, String> output = new HashMap<>();
 		boolean authenticated = api.userTokens.testUserTokenForUser(buyerID, userToken);
 
