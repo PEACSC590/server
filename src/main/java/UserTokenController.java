@@ -1,7 +1,7 @@
 import org.bson.Document;
 
 public class UserTokenController {
-	
+
 	private final long MS_IN_A_WEEK = 1000 * 60 * 60 * 24 * 7;
 
 	private API api;
@@ -31,7 +31,7 @@ public class UserTokenController {
 			return false;
 		}
 		String foundUserToken = user.getString("userToken");
-		
+
 		return user.isEmpty() || (foundUserToken.equals(userToken)
 				&& (System.currentTimeMillis() - Long.parseLong(foundUserToken.split("@")[1]) < MS_IN_A_WEEK));
 	}
