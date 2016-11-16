@@ -31,10 +31,6 @@
     <p><a class="btn btn-primary btn-lg" href="about" role="button">Learn more &raquo;</a></p>
 </div>
 
-	<#if error??>
-		<p style="color: red">${error}</p>
-	</#if>
-
       <div class="container-fluid">
         <div class="col-md-4">
 	        <#list items as item>

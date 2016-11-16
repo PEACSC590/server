@@ -41,22 +41,46 @@ public class Items {
 	}
 	
 	public List<Document> getPendingSales(String userID, String userToken) {
-		return getItems(new Document("status", "pending").append("sellerID", userID));
+		boolean authenticated = api.userTokens.testUserTokenForUser(userID, userToken);
+		
+		if (authenticated){
+			return getItems(new Document("status", "pending").append("sellerID", userID));
+		} else {
+			return null;
+		}
 	}
 
 	public List<Document> getPendingPurchases(String userID, String userToken) {
-		return getItems(new Document("status", "pending").append("buyerID", userID));
+		boolean authenticated = api.userTokens.testUserTokenForUser(userID, userToken);
+		
+		if (authenticated){
+			return getItems(new Document("status", "pending").append("buyerID", userID));
+		} else {
+			return null;
+		}
 	}
 	// TESTED: SUCCESS
 	public List<Document> getItemsUploadedByUser(String userID, String userToken) {
-		return getItems(new Document("sellerID", userID));
+		boolean authenticated = api.userTokens.testUserTokenForUser(userID, userToken);
+		
+		if (authenticated){
+			return getItems(new Document("sellerID", userID));
+		} else {
+			return null;
+		}
 	}
 
 	// SEMI-TESTED: SHOULD WORK
 	public List<Document> getItemsBoughtByUser(String userID, String userToken) {
 		// 10.16.16: the item attribute might not be "boughtByUserID", but I'll
 		// use it for now
-		return getItems(new Document("buyerID", userID));
+boolean authenticated = api.userTokens.testUserTokenForUser(userID, userToken);
+		
+		if (authenticated){
+			return getItems(new Document("buyerID", userID));
+		} else {
+			return null;
+		}
 	}
 
 	// TESTED: SUCCESS

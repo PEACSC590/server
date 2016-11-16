@@ -92,13 +92,13 @@ public class Main {
 			String userToken = data.get("userToken");
 			Map<String, Object> attributes = new HashMap<>();
 			List<Document> items = api.items.getBuyableItems(userID, userToken);
-			if (!items.isEmpty())
+			if (!items.isEmpty()) {
 				attributes.put("items", items);
-			else
-				attributes.put("error", "NOT AUTHENTICATED");
-			
-			attributes.put("pageName", "browse");
-			return new ModelAndView(attributes, "browse.ftl");
+				attributes.put("pageName", "browse");
+				return new ModelAndView(attributes, "browse.ftl");
+			} else {
+				return errorView("NOT AUTHENTICATED");
+			}
 		}, templateEngine);
 
 
@@ -128,11 +128,15 @@ public class Main {
 			List<Document> itemsUploaded = api.items.getItemsUploadedByUser(userID, userToken);
 			List<Document> itemsSold = api.items.getItemsSold(userID, userToken);
 			Map<String, Object> attributes = new HashMap<>();
-			attributes.put("itemsBought", itemsBought);
-			attributes.put("itemsUploaded", itemsUploaded);
-			attributes.put("itemsSold", itemsSold);
-			attributes.put("pageName", "dashboard");
-			return new ModelAndView(attributes, "dashboard.ftl");
+			if (!itemsBought.isEmpty()) {
+				attributes.put("itemsBought", itemsBought);
+				attributes.put("itemsUploaded", itemsUploaded);
+				attributes.put("itemsSold", itemsSold);
+				attributes.put("pageName", "dashboard");
+				return new ModelAndView(attributes, "dashboard.ftl");
+			} else {
+				return errorView("NOT AUTHENTICATED");
+			}
 		}, templateEngine);
 
 		// GET INFO ABOUT PEABAY COMPANY
@@ -146,10 +150,14 @@ public class Main {
 			List<Document> pendingPurchases = api.items.getPendingPurchases(userID, userToken);
 
 			Map<String, Object> attributes = new HashMap<>();
-			attributes.put("pendingSales", pendingSales);
-			attributes.put("pendingPurchases", pendingPurchases);
-			attributes.put("pageName", "pendingitems");
-			return new ModelAndView(attributes, "pendingitems.ftl");
+			if (!pendingSales.isEmpty()) {
+				attributes.put("pendingSales", pendingSales);
+				attributes.put("pendingPurchases", pendingPurchases);
+				attributes.put("pageName", "pendingitems");
+				return new ModelAndView(attributes, "pendingitems.ftl");
+			} else {
+				return errorView("NOT AUTHENTICATED");
+			}
 		}, templateEngine);
 
 		get("/upload", (req, res) -> staticTemplate("upload.ftl", "upload"), templateEngine);

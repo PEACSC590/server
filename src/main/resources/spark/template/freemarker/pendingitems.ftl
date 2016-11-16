@@ -8,7 +8,7 @@
 <body>
 
   <#include "/partials/nav.ftl">
-
+	
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-2">

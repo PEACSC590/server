@@ -21,7 +21,7 @@
       <h1 class="page-header textbgup">Upload</h1>
     </div>
   </div>
-
+	
   <div class="container-fluid">
     <div class="row">
 
