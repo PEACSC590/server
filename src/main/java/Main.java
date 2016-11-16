@@ -126,9 +126,9 @@ public class Main {
 			Map<String, String> data = api.getBody(req);
 			String userID = data.get("userID");
 			String userToken = data.get("userToken");
-			List<Document> itemsBought = api.items.getItemsBoughtByUser(userID);
+			List<Document> itemsBought = api.items.getItemsBoughtByUser(userID, userToken);
 			List<Document> itemsUploaded = api.items.getItemsUploadedByUser(userID, userToken);
-			List<Document> itemsSold = api.items.getItemsSold(userID);
+			List<Document> itemsSold = api.items.getItemsSold(userID, userToken);
 
 			Map<String, Object> attributes = new HashMap<>();
 			attributes.put("itemsBought", itemsBought);
@@ -141,7 +141,18 @@ public class Main {
 		// GET INFO ABOUT PEABAY COMPANY
 		get("/about", (req, res) -> staticTemplate("about.ftl", "about"), templateEngine);
 
-		// TODO: create pending items endpoint
+		get("/pendingitems", (req, res) -> {
+			Map<String, String> data = api.getBody(req);
+			String userID = data.get("userID");
+			String userToken = data.get("userToken");
+			List<Document> pendingSales = api.items.getPendingSales(userID, userToken);
+			List<Document> pendingPurchases = api.items.getPendingPurchases(userID, userToken);
+
+			Map<String, Object> attributes = new HashMap<>();
+			attributes.put("pendingSales", pendingSales);
+			attributes.put("pendingPurchases", pendingPurchases);
+			return new ModelAndView(attributes, "pendingitems.ftl");
+		}, templateEngine);
 
 		get("/upload", (req, res) -> staticTemplate("upload.ftl", "upload"), templateEngine);
 
