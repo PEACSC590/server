@@ -89,13 +89,14 @@ public class Main {
 
 		get("/logout", (req, res) -> {
 			// TODO: HOW DO WE STORE USER DATA?
-			Map<String, String> data = api.getBody(req);
-			String userID = data.get("userID");
-			String userToken = data.get("userToken");
-			Map status = api.users.logout(userID, userToken);
+			//Map<String, String> data = api.getBody(req);
+			//String userID = data.get("userID");
+			//String userToken = data.get("userToken");
+			//Map status = api.users.logout(userID, userToken);
 			Map<String, Object> attributes = new HashMap<>();
+			res.redirect("/login");
 			return new ModelAndView(attributes, "login.ftl");
-		}, jsonEngine);
+		}, templateEngine);
 
 		get("/browse", (req, res) -> {
 			Map<String, Object> attributes = new HashMap<>();
