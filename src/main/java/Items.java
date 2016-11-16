@@ -30,8 +30,14 @@ public class Items {
 	}
 
 	// TESTED: SUCCESS
-	public List<Document> getBuyableItems() {
-		return getItems(new Document("status", "listed"));
+	public List<Document> getBuyableItems(String userID, String userToken) {
+		boolean authenticated = api.userTokens.testUserTokenForUser(userID, userToken);
+		
+		if (authenticated){
+			return getItems(new Document("status", "listed"));
+		} else {
+			return null;
+		}
 	}
 	
 	public List<Document> getPendingSales(String userID, String userToken) {

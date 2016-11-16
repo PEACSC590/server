@@ -82,24 +82,16 @@ public class Main {
 		}, jsonEngine);
 
 		get("/browse", (req, res) -> {
+			Map<String, String> data = api.getBody(req);
+			String userID = data.get("userID");
+			String userToken = data.get("userToken");
 			Map<String, Object> attributes = new HashMap<>();
-			String jsonStringQuery = req.queryParams("query");
-			if (jsonStringQuery == null || jsonStringQuery.length() == 0 || jsonStringQuery.charAt(0) != '{')
-				jsonStringQuery = "{}";
-			try {
-				Bson query = (Bson) JSON.parse(jsonStringQuery);
-				List<Document> items = api.items.getItems(query);
-				List<String> itemStrings = new LinkedList<String>();
-
-				for (Document item : items)
-					itemStrings.add(item.toJson());
-
-				attributes.put("results", itemStrings);
+			List<Document> items = api.items.getBuyableItems(userID, userToken);
+			if (!items.isEmpty())
 				attributes.put("items", items);
-			} catch (Exception e) {
-				attributes.put("error", e.toString());
-			}
-
+			else
+				attributes.put("error", "NOT AUTHENTICATED");
+			
 			attributes.put("pageName", "browse");
 			return new ModelAndView(attributes, "browse.ftl");
 		}, templateEngine);
@@ -152,6 +144,7 @@ public class Main {
 			Map<String, Object> attributes = new HashMap<>();
 			attributes.put("pendingSales", pendingSales);
 			attributes.put("pendingPurchases", pendingPurchases);
+			attributes.put("pageName", "pendingitems");
 			return new ModelAndView(attributes, "pendingitems.ftl");
 		}, templateEngine);
 
