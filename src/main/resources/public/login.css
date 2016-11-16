@@ -60,7 +60,7 @@ body {
 
 .logintitle {
 	width:100%;
-	margin-left:20%;
+	
 	
 }
 
@@ -72,7 +72,10 @@ body {
 	padding-left:0%;
 	padding-right:0%;
 	padding-top:0%;
-	padding-bottom:0%;
+	padding-bottom:2%;
+	border-bottom-style: solid;
+	border-bottom-color: #990000;
+	border-bottom-width: medium;
 	
 }
 
