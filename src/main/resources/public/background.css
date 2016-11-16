@@ -270,6 +270,7 @@ background: rgba(255,255,255,0.8);
 
 .jumbotron-forsale {
   opacity: 0.8;
+  padding-left: 5%;
   padding-top: 35px;
   margin-right: 25%;
   margin-left: 21%;
