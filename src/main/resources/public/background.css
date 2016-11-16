@@ -232,6 +232,10 @@ background: rgba(255,255,255,0.8);
   border-radius: 6px;
 }
 
+.col-md-4 {
+	width:30%;
+}
+
 .product:hover {
   opacity:1.0;
   margin-left: 0%;
