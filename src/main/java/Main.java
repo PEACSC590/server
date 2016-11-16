@@ -97,8 +97,7 @@ public class Main {
 			return api.users.logout(userID, userToken);
 		}, jsonEngine);
 
-
-		get("/list-items", (req, res) -> {
+		get("/browse", (req, res) -> {
 			Map<String, Object> attributes = new HashMap<>();
 
 			String jsonStringQuery = req.queryParams("query");
@@ -118,7 +117,7 @@ public class Main {
 				attributes.put("error", e.toString());
 			}
 			
-			// TODO: replace with a view-items template
+			attributes.put("pageName", "browse");
 			return new ModelAndView(attributes, "browse.ftl");
 		}, templateEngine);
 		
@@ -154,15 +153,12 @@ public class Main {
 			attributes.put("itemsBought", itemsBought);
 			attributes.put("itemsUploaded", itemsUploaded);
 			attributes.put("itemsSold", itemsSold);
+			attributes.put("pageName", "dashboard");
 			return new ModelAndView(attributes, "dashboard.ftl");
 		}, templateEngine);
 		
 		// get about info for peaBay company
-		get("/about", (req, res) -> staticTemplate("about.ftl"), templateEngine);
-		// get settings for user
-		get("/settings", (req, res) -> staticTemplate("settings.ftl"), templateEngine);
-		// get profile page for user
-		get("/profile", (req, res) -> staticTemplate("profile.ftl"), templateEngine);
+		get("/about", (req, res) -> staticTemplate("about.ftl", "about"), templateEngine);
 
 		get("/upload", (req, res) -> {
 			Map<String, Object> attributes = new HashMap<>();
@@ -215,8 +211,10 @@ public class Main {
 
 	}
 	
-	private static ModelAndView staticTemplate(String path) {
-		return new ModelAndView(new HashMap<>(), path);
+	private static ModelAndView staticTemplate(String path, String pageName) {
+		Map<String, Object> attributes = new HashMap<>();
+		if (!pageName.isEmpty()) attributes.put("pageName", pageName);
+		return new ModelAndView(attributes, path);
 	}
 
 	private static ModelAndView errorView(String errmsg) {
