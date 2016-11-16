@@ -14,7 +14,7 @@
 
     <div class="load">
       <form id="loginForm">
-      <div class="jumbotron">
+      <div class="jumbotron jumbotron-login">
 	      <div class="form-group textbgform">
 	        <label for="imageUrl">Exeter Username</label>
 	        <input type="text" class="form-control" name="userID" id="userID" required>
