@@ -62,14 +62,14 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <#list itemsBought as document, itemName>
-                    <td>${itemName}</td>
+                    <#list itemsBought as document, name>
+                    <td>${name}</td>
                    </#list>
                     <#list itemsBought as document, dateBought>
                     <td>${dateBought}</td>
                    </#list>
-                    <#list itemsBought as document, itemPrice>
-                    <td>"$" + ${"itemPrice"}</td>
+                    <#list itemsBought as document, price>
+                    <td>"$" + ${"price"}</td>
                    </#list>
 
                   </tr>
