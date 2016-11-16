@@ -98,6 +98,7 @@ public class Main {
 		}, jsonEngine);
 
 		get("/browse", (req, res) -> {
+			Map<String, Object> attributes = new HashMap<>();
 			String jsonStringQuery = req.queryParams("query");
 			if (jsonStringQuery == null || jsonStringQuery.length() == 0 || jsonStringQuery.charAt(0) != '{')
 				jsonStringQuery = "{}";
