@@ -63,8 +63,6 @@ public class Main {
 		get("/login", (request, response) -> {
 			System.out.println("GET LOGIN");
 			Map<String, Object> attributes = new HashMap<>();
-			// no attributes needed?
-
 			return new ModelAndView(attributes, "login.ftl");
 		}, templateEngine);
 
@@ -80,26 +78,26 @@ public class Main {
 			Map<String, Object> attributes = new HashMap<>();
 
 			if (loginStatus.get("success").equals("true")) {
+				// TODO: MUST PASS USERID WHEN REDIRECT HAPPENS
 				res.redirect("/dashboard");
-				// TODO: halt... how do redirects work in spark?
 			} else {
-				attributes.put("error", "Your username or password is incorrect.");
+				attributes.put("error", "INCORRECT CREDENTIALS");
 			}
 
 			return new ModelAndView(attributes, "login.ftl"); // FIXME
 		}, templateEngine);
 
-		post("/logout", (req, res) -> {
+		get("/logout", (req, res) -> {
+			// TODO: HOW DO WE STORE USER DATA?
 			Map<String, String> data = api.getBody(req);
 			String userID = data.get("userID");
 			String userToken = data.get("userToken");
-
-			return api.users.logout(userID, userToken);
+			Map status = api.users.logout(userID, userToken);
+			Map<String, Object> attributes = new HashMap<>();
+			return new ModelAndView(attributes, "login.ftl");
 		}, jsonEngine);
 
 		get("/browse", (req, res) -> {
-			Map<String, Object> attributes = new HashMap<>();
-
 			String jsonStringQuery = req.queryParams("query");
 			if (jsonStringQuery == null || jsonStringQuery.length() == 0 || jsonStringQuery.charAt(0) != '{')
 				jsonStringQuery = "{}";
