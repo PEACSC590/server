@@ -1,3 +1,8 @@
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 import java.util.*;
 
 import org.bson.Document;
@@ -119,10 +124,9 @@ public class Main {
 			Map<String, String> data = api.getBody(req);
 			String userID = data.get("userID");
 			String userToken = data.get("userToken");
-			List<Document> itemsBought = api.items.getItemsBoughtByUser(userID, userToken);
+			List<Document>itemsBought = api.items.getItemsBoughtByUser(userID, userToken);
 			List<Document> itemsUploaded = api.items.getItemsUploadedByUser(userID, userToken);
 			List<Document> itemsSold = api.items.getItemsSold(userID, userToken);
-
 			Map<String, Object> attributes = new HashMap<>();
 			attributes.put("itemsBought", itemsBought);
 			attributes.put("itemsUploaded", itemsUploaded);

@@ -40,7 +40,7 @@
 												</div>
 										</div>
                     <div>
-            			       <button class="btn btn-default btn-file" type="submit" id="upload">Login</button>
+            			       <button class="btn btn-file" type="submit" id="upload">Login</button>
                        </div>
 								</div>
               </div>
