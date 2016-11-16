@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -156,9 +157,13 @@ public class Main {
 			List<HashMap<String, Object>> itemsBought = Util.convertListOfDocsIntoListOfMaps(api.items.getItemsBoughtByUser(userID));
 			List<HashMap<String, Object>> itemsUploaded = Util.convertListOfDocsIntoListOfMaps(api.items.getItemsUploadedByUser(userID, userToken));
 			List<HashMap<String, Object>> itemsSold = Util.convertListOfDocsIntoListOfMaps(api.items.getItemsSold(userID));
-			
+			ArrayList<String> itemNames = Util.itemNameList(itemsBought);
+			ArrayList<Long> itemDates = Util.itemDateBought(itemsBought);
+			ArrayList<Double> itemPrices = Util.itemPriceList(itemsBought);
 			Map<String, Object> attributes = new HashMap<>();
-			attributes.put("itemsBought", itemsBought);
+			attributes.put("itemNames", itemNames);
+			attributes.put("itemDates", itemDates);
+			attributes.put("itemPrices", itemPrices);
 			attributes.put("itemsUploaded", itemsUploaded);
 			attributes.put("itemsSold", itemsSold);
 			return new ModelAndView(attributes, "dashboard.ftl");

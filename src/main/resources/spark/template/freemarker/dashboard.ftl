@@ -62,14 +62,14 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <#list itemsBought as item>
-                    <td>${item.name}</td>
+                    <#list itemNames as name>
+                    <td>${name}</td>
                    </#list>
-                    <#list itemsBought as item>
-                    <td>${item.get("dateBought")}</td>
+                    <#list itemDates as date>
+                    <td>${date}</td>
                    </#list>
-                    <#list itemsBought as item>
-                    <td>$ ${item.get("itemPrice")}</td>
+                    <#list itemPrices as price>
+                    <td>$ ${price}</td>
                    </#list>
 
                   </tr>
