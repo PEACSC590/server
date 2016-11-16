@@ -25,7 +25,6 @@ public class Users {
 			output.put("userToken", userToken);
 		}
 		output.put("success", success + "");
-
 		return output;
 	}
 

@@ -14,6 +14,7 @@
 
     <div class="load">
       <form id="loginForm">
+      <div class="jumbotron jumbotron-login">
 	      <div class="form-group textbgform">
 	        <label for="imageUrl">Exeter Username</label>
 	        <input type="text" class="form-control" name="userID" id="userID" required>
@@ -22,6 +23,7 @@
 	      <div class="form-group textbgform">
 	        <label for="title">Exeter Password</label>
 	        <input type="password" class="form-control" name="password" id="password" required>
+	      </div>
 	      </div>
 
 	      <div class="form-group" id="terms">
@@ -69,15 +71,17 @@
 	    };
 
 	    var requestSuccess = function requestSuccess(data) {
-	      if (data.success === "true") console.log("login successful!");
-	      else if (data.success === "false") console.log("login failed.");
-
+	      //if (data.success === "true") console.log("login successful!");
+	     // else if (data.success === "false") console.log("login failed.");
+		
+		//console.log(data);
+		//console.log(data.userToken);
 	      if (data.success === "true" && data.userToken) {
 	      	localStorage.setItem("userID", userID);
-	      	localStorage.setItem("userToken", userToken);
+	      	localStorage.setItem("userToken", data.userToken);
           window.location.replace("/dashboard");
 	      } else {
-	      	alert("login failed.");
+	      	alert("Bad username or password.");
 	      }
 	    };
 

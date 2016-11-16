@@ -33,14 +33,21 @@ public class Items {
 	public List<Document> getBuyableItems() {
 		return getItems(new Document("status", "listed"));
 	}
+	
+	public List<Document> getPendingSales(String userID, String userToken) {
+		return getItems(new Document("status", "pending").append("sellerID", userID));
+	}
 
+	public List<Document> getPendingPurchases(String userID, String userToken) {
+		return getItems(new Document("status", "pending").append("buyerID", userID));
+	}
 	// TESTED: SUCCESS
 	public List<Document> getItemsUploadedByUser(String userID, String userToken) {
 		return getItems(new Document("sellerID", userID));
 	}
 
 	// SEMI-TESTED: SHOULD WORK
-	public List<Document> getItemsBoughtByUser(String userID) {
+	public List<Document> getItemsBoughtByUser(String userID, String userToken) {
 		// 10.16.16: the item attribute might not be "boughtByUserID", but I'll
 		// use it for now
 		return getItems(new Document("buyerID", userID));
@@ -142,7 +149,7 @@ public class Items {
 	}
 
 	// SEMI-TESTED: SHOULD WORK
-	public List<Document> getItemsSold(String userID) {
+	public List<Document> getItemsSold(String userID, String userToken) {
 		return getItems(new Document("sellerID", userID).append("status", "sold"));
 	}
 }
