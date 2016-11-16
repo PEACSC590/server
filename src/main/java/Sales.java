@@ -167,7 +167,10 @@ public class Sales {
 			if (item.getString("status").equals("cancelled")) {
 				output.put("status", "error");
 				output.put("error", "EXPIRED ITEM");
-			} else {
+			} else if (item.getString("status").equals("listed")) {
+				output.put("status", "error");
+				output.put("error", "ITEM HAS NOT BEEN BOUGHT");
+			} else if (item.getString("status").equals("pending")) {
 				Document updates = new Document();
 				updates.put("status", "sold");
 				api.itemsCollection.updateOne(new Document("itemID", itemID), new Document("$set", updates));
@@ -193,6 +196,9 @@ public class Sales {
 
 				output.put("status", "sold");
 				output.put("numPendingPurchases", numPendingPurchases + "");
+			} else {
+				output.put("status", "error");
+				output.put("error", "STATUS ILLEGAL");
 			}
 		} else {
 			String status = item.getString("status");

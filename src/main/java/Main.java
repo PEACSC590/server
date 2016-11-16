@@ -54,11 +54,10 @@ public class Main {
 		    }
 		}).start();
 		
-		// BEGIN TESTING CODE
-		// PLEASE LEAVE THE TESTING CODE HERE BECAUSE IT IS THE ONLY WAY I CAN GET IT TO CONNECT TO THE DB
+		
+		// LEAVE TESTING CODE HERE
 		//TestAPI test = new TestAPI(api);
 		//test.test();
-		// END TESTING CODE
 		
 		// DONE AND TESTED
 		get("/login", (request, response) -> {

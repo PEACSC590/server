@@ -3,9 +3,8 @@ import java.net.*;
 
 public class Login {
 
-    // username and pw
-    private static String username = ""; // your account name
-    private static String password = ""; // retrieve password for your account 
+    private static String username = "";
+    private static String password = "";
     private static URL url = null;
     
     static class MyAuthenticator extends Authenticator {
@@ -16,7 +15,7 @@ public class Login {
                 tries++;
                 return (new PasswordAuthentication(username, password.toCharArray()));
             } else {
-                //throw an unchecked exception
+                // THROW AN UNCHECKED EXCEPTION TO TRIGGER THE CATCH BLOCK BELOW
                 throw new IndexOutOfBoundsException();
             }
         }

@@ -26,10 +26,14 @@ public class UserTokenController {
 
 	// TESTED AS PART OF UPLOAD: SUCCESS
 	public boolean testUserTokenForUser(String userID, String userToken) {
-		Document item = api.usersCollection.find(new Document("userID", userID)).first();
-		String foundUserToken = item.getString("userToken");
-		return item.isEmpty() || (foundUserToken.equals(userToken)
-				&& (System.currentTimeMillis() - Long.parseLong(foundUserToken.split("@")[0]) < MS_IN_A_WEEK));
+		Document user = api.usersCollection.find(new Document("userID", userID)).first();
+		if (user.isEmpty()) {
+			return false;
+		}
+		String foundUserToken = user.getString("userToken");
+		
+		return user.isEmpty() || (foundUserToken.equals(userToken)
+				&& (System.currentTimeMillis() - Long.parseLong(foundUserToken.split("@")[1]) < MS_IN_A_WEEK));
 	}
 
 }
