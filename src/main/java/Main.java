@@ -143,7 +143,6 @@ public class Main {
 			return new ModelAndView(attributes, "ProductFocus.ftl");
 		}, templateEngine);
 		
-		// get list of items bought and list of items sold
 		get("/dashboard", (req, res) -> {
 			Map<String, String> data = api.getBody(req);
 			String userID = data.get("userID");
@@ -171,17 +170,15 @@ public class Main {
 
 		post("/upload", (req, res) -> {
 			Map<String, String> data = api.getBody(req);
-			System.out.println(data);
 			Document item = (Document) JSON.parse(data.get("item"));
 			String userID = data.get("userID");
 			String userToken = data.get("userToken");
 			
-			Map<String, String> result = api.items.upload(item, userID, userToken);
+			Map<String, String> result = api.items.upload(userID, userToken, item);
 			System.out.println(userID);
 			if (result.get("status").equals("listed")) {
 				res.redirect("/dashboard");
 				return new ModelAndView(new HashMap<>(), "redirecting.ftl");
-				// return new ModelAndView(new HashMap<>(), "MyProducts.ftl");
 			} else {
 				// if upload has illegal inputs, redirect
 				// res.redirect("/upload"); // can't use this for now; adds the
@@ -203,13 +200,28 @@ public class Main {
 
 			Map<String, String> output;
 			try {
-				output = api.sales.buy(body.get("userID"), body.get("itemID"), body.get("userToken"));
+				output = api.sales.buy(body.get("userID"), body.get("userToken"), body.get("itemID"));
 			} catch (Exception e) {
 				return jsonError(e.getMessage());
 			}
 
 			return output;
 		}, jsonEngine);
+		
+
+		post("/sell", (req, res) -> {
+					Map<String, String> body = api.getBody(req);
+					if (!body.containsKey("userToken") || !body.containsKey("userID") || !body.containsKey("itemID"))
+						return jsonError("Invalid input");
+
+					Map<String, String> output;
+					try {
+						output = api.sales.sell(body.get("userID"), body.get("userToken"), body.get("itemID"));
+					} catch (Exception e) {
+						return jsonError(e.getMessage());
+					}
+					return output;
+				}, jsonEngine);
 		
 
 	}
