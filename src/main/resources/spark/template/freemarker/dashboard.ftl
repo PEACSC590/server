@@ -8,6 +8,19 @@
 <body>
 
   <#include "/partials/nav.ftl">
+  
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-2">
+        <div class="list-group">
+          <a href="dashboard" class="list-group-item">My Items</a>
+          <a href="upload" class="list-group-item active">Upload</a>
+          <a href="pendingitems" class="list-group-item">Pending Sales</a>
+        </div>
+      </div>
+      <h1 class="page-header textbgup">Upload</h1>
+    </div>
+  </div>
 
   <div class="container-fluid">
     <div class="row">
@@ -60,22 +73,16 @@
 
                   </tr>
                 </thead>
+                <#list itemsBought as item>
                 <tbody>
                   <tr>
-                    <#list itemsBought as document, itemName>
-                    <td>${itemName}</td>
-                   </#list>
-                    <#list itemsBought as document, dateBought>
-                    <td>${dateBought}</td>
-                   </#list>
-                    <#list itemsBought as document, itemPrice>
-                    <td>"$" + ${"itemPrice"}</td>
-                   </#list>
+                    <td>${item.name}</td>
+                    <td><#if item.dateBought??>${item.dateBought}</#if></td>
+                    <td>$${item.price}</td>
 
                   </tr>
-
-
                 </tbody>
+                </#list>
               </table>
             </div>
 
@@ -94,14 +101,10 @@
                 </thead>
                 <tbody>
                   <tr>
-                    <#list itemsUploaded as document, itemName>
-                    <td>${itemName}</td>
-                   </#list>
-                    <#list itemsUploaded as document, dateBought>
-                    <td>${dateBought}</td>
-                   </#list>
-                    <#list itemsUploaded as itemsUploaded, itemPrice>
-                    <td>"$" + ${itemPrice}</td>
+                    <#list itemsUploaded as item>
+                    <td>${item.name}</td>
+                    <td><#if item.dateBought??>${item.dateBought}</#if></td>
+                    <td>$${item.price}</td>
                    </#list>
 
                   </tr>
@@ -123,20 +126,10 @@
                 </thead>
                 <tbody>
                    <tr>
-                    <#list itemsSold as document, itemName>
-
-                    <td>${itemName}</td>
-
-                   </#list>
-                    <#list itemsSold as document, dateBought>
-
-                    <td>${dateBought}</td>
-
-                   </#list>
-                    <#list itemsSold as document, itemPrice>
-
-                    <td>"$" + ${itemPrice}</td>
-
+                    <#list itemsSold as item>
+                    <td>${item.name}</td>
+                    <td><#if item.dateBought??>${item.dateBought}</#if></td>
+                    <td>$${item.price}</td>
                     </#list>
     </tr>
                 </tbody>

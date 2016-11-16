@@ -1,9 +1,13 @@
+import java.net.UnknownHostException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
 import org.bson.Document;
+
+import com.mongodb.MongoException;
 
 public class Util {
 
@@ -55,9 +59,41 @@ public class Util {
 
 		for (int i = 0; i < docs.size(); i++) {
 			list.add(convertDocumentToMap(docs.get(i)));
+			System.out.println(docs.get(i));
 		}
 
 		return list;
 	}
+	public static ArrayList<String> itemNameList(List<HashMap<String, Object>> docs){
+		ArrayList<String> itemNames = new ArrayList<String>();
+		for(int i = 0; i < docs.size(); i++){
+			itemNames.add( (String) docs.get(i).get("name"));
+			System.out.println(itemNames.get(i));
+		}
+		return itemNames;
+	}
+	public static ArrayList<Double> itemPriceList(List<HashMap<String, Object>> docs){
+		ArrayList<Double> itemPrices = new ArrayList<Double>();
+		for(int i = 0; i < docs.size(); i++){
+			itemPrices.add((Double) docs.get(i).get("price"));
+		}
+		return itemPrices;
+	}
+	public static ArrayList<Long> itemDateBought(List<HashMap<String, Object>> docs){
+		ArrayList<Long> itemDateBought = new ArrayList<Long>();
+		for(int i = 0; i < docs.size(); i++){
+			itemDateBought.add( (Long) docs.get(i).get("dateBought"));
+		}
+		return itemDateBought;
+	}
+	public static ArrayList<String> itemImageURL(List<HashMap<String, Object>> docs){
+		ArrayList<String> itemImages= new ArrayList<String>();
+		for(int i = 0; i < docs.size(); i++){
+			itemImages.add( (String) docs.get(i).get(""));
+		}
+		return itemImages;
+	}
+	
+	
 
 }

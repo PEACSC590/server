@@ -79,7 +79,7 @@ public class Items {
 			try {
 				String itemName = item.getString("name");
 				String itemDescription = item.getString("description");
-				double itemPrice = Double.parseDouble(item.getString("price"));
+				Double itemPrice = Double.parseDouble(item.getString("price"));
 				// TODO: NEED TO TEST WHEN INTEGRATION IN FRONTEND HAPPENS
 				String[] tags = (String[]) JSON.parse(item.getString("tags"));
 				String imageURL = item.getString("imageURL");
