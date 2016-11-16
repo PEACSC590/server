@@ -89,11 +89,13 @@ body {
 
 .btn-file {
 	color: #990000;
-	border-color: #990000;
-	border-width: medium;
-	border-style: solid;
+	
 }
 
-
+.btn-file:hover {
+	border-color: #990000;
+	border-width: thin;
+	border-style: solid;
+}
 
 
