@@ -1,7 +1,4 @@
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import org.bson.Document;
 import org.bson.conversions.Bson;
@@ -33,65 +30,47 @@ public class Main {
 		MongoDatabase db = database.db;
 
 		API api = new API(db); // note: the way the methods are organized and
-								// accessed is subject to change
+		// accessed is subject to change
 
 		FreeMarkerEngine templateEngine = new FreeMarkerEngine();
 		ResponseTransformer jsonEngine = JsonUtil.json();
-		
-		//System.out.println("Server is good!");
-		
-		// constantly refresh items every 5 min
+
+		// REFRESH ITEMS EVERY 5 MINUTES
 		new Thread(() -> {
-		    while (true) {
-		    	try {
+			while (true) {
+				try {
 					Thread.sleep(1000 * 60 * 5);
 					System.out.println("Refreshing pending items");
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-		    	api.refreshItems();
-		    }
+				api.refreshItems();
+			}
 		}).start();
-		
-		// BEGIN TESTING CODE
-		// PLEASE LEAVE THE TESTING CODE HERE BECAUSE IT IS THE ONLY WAY I CAN GET IT TO CONNECT TO THE DB
+
+		// LEAVE TESTING CODE HERE
 		//TestAPI test = new TestAPI(api);
 		//test.test();
-		// END TESTING CODE
-		
-		// Browser page
+
+		// DONE AND TESTED
 		get("/login", (request, response) -> {
 			System.out.println("GET LOGIN");
 			Map<String, Object> attributes = new HashMap<>();
-			// no attributes needed?
-
 			return new ModelAndView(attributes, "login.ftl");
 		}, templateEngine);
 
-		// login
-		// Should be used by a form -> serves a page
+
+		// DONE AND TESTED
 		post("/login", (req, res) -> {
 			System.out.println("POST LOGIN");
 			Map<String, String> data = api.getBody(req);
 			String userID = data.get("userID");
 			String password = data.get("password");
-			
-			Map<String, String> loginStatus = api.users.login(userID, password);
 
-			Map<String, Object> attributes = new HashMap<>();
+			return api.users.login(userID, password);
+		}, jsonEngine);
 
-			if (loginStatus.get("success").equals("true")) {
-				res.redirect("/dashboard");
-				// TODO: halt... how do redirects work in spark?
-			} else {
-				attributes.put("error", "Your username or password is incorrect.");
-			}
-
-			return new ModelAndView(attributes, "login.ftl"); // FIXME
-		}, templateEngine);
-		//not sure we need this 
-		// logout
 		// Should be used by AJAX -> serves json
 		post("/logout", (req, res) -> {
 			Map<String, String> data = api.getBody(req);
@@ -101,12 +80,8 @@ public class Main {
 			return api.users.logout(userID, userToken);
 		}, jsonEngine);
 
-		// list items in the db that match the query provided as a querystring
-		// param
-		// Browser page
-		get("/list-items", (req, res) -> {
+		get("/browse", (req, res) -> {
 			Map<String, Object> attributes = new HashMap<>();
-
 			String jsonStringQuery = req.queryParams("query");
 			if (jsonStringQuery == null || jsonStringQuery.length() == 0 || jsonStringQuery.charAt(0) != '{')
 				jsonStringQuery = "{}";
@@ -123,13 +98,12 @@ public class Main {
 			} catch (Exception e) {
 				attributes.put("error", e.toString());
 			}
-			
-			// TODO: replace with a view-items template
+
+			attributes.put("pageName", "browse");
 			return new ModelAndView(attributes, "browse.ftl");
 		}, templateEngine);
-		
-		
-		// Browser page
+
+
 		get("/list-item", (req, res) -> {
 			String itemID;
 			try {
@@ -146,8 +120,8 @@ public class Main {
 			attributes.put("item", item);
 			return new ModelAndView(attributes, "ProductFocus.ftl");
 		}, templateEngine);
-		
-		// get list of items bought and list of items sold
+
+		// GET LIST OF ITEMS BOUGHT AND SOLD
 		get("/dashboard", (req, res) -> {
 			Map<String, String> data = api.getBody(req);
 			String userID = data.get("userID");
@@ -155,53 +129,65 @@ public class Main {
 			List<Document> itemsBought = api.items.getItemsBoughtByUser(userID);
 			List<Document> itemsUploaded = api.items.getItemsUploadedByUser(userID, userToken);
 			List<Document> itemsSold = api.items.getItemsSold(userID);
-			
+
 			Map<String, Object> attributes = new HashMap<>();
 			attributes.put("itemsBought", itemsBought);
 			attributes.put("itemsUploaded", itemsUploaded);
 			attributes.put("itemsSold", itemsSold);
+			attributes.put("pageName", "dashboard");
 			return new ModelAndView(attributes, "dashboard.ftl");
 		}, templateEngine);
-		
-		// get about info for peaBay company
-		get("/about", (req, res) -> staticTemplate("about.ftl"), templateEngine);
-		// get settings for user
-		get("/settings", (req, res) -> staticTemplate("settings.ftl"), templateEngine);
-		// get profile page for user
-		get("/profile", (req, res) -> staticTemplate("profile.ftl"), templateEngine);
 
-		get("/upload", (req, res) -> {
-			Map<String, Object> attributes = new HashMap<>();
-			
-			return new ModelAndView(attributes, "upload.ftl");
-		}, templateEngine);
+		// GET INFO ABOUT PEABAY COMPANY
+		get("/about", (req, res) -> staticTemplate("about.ftl", "about"), templateEngine);
+
+		// TODO: create pending items endpoint
+
+		get("/upload", (req, res) -> staticTemplate("upload.ftl", "upload"), templateEngine);
 
 		post("/upload", (req, res) -> {
 			Map<String, String> data = api.getBody(req);
-			System.out.println(data);
+			// System.out.println(data);
 			Document item = (Document) JSON.parse(data.get("item"));
 			String userID = data.get("userID");
 			String userToken = data.get("userToken");
-			
-			Map<String, String> result = api.items.upload(item, userID, userToken);
-			System.out.println(userID);
-			if (result.get("status").equals("listed")) {
-				res.redirect("/dashboard");
-				return new ModelAndView(new HashMap<>(), "redirecting.ftl");
-				// return new ModelAndView(new HashMap<>(), "MyProducts.ftl");
-			} else {
-				// if upload has illegal inputs, redirect
-				// res.redirect("/upload"); // can't use this for now; adds the
-				// params to the url as qs params
-				Map<String, Object> attributes = new HashMap<>();
-				attributes.put("error", result.get("error"));
-				return new ModelAndView(attributes, "upload.ftl");
-				// TODO: have it redirect with an error
-			}
-		}, templateEngine);
-		
+
+			return api.items.upload(userID, userToken, item);
+		}, jsonEngine);
+
 		// Should be used by AJAX -> serves json
 		post("/buy", (req, res) -> {
+
+			Map<String, String> body = api.getBody(req);
+			if (!body.containsKey("userID") || !body.containsKey("userToken") || !body.containsKey("itemID"))
+				return jsonError("Invalid input");
+
+			Map<String, String> output;
+			try {
+				output = api.sales.buy(body.get("userID"), body.get("userToken"), body.get("itemID"));
+			} catch (Exception e) {
+				return jsonError(e.getMessage());
+			}
+
+			return output;
+		}, jsonEngine);
+
+
+		post("/sell", (req, res) -> {
+			Map<String, String> body = api.getBody(req);
+			if (!body.containsKey("userID") || !body.containsKey("userToken") || !body.containsKey("itemID"))
+				return jsonError("Invalid input");
+
+			Map<String, String> output;
+			try {
+				output = api.sales.sell(body.get("userID"), body.get("userToken"), body.get("itemID"));
+			} catch (Exception e) {
+				return jsonError(e.getMessage());
+			}
+			return output;
+		}, jsonEngine);
+
+		post("/cancelPendingSale", (req, res) -> {
 
 			Map<String, String> body = api.getBody(req);
 
@@ -210,19 +196,58 @@ public class Main {
 
 			Map<String, String> output;
 			try {
-				output = api.sales.buy(body.get("userID"), body.get("itemID"), body.get("userToken"));
+				output = api.sales.cancelPendingSale(body.get("userID"), body.get("userToken"), body.get("itemID"));
+				res.redirect("/pendingitems");
 			} catch (Exception e) {
 				return jsonError(e.getMessage());
 			}
 
 			return output;
+
 		}, jsonEngine);
-		
+
+		post("/refuseSale", (req, res) -> {
+
+			Map<String, String> body = api.getBody(req);
+
+			if (!body.containsKey("userToken") || !body.containsKey("userID") || !body.containsKey("itemID"))
+				return jsonError("Invalid input");
+
+			Map<String, String> output;
+			try {
+				output = api.sales.refuseSale(body.get("userID"), body.get("userToken"), body.get("itemID"));
+				res.redirect("/pendingitems");
+			} catch (Exception e) {
+				return jsonError(e.getMessage());
+			}
+
+			return output;
+
+		}, jsonEngine);
+
+		post("/unlist", (req, res) -> {
+			Map<String, String> body = api.getBody(req);
+			if (!body.containsKey("userID") || !body.containsKey("userToken") || !body.containsKey("itemID"))
+				return jsonError("Invalid input");
+
+			Map<String, String> output;
+			try {
+				output = api.items.unlist(body.get("userID"), body.get("userToken"), body.get("itemID"));
+				res.redirect("/dashboard");
+			} catch (Exception e) {
+				return jsonError(e.getMessage());
+			}
+			return output;
+
+		}, jsonEngine);
 
 	}
-	
-	private static ModelAndView staticTemplate(String path) {
-		return new ModelAndView(new HashMap<>(), path);
+
+	private static ModelAndView staticTemplate(String path, String pageName) {
+		Map<String, Object> attributes = new HashMap<>();
+		if (!pageName.isEmpty())
+			attributes.put("pageName", pageName);
+		return new ModelAndView(attributes, path);
 	}
 
 	private static ModelAndView errorView(String errmsg) {
@@ -230,7 +255,7 @@ public class Main {
 		attributes.put("message", errmsg);
 		return new ModelAndView(attributes, "error.ftl");
 	}
-	
+
 	private static Map<String, String> jsonError(String errmsg) {
 		Map<String, String> output = new HashMap<>();
 		output.put("error", errmsg);

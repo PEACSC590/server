@@ -18,35 +18,35 @@ public class NTLM {
 
 		String responseText = getAuthenticatedResponse(urlStr, domain, userName, password);
 
-	    System.out.println("response: " + responseText);
+		System.out.println("response: " + responseText);
 	}
 
 	private static String getAuthenticatedResponse(final String urlStr, final String domain, final String userName, final String password) throws IOException {
 
-	    StringBuilder response = new StringBuilder();
+		StringBuilder response = new StringBuilder();
 
 		Authenticator.setDefault(new Authenticator() {
-	        @Override
-	        public PasswordAuthentication getPasswordAuthentication() {
-	            return new PasswordAuthentication(domain + "\\" + userName, password.toCharArray());
-	        }
-	    });
+			@Override
+			public PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication(domain + "\\" + userName, password.toCharArray());
+			}
+		});
 
-	    URL urlRequest = new URL(urlStr);
-	    HttpURLConnection conn = (HttpURLConnection) urlRequest.openConnection();
-	    conn.setDoOutput(true);
-	    conn.setDoInput(true);
-	    conn.setRequestMethod("GET");
+		URL urlRequest = new URL(urlStr);
+		HttpURLConnection conn = (HttpURLConnection) urlRequest.openConnection();
+		conn.setDoOutput(true);
+		conn.setDoInput(true);
+		conn.setRequestMethod("GET");
 
-	    InputStream stream = conn.getInputStream();
-	    BufferedReader in = new BufferedReader(new InputStreamReader(stream));
-	    String str = "";
-	    while ((str = in.readLine()) != null) {
-	        response.append(str);
-	    }
-	    in.close();		
+		InputStream stream = conn.getInputStream();
+		BufferedReader in = new BufferedReader(new InputStreamReader(stream));
+		String str = "";
+		while ((str = in.readLine()) != null) {
+			response.append(str);
+		}
+		in.close();		
 
-	    return response.toString();
+		return response.toString();
 	}
 
 }

@@ -12,9 +12,9 @@
     <div class="row">
       <div class="col-md-2">
         <div class="list-group">
-          <a href="dashboard.ftl" class="list-group-item">My Items</a>
-          <a href="upload.ftl" class="list-group-item active">Upload</a>
-          <a href="pendingitems.ftl" class="list-group-item">Pending Sales</a>
+          <a href="dashboard" class="list-group-item">My Items</a>
+          <a href="upload" class="list-group-item active">Upload</a>
+          <a href="pendingitems" class="list-group-item">Pending Sales</a>
         </div>
       </div>
       <h1 class="page-header textbgup">Upload</h1>
@@ -60,7 +60,7 @@
         <input type="text" class="form-control" name="tags" id="tags">
       </div>
     </div>
-    <button class="btn btn-default btn-file" id="upload" onclick="submitForm()">Upload</button>
+    <button class="btn btn-default" type="submit" id="upload">Upload</button>
   </div>
 </form>
 
@@ -78,19 +78,36 @@
 
 <script>
 
-function submitForm() {
-  var formData = $('#uploadForm').serializeArray();
+$("#uploadForm").on('submit', function(e) {
+	submitForm();
+	e.preventDefault();
+	return false;
+});
 
-  /*
-  *formData: { name: "name", imageURL: "sdf" }
-  */
+function submitForm() {
+	var requestError = function requestError(err) {
+		alert("Request error: " + err);
+	};
+	
+	var requestSuccess = function requestSuccess(data) {
+		if (data.status === 'listed')
+	  		window.location.href = '/dashboard';
+	  	else alert("Error: " + data.error);
+	};
+
+
+  var formData = $('#uploadForm').serializeObject();
 
   // TODO: validate form inputs
 
-  var userID = localStorage.get('userID');
-  var userToken = localStorage.get('userToken');
+  var userID = localStorage.getItem('userID');
+  var userToken = localStorage.getItem('userToken');
 
-  // TODO: validate that userID and userToken are not null
+  if (!userID || !userToken) {
+  	alert('not logged in.');
+  	window.location.href = '/login';
+  	return;
+  }
 
   var item = {
     name: formData.name,
@@ -106,16 +123,10 @@ function submitForm() {
     type: 'POST',
     url: '/upload',
     data: { userID: userID, userToken: userToken, item: item },
-    success: uploadSuccess,
+    success: requestSuccess,
+    error: requestError,
     dataType: 'json'
   });
-}
-
-
-function uploadSuccess() {
-
-  alert("upload successful!");
-
 }
 
 
