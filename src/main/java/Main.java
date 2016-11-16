@@ -60,7 +60,6 @@ public class Main {
 		//test.test();
 		// END TESTING CODE
 		
-		// Browser page
 		get("/login", (request, response) -> {
 			System.out.println("GET LOGIN");
 			Map<String, Object> attributes = new HashMap<>();
@@ -69,8 +68,7 @@ public class Main {
 			return new ModelAndView(attributes, "login.ftl");
 		}, templateEngine);
 
-		// login
-		// Should be used by a form -> serves a page
+
 		post("/login", (req, res) -> {
 			System.out.println("POST LOGIN");
 			Map<String, String> data = api.getBody(req);
@@ -90,9 +88,7 @@ public class Main {
 
 			return new ModelAndView(attributes, "login.ftl"); // FIXME
 		}, templateEngine);
-		//not sure we need this 
-		// logout
-		// Should be used by AJAX -> serves json
+
 		post("/logout", (req, res) -> {
 			Map<String, String> data = api.getBody(req);
 			String userID = data.get("userID");
@@ -101,9 +97,7 @@ public class Main {
 			return api.users.logout(userID, userToken);
 		}, jsonEngine);
 
-		// list items in the db that match the query provided as a querystring
-		// param
-		// Browser page
+
 		get("/list-items", (req, res) -> {
 			Map<String, Object> attributes = new HashMap<>();
 
