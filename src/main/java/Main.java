@@ -57,6 +57,7 @@ public class Main {
 		get("/login", (request, response) -> {
 			System.out.println("GET LOGIN");
 			Map<String, Object> attributes = new HashMap<>();
+			attributes.put("pageName", "login");
 			return new ModelAndView(attributes, "login.ftl");
 		}, templateEngine);
 
