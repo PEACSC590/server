@@ -159,7 +159,10 @@ public class Main {
 			return new ModelAndView(attributes, "dashboard.ftl");
 		}, templateEngine);
 		
-		get("/about", (req, res) -> staticTemplate("about.ftl", "about"), templateEngine);
+		get("/about", (req, res) -> {
+			Map<String, Object> attributes = new HashMap<>();
+			return new ModelAndView(attributes, "about.ftl");
+		}, templateEngine);
 
 		get("/upload", (req, res) -> {
 			Map<String, Object> attributes = new HashMap<>();
