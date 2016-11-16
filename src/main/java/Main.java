@@ -37,29 +37,30 @@ public class Main {
 
 		FreeMarkerEngine templateEngine = new FreeMarkerEngine();
 		ResponseTransformer jsonEngine = JsonUtil.json();
-		
-		//System.out.println("Server is good!");
-		
+
+		// System.out.println("Server is good!");
+
 		// constantly refresh items every 5 min
 		new Thread(() -> {
-		    while (true) {
-		    	try {
+			while (true) {
+				try {
 					Thread.sleep(1000 * 60 * 5);
 					System.out.println("Refreshing pending items");
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-		    	api.refreshItems();
-		    }
+				api.refreshItems();
+			}
 		}).start();
-		
+
 		// BEGIN TESTING CODE
-		// PLEASE LEAVE THE TESTING CODE HERE BECAUSE IT IS THE ONLY WAY I CAN GET IT TO CONNECT TO THE DB
-		//TestAPI test = new TestAPI(api);
-		//test.test();
+		// PLEASE LEAVE THE TESTING CODE HERE BECAUSE IT IS THE ONLY WAY I CAN
+		// GET IT TO CONNECT TO THE DB
+		// TestAPI test = new TestAPI(api);
+		// test.test();
 		// END TESTING CODE
-		
+
 		// Browser page
 		get("/login", (request, response) -> {
 			System.out.println("GET LOGIN");
@@ -76,21 +77,10 @@ public class Main {
 			Map<String, String> data = api.getBody(req);
 			String userID = data.get("userID");
 			String password = data.get("password");
-			
-			Map<String, String> loginStatus = api.users.login(userID, password);
 
-			Map<String, Object> attributes = new HashMap<>();
+			return api.users.login(userID, password);
+		}, jsonEngine);
 
-			if (loginStatus.get("success").equals("true")) {
-				res.redirect("/dashboard");
-				// TODO: halt... how do redirects work in spark?
-			} else {
-				attributes.put("error", "Your username or password is incorrect.");
-			}
-
-			return new ModelAndView(attributes, "login.ftl"); // FIXME
-		}, templateEngine);
-		//not sure we need this 
 		// logout
 		// Should be used by AJAX -> serves json
 		post("/logout", (req, res) -> {
@@ -123,12 +113,11 @@ public class Main {
 			} catch (Exception e) {
 				attributes.put("error", e.toString());
 			}
-			
+
 			attributes.put("pageName", "browse");
 			return new ModelAndView(attributes, "browse.ftl");
 		}, templateEngine);
-		
-		
+
 		// Browser page
 		get("/list-item", (req, res) -> {
 			String itemID;
@@ -146,7 +135,7 @@ public class Main {
 			attributes.put("item", item);
 			return new ModelAndView(attributes, "ProductFocus.ftl");
 		}, templateEngine);
-		
+
 		// get list of items bought and list of items sold
 		get("/dashboard", (req, res) -> {
 			Map<String, String> data = api.getBody(req);
@@ -155,7 +144,7 @@ public class Main {
 			List<Document> itemsBought = api.items.getItemsBoughtByUser(userID);
 			List<Document> itemsUploaded = api.items.getItemsUploadedByUser(userID, userToken);
 			List<Document> itemsSold = api.items.getItemsSold(userID);
-			
+
 			Map<String, Object> attributes = new HashMap<>();
 			attributes.put("itemsBought", itemsBought);
 			attributes.put("itemsUploaded", itemsUploaded);
@@ -163,40 +152,24 @@ public class Main {
 			attributes.put("pageName", "dashboard");
 			return new ModelAndView(attributes, "dashboard.ftl");
 		}, templateEngine);
-		
+
 		// get about info for peaBay company
 		get("/about", (req, res) -> staticTemplate("about.ftl", "about"), templateEngine);
 
-		get("/upload", (req, res) -> {
-			Map<String, Object> attributes = new HashMap<>();
-			
-			return new ModelAndView(attributes, "upload.ftl");
-		}, templateEngine);
+		// TODO: create pending items endpoint
+
+		get("/upload", (req, res) -> staticTemplate("upload.ftl", "upload"), templateEngine);
 
 		post("/upload", (req, res) -> {
 			Map<String, String> data = api.getBody(req);
-			System.out.println(data);
+			// System.out.println(data);
 			Document item = (Document) JSON.parse(data.get("item"));
 			String userID = data.get("userID");
 			String userToken = data.get("userToken");
-			
-			Map<String, String> result = api.items.upload(item, userID, userToken);
-			System.out.println(userID);
-			if (result.get("status").equals("listed")) {
-				res.redirect("/dashboard");
-				return new ModelAndView(new HashMap<>(), "redirecting.ftl");
-				// return new ModelAndView(new HashMap<>(), "MyProducts.ftl");
-			} else {
-				// if upload has illegal inputs, redirect
-				// res.redirect("/upload"); // can't use this for now; adds the
-				// params to the url as qs params
-				Map<String, Object> attributes = new HashMap<>();
-				attributes.put("error", result.get("error"));
-				return new ModelAndView(attributes, "upload.ftl");
-				// TODO: have it redirect with an error
-			}
-		}, templateEngine);
-		
+
+			return api.items.upload(item, userID, userToken);
+		}, jsonEngine);
+
 		// Should be used by AJAX -> serves json
 		post("/buy", (req, res) -> {
 
@@ -214,13 +187,13 @@ public class Main {
 
 			return output;
 		}, jsonEngine);
-		
 
 	}
-	
+
 	private static ModelAndView staticTemplate(String path, String pageName) {
 		Map<String, Object> attributes = new HashMap<>();
-		if (!pageName.isEmpty()) attributes.put("pageName", pageName);
+		if (!pageName.isEmpty())
+			attributes.put("pageName", pageName);
 		return new ModelAndView(attributes, path);
 	}
 
@@ -229,7 +202,7 @@ public class Main {
 		attributes.put("message", errmsg);
 		return new ModelAndView(attributes, "error.ftl");
 	}
-	
+
 	private static Map<String, String> jsonError(String errmsg) {
 		Map<String, String> output = new HashMap<>();
 		output.put("error", errmsg);

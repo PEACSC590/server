@@ -9,16 +9,17 @@
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
               <ul class="nav navbar-nav">
-                  <li <#if pageName == "dashboard">class="active"</#if>>
+                  <li <#if pageName?? && pageName == "dashboard">class="active"</#if>>
                       <a href="dashboard">Dashboard</a>
                   </li>
-                  <li <#if pageName == "browse">class="active"</#if>>
+                  <li <#if pageName?? && pageName == "browse">class="active"</#if>>
                       <a href="browse">For Sale</a>
                   </li>
-                  <li <#if pageName == "about">class="active"</#if>>
+                  <li <#if pageName?? && pageName == "about">class="active"</#if>>
                       <a href="about">About</a>
                   </li>
-
+				
+				<!-- TODO: complete using AJAX instead -->
                   <li><a href="logout">Log Out</a></li>
 	
 				<!-- TODO: complete -->
