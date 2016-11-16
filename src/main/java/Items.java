@@ -74,7 +74,7 @@ public class Items {
 	public List<Document> getItemsBoughtByUser(String userID, String userToken) {
 		// 10.16.16: the item attribute might not be "boughtByUserID", but I'll
 		// use it for now
-boolean authenticated = api.userTokens.testUserTokenForUser(userID, userToken);
+		boolean authenticated = api.userTokens.testUserTokenForUser(userID, userToken);
 		
 		if (authenticated){
 			return getItems(new Document("buyerID", userID));
