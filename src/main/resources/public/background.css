@@ -337,6 +337,21 @@ background: rgba(255,255,255,0.8);
 
 }
 
+.logintitle {
+	width:100%;
+}
+
+.logologin {
+	width:20%;
+	height: auto;
+	margin-left:40%;
+	margin-right:40%;
+	padding-left:0%;
+	padding-right:0%;
+	padding-top:0%;
+	padding-bottom:0%;
+}
+
 .btn-primary {
   background-color: #990000;
   border-color: #990000;
