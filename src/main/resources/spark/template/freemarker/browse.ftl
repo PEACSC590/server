@@ -31,7 +31,7 @@
     <p><a class="btn btn-primary btn-lg" href="about" role="button">Learn more &raquo;</a></p>
 </div>
 
-      <div class="container">
+      <div class="container-fluid">
         <div class="col-md-4">
 	        <#list items as item>
 	          <div class="product">
@@ -95,7 +95,7 @@
         </div></div>-->
     </div> <!-- /container -->
   </div>
-  <div class="container">
+  <div class="container-fluid">
 
 	<hr>
 	<#include "/partials/footer.ftl">
