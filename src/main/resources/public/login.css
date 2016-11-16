@@ -57,3 +57,34 @@ body {
 #terms {
 	background: #fff;
 }
+
+.logintitle {
+	width:100%;
+}
+
+.logologin {
+	width:20%;
+	height: auto;
+	margin-left:40%;
+	margin-right:40%;
+	padding-left:0%;
+	padding-right:0%;
+	padding-top:0%;
+	padding-bottom:0%;
+}
+
+.logintitle {
+
+  padding: 3px;
+  border-bottom-color: #990000;
+  border-bottom-style: solid;
+  border-bottom-width: medium;
+  margin-bottom: 3%;
+
+  opacity: 0.8;
+
+
+
+
+
+}
