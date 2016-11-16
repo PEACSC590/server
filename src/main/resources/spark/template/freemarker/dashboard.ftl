@@ -8,6 +8,19 @@
 <body>
 
   <#include "/partials/nav.ftl">
+  
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-2">
+        <div class="list-group">
+          <a href="dashboard" class="list-group-item">My Items</a>
+          <a href="upload" class="list-group-item active">Upload</a>
+          <a href="pendingitems" class="list-group-item">Pending Sales</a>
+        </div>
+      </div>
+      <h1 class="page-header textbgup">Upload</h1>
+    </div>
+  </div>
 
   <div class="container-fluid">
     <div class="row">
@@ -60,22 +73,16 @@
 
                   </tr>
                 </thead>
+                <#list itemsBought as item>
                 <tbody>
                   <tr>
-                    <#list itemNames as name>
-                    <td>${name}</td>
-                   </#list>
-                    <#list itemDates as date>
-                    <td>${date}</td>
-                   </#list>
-                    <#list itemPrices as price>
-                    <td>$ ${price}</td>
-                   </#list>
+                    <td>${item.name}</td>
+                    <td><#if item.dateBought??>${item.dateBought}</#if></td>
+                    <td>$${item.price}</td>
 
                   </tr>
-
-
                 </tbody>
+                </#list>
               </table>
             </div>
 
@@ -95,13 +102,9 @@
                 <tbody>
                   <tr>
                     <#list itemsUploaded as item>
-                    <td>${item.get("itemName")}</td>
-                   </#list>
-                    <#list itemsUploaded as item>
-                    <td>${item.get("dateBought")}</td>
-                   </#list>
-                    <#list itemsUploaded as item>
-                    <td>$ ${item.get("itemPrice")}</td>
+                    <td>${item.name}</td>
+                    <td><#if item.dateBought??>${item.dateBought}</#if></td>
+                    <td>$${item.price}</td>
                    </#list>
 
                   </tr>
@@ -124,19 +127,9 @@
                 <tbody>
                    <tr>
                     <#list itemsSold as item>
-
-                    <td>${item.get("itemName")}</td>
-
-                   </#list>
-                    <#list itemsSold as item>
-
-                    <td>${item.get("dateBought")}</td>
-
-                   </#list>
-                    <#list itemsSold as item>
-
-                    <td>$ ${item.get("itemPrice")}</td>
-
+                    <td>${item.name}</td>
+                    <td><#if item.dateBought??>${item.dateBought}</#if></td>
+                    <td>$${item.price}</td>
                     </#list>
     </tr>
                 </tbody>
