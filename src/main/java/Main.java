@@ -159,12 +159,10 @@ public class Main {
 			return new ModelAndView(attributes, "dashboard.ftl");
 		}, templateEngine);
 		
-		// get about info for peaBay company
 		get("/about", (req, res) -> staticTemplate("about.ftl", "about"), templateEngine);
 
 		get("/upload", (req, res) -> {
 			Map<String, Object> attributes = new HashMap<>();
-			
 			return new ModelAndView(attributes, "upload.ftl");
 		}, templateEngine);
 
@@ -194,8 +192,7 @@ public class Main {
 		post("/buy", (req, res) -> {
 
 			Map<String, String> body = api.getBody(req);
-
-			if (!body.containsKey("userToken") || !body.containsKey("userID") || !body.containsKey("itemID"))
+			if (!body.containsKey("userID") || !body.containsKey("userToken") || !body.containsKey("itemID"))
 				return jsonError("Invalid input");
 
 			Map<String, String> output;
@@ -211,7 +208,7 @@ public class Main {
 
 		post("/sell", (req, res) -> {
 					Map<String, String> body = api.getBody(req);
-					if (!body.containsKey("userToken") || !body.containsKey("userID") || !body.containsKey("itemID"))
+					if (!body.containsKey("userID") || !body.containsKey("userToken") || !body.containsKey("itemID"))
 						return jsonError("Invalid input");
 
 					Map<String, String> output;
@@ -223,7 +220,21 @@ public class Main {
 					return output;
 				}, jsonEngine);
 		
+		post("/unlist", (req, res) -> {
+			Map<String, String> body = api.getBody(req);
+			if (!body.containsKey("userID") || !body.containsKey("userToken") || !body.containsKey("itemID"))
+				return jsonError("Invalid input");
 
+			Map<String, String> output;
+			try {
+				output = api.items.unlist(body.get("userID"), body.get("userToken"), body.get("itemID"));
+				res.redirect("/dashboard");
+			} catch (Exception e) {
+				return jsonError(e.getMessage());
+			}
+			return output;
+		}, jsonEngine);
+		
 	}
 	
 	private static ModelAndView staticTemplate(String path, String pageName) {
