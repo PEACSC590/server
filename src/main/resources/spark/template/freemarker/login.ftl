@@ -6,51 +6,25 @@
   </head>
 
   <body>
-
-  <!--
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" id="title">PEABay</a>
-        </div>
-        <div id="navbar" class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
-
-
-          </ul>
-        </div>
-      </div>
-    </nav>
-  -->
+	<div class="logintitle">
+  		<img class="logologin" src="logo.png">
+  	</div>
 
   <div class="container">
 
     <div class="load">
       <form id="loginForm">
-        <!--<span class="btn btn-default btn-file">
-        Browse Files <input type="file" class="file_bag" id="input">
-      </span>-->
+	      <div class="form-group textbgform">
+	        <label for="imageUrl">Exeter Username</label>
+	        <input type="text" class="form-control" name="userID" id="userID" required>
+	      </div>
 
-      <div class="form-group textbgform">
-        <label for="imageUrl">Exeter Username</label>
-        <input type="text" class="form-control" name="userID" id="userID">
-      </div>
+	      <div class="form-group textbgform">
+	        <label for="title">Exeter Password</label>
+	        <input type="password" class="form-control" name="password" id="password" required>
+	      </div>
 
-      <div class="form-group textbgform">
-        <label for="title">Exeter Password</label>
-        <input type="password" class="form-control" name="password" id="password">
-      </div>
-    </div>
-  </div>
-</form>
-
-						<div class="form-group" id="terms">
+	      <div class="form-group" id="terms">
               <div class="conditions">
 								<div class="col-xs-12">
                   <label style="color: #fff">Terms and conditions</label>
@@ -64,11 +38,14 @@
 												</div>
 										</div>
                     <div>
-            			       <button class="btn btn-default btn-file" id="upload" onclick="submitForm()">Login</button>
+            			       <button class="btn btn-default btn-file" type="submit" id="upload">Login</button>
                        </div>
 								</div>
               </div>
 						</div>
+      </form>
+    </div>
+  </div>
 
 
 
@@ -80,37 +57,55 @@
 
     <script>
 
+    $("#loginForm").on('submit', function(e) {
+    	submitForm();
+    	e.preventDefault();
+    	return false;
+    });
+
     function submitForm() {
-      console.log("in submitForm");
+    	var requestError = function requestError(err) {
+	    	alert("Request error: " + err);
+	    };
 
-      var formData = $('#loginForm').serializeArray();
+	    var requestSuccess = function requestSuccess(data) {
+	      if (data.success === "true") console.log("login successful!");
+	      else if (data.success === "false") console.log("login failed.");
 
-      console.log("formData: " + formData);
-      console.log("userID:" + formData.userID)
-      console.log("userID value: " + document.getElementById("userID").value);
-      console.log("password value: " + document.getElementById("password").value);
+	      if (data.success === "true" && data.userToken) {
+	      	localStorage.setItem("userID", userID);
+	      	localStorage.setItem("userToken", userToken);
+          window.location.replace("/dashboard");
+	      } else {
+	      	alert("login failed.");
+	      }
+	    };
+
+      //console.log("in submitForm");
+
+      var formData = $('#loginForm').serializeObject();
+
+      if (formData.agree !== 'agree') {
+      	alert('You must accept the terms and conditions.');
+      	return;
+      }
+
+      var userID = formData.userID,
+      	password = formData.password;
+
       var userData = {
-        userID: document.getElementById("userID").value,
-        password: document.getElementById("password").value,
+        userID: userID,
+        password: password,
       };
-
-      //console.log({ userID: userID, password: password });
 
       $.ajax({
         type: 'POST',
         url: '/login',
-        data: { userID: document.getElementById("userID").value, password: document.getElementById("password").value},
-        success: uploadSuccess,
-        dataType: 'json'
+        data: { userID: document.getElementById("userID").value, password: document.getElementById("password").value },
+        success: requestSuccess,
+        error: requestError,
+        dataType: 'json',
       });
-    }
-
-
-    function uploadSuccess() {
-
-      alert("login successful!");
-
-      // TODO: redirect to homepage
     }
 
 

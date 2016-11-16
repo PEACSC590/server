@@ -232,6 +232,10 @@ background: rgba(255,255,255,0.8);
   border-radius: 6px;
 }
 
+.col-md-4 {
+	
+}
+
 .product:hover {
   opacity:1.0;
   margin-left: 0%;
@@ -270,6 +274,7 @@ background: rgba(255,255,255,0.8);
 
 .jumbotron-forsale {
   opacity: 0.8;
+  padding-left: 5%;
   padding-top: 35px;
   margin-right: 25%;
   margin-left: 21%;
@@ -317,10 +322,10 @@ background: rgba(255,255,255,0.8);
 .lead {
   color: gray;
 }
-
+ 
 .conditions {
-  margin-left: 21%;
-  margin-right: 25%;
+  margin-left: 20%;
+  margin-right: 20%;
 
 }
 
@@ -330,6 +335,21 @@ background: rgba(255,255,255,0.8);
 
 .jumbotron:hover{
 
+}
+
+.logintitle {
+	width:100%;
+}
+
+.logologin {
+	width:20%;
+	height: auto;
+	margin-left:40%;
+	margin-right:40%;
+	padding-left:0%;
+	padding-right:0%;
+	padding-top:0%;
+	padding-bottom:0%;
 }
 
 .btn-primary {
@@ -347,7 +367,7 @@ background: rgba(255,255,255,0.8);
 }
 
 .list-group-item.active, .list-group-item.active:focus, .list-group-item.active:hover {
-  border-color: #7d0202;
+  border-color: #990000;
   color: #990000;
 }
 
