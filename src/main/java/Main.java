@@ -223,7 +223,44 @@ public class Main {
 					return output;
 				}, jsonEngine);
 		
+		post("/cancelPendingSale", (req, res) -> {
 
+			Map<String, String> body = api.getBody(req);
+
+			if (!body.containsKey("userToken") || !body.containsKey("userID") || !body.containsKey("itemID"))
+				return jsonError("Invalid input");
+
+			Map<String, String> output;
+			try {
+				output = api.sales.cancelPendingSale(body.get("userID"), body.get("userToken"), body.get("itemID"));
+				res.redirect("/pendingitems");
+			} catch (Exception e) {
+				return jsonError(e.getMessage());
+			}
+
+			return output;
+			
+		}, jsonEngine);
+		
+		post("/refuseSale", (req, res) -> {
+
+			Map<String, String> body = api.getBody(req);
+
+			if (!body.containsKey("userToken") || !body.containsKey("userID") || !body.containsKey("itemID"))
+				return jsonError("Invalid input");
+
+			Map<String, String> output;
+			try {
+				output = api.sales.refuseSale(body.get("userID"), body.get("userToken"), body.get("itemID"));
+				res.redirect("/pendingitems");
+			} catch (Exception e) {
+				return jsonError(e.getMessage());
+			}
+
+			return output;
+			
+		}, jsonEngine);
+		
 	}
 	
 	private static ModelAndView staticTemplate(String path, String pageName) {
