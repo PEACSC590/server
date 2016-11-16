@@ -60,6 +60,8 @@ body {
 
 .logintitle {
 	width:100%;
+	margin-left:20%;
+	
 }
 
 .logologin {
@@ -71,20 +73,7 @@ body {
 	padding-right:0%;
 	padding-top:0%;
 	padding-bottom:0%;
+	
 }
 
-.logintitle {
 
-  padding: 3px;
-  border-bottom-color: #990000;
-  border-bottom-style: solid;
-  border-bottom-width: medium;
-  margin-bottom: 3%;
-
-  opacity: 0.8;
-
-
-
-
-
-}
