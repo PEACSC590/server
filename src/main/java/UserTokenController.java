@@ -33,7 +33,7 @@ public class UserTokenController {
 		String foundUserToken = user.getString("userToken");
 
 		return user.isEmpty() || (foundUserToken.equals(userToken)
-				&& (System.currentTimeMillis() - Long.parseLong(foundUserToken.split("@")[1]) < MS_IN_A_WEEK));
+				&& (System.currentTimeMillis() - Long.parseLong(foundUserToken.split("_")[1]) < MS_IN_A_WEEK));
 	}
 
 }
