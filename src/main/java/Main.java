@@ -124,6 +124,7 @@ public class Main {
 			Map<String, String> data = api.getBody(req);
 			String userID = data.get("userID");
 			String userToken = data.get("userToken");
+			System.out.println(userID + " " + userToken);
 			List<Document>itemsBought = api.items.getItemsBoughtByUser(userID, userToken);
 			List<Document> itemsUploaded = api.items.getItemsUploadedByUser(userID, userToken);
 			List<Document> itemsSold = api.items.getItemsSold(userID, userToken);

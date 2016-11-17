@@ -17,9 +17,10 @@ public class TestAPI {
 	public void test() throws MongoException, UnknownHostException {
 		try {
 			// Testing in progess
-
-			String user1 = "asun1";
-			String user2 = "rdas1";
+			
+			
+			String user1 = "test1";
+			String user2 = "test2";
 
 			// Test upsert user
 			Document User1 = api.users.upsertUser(user1);
