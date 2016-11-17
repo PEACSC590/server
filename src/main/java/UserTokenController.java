@@ -12,7 +12,7 @@ public class UserTokenController {
 
 	// TESTED AS PART OF UPSERTUSER: SUCCESS
 	public String setUserTokenForNewSession(String userID) {
-		String newUserToken = Util.generateUUID() + "@" + System.currentTimeMillis();
+		String newUserToken = Util.generateUUID() + "_" + System.currentTimeMillis();
 		api.usersCollection.updateOne(new Document("userID", userID),
 				new Document("$set", new Document("userToken", newUserToken)));
 		return newUserToken;

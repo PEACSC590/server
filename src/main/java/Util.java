@@ -13,6 +13,8 @@ public class Util {
 
 	public static HashMap<String, String> queryStringToHashMap(String qs) {
 		HashMap<String, String> map = new HashMap<>();
+		
+		if (qs == null || qs.isEmpty()) return map;
 
 		String[] attributes = qs.split("&"), parts;
 		String val;

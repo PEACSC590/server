@@ -13,6 +13,7 @@ import java.net.UnknownHostException;
 import static spark.Spark.*;
 import spark.template.freemarker.FreeMarkerEngine;
 import spark.ModelAndView;
+import spark.Request;
 import spark.ResponseTransformer;
 
 import com.mongodb.*;
@@ -20,6 +21,8 @@ import com.mongodb.client.MongoDatabase;
 import com.mongodb.util.JSON;
 
 public class Main {
+
+	protected static API api;
 
 	public static void main(String[] args) throws MongoException, UnknownHostException {
 
@@ -34,7 +37,7 @@ public class Main {
 		Database database = new Database(new MongoClientURI(mongoURI));
 		MongoDatabase db = database.db;
 
-		API api = new API(db); // note: the way the methods are organized and
+		api = new API(db); // note: the way the methods are organized and
 		// accessed is subject to change
 
 		FreeMarkerEngine templateEngine = new FreeMarkerEngine();
@@ -55,8 +58,8 @@ public class Main {
 		}).start();
 
 		// LEAVE TESTING CODE HERE
-		//TestAPI test = new TestAPI(api);
-		//test.test();
+		// TestAPI test = new TestAPI(api);
+		// test.test();
 
 		// DONE AND TESTED
 		get("/login", (request, response) -> {
@@ -65,7 +68,6 @@ public class Main {
 			attributes.put("pageName", "login");
 			return new ModelAndView(attributes, "login.ftl");
 		}, templateEngine);
-
 
 		// DONE AND TESTED
 		post("/login", (req, res) -> {
@@ -87,20 +89,21 @@ public class Main {
 		}, jsonEngine);
 
 		get("/browse", (req, res) -> {
-			Map<String, String> data = api.getBody(req);
+			Map<String, String> data = getUserData(req);
+			if (data.containsKey("redirect"))
+				return new ModelAndView(data, "loadWithLocalData.ftl");
+
 			String userID = data.get("userID");
 			String userToken = data.get("userToken");
-			Map<String, Object> attributes = new HashMap<>();
 			List<Document> items = api.items.getBuyableItems(userID, userToken);
-			if (!items.isEmpty()) {
-				attributes.put("items", items);
-				attributes.put("pageName", "browse");
-				return new ModelAndView(attributes, "browse.ftl");
-			} else {
+			if (items == null)
 				return errorView("NOT AUTHENTICATED");
-			}
-		}, templateEngine);
 
+			Map<String, Object> attributes = new HashMap<>();
+			attributes.put("items", items);
+			attributes.put("pageName", "browse");
+			return new ModelAndView(attributes, "browse.ftl");
+		}, templateEngine);
 
 		get("/list-item", (req, res) -> {
 			String itemID;
@@ -121,44 +124,49 @@ public class Main {
 
 		// GET LIST OF ITEMS BOUGHT AND SOLD
 		get("/dashboard", (req, res) -> {
-			Map<String, String> data = api.getBody(req);
+			Map<String, String> data = getUserData(req);
+			if (data.containsKey("redirect"))
+				return new ModelAndView(data, "loadWithLocalData.ftl");
+
 			String userID = data.get("userID");
 			String userToken = data.get("userToken");
 			System.out.println(userID + " " + userToken);
-			List<Document>itemsBought = api.items.getItemsBoughtByUser(userID, userToken);
+			List<Document> itemsBought = api.items.getItemsBoughtByUser(userID, userToken);
 			List<Document> itemsUploaded = api.items.getItemsUploadedByUser(userID, userToken);
 			List<Document> itemsSold = api.items.getItemsSold(userID, userToken);
-			Map<String, Object> attributes = new HashMap<>();
-			if (!itemsBought.isEmpty()) {
-				attributes.put("itemsBought", itemsBought);
-				attributes.put("itemsUploaded", itemsUploaded);
-				attributes.put("itemsSold", itemsSold);
-				attributes.put("pageName", "dashboard");
-				return new ModelAndView(attributes, "dashboard.ftl");
-			} else {
+			// only need to test first one... if one, all return null
+			if (itemsBought == null)
 				return errorView("NOT AUTHENTICATED");
-			}
+
+			Map<String, Object> attributes = new HashMap<>();
+			attributes.put("itemsBought", itemsBought);
+			attributes.put("itemsUploaded", itemsUploaded);
+			attributes.put("itemsSold", itemsSold);
+			attributes.put("pageName", "dashboard");
+			return new ModelAndView(attributes, "dashboard.ftl");
 		}, templateEngine);
 
 		// GET INFO ABOUT PEABAY COMPANY
 		get("/about", (req, res) -> staticTemplate("about.ftl", "about"), templateEngine);
 
 		get("/pendingitems", (req, res) -> {
-			Map<String, String> data = api.getBody(req);
+			Map<String, String> data = getUserData(req);
+			if (data.containsKey("redirect"))
+				return new ModelAndView(data, "loadWithLocalData.ftl");
+
 			String userID = data.get("userID");
 			String userToken = data.get("userToken");
 			List<Document> pendingSales = api.items.getPendingSales(userID, userToken);
 			List<Document> pendingPurchases = api.items.getPendingPurchases(userID, userToken);
+			
+			if (pendingSales == null)
+				return errorView("NOT AUTHENTICATED");
 
 			Map<String, Object> attributes = new HashMap<>();
-			if (!pendingSales.isEmpty()) {
-				attributes.put("pendingSales", pendingSales);
-				attributes.put("pendingPurchases", pendingPurchases);
-				attributes.put("pageName", "pendingitems");
-				return new ModelAndView(attributes, "pendingitems.ftl");
-			} else {
-				return errorView("NOT AUTHENTICATED");
-			}
+			attributes.put("pendingSales", pendingSales);
+			attributes.put("pendingPurchases", pendingPurchases);
+			attributes.put("pageName", "pendingitems");
+			return new ModelAndView(attributes, "pendingitems.ftl");
 		}, templateEngine);
 
 		get("/upload", (req, res) -> staticTemplate("upload.ftl", "upload"), templateEngine);
@@ -175,7 +183,6 @@ public class Main {
 
 		// Should be used by AJAX -> serves json
 		post("/buy", (req, res) -> {
-
 			Map<String, String> body = api.getBody(req);
 			if (!body.containsKey("userID") || !body.containsKey("userToken") || !body.containsKey("itemID"))
 				return jsonError("Invalid input");
@@ -189,7 +196,6 @@ public class Main {
 
 			return output;
 		}, jsonEngine);
-
 
 		post("/sell", (req, res) -> {
 			Map<String, String> body = api.getBody(req);
@@ -225,7 +231,6 @@ public class Main {
 		}, jsonEngine);
 
 		post("/refuseSale", (req, res) -> {
-
 			Map<String, String> body = api.getBody(req);
 
 			if (!body.containsKey("userToken") || !body.containsKey("userID") || !body.containsKey("itemID"))
@@ -278,6 +283,20 @@ public class Main {
 		Map<String, String> output = new HashMap<>();
 		output.put("error", errmsg);
 		return output;
+	}
+
+	private static Map<String, String> getUserData(Request req) {
+		Map<String, String> data = api.getBody(req);
+		String userID = data.get("userID");
+		String userToken = data.get("userToken");
+		if (userID == null || userToken == null || userID.isEmpty() || userToken.isEmpty()) {
+			Map<String, String> attributes = new HashMap<>();
+			attributes.put("redirect", req.pathInfo());
+			attributes.put("get", "[\"userID\", \"userToken\"]");
+			return attributes;
+		} else {
+			return data;
+		}
 	}
 
 }

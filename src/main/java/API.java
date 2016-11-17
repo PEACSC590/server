@@ -1,6 +1,5 @@
 import java.util.*;
 
-
 import org.bson.Document;
 
 import com.mongodb.client.MongoCollection;
@@ -16,7 +15,7 @@ public class API {
 
 	MongoCollection<Document> usersCollection;
 	MongoCollection<Document> itemsCollection;
-	
+
 	UserTokenController userTokens;
 	Users users;
 	Items items;
@@ -32,7 +31,7 @@ public class API {
 		items = new Items(this);
 		sales = new Sales(this);
 		userTokens = new UserTokenController(this);
-	
+
 	}
 
 	// TESTED: SUCCESS
@@ -54,11 +53,11 @@ public class API {
 				cancelSale.put("buyerID", null);
 				cancelSale.put("dateBought", null);
 				itemsCollection.updateOne(item, new Document("$set", cancelSale));
-				
+
 				// BUYER EMAIL
 				Email.send(buyerID + "@exeter.edu", "Your purchase has been cancelled due to inactivity",
 						"Your purchase of " + itemName + " has been cancelled due to seller inactivity.");
-				
+
 				// SELLER EMAIL
 				Email.send(sellerID + "@exeter.edu", "Your sale has been cancelled due to inactivity",
 						"Your sale of " + itemName + " has been cancelled due to seller inactivity.");
@@ -68,10 +67,12 @@ public class API {
 
 	// Request/Response Utilities
 	public Map<String, String> getBody(Request request) {
-		// convert request.body() (structured=sdf&like=234&this=3) into a
-		// hashmap
-		Map<String, String> body = Util.queryStringToHashMap(request.body());
-		return body;
+		// convert request.body() or request.queryString()
+		// (structured=sdf&like=234&this=3) into a hashmap
+		String body = request.body();
+		if (body.isEmpty())
+			body = request.queryString();
+		return Util.queryStringToHashMap(body);
 	}
 
 }
