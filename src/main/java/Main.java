@@ -192,29 +192,7 @@ public class Main {
 			return new ModelAndView(attributes, "pendingitems.ftl");
 		}, templateEngine);
 
-		get("/upload", (req, res) -> {
-			Map<String, String> data = getUserData(req);
-			if (data.containsKey("redirect"))
-				return new ModelAndView(data, "loadWithLocalData.ftl");
-			return new ModelAndView(data, "loadWithLocalData.ftl");
-		}, templateEngine);
-
-		post("/upload", (req, res) -> {
-			Map<String, String> data = api.getBody(req);
-			// System.out.println(data);
-			Document item = (Document) JSON.parse(data.get("item"));
-			System.out.println(item);
-			String userID = data.get("userID");
-			String userToken = data.get("userToken");
-
-			if (userID == "null" || userToken == "null" || !api.userTokens.testUserTokenForUser(userID, userToken)) {
-				res.redirect("/login");
-				return errorView("NOT AUTHENTICATED");
-			}
-			
-			Map<String, Object> attributes = new HashMap<>();
-			return new ModelAndView(attributes, "upload.ftl");
-		}, templateEngine);
+		get("/upload", (req, res) -> staticTemplate("upload.ftl", "upload"), templateEngine);
 
 		post("/upload", (req, res) -> {
 			Map<String, String> body = api.getBody(req);
