@@ -96,12 +96,12 @@
 <script>
 
 $("#uploadForm").on('submit', function(e) {
-	submitForm();
+	confirmPurchase();
 	e.preventDefault();
 	return false;
 });
 
-function submitForm() {
+function confirmPurchase() {
 	var requestError = function requestError(err) {
 		alert("Request error: " + err);
 	};
@@ -111,9 +111,6 @@ function submitForm() {
 	  		window.location.href = '/dashboard';
 	  	else alert("Error: " + data.error);
 	};
-
-
-  var formData = $('#uploadForm').serializeObject();
 
   // TODO: validate form inputs
 
@@ -126,20 +123,13 @@ function submitForm() {
   	return;
   }
 
-  var item = {
-    name: formData.name,
-    description: formData.description,
-    price: parseInt(formData.price),
-    tags: formData.tags.split(','),
-    imageURL: formData.imageURL
-  };
 
   console.log({ userID: userID, userToken: userToken, item: item });
 
   $.ajax({
     type: 'POST',
-    url: '/upload',
-    data: { userID: userID, userToken: userToken, item: item },
+    url: '/buy',
+    data: { userID: userID, userToken: userToken},
     success: requestSuccess,
     error: requestError,
     dataType: 'json'
