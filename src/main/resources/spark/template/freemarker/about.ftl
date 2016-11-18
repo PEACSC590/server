@@ -10,8 +10,18 @@
   <#include "/partials/nav.ftl">
 
   </div>
-  <div class="container">
+
+  <div class="container"><font color="white">
   
+
+  <div class="container-fluid">
+  	<div class="jumbotron jumbotron-dashboard">
+		
+        <h1 class="display-3">About Us</h1>
+        
+
+      </div>
+
   		<div>
                 <h1 class="page-header">About Us
                     <small>PEAbay</small>
@@ -64,6 +74,7 @@
 
   </div>
   
+  </div>
   <#include "/partials/scripts.ftl">
 
     </body>
