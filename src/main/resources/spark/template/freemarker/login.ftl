@@ -62,8 +62,8 @@
 														<label for="agree-button" style="color: #fff">Agree with the terms and conditions</label>
 												</div>
 										</div>
-                    <div>
-            			       <button class="btn btn-file" type="submit" id="upload">Login</button>
+                    <div id="buttonpos">
+            			       <button class="btn btn-primary btn-file" type="submit" id="upload">Login</button>
                        </div>
 								</div>
               </div>
