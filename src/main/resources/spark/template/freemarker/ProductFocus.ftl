@@ -42,7 +42,7 @@
                   </div>
 
 									<div class="caption-full">
-                      <button class="btn btn-default" data-toggle="modal" data-target="#buyModal" type="submit">Button</button>
+                      <button class="btn btn-default" data-toggle="modal" data-target="#buyModal" type="submit">Buy</button>
                       </div>
                   </div>
 
