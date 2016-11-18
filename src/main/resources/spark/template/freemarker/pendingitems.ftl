@@ -14,8 +14,8 @@
       <div class="col-md-2">
         <div class="list-group">
           <a href="dashboard" class="list-group-item">My Items</a>
-          <a href="upload" class="list-group-item active">Upload</a>
-          <a href="pendingitems" class="list-group-item">Pending Items</a>
+          <a href="upload" class="list-group-item">Upload</a>
+          <a href="pendingitems" class="list-group-item active">Pending Items</a>
         </div>
       </div>
       <h1 class="page-header textbgpi">Pending Items</h1>
