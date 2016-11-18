@@ -35,7 +35,7 @@ $.obj2Qs = function obj2Qs(obj) {
   window.userID = localStorage.getItem('userID');
   window.userToken = localStorage.getItem('userToken');
 
-  if (!userID || !userToken) {
+  if ((!userID || !userToken) && window.location.pathname !== "/login") {
   	window.location.href = '/login';
   }
 </script>
