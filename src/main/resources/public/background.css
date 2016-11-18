@@ -392,13 +392,28 @@ background: rgba(255,255,255,0.8);
 
 .list-group {
   opacity:0.8;
+  background-image: none;
 }
 
 .list-group-item.active, .list-group-item.active:focus, .list-group-item.active:hover {
   border-color: #990000;
-  color: #990000;
+  color: white;
+  background-color:#990000;
+  background-image: none;
+}
+
+.uploadwidth {
+	width:60%;
+	margin-left:20%;
+	margin-right:20%;
+}
+
+.col-md-6 {
+	margin:0%;
+	padding:0%;
 }
 
 a.list-group-item:hover {
   background-color: #fff2f2;
+  background-image: none;
 }

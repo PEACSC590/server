@@ -17,14 +17,19 @@
           <a href="pendingitems" class="list-group-item">Pending Items</a>
         </div>
       </div>
-      <h1 class="page-header textbgup">Upload</h1>
+      <div class="jumbotron jumbotron-dashboard">
+		
+        <h1 class="display-3">Upload</h1>
+        <h4 class="lead">- Add an Item to PEAbay -</h4>
+        
+
+      </div>
+      
     </div>
   </div>
 
-  <!--       <div class="col-lg-12"> -->
 
-
-  <div class="container">
+  <div class="container-fluid">
 
   	<#if error??>
 	  	<div>
@@ -37,7 +42,9 @@
         <!--<span class="btn btn-default btn-file">
         Browse Files <input type="file" class="file_bag" id="input">
       </span>-->
-
+<div class="row">
+	<div class="uploadwidth">
+	<div class="col-md-6">
       <div class="form-group textbgform">
         <label for="imageUrl">Image URL</label>
         <input type="text" class="form-control" name="imageURL" id="imageUrl">
@@ -47,18 +54,25 @@
         <label for="title">Title</label>
         <input type="text" class="form-control" name="name" id="title">
       </div>
+      </div>
+	<div class="col-md-6">
       <div class="form-group textbgform">
         <label for="price">Price ($)</label>
         <input type="text" class="form-control" name="price" id="price">
+      </div>
+      
+      <div class="form-group textbgform">
+        <label for="tags">Tags (separate tags by commas)</label>
+        <input type="text" class="form-control" name="tags" id="tags">
+      </div>
+      </div>
+      </div>
       </div>
       <div class="form-group textbgform">
         <label for="description">Description</label>
         <input type="text" class="form-control" name="description" id="description">
       </div>
-      <div class="form-group textbgform">
-        <label for="tags">Tags (separate tags by commas)</label>
-        <input type="text" class="form-control" name="tags" id="tags">
-      </div>
+      
     </div>
     <button class="btn btn-default" type="submit" id="upload">Upload</button>
   </div>
