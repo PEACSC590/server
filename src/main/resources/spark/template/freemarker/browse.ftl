@@ -16,8 +16,9 @@
 
 <div class="jumbotron jumbotron-forsale">
     <h1>PEAbay</h1>
-    <p>List of Items on PEAbay</p>
-    <p><a class="btn btn-primary btn-lg" href="about" role="button">Learn more &raquo;</a></p>
+    <p class="lead">- List of Items on PEAbay -</p>
+    <a class="btn btn-primary btn-lg" href="about" role="button">Learn more &raquo;</a>
+    
 </div>
 
       <div class="container">

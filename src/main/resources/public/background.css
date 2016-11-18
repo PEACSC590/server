@@ -269,27 +269,34 @@ background: rgba(255,255,255,0.8);
 }
 
 .jumbotron-forsale {
-  opacity: 0.8;
-  padding-left: 5%;
-  padding-top: 35px;
+   opacity: 0.8;
+  padding-top: 1%;
+  padding-bottom: 19%;
   margin-right: 25%;
   margin-left: 21%;
-  height: 288px;
+  padding-left:5%;
+  padding-right:20%;
+  
+  height:170px;
+  margin-bottom: 2%;
+  border-radius: 0px;
 }
 
 .container-fluid .jumbotron-dashboard {
   border-radius: 0%;
-  text-align: center;
-
+  
 }
 
 .jumbotron-dashboard {
   opacity: 0.8;
   padding-top: 1%;
   padding-bottom: 13%;
-  margin-right: 0%;
-  margin-left: 0%;
-  height: 100px;
+  margin-right: 25%;
+  margin-left: 21%;
+  padding-left:5%;
+  padding-right:20%;
+  
+  height:170px;
   margin-bottom: 2%;
   border-radius: 0px;
 }
@@ -327,6 +334,7 @@ background: rgba(255,255,255,0.8);
 
 .jumbotron > h1 {
   color: #990000;
+  
 }
 
 .jumbotron:hover{
