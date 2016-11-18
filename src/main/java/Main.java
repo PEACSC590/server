@@ -179,7 +179,7 @@ public class Main {
 		post("/upload", (req, res) -> {
 			Map<String, String> body = api.getBody(req);
 			
-			if (!body.containsKey("userID") || !body.containsKey("userToken") || !body.containsKey("itemID"))
+			if (!body.containsKey("userID") || !body.containsKey("userToken"))
 				return jsonError("Invalid input");
 		
 			// System.out.println(data);
