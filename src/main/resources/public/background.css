@@ -299,18 +299,7 @@ background: rgba(255,255,255,0.8);
   border-radius: 0px;
 }
 
-.jumbotron-about {
-  opacity: 0.8;
-  padding-top: 1%;
-  padding-bottom: 13%;
-  margin-right: 20%;
-  margin-left: 20%;
-  
-  text-align:center;
-  height:170px;
-  margin-bottom: 2%;
-  border-radius: 0px;
-}
+
 
 #subdash {
   margin-left: 35%;
