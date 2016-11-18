@@ -30,9 +30,24 @@
   background-image: none;
 }
 
-.btn-primary:hover {
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active {
 	background-color: #750103;
 	border-color: #750103;
+	background-image: none;
+	border-image: none;
+}
+
+.btn-file {
+  background-color: #990000;
+  border-color: #990000;
+  background-image: none;
+}
+
+.btn-file:hover, .btn-file:focus, .btn-file:active {
+	background-color: #750103;
+	border-color: #750103;
+	background-image: none;
+	border-image: none;
 }
 
 #buttonpos {
