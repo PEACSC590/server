@@ -10,12 +10,16 @@
   <#include "/partials/nav.ftl">
 
   </div>
-  <div class="container">
-  
+  <div class="container-fluid">
+  	<div class="jumbotron jumbotron-about">
+		
+        <h1 class="display-3">About Us</h1>
+        <h4 class="lead">- PEAbay -</h4>
+        
+
+      </div>
   		<div>
-                <h1 class="page-header">About Us
-                    <small>PEAbay</small>
-                </h1>
+                
                 <h3> Here at PEAbay, our goal is to provide Exeter students with a means to buy and sell their belongings to other students at the Academy.</h3>
                 <p>PEABay was created, in part, to combat the high prices of the Phillips Exeter Bookstore.  The bookstore typically buys back books at significantly lower prices and sells them back as “Used” at a large fraction of the original price.
                 Students may already have the same books other students need for their classes and will be willing to “cut out the middleman” (i.e. the bookstore).  In doing this, the book sellers will be able to receive more money for their books, while the buyers will be able to spend less money on the book.</p>
