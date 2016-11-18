@@ -24,6 +24,24 @@
   
 }
 
+.btn-primary {
+  background-color: #990000;
+  border-color: #990000;
+  background-image: none;
+}
+
+.btn-primary:hover {
+	background-color: #750103;
+	border-color: #750103;
+}
+
+#buttonpos {
+	min-width:35px;
+	width:10%;
+	float:right;
+	margin-top: 5px;
+}
+
 input[type="text"] {
   margin-bottom: 0px;
   border-bottom-left-radius: 0;
@@ -86,16 +104,3 @@ body {
 	padding-bottom: 2%;
 	
 }
-
-.btn-file {
-	color: #990000;
-	
-}
-
-.btn-file:hover {
-	border-color: #990000;
-	border-width: thin;
-	border-style: solid;
-}
-
-
