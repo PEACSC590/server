@@ -60,14 +60,7 @@
         <label for="price">Item Price (dollars and cents)</label>
         <input type="text" class="form-control" name="price" id="price">
       </div>
-<<<<<<< HEAD
-      <div class="form-group textbgform">
-        <label for="description">Item Description</label>
-        <input type="text" class="form-control" name="description" id="description">
-      </div>
-=======
-      
->>>>>>> master
+
       <div class="form-group textbgform">
         <label for="tags">Item Tags (separate tags by commas)</label>
         <input type="text" class="form-control" name="tags" id="tags">
