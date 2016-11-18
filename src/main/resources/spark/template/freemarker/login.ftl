@@ -53,7 +53,7 @@
 <br><br>Changes 
 <br>We reserve the right, at our sole discretion, to modify or replace these Terms at any time. If a revision is material we will try to provide at least 1 day's notice prior to any new terms taking effect. What constitutes a material change will be determined at our sole discretion. 
 
-<br><br>If you have any questions about these Terms, please contact Ms. Colleen Brockmyre at cbrockmyre@exeter.edu
+<br><br>If you have any questions about these Terms, please contact peabay.bot@gmail.com
 </p>
 										</div>
 										<div class="col-xs-6 col-xs-offset-3">
