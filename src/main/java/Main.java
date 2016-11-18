@@ -65,15 +65,13 @@ public class Main {
 //		TestAPI test = new TestAPI(api);
 //		test.test();
 
-		get("/", (request, response) -> {
-			System.out.println("GET LOGIN");
-			Map<String, Object> attributes = new HashMap<>();
-			attributes.put("pageName", "login");
-			return new ModelAndView(attributes, "login.ftl");
+		get("/", (req, res) -> {
+			res.redirect("/login");
+			return null;
 		}, templateEngine);
 		
 		// DONE AND TESTED
-		get("/login", (request, response) -> {
+		get("/login", (req, res) -> {
 			System.out.println("GET LOGIN");
 			Map<String, Object> attributes = new HashMap<>();
 			attributes.put("pageName", "login");
