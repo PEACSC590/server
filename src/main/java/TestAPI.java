@@ -1,5 +1,7 @@
 import org.bson.Document;
 import java.net.UnknownHostException;
+import java.util.Map;
+
 import com.mongodb.*;
 
 public class TestAPI {
@@ -19,8 +21,8 @@ public class TestAPI {
 			// Testing in progess
 			
 			
-			String user1 = "test1";
-			String user2 = "test2";
+			String user1 = "rdas1";
+			String user2 = "jzwang";
 
 			// Test upsert user
 			Document User1 = api.users.upsertUser(user1);
@@ -35,8 +37,8 @@ public class TestAPI {
 			Document User2 = api.users.upsertUser(user2);
 			String token2 = api.userTokens.setUserTokenForNewSession(user2);
 
-			System.out.println(api.userTokens.testUserTokenForUser(user1, "moo"));
-			System.out.println(api.userTokens.testUserTokenForUser(user1, token1));
+			//System.out.println(api.userTokens.testUserTokenForUser(user1, "moo"));
+			//System.out.println(api.userTokens.testUserTokenForUser(user1, token1));
 
 			//System.out.println(token2);
 			//System.out.println("User2 has been created");
@@ -45,7 +47,7 @@ public class TestAPI {
 			/**api.usersCollection.updateOne(new Document("userID", user2),
 					new Document("$set", new Document("numPendingPurchases", 0)));
 			api.usersCollection.updateOne(new Document("userID", user1),
-					new Document("$set", new Document("numPendingPurchases", 0)));
+					new Document("$set", new Document("numPendingPurchases", 0)));**/
 
 			// Test upload item
 			Document book1 = new Document().append("name", "Hamlet")
@@ -65,7 +67,7 @@ public class TestAPI {
 					.append("imageURL", "moo.com");
 			api.items.upload(user1, token1, book2);
 			//System.out.println(api.items.upload(book2, "User1", token1).get("status"));
-			String book2ID = map.get("itemID");**/
+			String book2ID = map.get("itemID");
 
 			/**for (Document item : api.items.getItemsUploadedByUser(user1, token1)) {
 				System.out.println(item.get("itemID") + " " + item.get("itemName") + " " + item.get("sellerID") + " " + item.get("status"));
@@ -81,8 +83,9 @@ public class TestAPI {
 			//book2 = api.items.getItemByID(book2ID);
 			//System.out.println(book1.get("status"));
 
-			//map = api.sales.buy(user2, token2, book1ID);
-			//System.out.println(map.get("status") + " " + map.get("numPendingPurchases") + " " + map.get("dateBought"));
+			map = api.sales.buy(user2, token2, book1ID);
+			map = api.sales.buy(user2, token2, book2ID);
+			System.out.println(map.get("status") + " " + map.get("numPendingPurchases") + " " + map.get("dateBought"));
 			//System.out.println(api.usersCollection.find(new Document("userID", user2)).first().get("numPendingPurchases"));
 			//book1 = api.items.getItemByID(book1ID);
 			//System.out.println(book1.get("buyerID") + " " + book1.get("status"));
