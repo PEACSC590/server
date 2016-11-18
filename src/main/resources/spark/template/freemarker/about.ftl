@@ -10,7 +10,7 @@
   <#include "/partials/nav.ftl">
 
   </div>
-  <div class="container">
+  <div class="container"><font color="white">
   
   		<div>
                 <h1 class="page-header">About Us
