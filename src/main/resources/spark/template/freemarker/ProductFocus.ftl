@@ -67,7 +67,62 @@
     <!-- /.container -->
 
   <#include "/partials/scripts.ftl">
+  
+<script>
 
+$("#uploadForm").on('submit', function(e) {
+	submitForm();
+	e.preventDefault();
+	return false;
+});
+
+function submitForm() {
+	var requestError = function requestError(err) {
+		alert("Request error: " + err);
+	};
+	
+	var requestSuccess = function requestSuccess(data) {
+		if (data.status === 'listed')
+	  		window.location.href = '/dashboard';
+	  	else alert("Error: " + data.error);
+	};
+
+
+  var formData = $('#uploadForm').serializeObject();
+
+  // TODO: validate form inputs
+
+  var userID = localStorage.getItem('userID');
+  var userToken = localStorage.getItem('userToken');
+
+  if (!userID || !userToken) {
+  	alert('not logged in.');
+  	window.location.href = '/login';
+  	return;
+  }
+
+  var item = {
+    name: formData.name,
+    description: formData.description,
+    price: parseInt(formData.price),
+    tags: formData.tags.split(','),
+    imageURL: formData.imageURL
+  };
+
+  console.log({ userID: userID, userToken: userToken, item: item });
+
+  $.ajax({
+    type: 'POST',
+    url: '/upload',
+    data: { userID: userID, userToken: userToken, item: item },
+    success: requestSuccess,
+    error: requestError,
+    dataType: 'json'
+  });
+}
+
+
+</script>
 </body>
 
 </html>
