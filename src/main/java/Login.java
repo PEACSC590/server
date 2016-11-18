@@ -1,3 +1,5 @@
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.Properties;
 
 import javax.mail.MessagingException;
@@ -10,6 +12,11 @@ public class Login {
 
 	public static boolean login(String userID, String password) {
 		boolean success = false;
+		
+		try {
+			userID = URLDecoder.decode(userID, "UTF-8");
+			password = URLDecoder.decode(password, "UTF-8");
+		} catch (UnsupportedEncodingException e1) {}
 
 		Properties props = System.getProperties();
 		props.setProperty("mail.store.protocol", "imaps");
@@ -18,9 +25,7 @@ public class Login {
 			Store store = session.getStore("imaps");
 			store.connect(imapHost, userID.toLowerCase() + "@exeter.edu", password);
 			success = true;
-		} catch (MessagingException e) {
-			// e.printStackTrace();
-		}
+		} catch (MessagingException e) {}
 
 		return success;
 	}
