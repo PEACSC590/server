@@ -184,7 +184,7 @@ public class Main {
 		
 			// System.out.println(data);
 			Document item = (Document) JSON.parse(body.get("item"));
-
+			System.out.println(item);
 			return api.items.upload(body.get("userID"), body.get("userToken"), item);
 		}, jsonEngine);
 
