@@ -204,32 +204,42 @@ background: rgba(255,255,255,0.8);
 
 .product {
   background-color: #eee;
-
-
   opacity: 0.7;
+  
   padding-top:8%;
-  padding-bottom: 8%;
-  padding-left: 8%;
-  padding-right: 8%;
   margin-top:10%;
+  
+  padding-bottom: 8%;
   margin-bottom: 10%;
+  
+  padding-left: 8%;
   margin-left: 8%;
+  
+  padding-right: 8%;
   margin-right: 8%;
+  
   border-radius: 6px;
 }
 
 .col-md-4 {
-	
+	padding:0%;
+	margin:0%;
 }
 
 .product:hover {
   opacity:1.0;
-  margin-left: 0%;
-  margin-right: 0%;
+  
   margin-top: 4%;
-  margin-bottom: 4%;
   padding-top: 14%;
+  
+  margin-bottom: 4%;
   padding-bottom: 14%;
+  
+  margin-left: 2%;
+  padding-left:14%
+  
+  margin-right: 2%;
+  padding-right: 14%;
 }
 
 .product:hover > h2 {
@@ -328,11 +338,23 @@ background: rgba(255,255,255,0.8);
 .btn-primary {
   background-color: #990000;
   border-color: #990000;
+  background-image: none;
 }
 
-.btn-primary:hover, .btn-primary:focus {
-  border-color: #7d0202;
-  background-color: #7d0202;
+.btn-primary:hover {
+	background-color: #750103;
+	border-color: #990104;
+}
+
+.btn-default {
+	background-image: none;
+	text-shadow: none;
+}
+
+.btn-default:hover {
+	background-color: #750103;
+	border-color: #990104;
+	text-shadow: none;
 }
 
 .list-group {
