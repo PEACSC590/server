@@ -101,16 +101,21 @@ public class Main {
 
 		get("/browse", (req, res) -> {
 			Map<String, String> data = getUserData(req);
-			if (data.containsKey("redirect"))
-				return new ModelAndView(data, "loadWithLocalData.ftl");
-
+			System.out.println("GET BROWSE 1");
 			String userID = data.get("userID");
 			String userToken = data.get("userToken");
-
-			if (userID == "null" || userToken == "null" || !api.userTokens.testUserTokenForUser(userID, userToken)) {
+			System.out.println("GET BROWSE 1");
+			if (userID.equals("null") || userToken.equals("null") || !api.userTokens.testUserTokenForUser(userID, userToken)) {
+				System.out.println("NOT LOGGED IN");
 				res.redirect("/login");
 				return errorView("NOT AUTHENTICATED");
 			}
+			
+			System.out.println("GET BROWSE");
+			if (data.containsKey("redirect"))
+				return new ModelAndView(data, "loadWithLocalData.ftl");
+
+			
 			
 			List<Document> items = api.items.getBuyableItems(userID);
 
@@ -211,18 +216,11 @@ public class Main {
 			
 			if (!body.containsKey("userID") || !body.containsKey("userToken") || !body.containsKey("itemID"))
 				return jsonError("Invalid input");
-			
-			String userID = body.get("userID");
-			String userToken = body.get("userToken");
-			if (userID == "null" || userToken == "null" || !api.userTokens.testUserTokenForUser(userID, userToken)) {
-				res.redirect("/login");
-				return errorView("NOT AUTHENTICATED");
-			}
-			
+		
 			// System.out.println(data);
 			Document item = (Document) JSON.parse(body.get("item"));
 
-			return api.items.upload(userID, userToken, item);
+			return api.items.upload(body.get("userID"), body.get("userToken"), item);
 		}, jsonEngine);
 
 		// Should be used by AJAX -> serves json
@@ -230,13 +228,6 @@ public class Main {
 			Map<String, String> body = api.getBody(req);
 			if (!body.containsKey("userID") || !body.containsKey("userToken") || !body.containsKey("itemID"))
 				return jsonError("Invalid input");
-
-			String userID = body.get("userID");
-			String userToken = body.get("userToken");
-			if (userID == "null" || userToken == "null" || !api.userTokens.testUserTokenForUser(userID, userToken)) {
-				res.redirect("/login");
-				return errorView("NOT AUTHENTICATED");
-			}
 			
 			Map<String, String> output;
 			try {
@@ -252,13 +243,6 @@ public class Main {
 			Map<String, String> body = api.getBody(req);
 			if (!body.containsKey("userID") || !body.containsKey("userToken") || !body.containsKey("itemID"))
 				return jsonError("Invalid input");
-			
-			String userID = body.get("userID");
-			String userToken = body.get("userToken");
-			if (userID == "null" || userToken == "null" || !api.userTokens.testUserTokenForUser(userID, userToken)) {
-				res.redirect("/login");
-				return errorView("NOT AUTHENTICATED");
-			}
 
 			Map<String, String> output;
 			try {
@@ -275,13 +259,6 @@ public class Main {
 
 			if (!body.containsKey("userToken") || !body.containsKey("userID") || !body.containsKey("itemID"))
 				return jsonError("Invalid input");
-			
-			String userID = body.get("userID");
-			String userToken = body.get("userToken");
-			if (userID == "null" || userToken == "null" || !api.userTokens.testUserTokenForUser(userID, userToken)) {
-				res.redirect("/login");
-				return errorView("NOT AUTHENTICATED");
-			}
 
 			Map<String, String> output;
 			try {
@@ -300,13 +277,6 @@ public class Main {
 
 			if (!body.containsKey("userToken") || !body.containsKey("userID") || !body.containsKey("itemID"))
 				return jsonError("Invalid input");
-
-			String userID = body.get("userID");
-			String userToken = body.get("userToken");
-			if (userID == "null" || userToken == "null" || !api.userTokens.testUserTokenForUser(userID, userToken)) {
-				res.redirect("/login");
-				return errorView("NOT AUTHENTICATED");
-			}
 			
 			Map<String, String> output;
 			try {
@@ -324,13 +294,6 @@ public class Main {
 			Map<String, String> body = api.getBody(req);
 			if (!body.containsKey("userID") || !body.containsKey("userToken") || !body.containsKey("itemID"))
 				return jsonError("Invalid input");
-
-			String userID = body.get("userID");
-			String userToken = body.get("userToken");
-			if (userID == "null" || userToken == "null" || !api.userTokens.testUserTokenForUser(userID, userToken)) {
-				res.redirect("/login");
-				return errorView("NOT AUTHENTICATED");
-			}
 			
 			Map<String, String> output;
 			try {
