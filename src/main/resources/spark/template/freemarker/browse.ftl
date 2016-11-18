@@ -25,11 +25,11 @@
       </div>-->
 
 
-<div class="jumbotron jumbotron-forsale">
+<!--<div class="jumbotron jumbotron-forsale">
     <h1>PEAbay</h1>
     <p>List of Items on PEAbay</p>
     <p><a class="btn btn-primary btn-lg" href="about" role="button">Learn more &raquo;</a></p>
-</div>
+</div>-->
 
       <div class="container-fluid">
         <div class="col-md-4">
