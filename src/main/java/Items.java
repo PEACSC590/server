@@ -51,7 +51,7 @@ public class Items {
 	public List<Document> getItemsBoughtByUser(String userID) {
 		return getItems(new Document("buyerID", userID).append("status", "sold"));
 	}
-	
+
 	// SEMI-TESTED: SHOULD WORK
 	public List<Document> getItemsSoldByUser(String userID) {
 		return getItems(new Document("sellerID", userID).append("status", "sold"));
@@ -98,7 +98,7 @@ public class Items {
 				output.put("itemID", itemID);
 			} catch (Exception e) {
 				output.put("status", "illegal");
-				output.put("error", "internal error: " + e.getMessage());
+				output.put("error", "internal error: " + e.toString());
 			}
 		} else {
 			output.put("status", "illegal");
@@ -152,5 +152,4 @@ public class Items {
 		return getItems(new Document("$text", new Document("$search", searchBy)));
 	}
 
-	
 }
