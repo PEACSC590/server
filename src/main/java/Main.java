@@ -24,7 +24,15 @@ public class Main {
 
 		// set server port and configure /public to be served statically
 		port(Integer.valueOf(System.getenv("PORT")));
-		staticFileLocation("/public");
+		// don't copy the files into target if in dev so that the program
+		// doesn't have to be rebuilt for static file changes
+		if (System.getenv("STATIC_DEV") == "true") {
+			String projectDir = System.getProperty("user.dir");
+			String staticDir = "/src/main/resources/public";
+			externalStaticFileLocation(projectDir + staticDir);
+		} else {
+			staticFileLocation("/public");
+		}
 
 		// only use the official mongo db uri for production--when it is on the
 		// machine (only MONGO_DEV_URI should be in .env for development)
