@@ -180,6 +180,7 @@ public class Main {
 			Map<String, String> data = api.getBody(req);
 			// System.out.println(data);
 			Document item = (Document) JSON.parse(data.get("item"));
+			System.out.println(item);
 			String userID = data.get("userID");
 			String userToken = data.get("userToken");
 
