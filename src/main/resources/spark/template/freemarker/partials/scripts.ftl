@@ -36,8 +36,6 @@ $.obj2Qs = function obj2Qs(obj) {
   window.userToken = localStorage.getItem('userToken');
 
   if (!userID || !userToken) {
-  	alert('not logged in.');
   	window.location.href = '/login';
-  	return;
   }
 </script>

@@ -67,8 +67,7 @@ public class Main {
 
 		get("/", (req, res) -> {
 			res.redirect("/login");
-			Map<String, Object> attributes = new HashMap<>();
-			return new ModelAndView(attributes, "login.ftl");
+			return null;
 		}, templateEngine);
 		
 		// DONE AND TESTED
