@@ -27,12 +27,10 @@ public class UserTokenController {
 	// TESTED AS PART OF UPLOAD: SUCCESS
 	public boolean testUserTokenForUser(String userID, String userToken) {
 		Document user = api.usersCollection.find(new Document("userID", userID)).first();
-		if (user.isEmpty()) {
-			return false;
-		}
+		if (user.isEmpty()) return false;
+		
 		String foundUserToken = user.getString("userToken");
-
-		return user.isEmpty() || (foundUserToken.equals(userToken)
+		return (foundUserToken.equals(userToken)
 				&& (System.currentTimeMillis() - Long.parseLong(foundUserToken.split("_")[1]) < MS_IN_A_WEEK));
 	}
 

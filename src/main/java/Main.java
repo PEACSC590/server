@@ -99,12 +99,11 @@ public class Main {
 
 			String userID = data.get("userID");
 			String userToken = data.get("userToken");
-			if (userID == "null" || userToken == "null")
+
+			if (userID == "null" || userToken == "null" || !api.userTokens.testUserTokenForUser(userID, userToken))
 				return errorView("NOT AUTHENTICATED");
 
-			List<Document> items = api.items.getBuyableItems(userID, userToken);
-			if (items == null)
-				return errorView("NOT AUTHENTICATED");
+			List<Document> items = api.items.getBuyableItems(userID);
 
 			Map<String, Object> attributes = new HashMap<>();
 			attributes.put("items", items);
@@ -137,15 +136,12 @@ public class Main {
 
 			String userID = data.get("userID");
 			String userToken = data.get("userToken");
-			if (userID == "null" || userToken == "null")
+			if (userID == "null" || userToken == "null" || !api.userTokens.testUserTokenForUser(userID, userToken))
 				return errorView("NOT AUTHENTICATED");
 
-			List<Document> itemsBought = api.items.getItemsBoughtByUser(userID, userToken);
-			List<Document> itemsUploaded = api.items.getItemsUploadedByUser(userID, userToken);
-			List<Document> itemsSold = api.items.getItemsSold(userID, userToken);
-			// only need to test first one... if one, all return null
-			if (itemsBought == null)
-				return errorView("NOT AUTHENTICATED");
+			List<Document> itemsBought = api.items.getItemsBoughtByUser(userID);
+			List<Document> itemsUploaded = api.items.getItemsUploadedByUser(userID);
+			List<Document> itemsSold = api.items.getItemsSoldByUser(userID);
 
 			Map<String, Object> attributes = new HashMap<>();
 			attributes.put("itemsBought", itemsBought);
@@ -165,14 +161,11 @@ public class Main {
 
 			String userID = data.get("userID");
 			String userToken = data.get("userToken");
-			if (userID == "null" || userToken == "null")
+			if (userID == "null" || userToken == "null" || !api.userTokens.testUserTokenForUser(userID, userToken))
 				return errorView("NOT AUTHENTICATED");
 
-			List<Document> pendingSales = api.items.getPendingSales(userID, userToken);
-			List<Document> pendingPurchases = api.items.getPendingPurchases(userID, userToken);
-
-			if (pendingSales == null)
-				return errorView("NOT AUTHENTICATED");
+			List<Document> pendingSales = api.items.getPendingSales(userID);
+			List<Document> pendingPurchases = api.items.getPendingPurchases(userID);
 
 			Map<String, Object> attributes = new HashMap<>();
 			attributes.put("pendingSales", pendingSales);
@@ -275,7 +268,7 @@ public class Main {
 			return output;
 
 		}, jsonEngine);
-		
+
 		exception(Exception.class, (exc, req, res) -> {
 			res.body(exc.getMessage());
 		});

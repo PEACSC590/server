@@ -30,57 +30,31 @@ public class Items {
 	}
 
 	// TESTED: SUCCESS
-	public List<Document> getBuyableItems(String userID, String userToken) {
-		boolean authenticated = api.userTokens.testUserTokenForUser(userID, userToken);
-		
-		if (authenticated){
-			return getItems(new Document("status", "listed"));
-		} else {
-			return null;
-		}
-	}
-	
-	public List<Document> getPendingSales(String userID, String userToken) {
-		boolean authenticated = api.userTokens.testUserTokenForUser(userID, userToken);
-		
-		if (authenticated){
-			return getItems(new Document("status", "pending").append("sellerID", userID));
-		} else {
-			return null;
-		}
+	public List<Document> getBuyableItems(String userID) {
+		return getItems(new Document("status", "listed"));
 	}
 
-	public List<Document> getPendingPurchases(String userID, String userToken) {
-		boolean authenticated = api.userTokens.testUserTokenForUser(userID, userToken);
-		
-		if (authenticated){
-			return getItems(new Document("status", "pending").append("buyerID", userID));
-		} else {
-			return null;
-		}
+	public List<Document> getPendingSales(String userID) {
+		return getItems(new Document("status", "pending").append("sellerID", userID));
 	}
+
+	public List<Document> getPendingPurchases(String userID) {
+		return getItems(new Document("status", "pending").append("buyerID", userID));
+	}
+
 	// TESTED: SUCCESS
-	public List<Document> getItemsUploadedByUser(String userID, String userToken) {
-		boolean authenticated = api.userTokens.testUserTokenForUser(userID, userToken);
-		
-		if (authenticated){
-			return getItems(new Document("sellerID", userID));
-		} else {
-			return null;
-		}
+	public List<Document> getItemsUploadedByUser(String userID) {
+		return getItems(new Document("sellerID", userID));
 	}
 
 	// SEMI-TESTED: SHOULD WORK
-	public List<Document> getItemsBoughtByUser(String userID, String userToken) {
-		// 10.16.16: the item attribute might not be "boughtByUserID", but I'll
-		// use it for now
-		boolean authenticated = api.userTokens.testUserTokenForUser(userID, userToken);
-		
-		if (authenticated){
-			return getItems(new Document("buyerID", userID));
-		} else {
-			return null;
-		}
+	public List<Document> getItemsBoughtByUser(String userID) {
+		return getItems(new Document("buyerID", userID).append("status", "sold"));
+	}
+	
+	// SEMI-TESTED: SHOULD WORK
+	public List<Document> getItemsSoldByUser(String userID) {
+		return getItems(new Document("sellerID", userID).append("status", "sold"));
 	}
 
 	// TESTED: SUCCESS
@@ -178,8 +152,5 @@ public class Items {
 		return getItems(new Document("$text", new Document("$search", searchBy)));
 	}
 
-	// SEMI-TESTED: SHOULD WORK
-	public List<Document> getItemsSold(String userID, String userToken) {
-		return getItems(new Document("sellerID", userID).append("status", "sold"));
-	}
+	
 }
