@@ -167,7 +167,15 @@ public class Main {
 			return new ModelAndView(attributes, "pendingitems.ftl");
 		}, templateEngine);
 
-		get("/upload", (req, res) -> staticTemplate("upload.ftl", "upload"), templateEngine);
+		get("/upload", (req, res) -> {
+			Map<String, String> data = getUserData(req);
+			
+			if (data.containsKey("redirect"))
+				return new ModelAndView(data, "loadWithLocalData.ftl");
+
+			Map<String, Object> attributes = new HashMap<>();
+			return new ModelAndView(attributes, "upload.ftl");
+		}, templateEngine);
 
 		post("/upload", (req, res) -> {
 			Map<String, String> body = api.getBody(req);
