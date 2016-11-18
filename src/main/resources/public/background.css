@@ -23,21 +23,7 @@ body {
 
 
 
-.logintitle {
 
-  padding: 3px;
-  border-bottom-color: #990000;
-  border-bottom-style: solid;
-  border-bottom-width: medium;
-  margin-bottom: 3%;
-
-  opacity: 0.8;
-
-
-
-
-
-}
 
 .navbar-brand > img {
 
@@ -218,32 +204,42 @@ background: rgba(255,255,255,0.8);
 
 .product {
   background-color: #eee;
-
-
   opacity: 0.7;
+  
   padding-top:8%;
-  padding-bottom: 8%;
-  padding-left: 8%;
-  padding-right: 8%;
   margin-top:10%;
+  
+  padding-bottom: 8%;
   margin-bottom: 10%;
+  
+  padding-left: 8%;
   margin-left: 8%;
+  
+  padding-right: 8%;
   margin-right: 8%;
+  
   border-radius: 6px;
 }
 
 .col-md-4 {
-	
+	padding:0%;
+	margin:0%;
 }
 
 .product:hover {
   opacity:1.0;
-  margin-left: 0%;
-  margin-right: 0%;
+  
   margin-top: 4%;
-  margin-bottom: 4%;
   padding-top: 14%;
+  
+  margin-bottom: 4%;
   padding-bottom: 14%;
+  
+  margin-left: 2%;
+  padding-left:14%
+  
+  margin-right: 2%;
+  padding-right: 14%;
 }
 
 .product:hover > h2 {
@@ -273,30 +269,39 @@ background: rgba(255,255,255,0.8);
 }
 
 .jumbotron-forsale {
-  opacity: 0.8;
-  padding-left: 5%;
-  padding-top: 35px;
-  margin-right: 25%;
-  margin-left: 21%;
-  height: 288px;
+   opacity: 0.8;
+  padding-top: 1%;
+  padding-bottom: 1%;
+  padding-left: 60px;
+  padding-right: 60px;
+  margin-right: 20%;
+  margin-left: 20%;
+  
+  
+  height:240px;
+  margin-bottom: 2%;
+  border-radius: 0px;
 }
 
-.container-fluid .jumbotron-dashboard {
+.container-fluid .jumbotron {
   border-radius: 0%;
-  text-align: center;
-
+  
 }
 
 .jumbotron-dashboard {
   opacity: 0.8;
   padding-top: 1%;
   padding-bottom: 13%;
-  margin-right: 0%;
-  margin-left: 0%;
-  height: 100px;
+  margin-right: 20%;
+  margin-left: 20%;
+  
+  
+  height:170px;
   margin-bottom: 2%;
   border-radius: 0px;
 }
+
+
 
 #subdash {
   margin-left: 35%;
@@ -322,7 +327,7 @@ background: rgba(255,255,255,0.8);
 .lead {
   color: gray;
 }
-
+ 
 .conditions {
   margin-left: 20%;
   margin-right: 20%;
@@ -331,35 +336,35 @@ background: rgba(255,255,255,0.8);
 
 .jumbotron > h1 {
   color: #990000;
+  
 }
 
 .jumbotron:hover{
 
 }
 
-.logintitle {
-	width:100%;
-}
 
-.logologin {
-	width:20%;
-	height: auto;
-	margin-left:40%;
-	margin-right:40%;
-	padding-left:0%;
-	padding-right:0%;
-	padding-top:0%;
-	padding-bottom:0%;
-}
 
 .btn-primary {
   background-color: #990000;
   border-color: #990000;
+  background-image: none;
 }
 
-.btn-primary:hover, .btn-primary:focus {
-  border-color: #7d0202;
-  background-color: #7d0202;
+.btn-primary:hover {
+	background-color: #750103;
+	border-color: #990104;
+}
+
+.btn-default {
+	background-image: none;
+	text-shadow: none;
+}
+
+.btn-default:hover {
+	background-color: #750103;
+	border-color: #990104;
+	text-shadow: none;
 }
 
 .list-group {

@@ -12,28 +12,26 @@ public class UserTokenController {
 
 	// TESTED AS PART OF UPSERTUSER: SUCCESS
 	public String setUserTokenForNewSession(String userID) {
-		String newUserToken = Util.generateUUID() + "@" + System.currentTimeMillis();
-		api.usersCollection.updateOne(new Document("userID", userID),
+		String newUserToken = Util.generateUUID() + "_" + System.currentTimeMillis();
+		api.usersCollection.updateOne(new Document("userID", userID.toLowerCase()),
 				new Document("$set", new Document("userToken", newUserToken)));
 		return newUserToken;
 	}
 
 	// TESTED: SUCCESS
 	public void endSession(String userID) {
-		api.usersCollection.updateOne(new Document("userID", userID),
+		api.usersCollection.updateOne(new Document("userID", userID.toLowerCase()),
 				new Document("$set", new Document("userToken", null)));
 	}
 
 	// TESTED AS PART OF UPLOAD: SUCCESS
 	public boolean testUserTokenForUser(String userID, String userToken) {
-		Document user = api.usersCollection.find(new Document("userID", userID)).first();
-		if (user.isEmpty()) {
-			return false;
-		}
+		Document user = api.usersCollection.find(new Document("userID", userID.toLowerCase())).first();
+		if (user.isEmpty()) return false;
+		
 		String foundUserToken = user.getString("userToken");
-
-		return user.isEmpty() || (foundUserToken.equals(userToken)
-				&& (System.currentTimeMillis() - Long.parseLong(foundUserToken.split("@")[1]) < MS_IN_A_WEEK));
+		return (foundUserToken.equals(userToken)
+				&& (System.currentTimeMillis() - Long.parseLong(foundUserToken.split("_")[1]) < MS_IN_A_WEEK));
 	}
 
 }

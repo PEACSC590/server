@@ -30,20 +30,36 @@ public class Items {
 	}
 
 	// TESTED: SUCCESS
-	public List<Document> getBuyableItems() {
-		return getItems(new Document("status", "listed"));
+	public List<Document> getBuyableItems(String userID) {
+		return getItems(new Document("status", "listed").append("sellerID", new Document("$ne", userID)));
+	}
+
+	public List<Document> getPendingSales(String userID) {
+		return getItems(new Document("status", "pending").append("sellerID", userID));
+	}
+
+	public List<Document> getPendingPurchases(String userID) {
+		return getItems(new Document("status", "pending").append("buyerID", userID));
 	}
 
 	// TESTED: SUCCESS
-	public List<Document> getItemsUploadedByUser(String userID, String userToken) {
+	public List<Document> getItemsUploadedByUser(String userID) {
 		return getItems(new Document("sellerID", userID));
+	}
+
+	// SHOULD WORK
+	public List<Document> getItemsListedByUser(String userID) {
+		return getItems(new Document("sellerID", userID).append("status", "listed"));
 	}
 
 	// SEMI-TESTED: SHOULD WORK
 	public List<Document> getItemsBoughtByUser(String userID) {
-		// 10.16.16: the item attribute might not be "boughtByUserID", but I'll
-		// use it for now
-		return getItems(new Document("buyerID", userID));
+		return getItems(new Document("buyerID", userID).append("status", "sold"));
+	}
+
+	// SEMI-TESTED: SHOULD WORK
+	public List<Document> getItemsSoldByUser(String userID) {
+		return getItems(new Document("sellerID", userID).append("status", "sold"));
 	}
 
 	// TESTED: SUCCESS
@@ -72,7 +88,7 @@ public class Items {
 			try {
 				String itemName = item.getString("name");
 				String itemDescription = item.getString("description");
-				double itemPrice = Double.parseDouble(item.getString("price"));
+				Double itemPrice = Double.parseDouble(item.getString("price"));
 				// TODO: NEED TO TEST WHEN INTEGRATION IN FRONTEND HAPPENS
 				String[] tags = (String[]) JSON.parse(item.getString("tags"));
 				String imageURL = item.getString("imageURL");
@@ -87,7 +103,7 @@ public class Items {
 				output.put("itemID", itemID);
 			} catch (Exception e) {
 				output.put("status", "illegal");
-				output.put("error", "internal error: " + e.getMessage());
+				output.put("error", "internal error: " + e.toString());
 			}
 		} else {
 			output.put("status", "illegal");
@@ -141,8 +157,4 @@ public class Items {
 		return getItems(new Document("$text", new Document("$search", searchBy)));
 	}
 
-	// SEMI-TESTED: SHOULD WORK
-	public List<Document> getItemsSold(String userID) {
-		return getItems(new Document("sellerID", userID).append("status", "sold"));
-	}
 }

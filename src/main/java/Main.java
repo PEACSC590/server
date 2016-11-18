@@ -1,13 +1,15 @@
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.bson.Document;
-import org.bson.conversions.Bson;
 
 import java.net.UnknownHostException;
 
 import static spark.Spark.*;
 import spark.template.freemarker.FreeMarkerEngine;
 import spark.ModelAndView;
+import spark.Request;
 import spark.ResponseTransformer;
 
 import com.mongodb.*;
@@ -16,11 +18,21 @@ import com.mongodb.util.JSON;
 
 public class Main {
 
+	protected static API api;
+
 	public static void main(String[] args) throws MongoException, UnknownHostException {
 
 		// set server port and configure /public to be served statically
 		port(Integer.valueOf(System.getenv("PORT")));
-		staticFileLocation("/public");
+		// don't copy the files into target if in dev so that the program
+		// doesn't have to be rebuilt for static file changes
+		if (System.getenv("STATIC_DEV") == "true") {
+			String projectDir = System.getProperty("user.dir");
+			String staticDir = "/src/main/resources/public";
+			externalStaticFileLocation(projectDir + staticDir);
+		} else {
+			staticFileLocation("/public");
+		}
 
 		// only use the official mongo db uri for production--when it is on the
 		// machine (only MONGO_DEV_URI should be in .env for development)
@@ -29,7 +41,7 @@ public class Main {
 		Database database = new Database(new MongoClientURI(mongoURI));
 		MongoDatabase db = database.db;
 
-		API api = new API(db); // note: the way the methods are organized and
+		api = new API(db); // note: the way the methods are organized and
 		// accessed is subject to change
 
 		FreeMarkerEngine templateEngine = new FreeMarkerEngine();
@@ -50,16 +62,16 @@ public class Main {
 		}).start();
 
 		// LEAVE TESTING CODE HERE
-		//TestAPI test = new TestAPI(api);
-		//test.test();
+//		TestAPI test = new TestAPI(api);
+//		test.test();
 
 		// DONE AND TESTED
 		get("/login", (request, response) -> {
 			System.out.println("GET LOGIN");
 			Map<String, Object> attributes = new HashMap<>();
+			attributes.put("pageName", "login");
 			return new ModelAndView(attributes, "login.ftl");
 		}, templateEngine);
-
 
 		// DONE AND TESTED
 		post("/login", (req, res) -> {
@@ -81,28 +93,23 @@ public class Main {
 		}, jsonEngine);
 
 		get("/browse", (req, res) -> {
+			Map<String, String> data = getUserData(req);
+			if (data.containsKey("redirect"))
+				return new ModelAndView(data, "loadWithLocalData.ftl");
+
+			String userID = data.get("userID");
+			String userToken = data.get("userToken");
+
+			if (userID == "null" || userToken == "null" || !api.userTokens.testUserTokenForUser(userID, userToken))
+				return errorView("NOT AUTHENTICATED");
+
+			List<Document> items = api.items.getBuyableItems(userID);
+
 			Map<String, Object> attributes = new HashMap<>();
-			String jsonStringQuery = req.queryParams("query");
-			if (jsonStringQuery == null || jsonStringQuery.length() == 0 || jsonStringQuery.charAt(0) != '{')
-				jsonStringQuery = "{}";
-			try {
-				Bson query = (Bson) JSON.parse(jsonStringQuery);
-				List<Document> items = api.items.getItems(query);
-				List<String> itemStrings = new LinkedList<String>();
-
-				for (Document item : items)
-					itemStrings.add(item.toJson());
-
-				attributes.put("results", itemStrings);
-				attributes.put("items", items);
-			} catch (Exception e) {
-				attributes.put("error", e.toString());
-			}
-
+			attributes.put("items", items);
 			attributes.put("pageName", "browse");
 			return new ModelAndView(attributes, "browse.ftl");
 		}, templateEngine);
-
 
 		get("/list-item", (req, res) -> {
 			String itemID;
@@ -123,16 +130,22 @@ public class Main {
 
 		// GET LIST OF ITEMS BOUGHT AND SOLD
 		get("/dashboard", (req, res) -> {
-			Map<String, String> data = api.getBody(req);
+			Map<String, String> data = getUserData(req);
+			if (data.containsKey("redirect"))
+				return new ModelAndView(data, "loadWithLocalData.ftl");
+
 			String userID = data.get("userID");
 			String userToken = data.get("userToken");
+			if (userID == "null" || userToken == "null" || !api.userTokens.testUserTokenForUser(userID, userToken))
+				return errorView("NOT AUTHENTICATED");
+
 			List<Document> itemsBought = api.items.getItemsBoughtByUser(userID);
-			List<Document> itemsUploaded = api.items.getItemsUploadedByUser(userID, userToken);
-			List<Document> itemsSold = api.items.getItemsSold(userID);
+			List<Document> itemsListed = api.items.getItemsListedByUser(userID);
+			List<Document> itemsSold = api.items.getItemsSoldByUser(userID);
 
 			Map<String, Object> attributes = new HashMap<>();
 			attributes.put("itemsBought", itemsBought);
-			attributes.put("itemsUploaded", itemsUploaded);
+			attributes.put("itemsListed", itemsListed);
 			attributes.put("itemsSold", itemsSold);
 			attributes.put("pageName", "dashboard");
 			return new ModelAndView(attributes, "dashboard.ftl");
@@ -141,7 +154,25 @@ public class Main {
 		// GET INFO ABOUT PEABAY COMPANY
 		get("/about", (req, res) -> staticTemplate("about.ftl", "about"), templateEngine);
 
-		// TODO: create pending items endpoint
+		get("/pendingitems", (req, res) -> {
+			Map<String, String> data = getUserData(req);
+			if (data.containsKey("redirect"))
+				return new ModelAndView(data, "loadWithLocalData.ftl");
+
+			String userID = data.get("userID");
+			String userToken = data.get("userToken");
+			if (userID == "null" || userToken == "null" || !api.userTokens.testUserTokenForUser(userID, userToken))
+				return errorView("NOT AUTHENTICATED");
+
+			List<Document> pendingSales = api.items.getPendingSales(userID);
+			List<Document> pendingPurchases = api.items.getPendingPurchases(userID);
+
+			Map<String, Object> attributes = new HashMap<>();
+			attributes.put("pendingSales", pendingSales);
+			attributes.put("pendingPurchases", pendingPurchases);
+			attributes.put("pageName", "pendingitems");
+			return new ModelAndView(attributes, "pendingitems.ftl");
+		}, templateEngine);
 
 		get("/upload", (req, res) -> staticTemplate("upload.ftl", "upload"), templateEngine);
 
@@ -157,7 +188,6 @@ public class Main {
 
 		// Should be used by AJAX -> serves json
 		post("/buy", (req, res) -> {
-
 			Map<String, String> body = api.getBody(req);
 			if (!body.containsKey("userID") || !body.containsKey("userToken") || !body.containsKey("itemID"))
 				return jsonError("Invalid input");
@@ -171,7 +201,6 @@ public class Main {
 
 			return output;
 		}, jsonEngine);
-
 
 		post("/sell", (req, res) -> {
 			Map<String, String> body = api.getBody(req);
@@ -207,7 +236,6 @@ public class Main {
 		}, jsonEngine);
 
 		post("/refuseSale", (req, res) -> {
-
 			Map<String, String> body = api.getBody(req);
 
 			if (!body.containsKey("userToken") || !body.containsKey("userID") || !body.containsKey("itemID"))
@@ -241,6 +269,10 @@ public class Main {
 
 		}, jsonEngine);
 
+		exception(Exception.class, (exc, req, res) -> {
+			res.body(exc.getMessage());
+		});
+
 	}
 
 	private static ModelAndView staticTemplate(String path, String pageName) {
@@ -260,6 +292,20 @@ public class Main {
 		Map<String, String> output = new HashMap<>();
 		output.put("error", errmsg);
 		return output;
+	}
+
+	private static Map<String, String> getUserData(Request req) {
+		Map<String, String> data = api.getBody(req);
+		String userID = data.get("userID");
+		String userToken = data.get("userToken");
+		if (userID == null || userToken == null || userID.isEmpty() || userToken.isEmpty()) {
+			Map<String, String> attributes = new HashMap<>();
+			attributes.put("redirect", req.pathInfo());
+			attributes.put("get", "[\"userID\", \"userToken\"]");
+			return attributes;
+		} else {
+			return data;
+		}
 	}
 
 }

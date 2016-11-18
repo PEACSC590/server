@@ -8,148 +8,78 @@
 <body>
 
   <#include "/partials/nav.ftl">
+  
+<#macro itemsTable items>
+	<table class="table textbgtable">
+		<thead>
+		  <tr>
+		    <th>Item</th>
+		    <th>Date</th>
+		    <th>Price</th>
+		  </tr>
+		</thead>     
+		<tbody>
+		<#list items as item>
+	        <tr>
+				<td>${item.name}</td>
+				<td><#if item.dateBought??>${item.dateBought}</#if></td>
+				<td>$${item.price}</td>
+			</tr>
+		</#list>
+		</tbody>
+	</table>	
+</#macro>
+  
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-2">
+        <div class="list-group">
+          <a href="dashboard" class="list-group-item active">My Items</a>
+          <a href="upload" class="list-group-item">Upload</a>
+          <a href="pendingitems" class="list-group-item">Pending Sales</a>
+        </div>
+      </div>
+      <div class="jumbotron jumbotron-dashboard">
+		
+        <h1 class="display-3">Dashboard</h1>
+        <h4 class="lead">- Your Transaction History on PEAbay -</h4>
+        
 
+      </div>
+      
+    </div>
+  </div>
+	
   <div class="container-fluid">
     <div class="row">
 
 
-      <div class="jumbotron jumbotron-dashboard">
+      
 
-        <h1 class="display-3">Dashboard</h1>
-        <h4 class="lead">- Your Transaction History on PEAbay -</h4>
-
-      </div>
-
-       <!-- <div class="row placeholders">
-          <div class="col-xs-6 col-sm-3 placeholder">
-            <img src="">
-            <h4>Label</h4>
-            <span class="text-muted">Product</span>
-          </div>
-          <div class="col-xs-6 col-sm-3 placeholder">
-            <img src="">
-            <h4>Label</h4>
-            <span class="text-muted">Product</span>
-          </div>
-          <div class="col-xs-6 col-sm-3 placeholder">
-            <img src="">
-            <h4>Label</h4>
-            <span class="text-muted">Product</span>
-          </div>
-          <div class="col-xs-6 col-sm-3 placeholder">
-            <img src="">
-            <h4>Label</h4>
-            <span class="text-muted">Product</span>
-          </div>
-        </div> -->
+      
 
 
         <div class="container-fluid">
 
-
             <div class="table-responsive col-md-4">
-
-
               <h2 class="sub-header textbgdash2">Past Purchases</h2>
-              <table  class="table textbgtable">
-                 <thead >
-                  <tr>
-                    <th>Item</th>
-                    <th>Date</th>
-                    <th>Price</th>
-
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <#list itemsBought as document, itemName>
-                    <td>${itemName}</td>
-                   </#list>
-                    <#list itemsBought as document, dateBought>
-                    <td>${dateBought}</td>
-                   </#list>
-                    <#list itemsBought as document, itemPrice>
-                    <td>"$" + ${"itemPrice"}</td>
-                   </#list>
-
-                  </tr>
-
-
-                </tbody>
-              </table>
+              <@itemsTable items=itemsBought/>
             </div>
-
-
+            
             <div class="table-responsive col-md-4">
               <h2 class="sub-header textbgdash2">Items for Sale</h2>
-
-              <table  class="table textbgtable">
-                <thead>
-                  <tr>
-                    <th>Item</th>
-                    <th>Date</th>
-                    <th>Price</th>
-
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <#list itemsUploaded as document, itemName>
-                    <td>${itemName}</td>
-                   </#list>
-                    <#list itemsUploaded as document, dateBought>
-                    <td>${dateBought}</td>
-                   </#list>
-                    <#list itemsUploaded as itemsUploaded, itemPrice>
-                    <td>"$" + ${itemPrice}</td>
-                   </#list>
-
-                  </tr>
-
-                </tbody>
-              </table>
+              <@itemsTable items=itemsListed/>
             </div>
 
             <div class="table-responsive col-md-4">
               <h2 class="sub-header textbgdash2">Past Sales</h2>
-              <table  class="table textbgtable">
-                <thead>
-                  <tr>
-                    <th>Item</th>
-                    <th>Date</th>
-                    <th>Price</th>
-
-                  </tr>
-                </thead>
-                <tbody>
-                   <tr>
-                    <#list itemsSold as document, itemName>
-
-                    <td>${itemName}</td>
-
-                   </#list>
-                    <#list itemsSold as document, dateBought>
-
-                    <td>${dateBought}</td>
-
-                   </#list>
-                    <#list itemsSold as document, itemPrice>
-
-                    <td>"$" + ${itemPrice}</td>
-
-                    </#list>
-    </tr>
-                </tbody>
-              </table>
+              <@itemsTable items=itemsSold/>
             </div>
 
         </div>
 
-
         </div>
       </div>
-
-
 
     </div>
     <div class="container">
@@ -160,29 +90,6 @@
     </div>
     
     <#include "/partials/scripts.ftl">
-
-    <script>
-
-  /*
-  *formData: { name: "name", imageURL: "sdf" }
-  */
-
-  // TODO: validate form inputs
-
-  var userID = localStorage.get('userID');
-  var userToken = localStorage.get('userToken');
-
-  // TODO: validate that userID and userToken are not null
-
-  $.ajax({
-    type: 'GET',
-    url: '/dashboard',
-    data: { userID: userID, userToken: userToken},
-    success: uploadSuccess,
-    dataType: 'json'
-  });
-
-</script>
 
     </body>
     </html>
