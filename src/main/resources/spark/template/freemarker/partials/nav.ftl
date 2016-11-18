@@ -52,6 +52,8 @@
 	    error: requestError,
 	    dataType: 'json',
 	 });
+	 
+	 window.localStorage.clear();
 	  
 	 return false;
   }
