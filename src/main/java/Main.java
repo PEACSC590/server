@@ -136,11 +136,6 @@ public class Main {
 
 			String userID = data.get("userID");
 			String userToken = data.get("userToken");
-			
-			if (userID == "null" || userToken == "null" || !api.userTokens.testUserTokenForUser(userID, userToken)) {
-				res.redirect("/login");
-				return errorView("NOT AUTHENTICATED");
-			}
 
 			List<Document> itemsBought = api.items.getItemsBoughtByUser(userID);
 			List<Document> itemsListed = api.items.getItemsListedByUser(userID);
