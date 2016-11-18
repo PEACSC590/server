@@ -101,21 +101,11 @@ public class Main {
 
 		get("/browse", (req, res) -> {
 			Map<String, String> data = getUserData(req);
-			System.out.println("GET BROWSE 1");
-			String userID = data.get("userID");
-			String userToken = data.get("userToken");
-			System.out.println("GET BROWSE 1");
-			if (userID.equals("null") || userToken.equals("null") || !api.userTokens.testUserTokenForUser(userID, userToken)) {
-				System.out.println("NOT LOGGED IN");
-				res.redirect("/login");
-				return errorView("NOT AUTHENTICATED");
-			}
 			
-			System.out.println("GET BROWSE");
 			if (data.containsKey("redirect"))
 				return new ModelAndView(data, "loadWithLocalData.ftl");
 			
-			List<Document> items = api.items.getBuyableItems(userID);
+			List<Document> items = api.items.getBuyableItems(data.get("userID"));
 
 			Map<String, Object> attributes = new HashMap<>();
 			attributes.put("items", items);
@@ -174,16 +164,8 @@ public class Main {
 			if (data.containsKey("redirect"))
 				return new ModelAndView(data, "loadWithLocalData.ftl");
 
-			String userID = data.get("userID");
-			String userToken = data.get("userToken");
-			if (userID == "null" || userToken == "null" || !api.userTokens.testUserTokenForUser(userID, userToken)) {
-				res.redirect("/login");
-				return errorView("NOT AUTHENTICATED");
-			}
-				
-
-			List<Document> pendingSales = api.items.getPendingSales(userID);
-			List<Document> pendingPurchases = api.items.getPendingPurchases(userID);
+			List<Document> pendingSales = api.items.getPendingSales(data.get("userID"));
+			List<Document> pendingPurchases = api.items.getPendingPurchases(data.get("userID"));
 
 			Map<String, Object> attributes = new HashMap<>();
 			attributes.put("pendingSales", pendingSales);
@@ -192,29 +174,7 @@ public class Main {
 			return new ModelAndView(attributes, "pendingitems.ftl");
 		}, templateEngine);
 
-		get("/upload", (req, res) -> {
-			Map<String, String> data = getUserData(req);
-			if (data.containsKey("redirect"))
-				return new ModelAndView(data, "loadWithLocalData.ftl");
-			return new ModelAndView(data, "loadWithLocalData.ftl");
-		}, templateEngine);
-
-		post("/upload", (req, res) -> {
-			Map<String, String> data = api.getBody(req);
-			// System.out.println(data);
-			Document item = (Document) JSON.parse(data.get("item"));
-			System.out.println(item);
-			String userID = data.get("userID");
-			String userToken = data.get("userToken");
-
-			if (userID == "null" || userToken == "null" || !api.userTokens.testUserTokenForUser(userID, userToken)) {
-				res.redirect("/login");
-				return errorView("NOT AUTHENTICATED");
-			}
-			
-			Map<String, Object> attributes = new HashMap<>();
-			return new ModelAndView(attributes, "upload.ftl");
-		}, templateEngine);
+		get("/upload", (req, res) -> staticTemplate("upload.ftl", "upload"), templateEngine);
 
 		post("/upload", (req, res) -> {
 			Map<String, String> body = api.getBody(req);
