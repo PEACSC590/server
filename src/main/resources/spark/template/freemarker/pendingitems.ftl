@@ -9,7 +9,7 @@
 
   <#include "/partials/nav.ftl">
 	
-    <div class="container-fluid">
+  <div class="container-fluid">
     <div class="row">
       <div class="col-md-2">
         <div class="list-group">
@@ -18,7 +18,7 @@
           <a href="pendingitems" class="list-group-item active">Pending Items</a>
         </div>
       </div>
-      <h1 class="page-header textbgpi">Pending Items</h1>
+      <h1 class="page-header textbgup">Pending Items</h1>
     </div>
   </div>
     <div class="container">
