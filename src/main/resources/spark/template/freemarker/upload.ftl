@@ -14,7 +14,7 @@
         <div class="list-group">
           <a href="dashboard" class="list-group-item">My Items</a>
           <a href="upload" class="list-group-item active">Upload</a>
-          <a href="pendingitems" class="list-group-item">Pending Sales</a>
+          <a href="pendingitems" class="list-group-item">Pending Items</a>
         </div>
       </div>
       <h1 class="page-header textbgup">Upload</h1>

@@ -65,6 +65,13 @@ public class Main {
 //		TestAPI test = new TestAPI(api);
 //		test.test();
 
+		get("/", (request, response) -> {
+			System.out.println("GET LOGIN");
+			Map<String, Object> attributes = new HashMap<>();
+			attributes.put("pageName", "login");
+			return new ModelAndView(attributes, "login.ftl");
+		}, templateEngine);
+		
 		// DONE AND TESTED
 		get("/login", (request, response) -> {
 			System.out.println("GET LOGIN");
@@ -100,9 +107,11 @@ public class Main {
 			String userID = data.get("userID");
 			String userToken = data.get("userToken");
 
-			if (userID == "null" || userToken == "null" || !api.userTokens.testUserTokenForUser(userID, userToken))
+			if (userID == "null" || userToken == "null" || !api.userTokens.testUserTokenForUser(userID, userToken)) {
+				res.redirect("/login");
 				return errorView("NOT AUTHENTICATED");
-
+			}
+			
 			List<Document> items = api.items.getBuyableItems(userID);
 
 			Map<String, Object> attributes = new HashMap<>();
@@ -136,8 +145,11 @@ public class Main {
 
 			String userID = data.get("userID");
 			String userToken = data.get("userToken");
-			if (userID == "null" || userToken == "null" || !api.userTokens.testUserTokenForUser(userID, userToken))
+			
+			if (userID == "null" || userToken == "null" || !api.userTokens.testUserTokenForUser(userID, userToken)) {
+				res.redirect("/login");
 				return errorView("NOT AUTHENTICATED");
+			}
 
 			List<Document> itemsBought = api.items.getItemsBoughtByUser(userID);
 			List<Document> itemsListed = api.items.getItemsListedByUser(userID);
@@ -161,8 +173,11 @@ public class Main {
 
 			String userID = data.get("userID");
 			String userToken = data.get("userToken");
-			if (userID == "null" || userToken == "null" || !api.userTokens.testUserTokenForUser(userID, userToken))
+			if (userID == "null" || userToken == "null" || !api.userTokens.testUserTokenForUser(userID, userToken)) {
+				res.redirect("/login");
 				return errorView("NOT AUTHENTICATED");
+			}
+				
 
 			List<Document> pendingSales = api.items.getPendingSales(userID);
 			List<Document> pendingPurchases = api.items.getPendingPurchases(userID);
@@ -174,14 +189,43 @@ public class Main {
 			return new ModelAndView(attributes, "pendingitems.ftl");
 		}, templateEngine);
 
-		get("/upload", (req, res) -> staticTemplate("upload.ftl", "upload"), templateEngine);
+		get("/upload", (req, res) -> {
+			Map<String, String> data = getUserData(req);
+			if (data.containsKey("redirect"))
+				return new ModelAndView(data, "loadWithLocalData.ftl");
 
 		post("/upload", (req, res) -> {
 			Map<String, String> data = api.getBody(req);
 			// System.out.println(data);
 			Document item = (Document) JSON.parse(data.get("item"));
+			System.out.println(item);
 			String userID = data.get("userID");
 			String userToken = data.get("userToken");
+
+			if (userID == "null" || userToken == "null" || !api.userTokens.testUserTokenForUser(userID, userToken)) {
+				res.redirect("/login");
+				return errorView("NOT AUTHENTICATED");
+			}
+			
+			Map<String, Object> attributes = new HashMap<>();
+			return new ModelAndView(attributes, "upload.ftl");
+		}, templateEngine);
+
+		post("/upload", (req, res) -> {
+			Map<String, String> body = api.getBody(req);
+			
+			if (!body.containsKey("userID") || !body.containsKey("userToken") || !body.containsKey("itemID"))
+				return jsonError("Invalid input");
+			
+			String userID = body.get("userID");
+			String userToken = body.get("userToken");
+			if (userID == "null" || userToken == "null" || !api.userTokens.testUserTokenForUser(userID, userToken)) {
+				res.redirect("/login");
+				return errorView("NOT AUTHENTICATED");
+			}
+			
+			// System.out.println(data);
+			Document item = (Document) JSON.parse(body.get("item"));
 
 			return api.items.upload(userID, userToken, item);
 		}, jsonEngine);
@@ -192,6 +236,13 @@ public class Main {
 			if (!body.containsKey("userID") || !body.containsKey("userToken") || !body.containsKey("itemID"))
 				return jsonError("Invalid input");
 
+			String userID = body.get("userID");
+			String userToken = body.get("userToken");
+			if (userID == "null" || userToken == "null" || !api.userTokens.testUserTokenForUser(userID, userToken)) {
+				res.redirect("/login");
+				return errorView("NOT AUTHENTICATED");
+			}
+			
 			Map<String, String> output;
 			try {
 				output = api.sales.buy(body.get("userID"), body.get("userToken"), body.get("itemID"));
@@ -206,6 +257,13 @@ public class Main {
 			Map<String, String> body = api.getBody(req);
 			if (!body.containsKey("userID") || !body.containsKey("userToken") || !body.containsKey("itemID"))
 				return jsonError("Invalid input");
+			
+			String userID = body.get("userID");
+			String userToken = body.get("userToken");
+			if (userID == "null" || userToken == "null" || !api.userTokens.testUserTokenForUser(userID, userToken)) {
+				res.redirect("/login");
+				return errorView("NOT AUTHENTICATED");
+			}
 
 			Map<String, String> output;
 			try {
@@ -222,6 +280,13 @@ public class Main {
 
 			if (!body.containsKey("userToken") || !body.containsKey("userID") || !body.containsKey("itemID"))
 				return jsonError("Invalid input");
+			
+			String userID = body.get("userID");
+			String userToken = body.get("userToken");
+			if (userID == "null" || userToken == "null" || !api.userTokens.testUserTokenForUser(userID, userToken)) {
+				res.redirect("/login");
+				return errorView("NOT AUTHENTICATED");
+			}
 
 			Map<String, String> output;
 			try {
@@ -241,6 +306,13 @@ public class Main {
 			if (!body.containsKey("userToken") || !body.containsKey("userID") || !body.containsKey("itemID"))
 				return jsonError("Invalid input");
 
+			String userID = body.get("userID");
+			String userToken = body.get("userToken");
+			if (userID == "null" || userToken == "null" || !api.userTokens.testUserTokenForUser(userID, userToken)) {
+				res.redirect("/login");
+				return errorView("NOT AUTHENTICATED");
+			}
+			
 			Map<String, String> output;
 			try {
 				output = api.sales.refuseSale(body.get("userID"), body.get("userToken"), body.get("itemID"));
@@ -258,6 +330,13 @@ public class Main {
 			if (!body.containsKey("userID") || !body.containsKey("userToken") || !body.containsKey("itemID"))
 				return jsonError("Invalid input");
 
+			String userID = body.get("userID");
+			String userToken = body.get("userToken");
+			if (userID == "null" || userToken == "null" || !api.userTokens.testUserTokenForUser(userID, userToken)) {
+				res.redirect("/login");
+				return errorView("NOT AUTHENTICATED");
+			}
+			
 			Map<String, String> output;
 			try {
 				output = api.items.unlist(body.get("userID"), body.get("userToken"), body.get("itemID"));
@@ -269,13 +348,13 @@ public class Main {
 
 		}, jsonEngine);
 
-		exception(Exception.class, (exc, req, res) -> {
-			res.body(exc.getMessage());
-		});
-
+		//exception(Exception.class, (exc, req, res) -> {
+			//res.body(exc.getMessage());
+		//});
 	}
 
 	private static ModelAndView staticTemplate(String path, String pageName) {
+			
 		Map<String, Object> attributes = new HashMap<>();
 		if (!pageName.isEmpty())
 			attributes.put("pageName", pageName);

@@ -36,7 +36,7 @@
         <div class="list-group">
           <a href="dashboard" class="list-group-item active">My Items</a>
           <a href="upload" class="list-group-item">Upload</a>
-          <a href="pendingitems" class="list-group-item">Pending Sales</a>
+          <a href="pendingitems" class="list-group-item">Pending Items</a>
         </div>
       </div>
       <div class="jumbotron jumbotron-dashboard">
