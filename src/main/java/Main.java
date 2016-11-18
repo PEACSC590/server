@@ -275,6 +275,10 @@ public class Main {
 			return output;
 
 		}, jsonEngine);
+		
+		exception(Exception.class, (exc, req, res) -> {
+			res.body(exc.getMessage());
+		});
 
 	}
 

@@ -15,8 +15,6 @@
 <!-- linking login stylesheet -->
 <#if pageName?? && pageName == "login">
 <link rel="stylesheet" type="text/css" href="login.css">
-</#if>
-
-<#if pageName?? && pageName != "login">
+<#else>
 <link rel="stylesheet" type="text/css" href="background.css">
 </#if>
