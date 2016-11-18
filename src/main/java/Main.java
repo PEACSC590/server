@@ -65,15 +65,13 @@ public class Main {
 //		TestAPI test = new TestAPI(api);
 //		test.test();
 
-		get("/", (request, response) -> {
-			System.out.println("GET LOGIN");
-			Map<String, Object> attributes = new HashMap<>();
-			attributes.put("pageName", "login");
-			return new ModelAndView(attributes, "login.ftl");
+		get("/", (req, res) -> {
+			res.redirect("/login");
+			return null;
 		}, templateEngine);
 		
 		// DONE AND TESTED
-		get("/login", (request, response) -> {
+		get("/login", (req, res) -> {
 			System.out.println("GET LOGIN");
 			Map<String, Object> attributes = new HashMap<>();
 			attributes.put("pageName", "login");
@@ -138,11 +136,6 @@ public class Main {
 
 			String userID = data.get("userID");
 			String userToken = data.get("userToken");
-			
-			if (userID == "null" || userToken == "null" || !api.userTokens.testUserTokenForUser(userID, userToken)) {
-				res.redirect("/login");
-				return errorView("NOT AUTHENTICATED");
-			}
 
 			List<Document> itemsBought = api.items.getItemsBoughtByUser(userID);
 			List<Document> itemsListed = api.items.getItemsListedByUser(userID);
