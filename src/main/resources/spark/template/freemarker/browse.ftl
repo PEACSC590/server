@@ -84,7 +84,7 @@
           <h2>Heading</h2>
           <p>Product 9</p>
           <p><a class="btn btn-default" href="ProductFocus.ftl" role="button">View details &raquo;</a></p>
-        </div> -->
+        </div>
         </div></div>-->
     </div> 
   </div>

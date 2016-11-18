@@ -30,3 +30,14 @@ $.obj2Qs = function obj2Qs(obj) {
   return str.join("&");
 };
 </script>
+
+<script>
+  window.userID = localStorage.getItem('userID');
+  window.userToken = localStorage.getItem('userToken');
+
+  if (!userID || !userToken) {
+  	alert('not logged in.');
+  	window.location.href = '/login';
+  	return;
+  }
+</script>
