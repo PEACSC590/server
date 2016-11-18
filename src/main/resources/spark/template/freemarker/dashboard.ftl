@@ -9,12 +9,33 @@
 
   <#include "/partials/nav.ftl">
   
+<#macro itemsTable items>
+	<table class="table textbgtable">
+		<thead>
+		  <tr>
+		    <th>Item</th>
+		    <th>Date</th>
+		    <th>Price</th>
+		  </tr>
+		</thead>     
+		<tbody>
+		<#list items as item>
+	        <tr>
+				<td>${item.name}</td>
+				<td><#if item.dateBought??>${item.dateBought}</#if></td>
+				<td>$${item.price}</td>
+			</tr>
+		</#list>
+		</tbody>
+	</table>	
+</#macro>
+  
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-2">
         <div class="list-group">
-          <a href="dashboard" class="list-group-item">My Items</a>
-          <a href="upload" class="list-group-item active">Upload</a>
+          <a href="dashboard" class="list-group-item active">My Items</a>
+          <a href="upload" class="list-group-item">Upload</a>
           <a href="pendingitems" class="list-group-item">Pending Sales</a>
         </div>
       </div>
@@ -64,85 +85,24 @@
 
 
               <h2 class="sub-header textbgdash2">Past Purchases</h2>
-              <table  class="table textbgtable">
-                 <thead >
-                  <tr>
-                    <th>Item</th>
-                    <th>Date</th>
-                    <th>Price</th>
-
-                  </tr>
-                </thead>
-                <#list itemsBought as item>
-                <tbody>
-                  <tr>
-                    <td>${item.name}</td>
-                    <td><#if item.dateBought??>${item.dateBought}</#if></td>
-                    <td>$${item.price}</td>
-
-                  </tr>
-                </tbody>
-                </#list>
-              </table>
+              <@itemsTable items=itemsBought/>
             </div>
 
 
             <div class="table-responsive col-md-4">
               <h2 class="sub-header textbgdash2">Items for Sale</h2>
-
-              <table  class="table textbgtable">
-                <thead>
-                  <tr>
-                    <th>Item</th>
-                    <th>Date</th>
-                    <th>Price</th>
-
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <#list itemsUploaded as item>
-                    <td>${item.name}</td>
-                    <td><#if item.dateBought??>${item.dateBought}</#if></td>
-                    <td>$${item.price}</td>
-                   </#list>
-
-                  </tr>
-
-                </tbody>
-              </table>
+              <@itemsTable items=itemsUploaded/>
             </div>
 
             <div class="table-responsive col-md-4">
               <h2 class="sub-header textbgdash2">Past Sales</h2>
-              <table  class="table textbgtable">
-                <thead>
-                  <tr>
-                    <th>Item</th>
-                    <th>Date</th>
-                    <th>Price</th>
-
-                  </tr>
-                </thead>
-                <tbody>
-                   <tr>
-                    <#list itemsSold as item>
-                    <td>${item.name}</td>
-                    <td><#if item.dateBought??>${item.dateBought}</#if></td>
-                    <td>$${item.price}</td>
-                    </#list>
-    </tr>
-                </tbody>
-              </table>
+              <@itemsTable items=itemsSold/>
             </div>
 
         </div>
 
-
         </div>
       </div>
-
-
 
     </div>
     <div class="container">
