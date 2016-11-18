@@ -140,12 +140,12 @@ public class Main {
 				return errorView("NOT AUTHENTICATED");
 
 			List<Document> itemsBought = api.items.getItemsBoughtByUser(userID);
-			List<Document> itemsUploaded = api.items.getItemsUploadedByUser(userID);
+			List<Document> itemsListed = api.items.getItemsListedByUser(userID);
 			List<Document> itemsSold = api.items.getItemsSoldByUser(userID);
 
 			Map<String, Object> attributes = new HashMap<>();
 			attributes.put("itemsBought", itemsBought);
-			attributes.put("itemsUploaded", itemsUploaded);
+			attributes.put("itemsListed", itemsListed);
 			attributes.put("itemsSold", itemsSold);
 			attributes.put("pageName", "dashboard");
 			return new ModelAndView(attributes, "dashboard.ftl");

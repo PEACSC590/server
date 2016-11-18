@@ -31,7 +31,7 @@ public class Items {
 
 	// TESTED: SUCCESS
 	public List<Document> getBuyableItems(String userID) {
-		return getItems(new Document("status", "listed"));
+		return getItems(new Document("status", "listed").append("sellerID", new Document("$ne", userID)));
 	}
 
 	public List<Document> getPendingSales(String userID) {
@@ -45,6 +45,11 @@ public class Items {
 	// TESTED: SUCCESS
 	public List<Document> getItemsUploadedByUser(String userID) {
 		return getItems(new Document("sellerID", userID));
+	}
+
+	// SHOULD WORK
+	public List<Document> getItemsListedByUser(String userID) {
+		return getItems(new Document("sellerID", userID).append("status", "listed"));
 	}
 
 	// SEMI-TESTED: SHOULD WORK

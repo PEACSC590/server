@@ -80,18 +80,14 @@
 
         <div class="container-fluid">
 
-
             <div class="table-responsive col-md-4">
-
-
               <h2 class="sub-header textbgdash2">Past Purchases</h2>
               <@itemsTable items=itemsBought/>
             </div>
-
-
+            
             <div class="table-responsive col-md-4">
               <h2 class="sub-header textbgdash2">Items for Sale</h2>
-              <@itemsTable items=itemsUploaded/>
+              <@itemsTable items=itemsListed/>
             </div>
 
             <div class="table-responsive col-md-4">
@@ -113,29 +109,6 @@
     </div>
     
     <#include "/partials/scripts.ftl">
-
-    <script>
-
-  /*
-  *formData: { name: "name", imageURL: "sdf" }
-  */
-
-  // TODO: validate form inputs
-
-  var userID = localStorage.get('userID');
-  var userToken = localStorage.get('userToken');
-
-  // TODO: validate that userID and userToken are not null
-
-  $.ajax({
-    type: 'GET',
-    url: '/dashboard',
-    data: { userID: userID, userToken: userToken},
-    success: uploadSuccess,
-    dataType: 'json'
-  });
-
-</script>
 
     </body>
     </html>
