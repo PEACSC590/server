@@ -39,7 +39,14 @@
           <a href="pendingitems" class="list-group-item">Pending Sales</a>
         </div>
       </div>
-      <h1 class="page-header textbgup">Upload</h1>
+      <div class="jumbotron jumbotron-dashboard">
+		
+        <h1 class="display-3">Dashboard</h1>
+        <h4 class="lead">- Your Transaction History on PEAbay -</h4>
+        
+
+      </div>
+      
     </div>
   </div>
 	
@@ -47,35 +54,9 @@
     <div class="row">
 
 
-      <div class="jumbotron jumbotron-dashboard">
+      
 
-        <h1 class="display-3">Dashboard</h1>
-        <h4 class="lead">- Your Transaction History on PEAbay -</h4>
-
-      </div>
-
-       <!-- <div class="row placeholders">
-          <div class="col-xs-6 col-sm-3 placeholder">
-            <img src="">
-            <h4>Label</h4>
-            <span class="text-muted">Product</span>
-          </div>
-          <div class="col-xs-6 col-sm-3 placeholder">
-            <img src="">
-            <h4>Label</h4>
-            <span class="text-muted">Product</span>
-          </div>
-          <div class="col-xs-6 col-sm-3 placeholder">
-            <img src="">
-            <h4>Label</h4>
-            <span class="text-muted">Product</span>
-          </div>
-          <div class="col-xs-6 col-sm-3 placeholder">
-            <img src="">
-            <h4>Label</h4>
-            <span class="text-muted">Product</span>
-          </div>
-        </div> -->
+      
 
 
         <div class="container-fluid">
