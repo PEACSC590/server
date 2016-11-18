@@ -61,14 +61,14 @@ public class Main {
 		}).start();
 
 		// LEAVE TESTING CODE HERE
-//		TestAPI test = new TestAPI(api);
-//		test.test();
+		//		TestAPI test = new TestAPI(api);
+		//		test.test();
 
 		get("/", (req, res) -> {
 			res.redirect("/login");
 			return null;
 		}, templateEngine);
-		
+
 		get("/login", (req, res) -> {
 			System.out.println("GET LOGIN");
 			Map<String, Object> attributes = new HashMap<>();
@@ -84,7 +84,7 @@ public class Main {
 
 			return api.users.login(userID, password);
 		}, jsonEngine);
-		
+
 		post("/logout", (req, res) -> {
 			Map<String, String> data = api.getBody(req);
 			String userID = data.get("userID");
@@ -95,10 +95,10 @@ public class Main {
 
 		get("/browse", (req, res) -> {
 			Map<String, String> data = getUserData(req);
-			
+
 			if (data.containsKey("redirect"))
 				return new ModelAndView(data, "loadWithLocalData.ftl");
-			
+
 			List<Document> items = api.items.getBuyableItems(data.get("userID"));
 
 			Map<String, Object> attributes = new HashMap<>();
@@ -163,7 +163,7 @@ public class Main {
 
 		get("/upload", (req, res) -> {
 			Map<String, String> data = getUserData(req);
-			
+
 			if (data.containsKey("redirect"))
 				return new ModelAndView(data, "loadWithLocalData.ftl");
 
@@ -177,7 +177,7 @@ public class Main {
 				return jsonError("Invalid input");
 
 			String itemString = body.get("item");
-			
+
 			try {
 				itemString = URLDecoder.decode(itemString, "UTF-8");
 			} catch (UnsupportedEncodingException e1) {}
@@ -192,7 +192,7 @@ public class Main {
 			Map<String, String> body = api.getBody(req);
 			if (!body.containsKey("userID") || !body.containsKey("userToken") || !body.containsKey("itemID"))
 				return jsonError("Invalid input");
-			
+
 			Map<String, String> output;
 			try {
 				output = api.sales.buy(body.get("userID"), body.get("userToken"), body.get("itemID"));
@@ -241,7 +241,7 @@ public class Main {
 
 			if (!body.containsKey("userToken") || !body.containsKey("userID") || !body.containsKey("itemID"))
 				return jsonError("Invalid input");
-			
+
 			Map<String, String> output;
 			try {
 				output = api.sales.refuseSale(body.get("userID"), body.get("userToken"), body.get("itemID"));
@@ -258,7 +258,7 @@ public class Main {
 			Map<String, String> body = api.getBody(req);
 			if (!body.containsKey("userID") || !body.containsKey("userToken") || !body.containsKey("itemID"))
 				return jsonError("Invalid input");
-			
+
 			Map<String, String> output;
 			try {
 				output = api.items.unlist(body.get("userID"), body.get("userToken"), body.get("itemID"));
@@ -271,12 +271,12 @@ public class Main {
 		}, jsonEngine);
 
 		//exception(Exception.class, (exc, req, res) -> {
-			//res.body(exc.getMessage());
+		//res.body(exc.getMessage());
 		//});
 	}
 
 	private static ModelAndView staticTemplate(String path, String pageName) {
-			
+
 		Map<String, Object> attributes = new HashMap<>();
 		if (!pageName.isEmpty())
 			attributes.put("pageName", pageName);
