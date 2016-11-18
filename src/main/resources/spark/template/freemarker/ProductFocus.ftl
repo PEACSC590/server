@@ -58,7 +58,7 @@
 									      </div>
 									      <div class="modal-body">
 									        <p>Some text in the modal.</p>
-													<button type="button" class="btn btn-primary">Buy</button>
+													<button type="button" class="btn btn-primary" onclick="confirmPurchase">Buy</button>
 													<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
 									      </div>
 
@@ -92,20 +92,15 @@
     <!-- /.container -->
 
   <#include "/partials/scripts.ftl">
-  
+
 <script>
 
-$("#uploadForm").on('submit', function(e) {
-	confirmPurchase();
-	e.preventDefault();
-	return false;
-});
 
 function confirmPurchase() {
 	var requestError = function requestError(err) {
 		alert("Request error: " + err);
 	};
-	
+
 	var requestSuccess = function requestSuccess(data) {
 		if (data.status === 'listed')
 	  		window.location.href = '/dashboard';
