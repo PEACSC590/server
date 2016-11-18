@@ -15,7 +15,6 @@ import spark.ResponseTransformer;
 
 import com.mongodb.*;
 import com.mongodb.client.MongoDatabase;
-import com.mongodb.util.JSON;
 
 public class Main {
 
@@ -55,7 +54,6 @@ public class Main {
 					Thread.sleep(1000 * 60 * 10);
 					System.out.println("Refreshing pending items");
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				api.refreshItems();
@@ -71,7 +69,6 @@ public class Main {
 			return null;
 		}, templateEngine);
 		
-		// DONE AND TESTED
 		get("/login", (req, res) -> {
 			System.out.println("GET LOGIN");
 			Map<String, Object> attributes = new HashMap<>();
@@ -79,7 +76,6 @@ public class Main {
 			return new ModelAndView(attributes, "login.ftl");
 		}, templateEngine);
 
-		// DONE AND TESTED
 		post("/login", (req, res) -> {
 			System.out.println("POST LOGIN");
 			Map<String, String> data = api.getBody(req);
@@ -88,8 +84,7 @@ public class Main {
 
 			return api.users.login(userID, password);
 		}, jsonEngine);
-
-		// Should be used by AJAX -> serves json
+		
 		post("/logout", (req, res) -> {
 			Map<String, String> data = api.getBody(req);
 			String userID = data.get("userID");
@@ -129,7 +124,6 @@ public class Main {
 			return new ModelAndView(attributes, "ProductFocus.ftl");
 		}, templateEngine);
 
-		// GET LIST OF ITEMS BOUGHT AND SOLD
 		get("/dashboard", (req, res) -> {
 			Map<String, String> data = getUserData(req);
 			if (data.containsKey("redirect"))
@@ -150,7 +144,6 @@ public class Main {
 			return new ModelAndView(attributes, "dashboard.ftl");
 		}, templateEngine);
 
-		// GET INFO ABOUT PEABAY COMPANY
 		get("/about", (req, res) -> staticTemplate("about.ftl", "about"), templateEngine);
 
 		get("/pendingitems", (req, res) -> {
@@ -179,28 +172,22 @@ public class Main {
 		}, templateEngine);
 
 		post("/upload", (req, res) -> {
-			//System.out.println("POST UPLOAD");
 			Map<String, String> body = api.getBody(req);
-			//System.out.println("GOT BODY");
 			if (!body.containsKey("userID") || !body.containsKey("userToken"))
 				return jsonError("Invalid input");
 
 			String itemString = body.get("item");
-			//System.out.println(body.get("userID"));
-			//System.out.println(body.get("item"));
 			
 			try {
 				itemString = URLDecoder.decode(itemString, "UTF-8");
 			} catch (UnsupportedEncodingException e1) {}
-			//System.out.println(itemString);
 			Document item = Document.parse(itemString);
-			//System.out.println("PARSED ITEM");
 			Map<String, String> map = api.items.upload(body.get("userID"), body.get("userToken"), item);
 			System.out.println(map.get("status") + " " + map.get("error"));
 			return map;
 		}, jsonEngine);
 
-		// Should be used by AJAX -> serves json
+
 		post("/buy", (req, res) -> {
 			Map<String, String> body = api.getBody(req);
 			if (!body.containsKey("userID") || !body.containsKey("userToken") || !body.containsKey("itemID"))
