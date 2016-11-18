@@ -100,15 +100,6 @@ function submitForm() {
 
   // TODO: validate form inputs
 
-  var userID = localStorage.getItem('userID');
-  var userToken = localStorage.getItem('userToken');
-
-  if (!userID || !userToken) {
-  	alert('not logged in.');
-  	window.location.href = '/login';
-  	return;
-  }
-
   var item = {
     name: formData.name,
     description: formData.description,
