@@ -114,8 +114,6 @@ public class Main {
 			System.out.println("GET BROWSE");
 			if (data.containsKey("redirect"))
 				return new ModelAndView(data, "loadWithLocalData.ftl");
-
-			
 			
 			List<Document> items = api.items.getBuyableItems(userID);
 
@@ -198,6 +196,8 @@ public class Main {
 			Map<String, String> data = getUserData(req);
 			if (data.containsKey("redirect"))
 				return new ModelAndView(data, "loadWithLocalData.ftl");
+			return new ModelAndView(data, "loadWithLocalData.ftl");
+		}, templateEngine);
 
 		post("/upload", (req, res) -> {
 			Map<String, String> data = api.getBody(req);
