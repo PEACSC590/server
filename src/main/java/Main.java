@@ -1,12 +1,8 @@
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.*;
 
 import org.bson.Document;
-import org.bson.conversions.Bson;
 
 import java.net.UnknownHostException;
 
@@ -95,6 +91,9 @@ public class Main {
 
 			String userID = data.get("userID");
 			String userToken = data.get("userToken");
+			if (userID == "null" || userToken == "null")
+				return errorView("NOT AUTHENTICATED");
+
 			List<Document> items = api.items.getBuyableItems(userID, userToken);
 			if (items == null)
 				return errorView("NOT AUTHENTICATED");
@@ -130,7 +129,9 @@ public class Main {
 
 			String userID = data.get("userID");
 			String userToken = data.get("userToken");
-			System.out.println(userID + " " + userToken);
+			if (userID == "null" || userToken == "null")
+				return errorView("NOT AUTHENTICATED");
+
 			List<Document> itemsBought = api.items.getItemsBoughtByUser(userID, userToken);
 			List<Document> itemsUploaded = api.items.getItemsUploadedByUser(userID, userToken);
 			List<Document> itemsSold = api.items.getItemsSold(userID, userToken);
@@ -156,9 +157,12 @@ public class Main {
 
 			String userID = data.get("userID");
 			String userToken = data.get("userToken");
+			if (userID == "null" || userToken == "null")
+				return errorView("NOT AUTHENTICATED");
+
 			List<Document> pendingSales = api.items.getPendingSales(userID, userToken);
 			List<Document> pendingPurchases = api.items.getPendingPurchases(userID, userToken);
-			
+
 			if (pendingSales == null)
 				return errorView("NOT AUTHENTICATED");
 
