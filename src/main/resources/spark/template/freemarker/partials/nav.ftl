@@ -41,7 +41,7 @@
 	var requestSuccess = function requestSuccess(data) {
 		if (data.success === 'true')
 	  		window.location.href = '/login';
-	  	else alert("Error: " + data.error);
+	  	else alert("PEAbay was unable to log you out");
 	};
   
 	$.ajax({
