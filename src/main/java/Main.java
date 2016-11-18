@@ -62,8 +62,8 @@ public class Main {
 		}).start();
 
 		// LEAVE TESTING CODE HERE
-		TestAPI test = new TestAPI(api);
-		test.test();
+//		TestAPI test = new TestAPI(api);
+//		test.test();
 
 		// DONE AND TESTED
 		get("/login", (request, response) -> {
