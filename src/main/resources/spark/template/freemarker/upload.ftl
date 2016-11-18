@@ -40,23 +40,23 @@
 
       <div class="form-group textbgform">
         <label for="imageUrl">Image URL</label>
-        <input type="text" class="form-control" name="imageURL" id="imageUrl">
+        <input type="text" class="form-control" name="imageURL" id="imageURL">
       </div>
 
       <div class="form-group textbgform">
-        <label for="title">Title</label>
-        <input type="text" class="form-control" name="name" id="title">
+        <label for="title">Item Name</label>
+        <input type="text" class="form-control" name="name" id="name">
       </div>
       <div class="form-group textbgform">
-        <label for="price">Price ($)</label>
+        <label for="price">Item Price (dollars and cents)</label>
         <input type="text" class="form-control" name="price" id="price">
       </div>
       <div class="form-group textbgform">
-        <label for="description">Description</label>
+        <label for="description">Item Description</label>
         <input type="text" class="form-control" name="description" id="description">
       </div>
       <div class="form-group textbgform">
-        <label for="tags">Tags (separate tags by commas)</label>
+        <label for="tags">Item Tags (separate tags by commas)</label>
         <input type="text" class="form-control" name="tags" id="tags">
       </div>
     </div>
@@ -108,12 +108,12 @@ function submitForm() {
     imageURL: formData.imageURL
   };
 
-  console.log({ userID: userID, userToken: userToken, item: item });
+  console.log({ userID: userID, userToken: userToken, item: JSON.stringify(item)});
 
   $.ajax({
     type: 'POST',
     url: '/upload',
-    data: { userID: userID, userToken: userToken, item: item },
+    data: { userID: userID, userToken: userToken, item: JSON.stringify(item) },
     success: requestSuccess,
     error: requestError,
     dataType: 'json'

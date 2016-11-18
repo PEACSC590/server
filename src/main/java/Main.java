@@ -1,9 +1,10 @@
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.bson.Document;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.net.UnknownHostException;
 
 import static spark.Spark.*;
@@ -47,11 +48,11 @@ public class Main {
 		FreeMarkerEngine templateEngine = new FreeMarkerEngine();
 		ResponseTransformer jsonEngine = JsonUtil.json();
 
-		// REFRESH ITEMS EVERY 5 MINUTES
+		// REFRESH ITEMS EVERY 10 MINUTES
 		new Thread(() -> {
 			while (true) {
 				try {
-					Thread.sleep(1000 * 60 * 5);
+					Thread.sleep(1000 * 60 * 10);
 					System.out.println("Refreshing pending items");
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
@@ -178,15 +179,25 @@ public class Main {
 		}, templateEngine);
 
 		post("/upload", (req, res) -> {
+			//System.out.println("POST UPLOAD");
 			Map<String, String> body = api.getBody(req);
-			
+			//System.out.println("GOT BODY");
 			if (!body.containsKey("userID") || !body.containsKey("userToken"))
 				return jsonError("Invalid input");
-		
-			// System.out.println(data);
-			Document item = (Document) JSON.parse(body.get("item"));
 
-			return api.items.upload(body.get("userID"), body.get("userToken"), item);
+			String itemString = body.get("item");
+			//System.out.println(body.get("userID"));
+			//System.out.println(body.get("item"));
+			
+			try {
+				itemString = URLDecoder.decode(itemString, "UTF-8");
+			} catch (UnsupportedEncodingException e1) {}
+			//System.out.println(itemString);
+			Document item = Document.parse(itemString);
+			//System.out.println("PARSED ITEM");
+			Map<String, String> map = api.items.upload(body.get("userID"), body.get("userToken"), item);
+			System.out.println(map.get("status") + " " + map.get("error"));
+			return map;
 		}, jsonEngine);
 
 		// Should be used by AJAX -> serves json

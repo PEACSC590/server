@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -70,7 +71,7 @@ public class Items {
 
 	// TESTED AS PART OF UPLOAD: SUCCESS
 	public Document insertItem(String username, String itemName, String itemDescription, Double itemPrice,
-			String[] tags, String imageURL) {
+			ArrayList<String> tags, String imageURL) {
 
 		Document itemDocument = createItemDocument(username, itemName, itemDescription, itemPrice, tags, imageURL);
 		api.itemsCollection.insertOne(itemDocument);
@@ -88,9 +89,8 @@ public class Items {
 			try {
 				String itemName = item.getString("name");
 				String itemDescription = item.getString("description");
-				Double itemPrice = Double.parseDouble(item.getString("price"));
-				// TODO: NEED TO TEST WHEN INTEGRATION IN FRONTEND HAPPENS
-				String[] tags = (String[]) JSON.parse(item.getString("tags"));
+				Double itemPrice = Double.parseDouble(item.get("price").toString());
+				ArrayList<String> tags = (ArrayList<String>) item.get("tags");
 				String imageURL = item.getString("imageURL");
 				Document itemget = insertItem(userID, itemName, itemDescription, itemPrice, tags, imageURL);
 
@@ -100,7 +100,7 @@ public class Items {
 				api.itemsCollection.updateOne(new Document("itemID", itemID), new Document("$set", status));
 
 				output.put("status", "listed");
-				output.put("itemID", itemID);
+				output.put("itemID", itemID + "");
 			} catch (Exception e) {
 				output.put("status", "illegal");
 				output.put("error", "internal error: " + e.toString());
@@ -115,7 +115,7 @@ public class Items {
 
 	// TESTED AS PART OF UPLOAD: SUCCESS
 	private Document createItemDocument(String username, String itemName, String itemDescription, Double itemPrice,
-			String[] tags, String imageURL) {
+			ArrayList<String> tags, String imageURL) {
 		Document itemDocument = new Document();
 		String itemID = Util.generateUUID();
 		itemDocument.append("itemID", itemID);
