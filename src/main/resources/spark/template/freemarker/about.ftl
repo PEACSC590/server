@@ -15,7 +15,7 @@
   
 
   <div class="container-fluid">
-  	<div class="jumbotron jumbotron-about">
+  	<div class="jumbotron jumbotron-dashboard">
 		
         <h1 class="display-3">About Us</h1>
         
