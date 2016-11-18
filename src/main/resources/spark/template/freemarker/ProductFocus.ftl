@@ -54,14 +54,14 @@
 									    <div class="modal-content">
 									      <div class="modal-header">
 									        <button type="button" class="close" data-dismiss="modal">&times;</button>
-									        <h4 class="modal-title">Buy Header</h4>
+									        <h4 class="modal-title">Confirm Purchase</h4>
 									      </div>
 									      <div class="modal-body">
 									        <p>Some text in the modal.</p>
+													<button type="button" class="btn btn-primary">Buy</button>
+													<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
 									      </div>
-									      <div class="modal-footer">
-									        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-									      </div>
+
 									    </div>
 
 									  </div>
