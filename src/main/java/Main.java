@@ -199,6 +199,11 @@ public class Main {
 			if (data.containsKey("redirect"))
 				return new ModelAndView(data, "loadWithLocalData.ftl");
 
+		post("/upload", (req, res) -> {
+			Map<String, String> data = api.getBody(req);
+			// System.out.println(data);
+			Document item = (Document) JSON.parse(data.get("item"));
+			System.out.println(item);
 			String userID = data.get("userID");
 			String userToken = data.get("userToken");
 
@@ -306,10 +311,9 @@ public class Main {
 
 		}, jsonEngine);
 
-		exception(Exception.class, (exc, req, res) -> {
-			res.body(exc.getMessage());
-		});
-
+		//exception(Exception.class, (exc, req, res) -> {
+			//res.body(exc.getMessage());
+		//});
 	}
 
 	private static ModelAndView staticTemplate(String path, String pageName) {
