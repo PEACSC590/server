@@ -23,9 +23,9 @@ public class Login {
     
     
     public static boolean login(String userID1, String pw1) {
-    	
-    	System.out.println(userID1 + " " + pw1);
-		
+
+		// System.out.println(userID1 + " " + pw1);
+
 		// ESCAPE THE JAVASCRIPT STRING
 		// TODO: SOME CASES MIGHT NOT ESCAPE CORRECTLY
 		String userID = "";
