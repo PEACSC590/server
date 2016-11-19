@@ -31,6 +31,7 @@
 
       <div class="container">
       	<div class="row">
+      	<h1 class="pendingheader">Pending Sales</h1>
 	        <#list pendingSales as item>
 	        <div class="col-md-4">
 	          <div class="product">
@@ -69,6 +70,7 @@
 
 	<div class="container">
       	<div class="row">
+      	<h1 class="pendingheader">Pending Purchases</h1>
 	        <#list pendingPurchases as item>
 	        <div class="col-md-4">
 	          <div class="product">

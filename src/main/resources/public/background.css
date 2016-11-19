@@ -395,6 +395,15 @@ background: rgba(255,255,255,0.8);
 	margin-top:2px;
 }
 
+.pendingheader {
+	text-align:center;
+	width:30%;
+	margin-left:35%;
+	margin-right:35%;
+	padding-bottom:.5%;
+	background-color:lightgray;
+	color:#990000;
+}
 
 .btn-default:hover {
 	background-color: #990104;
