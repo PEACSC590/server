@@ -49,7 +49,7 @@
 						</#if>
 	                  </div>
                   </div>
-						<#if !(item.isOwnItem?? && item.isOwnItem)>
+						<#if !(ownitem?? && ownitem) && item.status == "listed">
 						<div class="caption-full">
 	                      	<button class="btn btn-default" data-toggle="modal" data-target="#buyModal" type="submit">Buy</button>
                         </div>
