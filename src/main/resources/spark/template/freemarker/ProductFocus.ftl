@@ -24,7 +24,7 @@
                 </div>
             </div>-->
 
-            <div class="col-md-9">
+            <div class="col-md-9" style="float: none; margin: 0px auto">
 
               <div class="thumbnail">
                 <#if item.imageURL??>
@@ -34,14 +34,22 @@
                 </#if>
 
                   <div class="caption-full">
-                      <h4 class="pull-right">&#36;${item.price}</h4>
-                      <h4>${item.name} <span class="label label-info">${item.status}</span></h4>
+                      <h3 class="pull-right">&#36;${item.price}</h3>
+                      <h2>${item.name} <span class="badge">${item.status}</span></h2>
                       <div>
-                      <p>${item.description}</p>
+                      	<p>${item.description}</p>
                       </div>
+                      <!-- tags -->
+	                  <div>
+	                  	<#if item.tags??>
+		                    <#list item.tags as tag>
+		                      <span class="label label-default">${tag}</span>
+		                    </#list>
+						</#if>
+	                  </div>
                   </div>
 
-									<div class="caption-full">
+						<div class="caption-full">
                       <button class="btn btn-default" data-toggle="modal" data-target="#buyModal" type="submit">Buy</button>
                       </div>
                   </div>
@@ -65,15 +73,6 @@
 									    </div>
 
 									  </div>
-
-                  <!-- tags -->
-                  <div>
-                  	<#if item.tags??>
-	                    <#list item.tags as tag>
-	                      <span class="label label-default">${tag}</span>
-	                    </#list>
-					</#if>
-                  </div>
               </div>
 
             </div> <!-- here -->

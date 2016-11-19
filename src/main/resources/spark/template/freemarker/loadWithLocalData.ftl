@@ -17,8 +17,9 @@
 		
 		if (data.userToken && data.userToken === null && data.userID && data.userID === null)
 			window.location.href = "/login";
-
-		window.location.href = dest + "?" + $.obj2Qs(data);
+		
+		var dataQs = $.obj2Qs(data);
+		window.location.href = dest + (window.location.search ? window.location.search + "&" + dataQs : "?" + dataQs);
 		</script>
 	</body>
 </html>

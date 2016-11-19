@@ -61,8 +61,8 @@ public class Main {
 		}).start();
 
 		// LEAVE TESTING CODE HERE
-		//		TestAPI test = new TestAPI(api);
-		//		test.test();
+		// TestAPI test = new TestAPI(api);
+		// test.test();
 
 		get("/", (req, res) -> {
 			res.redirect("/login");
@@ -107,13 +107,32 @@ public class Main {
 			return new ModelAndView(attributes, "browse.ftl");
 		}, templateEngine);
 
+		get("/search", (req, res) -> {
+			Map<String, String> data = getUserData(req);
+
+			if (data.containsKey("redirect"))
+				return new ModelAndView(data, "loadWithLocalData.ftl");
+
+			String query = req.queryParams("q");
+			if (query.equals(""))
+				return errorView("NO QUERY PROVIDED");
+
+			List<Document> items = api.items.searchItemsByText(query);
+
+			Map<String, Object> attributes = new HashMap<>();
+			attributes.put("items", items);
+			attributes.put("pageName", "search");
+			attributes.put("query", query);
+			return new ModelAndView(attributes, "browse.ftl");
+		}, templateEngine);
+
 		get("/list-item", (req, res) -> {
-			String itemID;
-			try {
-				itemID = (String) req.queryParams("itemID");
-			} catch (NumberFormatException e) {
-				return errorView(e.toString());
-			}
+			Map<String, String> data = getUserData(req);
+
+			if (data.containsKey("redirect"))
+				return new ModelAndView(data, "loadWithLocalData.ftl");
+			
+			String itemID = req.queryParams("itemID");
 
 			Document item = api.items.getItemByID(itemID);
 			if (item == null)
@@ -180,13 +199,13 @@ public class Main {
 
 			try {
 				itemString = URLDecoder.decode(itemString, "UTF-8");
-			} catch (UnsupportedEncodingException e1) {}
+			} catch (UnsupportedEncodingException e1) {
+			}
 			Document item = Document.parse(itemString);
 			Map<String, String> map = api.items.upload(body.get("userID"), body.get("userToken"), item);
 			System.out.println(map.get("status") + " " + map.get("error"));
 			return map;
 		}, jsonEngine);
-
 
 		post("/buy", (req, res) -> {
 			Map<String, String> body = api.getBody(req);
@@ -270,9 +289,9 @@ public class Main {
 
 		}, jsonEngine);
 
-		//exception(Exception.class, (exc, req, res) -> {
-		//res.body(exc.getMessage());
-		//});
+		// exception(Exception.class, (exc, req, res) -> {
+		// res.body(exc.getMessage());
+		// });
 	}
 
 	private static ModelAndView staticTemplate(String path, String pageName) {

@@ -18,14 +18,19 @@
                   <li <#if pageName?? && pageName == "about">class="active"</#if>>
                       <a href="about">About</a>
                   </li>
-				
-				<!-- TODO: complete using AJAX instead -->
+
                   <li><a href="#" onclick="return logout()">Log Out</a></li>
-	
-				<!-- TODO: complete -->
-                  <form class="navbar-form navbar-right" action="browse" method="post">
-                    <input type="text" href="items-page.ftl" class="form-control" placeholder="Search for Products">
-                  </form>
+                  
+                  <li>
+                   <form class="navbar-form navbar-right" action="search" method="get">
+				    <div class="input-group">
+				      <input type="text" name="q" class="form-control" placeholder="Search for Products">
+				      <span class="input-group-btn">
+				        <button class="btn btn-default" type="submit">Search</button>
+				      </span>
+				    </div><!-- /input-group -->
+				   </form>
+				  </li>
               </ul>
           </div>
           <!-- /.navbar-collapse -->

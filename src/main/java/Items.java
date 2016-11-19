@@ -8,7 +8,6 @@ import org.bson.Document;
 import org.bson.conversions.Bson;
 
 import com.mongodb.client.FindIterable;
-import com.mongodb.util.JSON;
 
 public class Items {
 
@@ -16,6 +15,12 @@ public class Items {
 
 	public Items(API api) {
 		this.api = api;
+	}
+
+	// TESTED: SUCCESS
+	public Document getItemByID(String itemID) {
+		List<Document> items = getItems(new Document("itemID", itemID));
+		return items.size() > 0 ? items.get(0) : null;
 	}
 
 	// TESTED AS PART OF GETITEMSBYID: SUCCESS
@@ -64,9 +69,10 @@ public class Items {
 	}
 
 	// TESTED: SUCCESS
-	public Document getItemByID(String itemID) {
-		List<Document> items = getItems(new Document("itemID", itemID));
-		return items.size() > 0 ? items.get(0) : null;
+	// TODO: THIS MAY BE A LITTLE FINNICKY
+	public List<Document> searchItemsByText(String searchBy) {
+		// RETURNS LISTED ITEMS WITH SEARCHBY IN TITLE, DESCRIPTION, OR TAGS
+		return getItems(new Document("$text", new Document("$search", searchBy)).append("status", "listed"));
 	}
 
 	// TESTED AS PART OF UPLOAD: SUCCESS
@@ -148,13 +154,6 @@ public class Items {
 		}
 
 		return output;
-	}
-
-	// TESTED: SUCCESS
-	// TODO: THIS MAY BE A LITTLE FINNICKY
-	public List<Document> searchItemsByText(String searchBy) {
-		// RETURNS ITMES WITH SEARCHBY IN TITLE, DESCRIPTION, OR TAGS
-		return getItems(new Document("$text", new Document("$search", searchBy)));
 	}
 
 }
