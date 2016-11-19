@@ -22,7 +22,7 @@
 		<#list items as item>
 	        <tr>
 				<td>${item.name}</td>
-				<td><#if item.dateBought??>${item.dateBought}</#if></td>
+				<td><#if item.dateBought??>${item.dateBought?number_to_datetime}</#if></td>
 				<td>$${item.price}</td>
 			</tr>
 		</#list>
@@ -52,12 +52,6 @@
 	
   <div class="container-fluid">
     <div class="row">
-
-
-      
-
-      
-
 
         <div class="container-fluid">
 
