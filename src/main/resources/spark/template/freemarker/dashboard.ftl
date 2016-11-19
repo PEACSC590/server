@@ -9,12 +9,12 @@
 
   <#include "/partials/nav.ftl">
   
-<#macro itemsTable items>
+<#macro itemsTable items date>
 	<table class="table textbgtable">
 		<thead>
 		  <tr>
 		    <th>Item</th>
-		    <th>Date</th>
+		    <#if date><th>Date Bought</th></#if>
 		    <th>Price</th>
 		  </tr>
 		</thead>     
@@ -22,7 +22,13 @@
 		<#list items as item>
 	        <tr>
 				<td>${item.name}</td>
-				<td><#if item.dateBought??>${item.dateBought?number_to_datetime}</#if></td>
+				<#if date>
+					<td>
+					<#if item.dateBought??>${item.dateBought?number_to_datetime}
+					<#else>-
+					</#if>
+					</td>
+				</#if>
 				<td>$${item.price}</td>
 			</tr>
 		</#list>
@@ -57,17 +63,17 @@
 
             <div class="table-responsive col-md-4">
               <h2 class="sub-header textbgdash2">Past Purchases</h2>
-              <@itemsTable items=itemsBought/>
+              <@itemsTable items=itemsBought date=true/>
             </div>
             
             <div class="table-responsive col-md-4">
               <h2 class="sub-header textbgdash2">Items for Sale</h2>
-              <@itemsTable items=itemsListed/>
+              <@itemsTable items=itemsListed date=false/>
             </div>
 
             <div class="table-responsive col-md-4">
               <h2 class="sub-header textbgdash2">Past Sales</h2>
-              <@itemsTable items=itemsSold/>
+              <@itemsTable items=itemsSold date=true/>
             </div>
 
         </div>
