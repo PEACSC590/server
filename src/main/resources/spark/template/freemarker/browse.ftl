@@ -32,11 +32,11 @@
 	        <#list items as item>
 	        <div class="col-md-4">
 	          <div class="product">
-							<#if item.imageURL??>
-								<a href="list-item?itemID=${item.itemID}"><img class="img-responsive" src="${item.imageURL}" alt="Product Image"></a>
-							<#else>
-								<img class="img-responsive" src="http://placehold.it/800x300" alt="No Product Image Provided">
-							</#if>
+				<#if item.imageURL??>
+					<a href="list-item?itemID=${item.itemID}"><img class="img-responsive" src="${item.imageURL}" alt="Product Image"></a>
+				<#else>
+					<img class="img-responsive" src="http://placehold.it/800x300" alt="No Product Image Provided">
+				</#if>
 
 	            <a href="list-item?itemID=${item.itemID}"><h2>${item.name}</h2></a>
 	            <p>Seller is ${item.sellerID}</p>

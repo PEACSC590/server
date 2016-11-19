@@ -49,10 +49,11 @@
 						</#if>
 	                  </div>
                   </div>
-
+						<#if !(ownitem?? && ownitem) && item.status == "listed">
 						<div class="caption-full">
-                      <button class="btn btn-default" data-toggle="modal" data-target="#buyModal" type="submit">Buy</button>
-                      </div>
+	                      	<button class="btn btn-default" data-toggle="modal" data-target="#buyModal" type="submit">Buy</button>
+                        </div>
+                        </#if>
                   </div>
 
 									<!-- Modal -->
