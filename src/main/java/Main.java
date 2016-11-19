@@ -222,6 +222,7 @@ public class Main {
 
 			Map<String, String> output;
 			System.out.println("moo");
+			System.out.println(body.get("userID") + " " + body.get("itemID"));
 			try {
 				output = api.sales.buy(body.get("userID"), body.get("userToken"), body.get("itemID"));
 			} catch (Exception e) {
