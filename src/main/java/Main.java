@@ -221,6 +221,7 @@ public class Main {
 				return jsonError("Invalid input");
 
 			Map<String, String> output;
+			System.out.println("moo");
 			try {
 				output = api.sales.buy(body.get("userID"), body.get("userToken"), body.get("itemID"));
 			} catch (Exception e) {
