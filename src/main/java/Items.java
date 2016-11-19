@@ -96,10 +96,14 @@ public class Items {
 				String itemName = item.getString("name");
 				String itemDescription = item.getString("description");
 				Double itemPrice = Double.parseDouble(item.get("price").toString());
-				ArrayList<String> tags = (ArrayList<String>) item.get("tags");
+				
+				ArrayList<String> tags = new ArrayList<String>();
+				if (!item.get("tags").toString().equals("")) {
+					tags = (ArrayList<String>) item.get("tags");
+				}
+				
 				String imageURL = item.getString("imageURL");
 				Document itemget = insertItem(userID, itemName, itemDescription, itemPrice, tags, imageURL);
-
 				String itemID = itemget.getString("itemID");
 
 				Document status = new Document().append("status", "listed");

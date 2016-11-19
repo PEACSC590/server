@@ -21,7 +21,7 @@ public class TestAPI {
 			// Testing in progess
 			
 			
-			String user1 = "rdas1";
+			String user1 = "asun1";
 			String user2 = "jzwang";
 
 			// Test upsert user
@@ -44,17 +44,17 @@ public class TestAPI {
 			//System.out.println("User2 has been created");
 
 
-			/**api.usersCollection.updateOne(new Document("userID", user2),
+			api.usersCollection.updateOne(new Document("userID", user2),
 					new Document("$set", new Document("numPendingPurchases", 0)));
 			api.usersCollection.updateOne(new Document("userID", user1),
-					new Document("$set", new Document("numPendingPurchases", 0)));**/
+					new Document("$set", new Document("numPendingPurchases", 0)));
 
 			// Test upload item
-			Document book1 = new Document().append("name", "Hamlet")
-					.append("description", "Shakespearean novel")
+			Document book1 = new Document().append("name", "The Book of Books")
+					.append("description", "Inception")
 					.append("price", "5.99")
 					.append("tags", "")
-					.append("imageURL", "exeter.edu");
+					.append("imageURL", "https://www.asme.org/getmedia/c2c8ea5a-b690-4ba7-92bb-34bd1432862b/book_guide_hero_books.aspx");
 			Map<String, String> map = api.items.upload(user1, token1, book1);
 			//System.out.println(map.get("status"));
 			String book1ID = map.get("itemID");

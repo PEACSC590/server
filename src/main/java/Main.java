@@ -61,8 +61,8 @@ public class Main {
 		}).start();
 
 		// LEAVE TESTING CODE HERE
-		// TestAPI test = new TestAPI(api);
-		// test.test();
+		//TestAPI test = new TestAPI(api);
+		//test.test();
 
 		get("/", (req, res) -> {
 			res.redirect("/login");
@@ -209,6 +209,7 @@ public class Main {
 			} catch (UnsupportedEncodingException e1) {
 			}
 			Document item = Document.parse(itemString);
+			System.out.println(item.get("tags"));
 			Map<String, String> map = api.items.upload(body.get("userID"), body.get("userToken"), item);
 			System.out.println(map.get("status") + " " + map.get("error"));
 			return map;
