@@ -139,9 +139,12 @@ public class Main {
 			Document item = api.items.getItemByID(itemID);
 			if (item == null)
 				return errorView("Item with id: " + itemID + " could not be found");
+			
+			boolean isOwnItem = data.get("userID").equals(item.getString("sellerID"));
 
 			Map<String, Object> attributes = new HashMap<>();
 			attributes.put("item", item);
+			attributes.put("ownitem", isOwnItem);
 			return new ModelAndView(attributes, "ProductFocus.ftl");
 		}, templateEngine);
 

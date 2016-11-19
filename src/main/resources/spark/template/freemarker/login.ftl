@@ -81,6 +81,7 @@
 	<#include "/partials/scripts.ftl">
 
     <script>
+    if (userID && userToken) window.location.href = "/dashboard";
 
     $("#loginForm").on('submit', function(e) {
     	submitForm();
