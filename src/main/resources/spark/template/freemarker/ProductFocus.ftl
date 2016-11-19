@@ -102,7 +102,7 @@ function confirmPurchase(itemID) {
 	};
 
 	var requestSuccess = function requestSuccess(data) {
-		if (data.status === 'listed')
+		if (data.status === 'pending')
 	  		window.location.href = '/dashboard';
 	  	else alert("Error: " + data.error);
 	};
