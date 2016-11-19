@@ -103,7 +103,7 @@ function confirmPurchase(itemID) {
 
 	var requestSuccess = function requestSuccess(data) {
 		if (data.status === 'pending')
-	  		window.location.href = '/dashboard';
+	  		window.location.href = '/pendingitems';
 	  	else alert("Error: " + data.error);
 	};
 

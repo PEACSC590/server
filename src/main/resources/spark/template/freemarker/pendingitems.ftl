@@ -21,7 +21,21 @@
 	        <#list pendingSales as item>
 	        <div class="col-md-4">
 	          <div class="product">
-	            <h2>${item.name}</h2>
+	            <div class="caption-full">
+                      <h3 class="pull-right">&#36;${item.price}</h3>
+                      <h2>${item.name} <span class="badge">${item.status}</span></h2>
+                      <div>
+                      	<p>${item.description}</p>
+                      </div>
+                      <!-- tags -->
+	                  <div>
+	                  	<#if item.tags??>
+		                    <#list item.tags as tag>
+		                      <span class="label label-default">${tag}</span>
+		                    </#list>
+						</#if>
+	                  </div>
+                  </div>
 	            <p>
 	            	<button type="button" class="btn btn-primary" onclick="cancelPendingSale('${item.itemID}', '${item.buyerID}')">Cancel sale</button>
 	            	<button type="button" class="btn btn-primary" onclick="confirmSale('${item.itemID}', '${item.buyerID}')">Confirm sale</button>
