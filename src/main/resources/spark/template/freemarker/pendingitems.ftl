@@ -72,7 +72,34 @@
 
         </div>
       </div>
-  
+      
+      
+  <div class="caption-full">
+                      <button class="btn btn-default" data-toggle="modal" data-target="#sellModal" type="submit">Sell</button>
+                      </div>
+                  </div>
+
+									<!-- Modal -->
+									<div id="sellModal" class="modal fade" role="dialog">
+									  <div class="modal-dialog">
+
+									    <!-- Modal content-->
+									    <div class="modal-content">
+									      <div class="modal-header">
+									        <button type="button" class="close" data-dismiss="modal">&times;</button>
+									        <h4 class="modal-title">Confirm Sale</h4>
+									      </div>a
+									      <div class="modal-body">
+									        <p>Some text in the modal.</p>
+													<button type="button" class="btn btn-primary" onclick="confirmSale()">Sell</button>
+													<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+									      </div>
+
+									    </div>
+
+									  </div>
+              </div>
+
   
   
   
