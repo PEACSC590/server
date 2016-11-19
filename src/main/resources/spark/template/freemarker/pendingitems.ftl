@@ -9,6 +9,18 @@
 <body>
 
   <#include "/partials/nav.ftl">
+  <div class="container-fluid">
+  <div class="row">
+      <div class="col-md-2">
+        <div class="list-group">
+          <a href="dashboard" class="list-group-item">My Items</a>
+          <a href="upload" class="list-group-item">Upload</a>
+          <a href="pendingitems" class="list-group-item active">Pending Items</a>
+        </div>
+      </div>
+      
+    </div>
+  </div>
 
 <div class="jumbotron jumbotron-forsale">
     <h1>PEAbay</h1>
@@ -81,28 +93,13 @@
 	
 	
   </div>
-  <div class="container-fluid">
+  
 
 	<hr>
 	<#include "/partials/footer.ftl">
 
   </div>
 
-<<<<<<< HEAD
-        
-
-            <div class="table-responsive col-md-5">
-              <h2 class="sub-header textbgdash2">Pending Purchases</h2>
-           <@itemsTable items=pendingPurchases date=true/>
-            </div>
-            
-            <div class="table-responsive col-md-5">
-              <h2 class="sub-header textbgdash2">Pending Sales</h2>
-             <@itemsTable items=pendingSales date=true/>
-			</div>
-
-        
-=======
   <#include "/partials/scripts.ftl">
 
 <script>
