@@ -71,7 +71,7 @@
 							</#if>
 	            <div class="caption-full">
                       <h3 class="pull-right">&#36;${item.price}</h3>
-                      <h2>${item.name} <span class="badge">${item.status}</span></h2>
+                      <a href="list-item?itemID=${item.itemID}"><h2>${item.name}<span class="badge">${item.status}</span></h2></a>
                       <div>
                       	<p>${item.description}</p>
                       </div>
