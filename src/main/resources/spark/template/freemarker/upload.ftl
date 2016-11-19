@@ -66,16 +66,20 @@
         <input type="text" class="form-control" name="tags" id="tags">
       </div>
       </div>
-      </div>
-      </div>
+      <div class="col-md-12">
       <div class="form-group textbgform">
         <label for="description">Description</label>
         <input type="text" class="form-control" name="description" id="description">
       </div>
+      </div>
+      <button class="btn btn-default" type="submit" id="upload">Upload</button>
+      </div>
+      </div>
       
-    </div>
-    <button class="btn btn-default" type="submit" id="upload">Upload</button>
-  </div>
+      
+  	  </div>
+  		  
+  		</div>
 </form>
 
 <!-- /.container -->

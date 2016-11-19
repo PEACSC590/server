@@ -56,19 +56,19 @@
     <div class="container-fluid">
     <div class="row">
 
-        <div class="container-fluid">
+        
 
-            <div class="table-responsive col-md-4">
+            <div class="table-responsive col-md-5">
               <h2 class="sub-header textbgdash2">Pending Purchases</h2>
            <@itemsTable items=pendingPurchases date=true/>
             </div>
             
-            <div class="table-responsive col-md-4">
+            <div class="table-responsive col-md-5">
               <h2 class="sub-header textbgdash2">Pending Sales</h2>
              <@itemsTable items=pendingSales date=true/>
 			</div>
 
-        </div>
+        
 
         </div>
       </div>
