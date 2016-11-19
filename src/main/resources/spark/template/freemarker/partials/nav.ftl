@@ -39,9 +39,10 @@
 	};
 	
 	var requestSuccess = function requestSuccess(data) {
-		if (data.success === 'true')
+		if (data.success === 'true') {
+			window.localStorage.clear();
 	  		window.location.href = '/login';
-	  	else alert("PEAbay was unable to log you out");
+	  	} else alert("PEAbay was unable to log you out");
 	};
   
 	$.ajax({
@@ -52,8 +53,6 @@
 	    error: requestError,
 	    dataType: 'json',
 	 });
-	 
-	 window.localStorage.clear();
 	  
 	 return false;
   }
