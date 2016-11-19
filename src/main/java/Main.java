@@ -70,10 +70,9 @@ public class Main {
 		}, templateEngine);
 
 		get("/login", (req, res) -> {
-			System.out.println("GET LOGIN");
 			Map<String, Object> attributes = new HashMap<>();
-			attributes.put("pageName", "login");
-			return new ModelAndView(attributes, "login.ftl");
+				attributes.put("pageName", "login");
+				return new ModelAndView(attributes, "login.ftl");
 		}, templateEngine);
 
 		post("/login", (req, res) -> {
@@ -254,7 +253,7 @@ public class Main {
 
 			Map<String, String> output;
 			try {
-				output = api.sales.cancelPendingSale(body.get("userID"), body.get("userToken"), body.get("itemID"));
+				output = api.sales.cancelPendingSale(body.get("userID"), body.get("userToken"), body.get("itemID"), body.get("buyerID"));
 				res.redirect("/pendingitems");
 			} catch (Exception e) {
 				return jsonError(e.getMessage());

@@ -78,9 +78,9 @@ public class Sales {
 	}
 
 	// TESTED: SUCCESS
-	public Map<String, String> cancelPendingSale(String buyerID, String userToken, String itemID) {
+	public Map<String, String> cancelPendingSale(String sellerID, String userToken, String itemID, String buyerID) {
 		Map<String, String> output = new HashMap<>();
-		boolean authenticated = api.userTokens.testUserTokenForUser(buyerID, userToken);
+		boolean authenticated = api.userTokens.testUserTokenForUser(sellerID, userToken);
 
 		Document userDocument = api.usersCollection.find(new Document("userID", buyerID)).first();
 		if (authenticated) {
@@ -97,7 +97,6 @@ public class Sales {
 
 			Document item = api.items.getItemByID(itemID);
 			String itemName = item.getString("name");
-			String sellerID = item.getString("sellerID");
 
 			// BUYER CONFIRMATION EMAIL
 			Email.send(buyerID + "@exeter.edu", "You have cancelled a purchase",
