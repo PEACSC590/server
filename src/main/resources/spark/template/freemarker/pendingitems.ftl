@@ -43,18 +43,10 @@
 							
 	            <div class="caption-full">
                       <h3 class="pull-right">&#36;${item.price}</h3>
-                      <h2>${item.name} <span class="badge">${item.status}</span></h2>
+                      <a href="list-item?itemID=${item.itemID}"><h2>${item.name}<span class="badge">${item.status}</span></h2></a>
                       <div>
-                      	<p>${item.description}</p>
+                      	<p>Pending sale to ${item.buyerID}</p>
                       </div>
-                      <!-- tags -->
-	                  <div>
-	                  	<#if item.tags??>
-		                    <#list item.tags as tag>
-		                      <span class="label label-default">${tag}</span>
-		                    </#list>
-						</#if>
-	                  </div>
                   </div>
 	            <p>
 	            	<button type="button" class="btn btn-primary" onclick="refuseSale('${item.itemID}')">Cancel sale</button>
@@ -81,7 +73,7 @@
 							</#if>
 	            <div class="caption-full">
                       <h3 class="pull-right">&#36;${item.price}</h3>
-                      <h2>${item.name} <span class="badge">${item.status}</span></h2>
+                      <a href="list-item?itemID=${item.itemID}"><h2>${item.name}<span class="badge">${item.status}</span></h2></a>
                       <div>
                       	<p>${item.description}</p>
                       </div>

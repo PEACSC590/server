@@ -34,6 +34,9 @@
                 Ms. Brockmyre
                 </li>
                 <li>
+                Raj Das
+                </li>
+                <li>
                 Morgan Himmer
                 </li>
                 <li>
@@ -41,9 +44,6 @@
                 </li>
                 <li>
                 Soren Rossi
-                </li>
-                <li>
-                Raj Das
                 </li>
                 <li>
                 Alec Sun
