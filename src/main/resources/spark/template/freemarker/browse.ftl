@@ -33,12 +33,14 @@
 	        <div class="col-md-4">
 	          <div class="product">
 							<#if item.imageURL??>
-								<img class="img-responsive" src="${item.imageURL}" alt="Product Image">
+								<a href="list-item?itemID=${item.itemID}"><img class="img-responsive" src="${item.imageURL}" alt="Product Image"></a>
 							<#else>
 								<img class="img-responsive" src="http://placehold.it/800x300" alt="No Product Image Provided">
 							</#if>
-	            <h2>${item.name}</h2>
-	            <p>${item.name}--Learn more</p>
+
+	            <a href="list-item?itemID=${item.itemID}"><h2>${item.name}</h2></a>
+	            <p>Seller is ${item.sellerID}</p>
+	            <p>$${item.price}</p>
 	            <p><a class="btn btn-default" href="list-item?itemID=${item.itemID}" role="button">View details &raquo;</a></p>
     		  </div>
 	    	</div>

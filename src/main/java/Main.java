@@ -70,10 +70,18 @@ public class Main {
 		}, templateEngine);
 
 		get("/login", (req, res) -> {
-			System.out.println("GET LOGIN");
 			Map<String, Object> attributes = new HashMap<>();
-			attributes.put("pageName", "login");
-			return new ModelAndView(attributes, "login.ftl");
+			//Map<String, String> data = getUserData(req);
+			//if (data.containsKey("redirect"))
+				//return new ModelAndView(data, "loadWithLocalData.ftl");
+			//if (testUserData(data)){
+				//attributes.put("pageName", "dashboard");
+				//return new ModelAndView(attributes, "dashboard.ftl");
+			//}
+			//else{
+				attributes.put("pageName", "login");
+				return new ModelAndView(attributes, "login.ftl");
+			//}
 		}, templateEngine);
 
 		post("/login", (req, res) -> {
@@ -182,7 +190,7 @@ public class Main {
 			Map<String, Object> attributes = new HashMap<>();
 			attributes.put("pendingSales", pendingSales);
 			attributes.put("pendingPurchases", pendingPurchases);
-			attributes.put("pageName", "pendingitems");
+			attributes.put("pageName", "pending");
 			return new ModelAndView(attributes, "pendingitems.ftl");
 		}, templateEngine);
 
@@ -239,7 +247,7 @@ public class Main {
 
 			Map<String, String> output;
 			try {
-				output = api.sales.sell(body.get("userID"), body.get("userToken"), body.get("itemID"));
+				output = api.sales.sell(body.get("userID"), body.get("userToken"), body.get("itemID"), body.get("buyerID"));
 			} catch (Exception e) {
 				return jsonError(e.getMessage());
 			}
