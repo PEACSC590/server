@@ -66,7 +66,7 @@
 									      </div>
 									      <div class="modal-body">
 									        <p>Some text in the modal.</p>
-													<button type="button" class="btn btn-primary" onclick="confirmPurchase">Buy</button>
+													<button type="button" class="btn btn-primary" onclick="confirmPurchase()">Buy</button>
 													<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
 									      </div>
 
@@ -96,6 +96,7 @@
 
 
 function confirmPurchase() {
+	console.log('buying item');
 	var requestError = function requestError(err) {
 		alert("Request error: " + err);
 	};
@@ -123,7 +124,7 @@ function confirmPurchase() {
   $.ajax({
     type: 'POST',
     url: '/buy',
-    data: { userID: userID, userToken: userToken},
+    data: {userID: userID, userToken: userToken, itemID: item.itemID},
     success: requestSuccess,
     error: requestError,
     dataType: 'json'
