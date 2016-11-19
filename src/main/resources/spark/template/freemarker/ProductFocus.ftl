@@ -37,6 +37,7 @@
                       <h3 class="pull-right">&#36;${item.price}</h3>
                       <h2>${item.name} <span class="badge">${item.status}</span></h2>
                       <div>
+                      	<p>Seller is ${item.sellerID}</p>
                       	<p>${item.description}</p>
                       </div>
                       <!-- tags -->

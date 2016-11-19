@@ -39,6 +39,7 @@
 							</#if>
 
 	            <a href="list-item?itemID=${item.itemID}"><h2>${item.name}</h2></a>
+	            <p>Seller is ${item.sellerID}</p>
 	            <p>$${item.price}</p>
 	            <p><a class="btn btn-default" href="list-item?itemID=${item.itemID}" role="button">View details &raquo;</a></p>
     		  </div>
