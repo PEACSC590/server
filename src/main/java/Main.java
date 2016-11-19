@@ -181,7 +181,7 @@ public class Main {
 			Map<String, Object> attributes = new HashMap<>();
 			attributes.put("pendingSales", pendingSales);
 			attributes.put("pendingPurchases", pendingPurchases);
-			attributes.put("pageName", "pendingitems");
+			attributes.put("pageName", "pending");
 			return new ModelAndView(attributes, "pendingitems.ftl");
 		}, templateEngine);
 

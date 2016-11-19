@@ -24,7 +24,7 @@ public class Sales {
 				throw new Exception("Could not find user " + buyerID);
 			}
 			
-			System.out.println("checkpoitn 1");
+			//System.out.println("checkpoitn 1");
 			// if `numPendingPurchases` is greater than the maximum allowed,
 			// error
 			int numPendingPurchases = Integer.parseInt(userDocument.get("numPendingPurchases").toString());
@@ -35,23 +35,23 @@ public class Sales {
 				output.put("dateBought", null);
 				return output;
 			}
-			System.out.println("checkpoitn 2");
+			//System.out.println("checkpoitn 2");
 			api.usersCollection.updateOne(new Document("userID", buyerID),
 					new Document("$inc", new Document("numPendingPurchases", 1)));
 
-			System.out.println("checkpoitn 3");
+			//System.out.println("checkpoitn 3");
 			
 			long dateBought = System.currentTimeMillis();
 			Document updates = new Document().append("buyerID", buyerID).append("dateBought", dateBought)
 					.append("status", "pending");
 			api.itemsCollection.updateOne(new Document("itemID", itemID), new Document("$set", updates));
 
-			System.out.println("checkpoitn 4");
+			//System.out.println("checkpoitn 4");
 			Document item = api.items.getItemByID(itemID);
 			String itemName = item.getString("name");
 			String sellerID = item.getString("sellerID");
 
-			System.out.println("checkpoitn 5");
+			//System.out.println("checkpoitn 5");
 			
 			// BUYER CONFIRMATION EMAIL
 			Email.send(buyerID + "@exeter.edu", "Pending purchase", "Your purchase of " + itemName + " is pending.");
@@ -60,11 +60,11 @@ public class Sales {
 			Email.send(sellerID + "@exeter.edu", "Confirm your sale", "Buyer " + buyerID + " has bought your item "
 					+ itemName + ". Please confirm your sale of the item.");
 
-			System.out.println("checkpoitn 6");
+			//System.out.println("checkpoitn 6");
 			output.put("status", "pending");
 			output.put("numPendingPurchases", (numPendingPurchases + 1) + "");
 			output.put("dateBought", dateBought + "");
-			System.out.println("checkpoitn 7");
+			//System.out.println("checkpoitn 7");
 		} else {
 			Document userDocument = api.usersCollection.find(new Document("userID", buyerID)).first();
 			int numPendingPurchases = Integer.parseInt(userDocument.get("numPendingPurchases").toString());
