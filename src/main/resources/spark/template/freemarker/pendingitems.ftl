@@ -9,6 +9,18 @@
 <body>
 
   <#include "/partials/nav.ftl">
+  <div class="container-fluid">
+  <div class="row">
+      <div class="col-md-2">
+        <div class="list-group">
+          <a href="dashboard" class="list-group-item">My Items</a>
+          <a href="upload" class="list-group-item">Upload</a>
+          <a href="pendingitems" class="list-group-item active">Pending Items</a>
+        </div>
+      </div>
+      
+    </div>
+  </div>
 
 <div class="jumbotron jumbotron-forsale">
     <h1>PEAbay</h1>
@@ -20,6 +32,12 @@
 	        <#list pendingSales as item>
 	        <div class="col-md-4">
 	          <div class="product">
+	          <#if item.imageURL??>
+								<a href="list-item?itemID=${item.itemID}"><img class="img-responsive" src="${item.imageURL}" alt="Product Image"></a>
+							<#else>
+								<img class="img-responsive" src="http://placehold.it/800x300" alt="No Product Image Provided">
+							</#if>
+							
 	            <div class="caption-full">
                       <h3 class="pull-right">&#36;${item.price}</h3>
                       <h2>${item.name} <span class="badge">${item.status}</span></h2>
@@ -55,6 +73,11 @@
 	        <#list pendingPurchases as item>
 	        <div class="col-md-4">
 	          <div class="product">
+	          <#if item.imageURL??>
+								<a href="list-item?itemID=${item.itemID}"><img class="img-responsive" src="${item.imageURL}" alt="Product Image"></a>
+							<#else>
+								<img class="img-responsive" src="http://placehold.it/800x300" alt="No Product Image Provided">
+							</#if>
 	            <div class="caption-full">
                       <h3 class="pull-right">&#36;${item.price}</h3>
                       <h2>${item.name} <span class="badge">${item.status}</span></h2>
@@ -81,12 +104,13 @@
 	
 	
   </div>
-  <div class="container-fluid">
+  
 
 	<hr>
 	<#include "/partials/footer.ftl">
 
   </div>
+
   <#include "/partials/scripts.ftl">
 
 <script>
