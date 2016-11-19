@@ -71,17 +71,8 @@ public class Main {
 
 		get("/login", (req, res) -> {
 			Map<String, Object> attributes = new HashMap<>();
-			//Map<String, String> data = getUserData(req);
-			//if (data.containsKey("redirect"))
-				//return new ModelAndView(data, "loadWithLocalData.ftl");
-			//if (testUserData(data)){
-				//attributes.put("pageName", "dashboard");
-				//return new ModelAndView(attributes, "dashboard.ftl");
-			//}
-			//else{
-				attributes.put("pageName", "login");
-				return new ModelAndView(attributes, "login.ftl");
-			//}
+			attributes.put("pageName", "login");
+			return new ModelAndView(attributes, "login.ftl");
 		}, templateEngine);
 
 		post("/login", (req, res) -> {
