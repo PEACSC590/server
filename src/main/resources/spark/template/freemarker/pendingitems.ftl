@@ -10,7 +10,7 @@
 
   <#include "/partials/nav.ftl">
   <div class="container-fluid">
-  <div class="row">
+    <div class="row">
       <div class="col-md-2">
         <div class="list-group">
           <a href="dashboard" class="list-group-item">My Items</a>
@@ -18,14 +18,16 @@
           <a href="pendingitems" class="list-group-item active">Pending Items</a>
         </div>
       </div>
+      <div class="jumbotron jumbotron-dashboard">
+		
+        <h1 class="display-3">Pending Transactions</h1>
+        <h4 class="lead">- Current Sales and Purchases on PEAbay -</h4>
+        
+
+      </div>
       
     </div>
   </div>
-
-<div class="jumbotron jumbotron-forsale">
-    <h1>PEAbay</h1>
-    <p class="lead">- Your Pending Sales -</p>
-</div>
 
       <div class="container">
       	<div class="row">
@@ -63,10 +65,7 @@
     	</div> 
 	</div>
 	
-	<div class="jumbotron jumbotron-forsale">
-    <h1>PEAbay</h1>
-    <p class="lead">- Your Pending Purchases-</p>
-</div>
+	
 
 	<div class="container">
       	<div class="row">
