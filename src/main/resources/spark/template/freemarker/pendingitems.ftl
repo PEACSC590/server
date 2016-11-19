@@ -1,91 +1,81 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Pending Items | PEAbay</title>
-	<#include "/partials/head.ftl">
-</head>
+	<title>Pending items | PEAbay</title>
+
+    <#include "/partials/head.ftl">
+  </head>
 
 <body>
 
   <#include "/partials/nav.ftl">
-  
-<#macro itemsTable items date>
-	<table class="table textbgtable">
-		<thead>
-		  <tr>
-		    <th>Item</th>
-		    <th>Price</th>
-		  </tr>
-		</thead>     
-		<tbody>
-		<#list items as item>
-	        <tr>
-				<td>${item.name}</td>
-				
-				<td>$${item.price}</td>
-			</tr>
-		</#list>
-		</tbody>
-	</table>	
-</#macro>
-  
 
-  
-  
-	
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-2">
-        <div class="list-group">
-          <a href="dashboard" class="list-group-item">My Items</a>
-          <a href="upload" class="list-group-item">Upload</a>
-          <a href="pendingitems" class="list-group-item active">Pending Items</a>
-        </div>
-      </div>
-      <div class="jumbotron jumbotron-dashboard">
-		
-        <h1 class="display-3">Pending Items</h1>
-        <h4 class="lead">- View your items pending approval-</h4>
-        
+<div class="jumbotron jumbotron-forsale">
+    <h1>PEAbay</h1>
+    <p class="lead">- List of Items on PEAbay -</p>
+    <a class="btn btn-primary btn-lg" href="about" role="button">Learn more &raquo;</a>
+</div>
 
-      </div>
-      
-    </div>
+      <div class="container">
+      	<div class="row">
+	        <#list pendingPurchases as item>
+	        <div class="col-md-4">
+	          <div class="product">
+	            <h2>${item.name}</h2>
+	            <p><a class="btn btn-default" onclick="confirmSale('${item.itemID}', '${item.buyerID}')" role="button">Confirm sale</a></p>
+    		  </div>
+	    	</div>
+	    	</#list>
+    	</div> 
+	</div>
   </div>
-  
-    <div class="container-fluid">
-    <div class="row">
+  <div class="container-fluid">
 
-        <div class="container-fluid">
+	<hr>
+	<#include "/partials/footer.ftl">
 
-            <div class="table-responsive col-md-4">
-              <h2 class="sub-header textbgdash2">Pending Purchases</h2>
-           <@itemsTable items=pendingPurchases date=true/>
-            </div>
-            
-            <div class="table-responsive col-md-4">
-              <h2 class="sub-header textbgdash2">Pending Sales</h2>
-             <@itemsTable items=pendingSales date=true/>
-			</div>
-
-        </div>
-
-        </div>
-      </div>
-  
-  
-  
-  
-
-    <div class="container">
-
-        <hr>
-        <#include "/partials/footer.ftl">
-
-    </div>
-	
+  </div>
 
   <#include "/partials/scripts.ftl">
+
+function confirmSale(itemID, buyerID) {
+	console.log('confirm selling item');
+	var requestError = function requestError(err) {
+		alert("Request error: " + err);
+	};
+
+	var requestSuccess = function requestSuccess(data) {
+		if (data.status === 'sold')
+	  		window.location.href = '/dashboard';
+	  	else alert("Error: " + data.error);
+	};
+
+  // TODO: validate form inputs
+
+  var userID = localStorage.getItem('userID');
+  var userToken = localStorage.getItem('userToken');
+
+  if (!userID || !userToken) {
+  	alert('not logged in.');
+  	window.location.href = '/login';
+  	return;
+  }
+
+
+  console.log({ userID: userID, userToken: userToken, itemID: itemID, buyerID: buyerID });
+
+  $.ajax({
+    type: 'POST',
+    url: '/sell',
+    data: {userID: userID, userToken: userToken, itemID: itemID, buyerID: buyerID},
+    success: requestSuccess,
+    error: requestError,
+    dataType: 'json'
+  });
+}
+
+
+</script>
 
     </body>
     </html>
