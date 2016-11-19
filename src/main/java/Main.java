@@ -95,9 +95,10 @@ public class Main {
 
 		get("/browse", (req, res) -> {
 			Map<String, String> data = getUserData(req);
-
 			if (data.containsKey("redirect"))
 				return new ModelAndView(data, "loadWithLocalData.ftl");
+			if (!testUserData(data))
+				return errorView("NOT AUTHENTICATED");
 
 			List<Document> items = api.items.getBuyableItems(data.get("userID"));
 
@@ -109,9 +110,10 @@ public class Main {
 
 		get("/search", (req, res) -> {
 			Map<String, String> data = getUserData(req);
-
 			if (data.containsKey("redirect"))
 				return new ModelAndView(data, "loadWithLocalData.ftl");
+			if (!testUserData(data))
+				return errorView("NOT AUTHENTICATED");
 
 			String query = req.queryParams("q");
 			if (query.equals(""))
@@ -128,9 +130,10 @@ public class Main {
 
 		get("/list-item", (req, res) -> {
 			Map<String, String> data = getUserData(req);
-
 			if (data.containsKey("redirect"))
 				return new ModelAndView(data, "loadWithLocalData.ftl");
+			if (!testUserData(data))
+				return errorView("NOT AUTHENTICATED");
 			
 			String itemID = req.queryParams("itemID");
 
@@ -147,9 +150,10 @@ public class Main {
 			Map<String, String> data = getUserData(req);
 			if (data.containsKey("redirect"))
 				return new ModelAndView(data, "loadWithLocalData.ftl");
+			if (!testUserData(data))
+				return errorView("NOT AUTHENTICATED");
 
 			String userID = data.get("userID");
-			String userToken = data.get("userToken");
 
 			List<Document> itemsBought = api.items.getItemsBoughtByUser(userID);
 			List<Document> itemsListed = api.items.getItemsListedByUser(userID);
@@ -169,6 +173,8 @@ public class Main {
 			Map<String, String> data = getUserData(req);
 			if (data.containsKey("redirect"))
 				return new ModelAndView(data, "loadWithLocalData.ftl");
+			if (!testUserData(data))
+				return errorView("NOT AUTHENTICATED");
 
 			List<Document> pendingSales = api.items.getPendingSales(data.get("userID"));
 			List<Document> pendingPurchases = api.items.getPendingPurchases(data.get("userID"));
@@ -182,9 +188,10 @@ public class Main {
 
 		get("/upload", (req, res) -> {
 			Map<String, String> data = getUserData(req);
-
 			if (data.containsKey("redirect"))
 				return new ModelAndView(data, "loadWithLocalData.ftl");
+			if (!testUserData(data))
+				return errorView("NOT AUTHENTICATED");
 
 			Map<String, Object> attributes = new HashMap<>();
 			return new ModelAndView(attributes, "upload.ftl");
@@ -237,7 +244,6 @@ public class Main {
 		}, jsonEngine);
 
 		post("/cancelPendingSale", (req, res) -> {
-
 			Map<String, String> body = api.getBody(req);
 
 			if (!body.containsKey("userToken") || !body.containsKey("userID") || !body.containsKey("itemID"))
@@ -295,7 +301,6 @@ public class Main {
 	}
 
 	private static ModelAndView staticTemplate(String path, String pageName) {
-
 		Map<String, Object> attributes = new HashMap<>();
 		if (!pageName.isEmpty())
 			attributes.put("pageName", pageName);
@@ -326,6 +331,11 @@ public class Main {
 		} else {
 			return data;
 		}
+	}
+	
+	private static boolean testUserData(Map<String, String> data) {
+		if (!data.containsKey("userID") || !data.containsKey("userToken")) return false;
+		return api.userTokens.testUserTokenForUser(data.get("userID"), data.get("userToken"));
 	}
 
 }
