@@ -54,11 +54,11 @@ public class Sales {
 			//System.out.println("checkpoitn 5");
 			
 			// BUYER CONFIRMATION EMAIL
-			Email.send(buyerID + "@exeter.edu", "Pending purchase", "Your purchase of " + itemName + " is pending.");
+			Email.send(buyerID + "@exeter.edu", "PURCHASE PENDING", "Your purchase of " + itemName + " is pending. Please arrange a time to meet and execute the sale within the next 3 days, or your purchase will be cancelled.");
 
 			// SELLER CONFIRMATION EMAIL
-			Email.send(sellerID + "@exeter.edu", "Confirm your sale", "Buyer " + buyerID + " has bought your item "
-					+ itemName + ". Please confirm your sale of the item.");
+			Email.send(sellerID + "@exeter.edu", "SALE PENDING", "Buyer " + buyerID + " has bought your item "
+					+ itemName + ". Please arrange a time to meet, execute, and confirm the sale within the next 3 days, or your sale will be cancelled.");
 
 			//System.out.println("checkpoitn 6");
 			output.put("status", "pending");
@@ -100,11 +100,11 @@ public class Sales {
 			String sellerID = item.getString("sellerID");
 
 			// BUYER CONFIRMATION EMAIL
-			Email.send(buyerID + "@exeter.edu", "You have cancelled a purchase",
-					"You have cancelled purchase of " + itemName + ".");
+			Email.send(buyerID + "@exeter.edu", "PURCHASE CANCELLED",
+					"You have successfully cancelled your purchase of " + itemName + ".");
 
 			// SELLER CONFIRMATION EMAIL
-			Email.send(sellerID + "@exeter.edu", "Buyer has cancelled your sale", "Buyer has cancelled your sale of "
+			Email.send(sellerID + "@exeter.edu", "SALE CANCELLED", buyerID + "has cancelled your sale of "
 					+ itemName + ". Your item has automatically been marked as listed.");
 
 			output.put("status", "listed");
@@ -142,11 +142,11 @@ public class Sales {
 			String itemName = item.getString("name");
 
 			// BUYER CONFIRMATION EMAIL
-			Email.send(buyerID + "@exeter.edu", "Seller has cancelled your purchase",
-					"Your purchase of " + itemName + " has been cancelled by seller " + sellerID + ".");
+			Email.send(buyerID + "@exeter.edu", "PURCHASE REFUSED",
+					"Your purchase of " + itemName + " has been cancelled by " + sellerID + ".");
 
 			// SELLER CONFIRMATION EMAIL
-			Email.send(sellerID + "@exeter.edu", "You have refused a sale", "You have refused a sale of " + itemName
+			Email.send(sellerID + "@exeter.edu", "SALE REFUSED", "You have successfully refused a sale of " + itemName
 					+ " to " + buyerID + ". Your item has automatically been marked as listed.");
 
 			output.put("status", "listed");
@@ -189,11 +189,11 @@ public class Sales {
 
 				try {
 					// BUYER EMAIL
-					Email.send(buyerID + "@exeter.edu", "Successful purchase",
-							"Successful purchase of " + itemName + ".");
+					Email.send(buyerID + "@exeter.edu", "PURCHASE SUCCESSFUL",
+							"You have successfully purchased " + itemName + ". Thank you for using PEAbay.");
 
 					// SELLER EMAIL
-					Email.send(sellerID + "@exeter.edu", "Successful sale", "Successful sale of " + itemName + ".");
+					Email.send(sellerID + "@exeter.edu", "SALE SUCCESSFUL", "You have successfully sold " + itemName + ". Thank you for using PEAbay.");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

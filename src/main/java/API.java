@@ -55,11 +55,11 @@ public class API {
 				itemsCollection.updateOne(item, new Document("$set", cancelSale));
 
 				// BUYER EMAIL
-				Email.send(buyerID + "@exeter.edu", "Your purchase has been cancelled due to inactivity",
+				Email.send(buyerID + "@exeter.edu", "PURCHASE CANCELLED",
 						"Your purchase of " + itemName + " has been cancelled due to seller inactivity.");
 
 				// SELLER EMAIL
-				Email.send(sellerID + "@exeter.edu", "Your sale has been cancelled due to inactivity",
+				Email.send(sellerID + "@exeter.edu", "SALE CANCELLED",
 						"Your sale of " + itemName + " has been cancelled due to seller inactivity.");
 			}
 		}
