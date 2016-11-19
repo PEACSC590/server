@@ -65,7 +65,7 @@
 									        <h4 class="modal-title">Confirm Purchase</h4>
 									      </div>
 									      <div class="modal-body">
-									        <p>Some text in the modal.</p>
+									        <p>Please confirm your purchase of ${item.name}</p>
 													<button type="button" class="btn btn-primary" onclick="confirmPurchase('${item.itemID}')">Buy</button>
 													<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
 									      </div>
