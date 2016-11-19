@@ -239,7 +239,7 @@ public class Main {
 
 			Map<String, String> output;
 			try {
-				output = api.sales.sell(body.get("userID"), body.get("userToken"), body.get("itemID"));
+				output = api.sales.sell(body.get("userID"), body.get("userToken"), body.get("itemID"), body.get("buyerID"));
 			} catch (Exception e) {
 				return jsonError(e.getMessage());
 			}
