@@ -99,7 +99,10 @@
 	<#include "/partials/footer.ftl">
 
   </div>
+<<<<<<< HEAD
 
+=======
+>>>>>>> 5e26ea4476ce63324c3cd7935bfceaa1f30a0afa
   <#include "/partials/scripts.ftl">
 
 <script>
@@ -109,7 +112,7 @@ function confirmSale(itemID, buyerID) {
 	var requestError = function requestError(err) {
 		alert("Request error: " + err);
 	};
->>>>>>> 463fa969ffd9de6fa6097e0b2914f11d1513d34a
+
 
 	var requestSuccess = function requestSuccess(data) {
 		if (data.status === 'sold')
