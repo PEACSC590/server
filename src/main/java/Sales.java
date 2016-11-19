@@ -165,9 +165,9 @@ public class Sales {
 	}
 
 	// TESTED: SUCCESS
-	public Map<String, String> sell(String buyerID, String userToken, String itemID) {
+	public Map<String, String> sell(String sellerID, String userToken, String itemID, String buyerID) {
 		Map<String, String> output = new HashMap<>();
-		boolean authenticated = api.userTokens.testUserTokenForUser(buyerID, userToken);
+		boolean authenticated = api.userTokens.testUserTokenForUser(sellerID, userToken);
 
 		Document item = api.items.getItemByID(itemID);
 
@@ -186,7 +186,6 @@ public class Sales {
 						new Document("$inc", new Document("numPendingPurchases", -1)));
 
 				String itemName = item.getString("name");
-				String sellerID = item.getString("sellerID");
 
 				try {
 					// BUYER EMAIL

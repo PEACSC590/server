@@ -38,7 +38,7 @@
 								<img class="img-responsive" src="http://placehold.it/800x300" alt="No Product Image Provided">
 							</#if>
 	            <h2>${item.name}</h2>
-	            <p>${item.name}--Learn more</p>
+	            <p>$${item.price}</p>
 	            <p><a class="btn btn-default" href="list-item?itemID=${item.itemID}" role="button">View details &raquo;</a></p>
     		  </div>
 	    	</div>
