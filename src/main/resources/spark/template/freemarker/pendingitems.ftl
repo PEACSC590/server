@@ -98,7 +98,6 @@
 	<#include "/partials/footer.ftl">
 
   </div>
-
   <#include "/partials/scripts.ftl">
 
 <script>
@@ -108,6 +107,7 @@ function confirmSale(itemID, buyerID) {
 	var requestError = function requestError(err) {
 		alert("Request error: " + err);
 	};
+
 
 	var requestSuccess = function requestSuccess(data) {
 		if (data.status === 'sold')

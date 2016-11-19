@@ -210,12 +210,17 @@ background: rgba(255,255,255,0.8);
   margin-bottom: 10%; */
   padding-top:.5%;
   padding-bottom: .5%;
-  margin-left: 23%;
-  margin-right: 23%;
+  margin-left: 1%;
+  margin-right: 1%;
   border-radius: 6px;
    border-color: #990000;
    border-style: solid;
    border-width: medium;
+}
+
+.col-md-12 {
+	width:100%;
+	
 }
 
 .load{
@@ -373,23 +378,32 @@ background: rgba(255,255,255,0.8);
   background-color: #990000;
   border-color: #990000;
   background-image: none;
+  text-shadow: none;
 }
 
 .btn-primary:hover {
 	background-color: #750103;
 	border-color: #990104;
+	text-shadow: none;
 }
 
 .btn-default {
 	background-image: none;
+	background-color: lightgray;
+	border-color: #990000;
 	text-shadow: none;
+	margin-top:2px;
 }
 
+
 .btn-default:hover {
-	background-color: #750103;
-	border-color: #990104;
+	background-color: #990104;
+	border-color: #750103;
 	text-shadow: none;
+	color:white;
 }
+
+
 
 .list-group {
   opacity:0.8;
@@ -407,6 +421,13 @@ background: rgba(255,255,255,0.8);
 	width:60%;
 	margin-left:20%;
 	margin-right:20%;
+}
+
+.col-md-5 {
+	width:40%;
+	margin-left:5%;
+	margin-right:5%;
+	padding:0%;
 }
 
 .col-md-6 {
