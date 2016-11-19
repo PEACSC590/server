@@ -18,11 +18,14 @@
 
       <div class="container">
       	<div class="row">
-	        <#list pendingPurchases as item>
+	        <#list pendingSales as item>
 	        <div class="col-md-4">
 	          <div class="product">
 	            <h2>${item.name}</h2>
-	            <p><a class="btn btn-default" onclick="confirmSale('${item.itemID}', '${item.buyerID}')" role="button">Confirm sale</a></p>
+	            <p>
+	            	<button type="button" class="btn btn-primary" onclick="cancelPendingSale('${item.itemID}', '${item.buyerID}')">Cancel sale</button>
+	            	<button type="button" class="btn btn-primary" onclick="confirmSale('${item.itemID}', '${item.buyerID}')">Confirm sale</button>
+	            </p>
     		  </div>
 	    	</div>
 	    	</#list>
@@ -37,6 +40,8 @@
   </div>
 
   <#include "/partials/scripts.ftl">
+
+<script>
 
 function confirmSale(itemID, buyerID) {
 	console.log('confirm selling item');
@@ -67,6 +72,42 @@ function confirmSale(itemID, buyerID) {
   $.ajax({
     type: 'POST',
     url: '/sell',
+    data: {userID: userID, userToken: userToken, itemID: itemID, buyerID: buyerID},
+    success: requestSuccess,
+    error: requestError,
+    dataType: 'json'
+  });
+}
+
+function cancelPendingSale(itemID, buyerID) {
+	console.log('confirm selling item');
+	var requestError = function requestError(err) {
+		alert("Request error: " + err);
+	};
+
+	var requestSuccess = function requestSuccess(data) {
+		if (data.status === 'listed')
+	  		window.location.href = '/dashboard';
+	  	else alert("Error: " + data.error);
+	};
+
+  // TODO: validate form inputs
+
+  var userID = localStorage.getItem('userID');
+  var userToken = localStorage.getItem('userToken');
+
+  if (!userID || !userToken) {
+  	alert('not logged in.');
+  	window.location.href = '/login';
+  	return;
+  }
+
+
+  console.log({ userID: userID, userToken: userToken, itemID: itemID, buyerID: buyerID });
+
+  $.ajax({
+    type: 'POST',
+    url: '/cancelPendingSale',
     data: {userID: userID, userToken: userToken, itemID: itemID, buyerID: buyerID},
     success: requestSuccess,
     error: requestError,
