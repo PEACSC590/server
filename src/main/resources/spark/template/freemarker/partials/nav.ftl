@@ -34,24 +34,15 @@
   </nav>
   <script>
   function logout() {
-  	var requestError = function requestError(err) {
-		alert("Request error: " + err);
-	};
-	
-	var requestSuccess = function requestSuccess(data) {
-		if (data.success === 'true') {
-			window.localStorage.clear();
-	  		window.location.href = '/login';
-	  	} else alert("PEAbay was unable to log you out");
-	};
-  
 	$.ajax({
 	    type: 'POST',
 	    url: '/logout',
 	    data: { userID: userID, userToken: userToken },
-	    success: requestSuccess,
-	    error: requestError,
 	    dataType: 'json',
+	 }).always(function() {
+	 	// clear creds + redirect regardless of the status of the request or the API method
+	 	window.localStorage.clear();
+  		window.location.href = '/login';
 	 });
 	  
 	 return false;
